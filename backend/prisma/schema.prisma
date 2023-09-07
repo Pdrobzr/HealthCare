@@ -13,8 +13,8 @@ datasource db {
 model Empresa {
   idEmpresa       Int     @id @default(autoincrement())
   nomeEmpresa     String
-  emailEmpresa    String
-  cpnjEmpresa     String
+  emailEmpresa    String  @unique
+  cpnjEmpresa     String  @unique
   senhaEmpresa    String
   telefoneEmpresa Int
   bairro          Bairros @relation(fields: [bairrosId], references: [idBairro])

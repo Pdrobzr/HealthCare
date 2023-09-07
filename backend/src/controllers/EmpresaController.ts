@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import { prisma } from "../utils/prisma";
-import { hash } from "bcryptjs";
+import { compare, hash } from "bcryptjs";
+import * as dotenv from 'dotenv';
+import { sign } from "jsonwebtoken";
+
+dotenv.config();
 
 export class EmpresaController {
 
@@ -11,12 +15,19 @@ export class EmpresaController {
 
         const cpnjRegistrado = await prisma.empresa.findFirst({
             where: {
-                cpnjEmpresa: cnpj
+                OR: [
+                    {
+                        emailEmpresa: email
+                    },
+                    {
+                        cpnjEmpresa: cnpj
+                    }
+                ]
             }
         })
 
         if (cpnjRegistrado) {
-            res.json({ error: 'Erro! CNPJ já cadastrado!' });
+            res.json({ error: 'Erro! CNPJ ou email já cadastrados!' });
         } else {
 
             const adicionarEmpresa = await prisma.empresa.create({
@@ -33,5 +44,33 @@ export class EmpresaController {
 
             res.json({ message: 'Empresa adicionada com sucesso!', adicionarEmpresa });
         }
+    }
+
+    async autenticarEmpresa(req: Request, res: Response) {
+        const { email, senha } = req.body;
+        const secret = process.env.SECRET;
+
+        const empresa = await prisma.empresa.findFirst({
+            where: {
+                emailEmpresa: email
+            }
+        });
+
+        if(!empresa){
+            return res.status(400).json({ error: 'Erro ao realizar o login!' });
+        }
+
+        const senhaValida = await compare(senha, empresa.senhaEmpresa);
+
+        if(senhaValida === false) {
+            return res.status(400).json({ error: 'Erro ao realizar o login!' });
+        } else {
+            
+            const token = sign({id: empresa.idEmpresa}, secret as string, {expiresIn:"1d"});
+            const { idEmpresa } = empresa;
+
+            return res.json({ message: 'Empresa logada com sucesso!', Empresa: { idEmpresa, email }, token });
+        }
+
     }
 }

@@ -6,3 +6,4 @@ const empresaController = new EmpresaController();
 export const router = Router();
 
 router.post('/empresa', empresaController.adicionarEmpresa);
+router.post('/autenticarEmpresa', empresaController.autenticarEmpresa);
