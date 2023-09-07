@@ -15,6 +15,7 @@ model Empresa {
   nomeEmpresa     String
   emailEmpresa    String
   cpnjEmpresa     String
+  senhaEmpresa    String
   telefoneEmpresa Int
   bairro          Bairros @relation(fields: [bairrosId], references: [idBairro])
   bairrosId       Int
