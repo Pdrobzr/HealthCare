@@ -9,3 +9,20 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Empresa {
+  idEmpresa       Int     @id @default(autoincrement())
+  nomeEmpresa     String
+  emailEmpresa    String
+  cpnjEmpresa     String
+  telefoneEmpresa Int
+  bairro          Bairros @relation(fields: [bairrosId], references: [idBairro])
+  bairrosId       Int
+  enderecoEmpresa String
+}
+
+model Bairros {
+  idBairro   Int       @id @default(autoincrement())
+  nomeBairro String
+  Empresa    Empresa[]
+}
