@@ -73,4 +73,41 @@ export class EmpresaController {
         }
 
     }
-}
+
+    async listarEmpresas(req: Request, res: Response) {
+        const listarEmpresas = await prisma.empresa.findMany();
+
+        res.json({listarEmpresas});
+    }
+
+    async atualizarEmpresa(req: Request, res: Response) {
+        const {nome, email, telefone} = req.body;
+        const id = Number(req.params.id);
+
+            const atualizarEmpresa = await prisma.empresa.update({
+                data: {
+                    nomeEmpresa: nome,
+                    emailEmpresa: email,
+                    telefoneEmpresa: telefone,
+                },
+                where: {
+                    idEmpresa: id
+                }
+            });
+
+            res.json({message: 'Informações atualizadas com sucesso!', atualizarEmpresa});
+        }
+
+    async deletarEmpresa(req: Request, res: Response) {
+        const id = Number(req.params.id);
+
+        const deletarEmpresa = await prisma.empresa.delete({
+            where: {
+                idEmpresa: id
+            }
+        })
+    }
+
+    
+    
+    }
