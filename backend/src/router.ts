@@ -15,6 +15,7 @@ router.get('/selecionarEmpresa/:id', AuthMiddleware, empresaController.seleciona
 router.post('/autenticarEmpresa', empresaController.autenticarEmpresa);
 router.put('/atualizarEmpresa/:id', AuthMiddleware, empresaController.atualizarEmpresa);
 router.delete('/deletarEmpresa/:id', AuthMiddleware, empresaController.deletarEmpresa);
+router.post('/pesquisarEmpresa', AuthMiddleware, empresaController.pesquisarEmpresa);
 
 // ROTAS DE USUARIO
 router.post('/adicionarUsuario', usuarioController.adicionarUsuario);

@@ -143,4 +143,23 @@ export class EmpresaController {
         return res.json({ message: 'Empresa deletada com sucesso!', deletarEmpresa });
     }
 
+    async pesquisarEmpresa(req: Request, res: Response) {
+        const { pesquisa } = req.body
+
+        const pesquisarEmpresa = await prisma.empresa.findMany({
+            where: {
+                nomeEmpresa: {
+                    contains: pesquisa
+                }
+            }
+        });
+
+        if (pesquisarEmpresa.length < 1) {
+            return res.status(404).json({ message: 'Não foi encontrado nenhuma empresa com esse nome!' });
+        } else {
+
+            return res.json({ pesquisarEmpresa });
+        }
+    }
+
 }

@@ -21,7 +21,6 @@ export class UsuarioController {
             }
         });
 
-
         if (emailRegistrado) {
             res.json({ error: 'Erro! Email já cadastrado!' });
         } else {
@@ -45,6 +44,7 @@ export class UsuarioController {
         const secret = process.env.SECRET;
 
         const emailValido = await prisma.usuario.findFirst({
+            
             where: {
                 emailUsuario: email
             }
