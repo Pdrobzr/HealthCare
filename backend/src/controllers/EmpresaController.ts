@@ -162,4 +162,10 @@ export class EmpresaController {
         }
     }
 
+    async listarBairros(req: Request, res: Response) {
+        const listarBairros = await prisma.bairros.findMany();
+
+        return res.json({listarBairros});
+    }
+
 }
