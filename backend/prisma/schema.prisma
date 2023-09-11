@@ -27,3 +27,10 @@ model Bairros {
   nomeBairro String
   Empresa    Empresa[]
 }
+
+model Usuario {
+  idUsuario    Int    @id @default(autoincrement())
+  nomeUsuario  String
+  emailUsuario String @unique
+  senhaUsuario String
+}

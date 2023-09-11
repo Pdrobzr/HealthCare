@@ -92,6 +92,27 @@ export class EmpresaController {
         res.json({listarEmpresas});
     }
 
+    async selecionarEmpresa(req: Request, res: Response) {
+        const id = Number(req.params.id);
+
+        const selecionarEmpresa = await prisma.empresa.findFirst({
+            select: {
+                nomeEmpresa: true,
+                enderecoEmpresa: true,
+                bairro: {
+                    select: {
+                        nomeBairro: true,
+                    }
+                }
+            },
+            where: {
+                idEmpresa: id,
+            }
+        });
+
+        res.json({selecionarEmpresa});
+    }
+
     async atualizarEmpresa(req: Request, res: Response) {
         const {nome, email, telefone} = req.body;
         const id = Number(req.params.id);
