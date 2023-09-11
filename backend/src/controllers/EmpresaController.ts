@@ -56,17 +56,17 @@ export class EmpresaController {
             }
         });
 
-        if(!empresa){
+        if (!empresa) {
             return res.status(400).json({ error: 'Erro ao realizar o login!' });
         }
 
         const senhaValida = await compare(senha, empresa.senhaEmpresa);
 
-        if(senhaValida === false) {
+        if (senhaValida === false) {
             return res.status(400).json({ error: 'Erro ao realizar o login!' });
         } else {
-            
-            const token = sign({id: empresa.idEmpresa}, secret as string, {expiresIn:"1d"});
+
+            const token = sign({ id: empresa.idEmpresa }, secret as string, { expiresIn: "1d" });
             const { idEmpresa } = empresa;
 
             return res.json({ message: 'Empresa logada com sucesso!', Empresa: { idEmpresa, email }, token });
@@ -89,7 +89,7 @@ export class EmpresaController {
             }
         });
 
-        res.json({listarEmpresas});
+        res.json({ listarEmpresas });
     }
 
     async selecionarEmpresa(req: Request, res: Response) {
@@ -110,26 +110,26 @@ export class EmpresaController {
             }
         });
 
-        res.json({selecionarEmpresa});
+        res.json({ selecionarEmpresa });
     }
 
     async atualizarEmpresa(req: Request, res: Response) {
-        const {nome, email, telefone} = req.body;
+        const { nome, email, telefone } = req.body;
         const id = Number(req.params.id);
 
-            const atualizarEmpresa = await prisma.empresa.update({
-                data: {
-                    nomeEmpresa: nome,
-                    emailEmpresa: email,
-                    telefoneEmpresa: telefone,
-                },
-                where: {
-                    idEmpresa: id
-                }
-            });
+        const atualizarEmpresa = await prisma.empresa.update({
+            data: {
+                nomeEmpresa: nome,
+                emailEmpresa: email,
+                telefoneEmpresa: telefone,
+            },
+            where: {
+                idEmpresa: id
+            }
+        });
 
-            res.json({message: 'Informações atualizadas com sucesso!', atualizarEmpresa});
-        }
+        res.json({ message: 'Informações atualizadas com sucesso!', atualizarEmpresa });
+    }
 
     async deletarEmpresa(req: Request, res: Response) {
         const id = Number(req.params.id);
@@ -138,9 +138,9 @@ export class EmpresaController {
             where: {
                 idEmpresa: id
             }
-        })
+        });
+
+        res.json({ message: 'Empresa deletada com sucesso!', deletarEmpresa });
     }
 
-    
-    
-    }
+}
