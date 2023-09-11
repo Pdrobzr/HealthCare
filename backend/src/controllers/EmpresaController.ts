@@ -27,7 +27,7 @@ export class EmpresaController {
         })
 
         if (cpnjRegistrado) {
-            res.json({ error: 'Erro! CNPJ ou email já cadastrados!' });
+            return res.status(400).json({ error: 'Erro! CNPJ ou email já cadastrados!' });
         } else {
 
             const adicionarEmpresa = await prisma.empresa.create({
@@ -42,7 +42,7 @@ export class EmpresaController {
                 }
             });
 
-            res.json({ message: 'Empresa adicionada com sucesso!', adicionarEmpresa });
+            return res.json({ message: 'Empresa adicionada com sucesso!', adicionarEmpresa });
         }
     }
 
@@ -89,7 +89,7 @@ export class EmpresaController {
             }
         });
 
-        res.json({ listarEmpresas });
+        return res.json({ listarEmpresas });
     }
 
     async selecionarEmpresa(req: Request, res: Response) {
@@ -110,7 +110,7 @@ export class EmpresaController {
             }
         });
 
-        res.json({ selecionarEmpresa });
+        return res.json({ selecionarEmpresa });
     }
 
     async atualizarEmpresa(req: Request, res: Response) {
@@ -128,7 +128,7 @@ export class EmpresaController {
             }
         });
 
-        res.json({ message: 'Informações atualizadas com sucesso!', atualizarEmpresa });
+        return res.json({ message: 'Informações atualizadas com sucesso!', atualizarEmpresa });
     }
 
     async deletarEmpresa(req: Request, res: Response) {
@@ -140,7 +140,7 @@ export class EmpresaController {
             }
         });
 
-        res.json({ message: 'Empresa deletada com sucesso!', deletarEmpresa });
+        return res.json({ message: 'Empresa deletada com sucesso!', deletarEmpresa });
     }
 
 }

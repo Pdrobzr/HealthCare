@@ -15,13 +15,12 @@ export class UsuarioController {
 
         const role = "USER";
 
-
         const emailRegistrado = await prisma.usuario.findFirst({
             where: {
-              emailUsuario: email
+                emailUsuario: email
             }
-          });
-          
+        });
+
 
         if (emailRegistrado) {
             res.json({ error: 'Erro! Email já cadastrado!' });
@@ -36,8 +35,35 @@ export class UsuarioController {
                 }
             });
 
-            res.json({ message: 'Usuáro adicionada com sucesso!', adicionarUsuario });
+            return res.json({ message: 'Usuáro registrado com sucesso!', adicionarUsuario });
         }
 
-        } 
+    }
+
+    async autenticarUsuario(req: Request, res: Response) {
+        const { email, senha } = req.body;
+        const secret = process.env.SECRET;
+
+        const emailValido = await prisma.usuario.findFirst({
+            where: {
+                emailUsuario: email
+            }
+        });
+
+        if (!emailValido) {
+            return res.status(404).json({ error: 'Erro ao realizar o login!' });
+        } else {
+
+            const validarSenha = await compare(senha, emailValido.senhaUsuario);
+
+            if (validarSenha === false) {
+                return res.status(404).json({ error: 'Erro ao realizar o login!' });
+            } else {
+                const token = sign({ id: emailValido.idUsuario }, secret as string, { expiresIn: "1d" });
+                const { idUsuario } = emailValido;
+
+                return res.json({ message: 'Usuáro logado com sucesso!', Empresa: { idUsuario, email }, token });
+            }
+        }
+    }
 }

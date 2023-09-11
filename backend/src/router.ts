@@ -18,3 +18,4 @@ router.delete('/deletarEmpresa/:id', AuthMiddleware, empresaController.deletarEm
 
 // ROTAS DE USUARIO
 router.post('/adicionarUsuario', usuarioController.adicionarUsuario);
+router.post('/autenticarUsuario', usuarioController.autenticarUsuario);
