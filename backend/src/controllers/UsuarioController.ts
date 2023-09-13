@@ -8,6 +8,12 @@ dotenv.config();
 
 export class UsuarioController {
 
+    async listarUsuarios(req: Request, res: Response) {
+        const listarUsuarios = await prisma.usuario.findMany();
+
+        res.json({listarUsuarios});
+    }
+
     async adicionarUsuario(req: Request, res: Response) {
         const { nome, email, senha } = req.body;
 
@@ -66,4 +72,35 @@ export class UsuarioController {
             }
         }
     }
+
+    async atualizarUsuario(req: Request, res: Response) {
+        const id = Number(req.params.id);
+
+        const {nome, email} = req.body;
+
+        const atualizarUsuario = await prisma.usuario.update({
+            data: {
+                nomeUsuario: nome,
+                emailUsuario: email
+            },
+            where: {
+                idUsuario: id
+            }
+        });
+
+        res.json({message: 'Usuário atualizado com sucesso!', atualizarUsuario});
+    }
+
+    async deletarUsuario(req: Request, res: Response) {
+        const id = Number(req.params.id);
+        
+        const deletarUsuario = await prisma.usuario.delete({
+            where: {
+                idUsuario: id
+            }
+        });
+
+        res.json({message: 'Usuário deletado com sucesso!', deletarUsuario});
+    }
+    
 }

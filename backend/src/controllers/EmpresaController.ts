@@ -75,19 +75,7 @@ export class EmpresaController {
     }
 
     async listarEmpresas(req: Request, res: Response) {
-        const listarEmpresas = await prisma.empresa.findMany({
-            select: {
-                idEmpresa: true,
-                nomeEmpresa: true,
-                emailEmpresa: true,
-                enderecoEmpresa: true,
-                bairro: {
-                    select: {
-                        nomeBairro: true
-                    }
-                }
-            }
-        });
+        const listarEmpresas = await prisma.empresa.findMany();
 
         return res.json({ listarEmpresas });
     }
