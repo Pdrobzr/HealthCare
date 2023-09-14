@@ -21,8 +21,8 @@ router.post('/pesquisarEmpresa', AuthMiddleware, empresaController.pesquisarEmpr
 router.get('/listarBairros', empresaController.listarBairros);
 
 // ROTAS DE USUARIO
-router.get('/listarUsuarios', usuarioController.listarUsuarios);
+router.get('/listarUsuarios', AuthMiddleware, usuarioController.listarUsuarios);
 router.post('/adicionarUsuario', usuarioController.adicionarUsuario);
 router.post('/autenticarUsuario', usuarioController.autenticarUsuario);
-router.put('/atualizarUsuario/:id', usuarioController.atualizarUsuario);
-router.delete('/deletarUsuario/:id', usuarioController.deletarUsuario);
+router.put('/atualizarUsuario/:id', AuthMiddleware, usuarioController.atualizarUsuario);
+router.delete('/deletarUsuario/:id', AuthMiddleware, usuarioController.deletarUsuario);
