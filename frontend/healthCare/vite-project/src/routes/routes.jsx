@@ -6,6 +6,7 @@ import { RegistrarPrimeiro } from "../pages/RegistrarPrimeiro"
 import { RegistrarSegundo } from "../pages/RegistrarSegundo"
 import { RecuperarSenha } from "../pages/RecuperarSenha"
 import { EspecialidadeDisponivel } from "../pages/EspecialidadeDisponivel"
+import ListarEmpresas from "../pages/ListarEmpresas/ListarEmpresas";
 
 
 export const AppRoutes = () => {
@@ -13,6 +14,7 @@ export const AppRoutes = () => {
         <BrowserRouter>
             <Routes>
                 <Route element={<Entrar/>} path="/entrar"/>
+                <Route element={<ListarEmpresas/>} path="/listarEmpresas/"/>
                 <Route element={<RegistrarPrimeiro/>} path="/registrarPrimeiro"/>
                 <Route element={<RegistrarSegundo/>} path="registrarSegundo"/>
                 <Route element={<RecuperarSenha/>} path="recuperarSenha"/>

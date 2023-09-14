@@ -24,7 +24,7 @@ export class EmpresaController {
                     }
                 ]
             }
-        })
+        });
 
         if (cpnjRegistrado) {
             return res.status(400).json({ error: 'Erro! CNPJ ou email já cadastrados!' });

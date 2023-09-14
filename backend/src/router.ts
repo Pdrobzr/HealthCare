@@ -10,7 +10,7 @@ export const router = Router();
 
 // ROTAS DE EMPRESA
 router.post('/adicionarEmpresa', empresaController.adicionarEmpresa);
-router.get('/listarEmpresas', AuthMiddleware, empresaController.listarEmpresas);
+router.get('/listarEmpresas', empresaController.listarEmpresas);
 router.get('/selecionarEmpresa/:id', AuthMiddleware, empresaController.selecionarEmpresa);
 router.post('/autenticarEmpresa', empresaController.autenticarEmpresa);
 router.put('/atualizarEmpresa/:id', AuthMiddleware, empresaController.atualizarEmpresa);
