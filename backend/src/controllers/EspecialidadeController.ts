@@ -4,32 +4,39 @@ import { prisma } from "../utils/prisma";
 export class EspecialidadeController {
 
     async listarEspecialidades(req: Request, res: Response) {
-        const listarEspecialidades = prisma.especialidade.findMany();
+        const listarEspecialidades = await prisma.especialidade.findMany();
 
         res.json({listarEspecialidades});
     }
 
-    async listarEspecialidadesDisponiveis(req: Request, res: Response) {
+    async listarEspecialidadesEmpresas(req: Request, res: Response) {
 
         const idEmpresa = Number(req.params.idEmpresa);
 
-        const listarEspecialidadesDisponiveis = prisma.disponibilidadeEspecialidade.findMany({
+        const listarEspecialidadesEmpresas = await prisma.disponibilidadeEspecialidade.findMany({
+            select:{
+                idDisponibilidade: true, 
+                idEmpresa: true,
+                quantidadeEspecialidade:true, 
+                Empresa: {
+                    select: { nomeEmpresa: true}
+                }
+            },
             where: {
                 idEmpresa
             }
-        });
+        })
 
-        res.json({listarEspecialidadesDisponiveis});
+        res.json({listarEspecialidadesEmpresas});
     }
 
     async adicionarEspecialidade(req: Request, res: Response) {
         const idEmpresa = Number(req.params.idEmpresa);
         const idEspecialidade = Number(req.params.idEspecialidade);
-        const {qtEspecialidade} = req.body;
 
         const adicionarEspecialidade = await prisma.disponibilidadeEspecialidade.create({
             data: {
-                quantidadeEspecialidade: qtEspecialidade,
+                quantidadeEspecialidade: 0,
                 idEmpresa: idEmpresa,
                 idEspecialidade: idEspecialidade
             },
@@ -38,13 +45,13 @@ export class EspecialidadeController {
         res.json({message: 'Especialidade adicionada com sucesso!', adicionarEspecialidade});
     }
 
-    async alterarDisponibilidadeEspecialidade(req: Request, res: Response) {
+    async informarDisponibilidade(req: Request, res: Response) {
         const idDisponibilidade = Number(req.params.idDisponibilidade);
-        const {qtEspecialidade} = req.body;
+        const {quantidade} = req.body;
 
         const alterarDisponibilidade = await prisma.disponibilidadeEspecialidade.update({
             data:{
-               quantidadeEspecialidade: qtEspecialidade, 
+               quantidadeEspecialidade: quantidade, 
             },
             where: {
                 idDisponibilidade: idDisponibilidade

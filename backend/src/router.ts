@@ -2,9 +2,11 @@ import { Router } from "express";
 import { EmpresaController } from "./controllers/EmpresaController";
 import { AuthMiddleware } from "./middlewares/auth";
 import { UsuarioController } from "./controllers/UsuarioController";
+import { EspecialidadeController } from "./controllers/EspecialidadeController";
 
 const empresaController = new EmpresaController();
 const usuarioController = new UsuarioController();
+const especialidadeController = new EspecialidadeController();
 
 export const router = Router();
 
@@ -26,3 +28,10 @@ router.post('/adicionarUsuario', usuarioController.adicionarUsuario);
 router.post('/autenticarUsuario', usuarioController.autenticarUsuario);
 router.put('/atualizarUsuario/:id', AuthMiddleware, usuarioController.atualizarUsuario);
 router.delete('/deletarUsuario/:id', AuthMiddleware, usuarioController.deletarUsuario);
+
+// ROTAS DE ESPECIALIDADES 
+router.get('/listarEspecialidades', AuthMiddleware, especialidadeController.listarEspecialidades);
+router.get('/listarEspecialidades/:idEmpresa', AuthMiddleware, especialidadeController.listarEspecialidadesEmpresas);
+router.post('/adicionarEspecialidade/:idEmpresa/:idEspecialidade', AuthMiddleware, especialidadeController.adicionarEspecialidade);
+router.put('/informarEspecialidade/:idDisponibilidade', AuthMiddleware, especialidadeController.informarDisponibilidade);
+router.delete('/deletarEspecialidade:/idDisponibilidade', AuthMiddleware, especialidadeController.deletarEspecialidade);
