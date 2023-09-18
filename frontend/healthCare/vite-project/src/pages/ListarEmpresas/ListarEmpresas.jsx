@@ -21,8 +21,10 @@ const ListarEmpresas = () => {
             {empresas.map((empresa) => (
                 <div key={empresa.idEmpresa}>
                     <h1>Nome: {empresa.nomeEmpresa}</h1>
-                    <h1>Endereço: {empresa.emailEmpresa}</h1>
+                    <h1>Email: {empresa.emailEmpresa}</h1>
+                    <h1>Endereço: {empresa.enderecoEmpresa}</h1>
                     <hr />
+                    <br />
                 </div>
             ))}
         </div>

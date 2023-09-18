@@ -11,15 +11,16 @@ datasource db {
 }
 
 model Empresa {
-  idEmpresa       Int     @id @default(autoincrement())
-  nomeEmpresa     String
-  emailEmpresa    String  @unique
-  cpnjEmpresa     String  @unique
-  senhaEmpresa    String
-  telefoneEmpresa Int
-  bairro          Bairros @relation(fields: [bairrosId], references: [idBairro])
-  bairrosId       Int
-  enderecoEmpresa String
+  idEmpresa                    Int                            @id @default(autoincrement())
+  nomeEmpresa                  String
+  emailEmpresa                 String                         @unique
+  cpnjEmpresa                  String                         @unique
+  senhaEmpresa                 String
+  telefoneEmpresa              Int
+  bairro                       Bairros                        @relation(fields: [bairrosId], references: [idBairro])
+  bairrosId                    Int
+  enderecoEmpresa              String
+  DisponibilidadeEspecialidade DisponibilidadeEspecialidade[]
 }
 
 model Bairros {
@@ -34,4 +35,19 @@ model Usuario {
   emailUsuario String @unique
   roleUsuario  String
   senhaUsuario String
+}
+
+model Especialidade {
+  idEspecialidade              Int                            @id @default(autoincrement())
+  nomeEspecialidade            String
+  DisponibilidadeEspecialidade DisponibilidadeEspecialidade[]
+}
+
+model DisponibilidadeEspecialidade {
+  idDisponibilidade       Int           @id @default(autoincrement())
+  quantidadeEspecialidade Int
+  Especialidade           Especialidade @relation(fields: [idEspecialidade], references: [idEspecialidade])
+  Empresa                 Empresa       @relation(fields: [idEmpresa], references: [idEmpresa])
+  idEspecialidade         Int
+  idEmpresa               Int
 }
