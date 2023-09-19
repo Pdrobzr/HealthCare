@@ -21,6 +21,7 @@ model Empresa {
   bairrosId                    Int
   enderecoEmpresa              String
   DisponibilidadeEspecialidade DisponibilidadeEspecialidade[]
+  Comentario                   Comentario[]
 }
 
 model Bairros {
@@ -30,11 +31,12 @@ model Bairros {
 }
 
 model Usuario {
-  idUsuario    Int    @id @default(autoincrement())
+  idUsuario    Int          @id @default(autoincrement())
   nomeUsuario  String
-  emailUsuario String @unique
+  emailUsuario String       @unique
   roleUsuario  String
   senhaUsuario String
+  Comentario   Comentario[]
 }
 
 model Especialidade {
@@ -50,4 +52,21 @@ model DisponibilidadeEspecialidade {
   Empresa                 Empresa       @relation(fields: [idEmpresa], references: [idEmpresa])
   idEspecialidade         Int
   idEmpresa               Int
+}
+
+model Comentario {
+  idComentario       Int     @id @default(autoincrement())
+  conteudoComentario String
+  Usuario            Usuario @relation(fields: [idUsuario], references: [idUsuario])
+  idUsuario          Int
+  Status             Status  @relation(fields: [idStatus], references: [idStatus])
+  idStatus           Int
+  Empresa            Empresa @relation(fields: [idEmpresa], references: [idEmpresa])
+  idEmpresa   Int
+}
+
+model Status {
+  idStatus   Int          @id @default(autoincrement())
+  nomeStatus String
+  Comentario Comentario[]
 }
