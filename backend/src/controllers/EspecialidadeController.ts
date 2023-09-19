@@ -6,7 +6,7 @@ export class EspecialidadeController {
     async listarEspecialidades(req: Request, res: Response) {
         const listarEspecialidades = await prisma.especialidade.findMany();
 
-        res.json({listarEspecialidades});
+        res.json({ listarEspecialidades });
     }
 
     async listarEspecialidadesEmpresas(req: Request, res: Response) {
@@ -14,12 +14,12 @@ export class EspecialidadeController {
         const idEmpresa = Number(req.params.idEmpresa);
 
         const listarEspecialidadesEmpresas = await prisma.disponibilidadeEspecialidade.findMany({
-            select:{
-                idDisponibilidade: true, 
+            select: {
+                idDisponibilidade: true,
                 idEmpresa: true,
-                quantidadeEspecialidade:true, 
+                quantidadeEspecialidade: true,
                 Empresa: {
-                    select: { nomeEmpresa: true}
+                    select: { nomeEmpresa: true }
                 }
             },
             where: {
@@ -27,38 +27,50 @@ export class EspecialidadeController {
             }
         })
 
-        res.json({listarEspecialidadesEmpresas});
+        res.json({ listarEspecialidadesEmpresas });
     }
 
     async adicionarEspecialidade(req: Request, res: Response) {
         const idEmpresa = Number(req.params.idEmpresa);
         const idEspecialidade = Number(req.params.idEspecialidade);
 
-        const adicionarEspecialidade = await prisma.disponibilidadeEspecialidade.create({
-            data: {
-                quantidadeEspecialidade: 0,
-                idEmpresa: idEmpresa,
-                idEspecialidade: idEspecialidade
-            },
+        const verificarEspecialidadeExistente = await prisma.disponibilidadeEspecialidade.findFirst({
+            where: {
+                idEmpresa,
+                idEspecialidade
+            }
         });
 
-        res.json({message: 'Especialidade adicionada com sucesso!', adicionarEspecialidade});
+        if (verificarEspecialidadeExistente) {
+            res.status(400).json({ error: 'Erro! Especialidade já adicionada!' });
+        } else {
+
+            const adicionarEspecialidade = await prisma.disponibilidadeEspecialidade.create({
+                data: {
+                    quantidadeEspecialidade: 0,
+                    idEmpresa,
+                    idEspecialidade
+                },
+            });
+
+            res.json({ message: 'Especialidade adicionada com sucesso!', adicionarEspecialidade });
+        }
     }
 
     async informarDisponibilidade(req: Request, res: Response) {
         const idDisponibilidade = Number(req.params.idDisponibilidade);
-        const {quantidade} = req.body;
+        const { quantidade } = req.body;
 
         const alterarDisponibilidade = await prisma.disponibilidadeEspecialidade.update({
-            data:{
-               quantidadeEspecialidade: quantidade, 
+            data: {
+                quantidadeEspecialidade: quantidade,
             },
             where: {
                 idDisponibilidade: idDisponibilidade
             }
         });
 
-        res.json({message: 'Quantidade alterada com sucesso!', alterarDisponibilidade});
+        res.json({ message: 'Quantidade alterada com sucesso!', alterarDisponibilidade });
     }
 
     async deletarEspecialidade(req: Request, res: Response) {
@@ -70,6 +82,6 @@ export class EspecialidadeController {
             }
         });
 
-        res.json({message: 'Especialidade deletada com sucesso!', deletarEspecialidade});
+        res.json({ message: 'Especialidade deletada com sucesso!', deletarEspecialidade });
     }
 }
