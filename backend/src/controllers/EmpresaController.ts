@@ -91,14 +91,21 @@ export class EmpresaController {
                     select: {
                         nomeBairro: true,
                     }
-                }
+                },
+
             },
             where: {
                 idEmpresa: id,
             }
         });
 
-        return res.json({ selecionarEmpresa });
+        const listarComentarios = await prisma.comentario.findMany({
+            where: {
+                idEmpresa: id 
+            }
+        });
+
+        return res.json({ selecionarEmpresa, listarComentarios });
     }
 
     async atualizarEmpresa(req: Request, res: Response) {

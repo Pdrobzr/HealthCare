@@ -63,7 +63,7 @@ model Comentario {
   idStatus           Int
   Empresa            Empresa @relation(fields: [idEmpresa], references: [idEmpresa])
   idEmpresa   Int
-}
+} 
 
 model Status {
   idStatus   Int          @id @default(autoincrement())
