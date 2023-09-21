@@ -4,14 +4,17 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.container-total{
-    min-height:100vh;
+.parte-esquerda{
+    min-width: 35%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.parte-esquerda-entrar{
+.parte-direita{
+    
     min-width: 65%;
-    background-image: url("../../img/imagemFundo/imagem-entrar.png");
+    background-image: url("../../img/imagemFundo/Fundo-Registrar2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-origin: border-box;
@@ -20,29 +23,14 @@
     flex-direction: column;
 }
 
-.parte-direita-entrar{
-    min-width: 35%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-
-.formulario-entrar{
+.formulario{
     display: flex;
     flex-direction: column;
      justify-content: right;
      align-items: last baseline;
     margin-top: 25px;
     width: 290px;
-    height: 280px;
-}
-
-.Propaganda-entrar{
-    color: white;
-    font-size: 80px;
-    font-weight: bold;
-    padding-left: 50px;
-    padding-top: 8px;
+    height: 440px;
 }
 

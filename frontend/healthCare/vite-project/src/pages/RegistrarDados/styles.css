@@ -1,0 +1,17 @@
+
+.div-lado-a-lado{
+    height: 100px;
+    width: 100%;
+    display: flex;
+}
+.input-esquerdo{
+    display: flex;
+    flex-direction: column;
+    min-width: 70%;
+}
+
+.input-direito{
+    display: flex;
+    flex-direction: column;
+    min-width: 30%;
+}

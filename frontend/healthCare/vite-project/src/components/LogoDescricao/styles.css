@@ -1,0 +1,21 @@
+.parte-superior{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 430px;
+    height: 280px; 
+}
+
+.logo{
+    margin: 10px 0px 10px 0px;  
+}
+
+.descricao-logo{
+    color: rgba(112, 115, 119, 1);
+    margin-top: 6px;
+ }
+
+.titulo{
+    color:rgba(73, 187, 198, 1);
+}

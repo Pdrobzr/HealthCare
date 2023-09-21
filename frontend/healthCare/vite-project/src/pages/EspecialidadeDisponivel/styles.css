@@ -1,0 +1,59 @@
+
+body{
+    background-color: rgba(242, 242, 242, 1);
+    border: 1px solid yellow;
+    min-height: 99.6vh;
+   
+
+}
+header{
+    display: flex;
+    height: 55px;
+    min-width: 100%;
+    background-color: white;
+}
+.parte-esquerda-logo{
+    
+    min-width: 50%;
+    
+}
+.imagem-logo{
+    width: 73px;
+    padding-left: 30px;
+}
+.parte-direita-logo{
+    min-width: 48%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.container-toal-especialidade{
+    border: solid 1px blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.imagem-empresa-escolhe{
+    margin: 14px 0px;
+    border: solid 1px black;
+    width: 705px;
+    height: 92px;
+    border-radius: 8px;
+    background-image: url(https://www.saudeseguros.com/wp-content/uploads/2023/02/rede-credenciada-blue-med-do-plano-de-saude-empresarial.jpg;)
+}
+
+.adicionar-especialidade{
+    margin-bottom: 15px;
+    border: 1px solid green;
+    width: 705px;
+    border-radius: 8px;
+}
+.tabela-adicionar-especialidade{
+
+    border: 1px solid red;
+    width: 705px;
+    height: 290px;
+    border-radius: 8px;
+}
