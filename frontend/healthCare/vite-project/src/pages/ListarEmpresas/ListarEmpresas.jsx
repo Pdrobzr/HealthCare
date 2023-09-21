@@ -24,7 +24,6 @@ const ListarEmpresas = () => {
                     <h1>Email: {empresa.emailEmpresa}</h1>
                     <h1>Endereço: {empresa.enderecoEmpresa}</h1>
                     <hr />
-                    <br />
                 </div>
             ))}
         </div>
