@@ -64,14 +64,21 @@ export function RegistrarDados() {
             <div className='parte-esquerda'>
                 <LogoDescricao title="Registre-se" description="Disponibilize dados aos seus pacientes" />
                 <form onSubmit={registrarEmpresa} className='formulario'>
+                    <label htmlFor="nome fantasia">Nome Fantasia</label>
                     <input type="text" onChange={(e) => setNome(e.target.value)} text="Nome Fantasia" name="nome fantasia" placeholder="Nome Fantasia" />
+                    <label htmlFor="e-mail">E-mail</label>
                     <input type="email" onChange={(e) => setEmail(e.target.value)} text="E-mail" name="e-mail" placeholder="E-mail" />
+                    <label htmlFor="cnpj">Cnpj</label>
                     <input type="number" onChange={(e) => setCnpj(e.target.value)} text="Cnpj" name="cnpj" placeholder="Cnpj" />
-                    <input type="number" onChange={(e) => setTelefone(Number(e.target.value))} text="Telefone" name="telefone" placeholder="Telefone" />
+                    <label htmlFor="telefone">Telefone</label>
+                    <input type="number" onChange={(e) => setTelefone(Number(e.target.value))} text="telefone" name="telefone" placeholder="Telefone" />
+                    <label htmlFor="senha">Senha</label>
                     <input type="password" onChange={(e) => setSenha(e.target.value)} text="Senha" name="senha" placeholder="Senha" />
-                    <div className='div-lado-a-lado'>
-                        <div className='input-esquerdo'>
-                            <select onChange={(e) => setBairro(Number(e.target.value))}>
+                    
+                        
+                            <label htmlFor="bairro">Bairro</label>
+                            <select className='input-bairro' name='bairro' onChange={(e) => setBairro(Number(e.target.value))}>
+                                <option>batata</option>
                                 {/* <option selected disabled>Selecionar bairro</option> */}
                                 {bairros.map(bairros => (
                                     <option key={bairros.idBairro} value={bairros.idBairro}>
@@ -79,9 +86,10 @@ export function RegistrarDados() {
                                     </option>
                                 ))}
                             </select>
-                            <input type="text" text="Endereço" name="endereço" placeholder="Endereço" onChange={(e) => setEndereco(e.target.value)} />
-                        </div>
-                    </div>
+                            <label htmlFor="endereço">Endereço</label>
+                            <input type="text" text="Endereço" name="endereço" placeholder="endereço" onChange={(e) => setEndereco(e.target.value)}/>
+                        
+                    
                     <Button type="submit" content="Registrar" name="Registrar" />
                     <Links content="É registrado? " link=" Entrar" />
                 </form>
