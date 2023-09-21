@@ -41,9 +41,15 @@ export function RegistrarDados() {
 
             const data = response.data;
 
-            alert(data.message);
+            Swal.fire({
+                icon: 'success',
+                text: data.message
+              })
         } catch (error) {
-            alert("Erro ao registrar!");
+            Swal.fire({
+                icon: 'error',
+                text: 'Erro ao cadastrar!'
+              })
         }
 
         console.log(nome, email, senha, telefone, cnpj, endereco, bairro);
