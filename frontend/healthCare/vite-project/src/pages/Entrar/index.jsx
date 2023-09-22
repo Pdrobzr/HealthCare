@@ -5,6 +5,7 @@ import { Button } from '../../components/Button'
 import { Links } from '../../components/linksBaixoBotao';
 import { LogoDescricao } from '../../components/LogoDescricao';
 import blogFetch from '../../axios/config';
+import Swal from 'sweetalert2'
 
 export function Entrar(){
 
@@ -19,9 +20,19 @@ export function Entrar(){
             });
             const data = response.data;
 
-            alert(data.message);
+            localStorage.setItem("token", data.token);
+
+            localStorage.setItem("Empresa", JSON.stringify(data.Empresa));
+
+            Swal.fire({
+                icon: 'success',
+                text: data.message
+              });
         } catch (error) {
-            alert("Erro ao logar!, email ou senha inválidos!");
+            Swal.fire({
+                icon: 'error',
+                text: 'Erro ao autenticar! Email ou Senha inválidos!'
+              });
         }
     }
 
@@ -38,8 +49,8 @@ export function Entrar(){
                     <input onChange={(e) => setEmail(e.target.value)} type="text" text="Email" name="Email" placeholder="Email"/>
                     <input onChange={(e) => setSenha(e.target.value)} type="password" text="Senha" name="senha" placeholder="Senha"/>
                     <Button type="submit" content="Entrar" name="entrar"/>
-                    <Links content="Não tem uma conta? " link=" cadastre-se"/>
-                    <Links content="Esqueceu a senha?" link=" recuperar"/>
+                    <Links content="Não tem uma conta? " text=" cadastre-se" link="/registrarDados"/>
+                    <Links content="Esqueceu a senha?" text=" recuperar"/>
                 </form>
             </div>
         </div>

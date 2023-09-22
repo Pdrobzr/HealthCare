@@ -6,8 +6,11 @@ import { Links } from '../../components/linksBaixoBotao';
 import { LogoDescricao } from '../../components/LogoDescricao';
 import blogFetch from '../../axios/config';
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
 
 export function RegistrarDados() {
+
+    const navigate = useNavigate();
 
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
@@ -44,15 +47,15 @@ export function RegistrarDados() {
             Swal.fire({
                 icon: 'success',
                 text: data.message
-              })
+              });
+
+              navigate('/entrar');
         } catch (error) {
             Swal.fire({
                 icon: 'error',
                 text: 'Erro ao cadastrar!'
               })
         }
-
-        console.log(nome, email, senha, telefone, cnpj, endereco, bairro);
     }
 
     useEffect(() => {
@@ -78,8 +81,8 @@ export function RegistrarDados() {
                         
                             <label htmlFor="bairro">Bairro</label>
                             <select className='input-bairro' name='bairro' onChange={(e) => setBairro(Number(e.target.value))}>
-                                <option>batata</option>
-                                {/* <option selected disabled>Selecionar bairro</option> */}
+                                {/* <option>batata</option> */}
+                                <option disabled>Selecionar bairro</option>
                                 {bairros.map(bairros => (
                                     <option key={bairros.idBairro} value={bairros.idBairro}>
                                         {bairros.nomeBairro}
@@ -91,7 +94,7 @@ export function RegistrarDados() {
                         
                     
                     <Button type="submit" content="Registrar" name="Registrar" />
-                    <Links content="É registrado? " link=" Entrar" />
+                    <Links content="É registrado? " text=" Entrar" link="/entrar" />
                 </form>
             </div>
             <div className='parte-direita'>

@@ -68,8 +68,9 @@ export class EmpresaController {
 
             const token = sign({ id: empresa.idEmpresa }, secret as string, { expiresIn: "1d" });
             const { idEmpresa } = empresa;
+            const { nomeEmpresa } = empresa;
 
-            return res.json({ message: 'Empresa logada com sucesso!', Empresa: { idEmpresa, email }, token });
+            return res.json({ message: 'Empresa logada com sucesso!', Empresa: { idEmpresa, nomeEmpresa, email }, token });
         }
 
     }
