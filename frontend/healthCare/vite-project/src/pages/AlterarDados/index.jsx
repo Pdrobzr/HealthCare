@@ -64,9 +64,13 @@ export function AlterarDados() {
         try {
             Swal.fire({
                 title: 'Tem certeza que deseja apagar perfil da empresa?',
-                showDenyButton: true,
-                confirmButtonText: 'Excluir',
-                denyButtonText: `Cancelar`,
+                text: "Perfil apagados não podem ser recuperados!",
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Deletar'
               }).then(async (result) => {
                 if (result.isConfirmed) {
                   const response = await blogFetch.delete(`/deletarEmpresa/${empresa.idEmpresa}`);
