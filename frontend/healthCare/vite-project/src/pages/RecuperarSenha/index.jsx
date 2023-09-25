@@ -12,14 +12,15 @@ export function RecuperarSenha(){
            
             <div className='parte-esquerda'>
                 <LogoDescricao 
+                    size="450px"
                     title="Recupere sua senha" 
                     description="Para recuperar a sua senha, informe seu endereço de email 
-que nós enviaremos um link para a alteração da senha."/>
+                    que nós enviaremos um link para a alteração da senha."/>
                 <form action="" className='formulario'>
                 <Input cor="red" type="email" text="E-mail" name="e-mail" placeholder="E-mail"/>
                 
                 <Button type="submit" content="RECUPERAR" name="cadastrar"/>
-                <Links content="Lembrou a senha? " link=" Entrar"/>
+                <Links content="Lembrou a senha? " text=" Entrar" link="/entrar"/>
                     
                 </form>
             </div>

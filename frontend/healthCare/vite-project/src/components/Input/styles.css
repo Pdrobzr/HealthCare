@@ -1,11 +1,10 @@
-input{
+.input-componentizado{
     background-color: rgba(208, 231, 253, 0.4);
-    width: 260px;
+    width: 267px;
     height: 45px;
     border-radius: 2px;
     border: none;
     padding-left: 23px;
-    margin: 8px 0px;
 }
 
 label{

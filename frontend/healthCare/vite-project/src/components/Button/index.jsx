@@ -5,7 +5,9 @@ export function Button(props){
         <>
         <button
             type= {props.type}
-        >{props.content}</button>
+        >
+            {props.content}
+        </button>
         </>
     );
 };

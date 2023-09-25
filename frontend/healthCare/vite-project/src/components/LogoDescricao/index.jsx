@@ -7,7 +7,7 @@ export function LogoDescricao(props){
         <div className='parte-superior'>
             <img className='logo' src={Image} alt="" />
             <h2 className='titulo'>{props.title}</h2>
-            <p className='descricao-logo'>{props.description}</p>
+            <p style={{width: props.size}} className='descricao-logo'>{props.description}</p>
         </div>
     );
 };

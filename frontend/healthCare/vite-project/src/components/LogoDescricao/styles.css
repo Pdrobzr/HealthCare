@@ -2,20 +2,18 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
-    width: 430px;
-    height: 300px; 
-    border: 1px solid;
+    justify-content: center; 
+
 }
 
 .logo{
 
-    margin: 10px 0px 10px 0px;  
+    
 }
 
 .descricao-logo{
     color: rgba(112, 115, 119, 1);
-    margin-top: 6px;
+    margin: 8px 0px 16px 0px;
  }
 
 .titulo{

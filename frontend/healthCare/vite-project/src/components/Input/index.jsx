@@ -5,6 +5,7 @@ export function Input(props){
         <>
         <label htmlFor={props.name}>{props.text}</label>
         <input
+            className='input-componentizado'
             style={{width: props.size}}
             type={props.type}
             name={props.name}

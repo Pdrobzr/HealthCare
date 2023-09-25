@@ -8,7 +8,7 @@ import blogFetch from '../../axios/config';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
 
-export function RegistrarDados() {
+export function AlterarDados() {
 
     const navigate = useNavigate();
 
@@ -98,7 +98,7 @@ export function RegistrarDados() {
                         </div>
                     </div>
                     <Button type="submit" content="Registrar" name="Registrar" />
-                    <Links content="É registrado? " text=" Entrar" link="/entrar" />
+                    <Links content="Deseja continuar com esses dados? " text=" voltar" link="/entrar" />
                 </form>
             </div>
             <div className='parte-direita'>
