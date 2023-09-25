@@ -12,34 +12,36 @@ export function AlterarDados() {
 
     const navigate = useNavigate();
 
-    const [nome, setNome] = useState("");
-    const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
-    const [telefone, setTelefone] = useState(0);
-    const [cnpj, setCnpj] = useState(0);
-    const [endereco, setEndereco] = useState("");
-    const [bairro, setBairro] = useState();
+    const token = localStorage.getItem("token");
 
-    const [bairros, setBairros] = useState([]);
+    const empresa = JSON.parse(localStorage.getItem("Empresa"));
 
-    const listarBairros = async () => {
-        const response = await blogFetch.get('/listarBairros');
-        const data = response.data;
-        setBairros(data.listarBairros);
+    const [nomePlaceholder, setNomePlaceholder] = useState("");
+    const [emailPlaceholder, setEmailPlaceholder] = useState("");
+    const [telefonePlaceholder, setTelefonePlaceholder] = useState();
+
+    const selecionarEmpresa = async (e) => {
+        const response = await blogFetch.get(`/selecionarEmpresa/${empresa.idEmpresa}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        const data = response.data.selecionarEmpresa;
+
+        setNomePlaceholder(data.nomeEmpresa);
+        setEmailPlaceholder(data.emailEmpresa);
+        setTelefonePlaceholder(data.telefoneEmpresa);
     }
 
     const registrarEmpresa = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await blogFetch.post('/adicionarEmpresa', {
-                nome: nome,
-                email: email,
-                senha: senha,
-                cnpj: cnpj,
-                telefone: telefone,
-                bairro: bairro,
-                endereco: endereco
+            const response = await blogFetch.put(`/atualizarEmpresa/${empresa.idEmpresa}`, {
+                nome: nomePlaceholder,
+                email: emailPlaceholder,
+                telefone: telefonePlaceholder,
             });
 
             const data = response.data;
@@ -47,59 +49,64 @@ export function AlterarDados() {
             Swal.fire({
                 icon: 'success',
                 text: data.message
-              });
+            });
 
-              navigate('/entrar');
+
         } catch (error) {
             Swal.fire({
                 icon: 'error',
                 text: 'Erro ao cadastrar!'
+            })
+        }
+    }
+
+    const deletarEmpresa = async () => {
+        try {
+            Swal.fire({
+                title: 'Tem certeza que deseja apagar perfil da empresa?',
+                showDenyButton: true,
+                confirmButtonText: 'Excluir',
+                denyButtonText: `Cancelar`,
+              }).then(async (result) => {
+                if (result.isConfirmed) {
+                  const response = await blogFetch.delete(`/deletarEmpresa/${empresa.idEmpresa}`);
+                  const data = response.data;
+                  Swal.fire(data.message, '', 'success');
+                  localStorage.clear();
+                  navigate('/entrar');
+                } 
               })
+        } catch (error) {
+            
         }
     }
 
     useEffect(() => {
-        listarBairros();
+        if (localStorage.length == 0) {
+            navigate('/entrar');
+        } else {
+            selecionarEmpresa();
+        }
     }, [])
+
+
 
     return (
         <div className='container-total'>
             <div className='parte-esquerda'>
-                <LogoDescricao title="Registre-se" description="" />
+                <LogoDescricao title="Atualizar Dados" description="" />
                 <form onSubmit={registrarEmpresa} className='formulario'>
                     <label htmlFor="nome fantasia">Nome Fantasia</label>
-                    <input type="text" onChange={(e) => setNome(e.target.value)} text="Nome Fantasia" name="nome fantasia" placeholder="Nome Fantasia" />
+                    <input type="text" onChange={(e) => setNomePlaceholder(e.target.value)} defaultValue={nomePlaceholder} name="nome fantasia" />
                     <label htmlFor="e-mail">E-mail</label>
-                    <input type="email" onChange={(e) => setEmail(e.target.value)} text="E-mail" name="e-mail" placeholder="E-mail" />
-                    <label htmlFor="cnpj">CNPJ</label>
-                    <input type="number" onChange={(e) => setCnpj(e.target.value)} text="Cnpj" name="cnpj" placeholder="CNPJ" />
+                    <input type="email" onChange={(e) => setEmailPlaceholder(e.target.value)} defaultValue={emailPlaceholder} text="E-mail" name="e-mail" />
                     <label htmlFor="telefone">Telefone</label>
-                    <input type="number" onChange={(e) => setTelefone(Number(e.target.value))} text="telefone" name="telefone" placeholder="Telefone" />
-                    <label htmlFor="senha">Senha</label>
-                    <input type="password" onChange={(e) => setSenha(e.target.value)} text="Senha" name="senha" placeholder="Senha" /> 
-                    <div className='div-lado-a-lado'>
-
-                        <div className='input-esquerdo'>
-                            <label htmlFor="bairro">Bairro</label>
-                            <select className='input-bairro' name='bairro' onChange={(e) => setBairro(Number(e.target.value))}>
-                                {<option value="" disabled selected hidden>Canto do Forte</option>}
-                                    <option disabled>Selecionar bairro</option>
-                                {bairros.map(bairros => (
-                                    <option key={bairros.idBairro} value={bairros.idBairro}>
-                                        {bairros.nomeBairro}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        
-                        <div className='input-direito'>
-                            <label htmlFor="endereço">Endereço</label>
-                            <input className="input-endereco" type="text" text="endereço" name="endereço" placeholder="Endereço" onChange={(e) => setEndereco(e.target.value)}/>
-                        </div>
-                    </div>
-                    <Button type="submit" content="Registrar" name="Registrar" />
-                    <Links content="Deseja continuar com esses dados? " text=" voltar" link="/entrar" />
+                    <input type="number" onChange={(e) => setTelefonePlaceholder(Number(e.target.value))} defaultValue={telefonePlaceholder} text="telefone" name="telefone" />
+                    <Button type="submit" content="Editar" name="Editar" />
+                    
                 </form>
+                <button onClick={deletarEmpresa}>DELETAR EMPRESA</button>
+                <Links content="Deseja continuar com esses dados? " text=" voltar" link="/entrar" />
             </div>
             <div className='parte-direita'>
             </div>

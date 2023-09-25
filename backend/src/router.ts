@@ -15,8 +15,8 @@ router.post('/adicionarEmpresa', empresaController.adicionarEmpresa);
 router.get('/listarEmpresas', empresaController.listarEmpresas);
 router.get('/selecionarEmpresa/:id', AuthMiddleware, empresaController.selecionarEmpresa);
 router.post('/autenticarEmpresa', empresaController.autenticarEmpresa);
-router.put('/atualizarEmpresa/:id', AuthMiddleware, empresaController.atualizarEmpresa);
-router.delete('/deletarEmpresa/:id', AuthMiddleware, empresaController.deletarEmpresa);
+router.put('/atualizarEmpresa/:id', empresaController.atualizarEmpresa);
+router.delete('/deletarEmpresa/:id', empresaController.deletarEmpresa);
 router.post('/pesquisarEmpresa', AuthMiddleware, empresaController.pesquisarEmpresa);
 
 // ROTAS DE BAIRROS
@@ -26,7 +26,7 @@ router.get('/listarBairros', empresaController.listarBairros);
 router.get('/listarUsuarios', AuthMiddleware, usuarioController.listarUsuarios);
 router.post('/adicionarUsuario', usuarioController.adicionarUsuario);
 router.post('/autenticarUsuario', usuarioController.autenticarUsuario);
-router.put('/atualizarUsuario/:id', AuthMiddleware, usuarioController.atualizarUsuario);
+router.put('/atualizarUsuario/:id', usuarioController.atualizarUsuario);
 router.delete('/deletarUsuario/:id', AuthMiddleware, usuarioController.deletarUsuario);
 
 // ROTAS DE ESPECIALIDADES 

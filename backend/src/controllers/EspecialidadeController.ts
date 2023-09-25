@@ -33,6 +33,7 @@ export class EspecialidadeController {
     async adicionarEspecialidade(req: Request, res: Response) {
         const idEmpresa = Number(req.params.idEmpresa);
         const idEspecialidade = Number(req.params.idEspecialidade);
+        const { quantidade } = req.body;
 
         const verificarEspecialidadeExistente = await prisma.disponibilidadeEspecialidade.findFirst({
             where: {
@@ -47,7 +48,7 @@ export class EspecialidadeController {
 
             const adicionarEspecialidade = await prisma.disponibilidadeEspecialidade.create({
                 data: {
-                    quantidadeEspecialidade: 0,
+                    quantidadeEspecialidade: quantidade,
                     idEmpresa,
                     idEspecialidade
                 },

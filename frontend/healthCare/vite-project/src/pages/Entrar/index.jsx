@@ -6,11 +6,14 @@ import { Links } from '../../components/linksBaixoBotao';
 import { LogoDescricao } from '../../components/LogoDescricao';
 import blogFetch from '../../axios/config';
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
 
 export function Entrar(){
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+
+    const navigate = useNavigate();
 
     const autenticarEmpresa = async (e) => {
         e.preventDefault();
@@ -28,11 +31,15 @@ export function Entrar(){
                 icon: 'success',
                 text: data.message
               });
+
+              navigate('/alterarDados');
         } catch (error) {
             Swal.fire({
                 icon: 'error',
                 text: 'Erro ao autenticar! Email ou Senha inválidos!'
               });
+
+             
         }
     }
 

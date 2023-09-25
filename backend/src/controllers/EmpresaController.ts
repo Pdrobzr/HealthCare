@@ -87,7 +87,9 @@ export class EmpresaController {
         const selecionarEmpresa = await prisma.empresa.findFirst({
             select: {
                 nomeEmpresa: true,
+                emailEmpresa: true,
                 enderecoEmpresa: true,
+                telefoneEmpresa: true,
                 bairro: {
                     select: {
                         nomeBairro: true,
@@ -102,7 +104,7 @@ export class EmpresaController {
 
         const listarComentarios = await prisma.comentario.findMany({
             where: {
-                idEmpresa: id 
+                idEmpresa: id
             }
         });
 
@@ -113,22 +115,63 @@ export class EmpresaController {
         const { nome, email, telefone } = req.body;
         const id = Number(req.params.id);
 
-        const atualizarEmpresa = await prisma.empresa.update({
-            data: {
-                nomeEmpresa: nome,
+        const emailCadastrado = await prisma.empresa.findFirst({
+            where: {
                 emailEmpresa: email,
-                telefoneEmpresa: telefone,
-            },
+                NOT: {
+                    idEmpresa: id
+                }
+            }
+        });
+
+        if (emailCadastrado) {
+            res.status(400).json({ error: 'Erro ao atualizar! E-mail já cadastrado!' });
+        } else {
+
+            const atualizarEmpresa = await prisma.empresa.update({
+                data: {
+                    nomeEmpresa: nome,
+                    emailEmpresa: email,
+                    telefoneEmpresa: telefone,
+                },
+                where: {
+                    idEmpresa: id
+                }
+            });
+
+            return res.json({ message: 'Informações atualizadas com sucesso!', atualizarEmpresa });
+        }
+    }
+
+    async deletarEmpresa(req: Request, res: Response) {
+        const id = Number(req.params.id);
+
+        const encontrarEspecialidade = await prisma.disponibilidadeEspecialidade.findFirst({
+            where: {
+                idEmpresa: id
+            }
+        });
+        if(encontrarEspecialidade) {
+            const deletarEspecialidadesEmpresa = await prisma.disponibilidadeEspecialidade.deleteMany({
+                where: {
+                    idEmpresa: id
+                }
+            });
+        }
+
+        const encontrarComentariosEmpresa = await prisma.comentario.findFirst({
             where: {
                 idEmpresa: id
             }
         });
 
-        return res.json({ message: 'Informações atualizadas com sucesso!', atualizarEmpresa });
-    }
-
-    async deletarEmpresa(req: Request, res: Response) {
-        const id = Number(req.params.id);
+        if(encontrarComentariosEmpresa) {
+            const deletarComentariosEmpresa = await prisma.comentario.deleteMany({
+                where: {
+                    idEmpresa: id
+                }
+            });
+        }
 
         const deletarEmpresa = await prisma.empresa.delete({
             where: {
@@ -161,7 +204,7 @@ export class EmpresaController {
     async listarBairros(req: Request, res: Response) {
         const listarBairros = await prisma.bairros.findMany();
 
-        return res.json({listarBairros});
+        return res.json({ listarBairros });
     }
 
 }
