@@ -34,7 +34,7 @@ export function AlterarDados() {
         setTelefonePlaceholder(data.telefoneEmpresa);
     }
 
-    const registrarEmpresa = async (e) => {
+    const atualizarEmpresa = async (e) => {
         e.preventDefault();
 
         try {
@@ -99,7 +99,7 @@ export function AlterarDados() {
         <div className='container-total'>
             <div className='parte-esquerda'>
                 <LogoDescricao title="Atualizar Dados" description="" />
-                <form onSubmit={registrarEmpresa} className='formulario'>
+                <form onSubmit={atualizarEmpresa} className='formulario'>
                     <label htmlFor="nome fantasia">Nome Fantasia</label>
                     <input type="text" onChange={(e) => setNomePlaceholder(e.target.value)} defaultValue={nomePlaceholder} name="nome fantasia" />
                     <label htmlFor="e-mail">E-mail</label>
