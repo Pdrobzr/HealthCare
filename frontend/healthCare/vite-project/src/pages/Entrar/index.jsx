@@ -25,7 +25,7 @@ export function Entrar(){
 
             localStorage.setItem("token", data.token);
 
-            localStorage.setItem("Empresa", JSON.stringify(data.Empresa));
+            localStorage.setItem("Empresa", data.Empresa.idEmpresa);
 
             Swal.fire({
                 icon: 'success',

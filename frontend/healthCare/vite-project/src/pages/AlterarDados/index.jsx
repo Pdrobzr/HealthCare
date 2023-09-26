@@ -14,14 +14,14 @@ export function AlterarDados() {
 
     const token = localStorage.getItem("token");
 
-    const empresa = JSON.parse(localStorage.getItem("Empresa"));
+    const idEmpresa = localStorage.getItem("Empresa");
 
     const [nomePlaceholder, setNomePlaceholder] = useState("");
     const [emailPlaceholder, setEmailPlaceholder] = useState("");
     const [telefonePlaceholder, setTelefonePlaceholder] = useState();
 
     const selecionarEmpresa = async (e) => {
-        const response = await blogFetch.get(`/selecionarEmpresa/${empresa.idEmpresa}`, {
+        const response = await blogFetch.get(`/selecionarEmpresa/${idEmpresa}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -38,7 +38,7 @@ export function AlterarDados() {
         e.preventDefault();
 
         try {
-            const response = await blogFetch.put(`/atualizarEmpresa/${empresa.idEmpresa}`, {
+            const response = await blogFetch.put(`/atualizarEmpresa/${idEmpresa}`, {
                 nome: nomePlaceholder,
                 email: emailPlaceholder,
                 telefone: telefonePlaceholder,
@@ -73,7 +73,7 @@ export function AlterarDados() {
                 confirmButtonText: 'Deletar'
               }).then(async (result) => {
                 if (result.isConfirmed) {
-                  const response = await blogFetch.delete(`/deletarEmpresa/${empresa.idEmpresa}`);
+                  const response = await blogFetch.delete(`/deletarEmpresa/${idEmpresa}`);
                   const data = response.data;
                   Swal.fire(data.message, '', 'success');
                   localStorage.clear();
@@ -109,7 +109,7 @@ export function AlterarDados() {
                     <Button type="submit" content="Editar" name="Editar" />
                     
                 </form>
-                <button onClick={deletarEmpresa}>DELETAR EMPRESA</button>
+                <button className='delete' onClick={deletarEmpresa}>DELETAR EMPRESA</button>
                 <Links content="Deseja continuar com esses dados? " text=" voltar" link="/entrar" />
             </div>
             <div className='parte-direita'>
