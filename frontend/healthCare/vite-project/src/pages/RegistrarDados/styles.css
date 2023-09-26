@@ -26,17 +26,16 @@
     height: 45px;
     border-radius: 2px;
     border: none;
-    margin: 8px 8px 8px 0px;
+    margin-right: 8px;
 }
 
 .input-endereco{
     background-color: rgba(208, 231, 253, 0.4);
     border-radius: 2px;
     border: none;
-    margin: 8px 0px;
-    width: 182.7px;
-    padding: 0px;
     
+    width: 185px;
+    padding: 0px;
 }
 
 label{

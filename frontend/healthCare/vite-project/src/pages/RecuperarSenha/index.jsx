@@ -16,8 +16,8 @@ export function RecuperarSenha(){
                     title="Recupere sua senha" 
                     description="Para recuperar a sua senha, informe seu endereço de email 
                     que nós enviaremos um link para a alteração da senha."/>
-                <form action="" className='formulario'>
-                <Input cor="red" type="email" text="E-mail" name="e-mail" placeholder="E-mail"/>
+                <form action="" className='formulario-recuperar-senha'>
+                <Input type="email" text="E-mail" name="e-mail" placeholder="E-mail"/>
                 
                 <Button type="submit" content="RECUPERAR" name="cadastrar"/>
                 <Links content="Lembrou a senha? " text=" Entrar" link="/entrar"/>

@@ -51,7 +51,6 @@ header{
 }
 
 .tabela-adicionar-especialidade{
-    border: 1px solid red;
     width: 705px;
     height: 380px;
     border-radius: 8px;
@@ -85,7 +84,7 @@ header{
     border-radius: 8px;
     transition: 1s;
     box-shadow: 1px 5px 5px rgb(156, 156, 156);
-    margin-top: 24px;
+    margin-top: 18px;
 }
 .botao-especialidade:hover{
     background-color: rgb(39, 234, 59)
@@ -107,6 +106,7 @@ header{
     border-radius: 8px;
     box-shadow: 1px 5px 5px rgb(156, 156, 156);
     padding-left:24px ;
+    margin-bottom: 8px;
 }
 
 .input-quantidade{
@@ -129,4 +129,34 @@ header{
 label{
     margin-bottom: 9px;
 }
+
+.styled-table {
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 100%;
+    overflow: hidden;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+thead tr {
+    background-color: rgba(223, 223, 223, 1);
+    color: black;
+    text-align: center;   
+}
+
+th,td {
+    padding: 12px 15px;
+}
+
+tbody tr{
+    border-bottom: 1px solid #8b8c8c;
+    
+}
+
+.styled-table tbody tr.active-row {
+    color: rgba(112, 115, 119, 1);
+    text-align: center;
+}
+
 
