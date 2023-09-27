@@ -3,8 +3,11 @@ import './styles.css';
 import  ImagemBotao from "../../img/imagemFundo/botao-editar.png";
 import Navbar from "../../components/Navbar";
 import blogFetch from "../../axios/config";
+import { useNavigate } from "react-router-dom";
 
 export function EspecialidadeDisponivel(){
+
+    const navigate = useNavigate();
 
     const [especialidades, setEspecialidades] = useState([]);
     const [especialidadesDisponiveis, setEspecialidadesDisponiveis] = useState([]);
@@ -70,8 +73,8 @@ export function EspecialidadeDisponivel(){
                         <div className="inputs-centralizados">
                             
                             <label className="label-especialidade"htmlFor="escolha-especialidade">Especialidade</label>
-                            <select className='escolha-especialidade' name='bairro' onChange={(e) => setEspecialidade(Number(e.target.value))}>
-                                    <option disabled>Selecionar especialidade</option>
+                            <select className='escolha-especialidade' value={especialidade} onChange={(e) => setEspecialidade(Number(e.target.value))}>
+                                    <option>Selecionar especialidade</option>
                                 {especialidades.map(especialidade => (
                                     <option key={especialidade.idEspecialidade} value={especialidade.idEspecialidade}>
                                         {especialidade.nomeEspecialidade}

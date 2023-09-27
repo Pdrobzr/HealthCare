@@ -27,6 +27,11 @@ export class EspecialidadeController {
             },
             where: {
                 idEmpresa
+            },
+            orderBy: {
+                Especialidade: {
+                    nomeEspecialidade: 'asc'
+                }
             }
         })
 

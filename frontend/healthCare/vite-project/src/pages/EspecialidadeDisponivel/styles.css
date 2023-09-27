@@ -9,21 +9,6 @@ header{
     min-width: 100%;
     background-color: white;
 }
-.parte-esquerda-logo{
-    
-    min-width: 50%;
-    
-}
-.imagem-logo{
-    width: 73px;
-    padding-left: 30px;
-}
-.parte-direita-logo{
-    min-width: 48%;
-    display: flex;
-    align-items: center;
-    justify-content: right;
-}
 
 .container-total-especialidade{
     display: flex;
@@ -44,7 +29,6 @@ header{
     display: flex;
     justify-content: right;
 }
-
 .adicionar-especialidade{
     margin-bottom: 24px;
     width: 705px;

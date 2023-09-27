@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import  Image from "../../img/imgLogo/logo.png";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import blogFetch from '../../axios/config';
+import './styles.css'
 
 const Navbar = () => {
+
+    const navigate = useNavigate();
 
     const [nomeEmpresa, setNomeEmpresa] = useState("");
     const token = localStorage.getItem("token");
@@ -22,12 +25,13 @@ const Navbar = () => {
         setNomeEmpresa(data.nomeEmpresa);
     }
 
+    const logout = () => {
+        localStorage.clear();
+        navigate('/entrar');
+    }
+
     useEffect(() => {
-        if (localStorage.length == 0) {
-            navigate('/entrar');
-        } else {
             selecionarEmpresa();
-        }
     }, []);
 
     return (
@@ -37,10 +41,10 @@ const Navbar = () => {
                 <img className="imagem-logo" src={Image} alt="" />
             </div>
             <div className="parte-direita-logo">
-                <div>
+                
                 <p>{nomeEmpresa}</p>
-                <Link to={'/alterarDados'}>Editar Dados</Link>
-                </div>
+                <Link className='link' to={'/alterarDados'}>Editar Dados</Link>
+                <p className='logout' onClick={logout}>Sair</p>
             </div>
         </header>
         </>     
