@@ -160,3 +160,21 @@ tbody tr{
 }
 
 
+.botao-editar{
+    background-image: url('../../img/imagemFundo/img.editar.png');
+    width: 23px;
+    height: 21px;
+    background-color: transparent;
+}
+.botao-deletar{
+    background-image: url('../../img/imagemFundo/imgDeletar.png');
+    width: 23px;
+    height: 21px;
+    background-color: transparent;
+}
+.botao-deletar:hover{
+    background-color: transparent;
+}
+.botao-editar:hover{
+    background-color: transparent;
+}

@@ -58,17 +58,10 @@ export function EspecialidadeDisponivel(){
                             <tr class="active-row">
                                 <td>Ortopedista</td>
                                 <td>4</td>
-                                <td>XX</td>
-                            </tr>
-                            <tr class="active-row">
-                                <td>Ortopedista</td>
-                                <td>4</td>
-                                <td>XX</td>
-                            </tr>
-                            <tr class="active-row">
-                                <td>Ortopedista</td>
-                                <td>4</td>
-                                <td>XX</td>
+                                <td>
+                                    <button className="botao-editar"></button>
+                                    <button className="botao-deletar"></button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
