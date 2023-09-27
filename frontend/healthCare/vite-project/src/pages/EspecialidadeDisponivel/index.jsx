@@ -46,6 +46,10 @@ export function EspecialidadeDisponivel(){
         const response = await blogFetch.delete(`/deletarEspecialidade/${id}`);
     }
 
+    const redirecionarEspecialidade = (id) => {
+        navigate(`/alterarEspecialidade/${id}`);
+    }
+
     useEffect(() => {
         if (localStorage.length == 0) {
             navigate('/entrar');
@@ -110,7 +114,7 @@ export function EspecialidadeDisponivel(){
                                 <td>{especialidadeEmpresa.Especialidade.nomeEspecialidade}</td>
                                 <td>{especialidadeEmpresa.quantidadeEspecialidade}</td>
                                 <td>
-                                    <button className="botao-editar"></button>
+                                    <button className="botao-editar" onClick={() => redirecionarEspecialidade(especialidadeEmpresa.idDisponibilidade)}></button>
                                     <button className="botao-deletar" onClick={() => deletarEspecialidade(especialidadeEmpresa.idDisponibilidade)}></button>
                                 </td>
                                 </tr>

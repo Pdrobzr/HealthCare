@@ -7,6 +7,7 @@ import { RecuperarSenha } from "../pages/RecuperarSenha"
 import { EspecialidadeDisponivel } from "../pages/EspecialidadeDisponivel"
 import ListarEmpresas from "../pages/ListarEmpresas/ListarEmpresas";
 import { AlterarDados } from "../pages/AlterarDados";
+import { AlterarEspecialidade } from "../pages/AlterarEspecialidade";
 
 export const AppRoutes = () => {
     return(
@@ -18,6 +19,7 @@ export const AppRoutes = () => {
                 <Route element={<RegistrarDados/>} path="registrarDados"/>
                 <Route element={<RecuperarSenha/>} path="recuperarSenha"/>
                 <Route element={<EspecialidadeDisponivel/>} path="especialidadeDisponivel"/>
+                <Route element={<AlterarEspecialidade/>} path="alterarEspecialidade/:id"/>
             </Routes>
         </BrowserRouter>
     )

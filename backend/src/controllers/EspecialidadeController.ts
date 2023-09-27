@@ -38,6 +38,25 @@ export class EspecialidadeController {
         res.json({ listarEspecialidadesEmpresas });
     }
 
+    async selecionarDisponibilidade(req: Request, res: Response) {
+        const idDisponibilidade = Number(req.params.idDisponibilidade);
+        const selecionarDisponibilidade = await prisma.disponibilidadeEspecialidade.findUnique({
+            select: {
+                idDisponibilidade: true,
+                quantidadeEspecialidade: true,
+                Especialidade: {
+                    select: {nomeEspecialidade: true}
+                }
+            },
+            where: {
+                idDisponibilidade
+            }
+
+        });
+
+        res.json({selecionarDisponibilidade});
+    }
+
     async adicionarEspecialidade(req: Request, res: Response) {
         const idEmpresa = Number(req.params.idEmpresa);
         const idEspecialidade = Number(req.params.idEspecialidade);

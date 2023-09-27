@@ -33,5 +33,6 @@ router.delete('/deletarUsuario/:id', AuthMiddleware, usuarioController.deletarUs
 router.get('/listarEspecialidades', especialidadeController.listarEspecialidades);
 router.get('/listarEspecialidades/:idEmpresa', especialidadeController.listarEspecialidadesEmpresas);
 router.post('/adicionarEspecialidade/:idEmpresa/:idEspecialidade', especialidadeController.adicionarEspecialidade);
-router.put('/informarEspecialidade/:idDisponibilidade', AuthMiddleware, especialidadeController.informarDisponibilidade);
+router.put('/informarEspecialidade/:idDisponibilidade', especialidadeController.informarDisponibilidade);
 router.delete('/deletarEspecialidade/:idDisponibilidade', especialidadeController.deletarEspecialidade);
+router.get('/selecionarDisponibilidade/:idDisponibilidade', especialidadeController.selecionarDisponibilidade);
