@@ -30,8 +30,8 @@ router.put('/atualizarUsuario/:id', usuarioController.atualizarUsuario);
 router.delete('/deletarUsuario/:id', AuthMiddleware, usuarioController.deletarUsuario);
 
 // ROTAS DE ESPECIALIDADES 
-router.get('/listarEspecialidades', AuthMiddleware, especialidadeController.listarEspecialidades);
-router.get('/listarEspecialidades/:idEmpresa', AuthMiddleware, especialidadeController.listarEspecialidadesEmpresas);
-router.post('/adicionarEspecialidade/:idEmpresa/:idEspecialidade', AuthMiddleware, especialidadeController.adicionarEspecialidade);
+router.get('/listarEspecialidades', especialidadeController.listarEspecialidades);
+router.get('/listarEspecialidades/:idEmpresa', especialidadeController.listarEspecialidadesEmpresas);
+router.post('/adicionarEspecialidade/:idEmpresa/:idEspecialidade', especialidadeController.adicionarEspecialidade);
 router.put('/informarEspecialidade/:idDisponibilidade', AuthMiddleware, especialidadeController.informarDisponibilidade);
-router.delete('/deletarEspecialidade:/idDisponibilidade', AuthMiddleware, especialidadeController.deletarEspecialidade);
+router.delete('/deletarEspecialidade/:idDisponibilidade', especialidadeController.deletarEspecialidade);

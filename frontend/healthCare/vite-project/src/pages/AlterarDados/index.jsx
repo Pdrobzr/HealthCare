@@ -12,6 +12,7 @@ export function AlterarDados() {
 
     const navigate = useNavigate();
 
+
     const token = localStorage.getItem("token");
 
     const idEmpresa = localStorage.getItem("Empresa");
@@ -91,12 +92,14 @@ export function AlterarDados() {
         } else {
             selecionarEmpresa();
         }
-    }, [])
+    }, []);
 
 
 
     return (
+        <>
         <div className='container-total'>
+            
             <div className='parte-esquerda'>
                 <LogoDescricao title="Atualizar Dados" description="" />
                 <form onSubmit={atualizarEmpresa} className='formulario'>
@@ -110,10 +113,11 @@ export function AlterarDados() {
                     
                 </form>
                 <button className='delete' onClick={deletarEmpresa}>DELETAR EMPRESA</button>
-                <Links content="Deseja continuar com esses dados? " text=" voltar" link="/entrar" />
+                <Links content="Deseja continuar com esses dados? " text=" voltar" link="/especialidadeDisponivel" />
             </div>
             <div className='parte-direita'>
             </div>
         </div>
+        </>
     );
 };

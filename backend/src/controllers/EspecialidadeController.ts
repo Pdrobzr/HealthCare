@@ -20,6 +20,9 @@ export class EspecialidadeController {
                 quantidadeEspecialidade: true,
                 Empresa: {
                     select: { nomeEmpresa: true }
+                },
+                Especialidade: {
+                    select: {nomeEspecialidade: true}
                 }
             },
             where: {

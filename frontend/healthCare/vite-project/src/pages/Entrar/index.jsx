@@ -32,7 +32,7 @@ export function Entrar(){
                 text: data.message
               });
 
-              navigate('/alterarDados');
+              navigate('/especialidadeDisponivel');
         } catch (error) {
             Swal.fire({
                 icon: 'error',

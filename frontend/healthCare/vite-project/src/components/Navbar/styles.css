@@ -1,0 +1,180 @@
+
+body{
+    background-color: rgba(242, 242, 242, 1);
+    min-height: 99.6vh;
+}
+header{
+    display: flex;
+    height: 55px;
+    min-width: 100%;
+    background-color: white;
+}
+.parte-esquerda-logo{
+    
+    min-width: 50%;
+    
+}
+.imagem-logo{
+    width: 73px;
+    padding-left: 30px;
+}
+.parte-direita-logo{
+    min-width: 48%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.container-total-especialidade{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.imagem-empresa-escolhe{
+    margin: 24px 0px;
+    width: 705px;
+    height: 92px;
+    border-radius: 8px;
+    background-size: cover;
+    background-repeat: contain;
+    background-image: url('../../img/imagemFundo/images.png');
+    box-shadow: 1px 5px 5px rgb(156, 156, 156);
+    display: flex;
+    justify-content: right;
+}
+
+.adicionar-especialidade{
+    margin-bottom: 24px;
+    width: 705px;
+}
+
+.tabela-adicionar-especialidade{
+    width: 705px;
+    height: 380px;
+    border-radius: 8px;
+    box-shadow: 1px 5px 5px rgb(156, 156, 156);
+}
+
+.botao-alterar-imagem{
+    height: 25px;
+    width: 25px;
+}
+
+.botao-imagem{
+    width: 50px;
+    height: 50px;
+    margin: 8px;
+    background-color: transparent;
+}
+
+.botao-imagem:hover{
+    background-color: transparent;
+}
+
+.titulo-adicionar-especialidade{
+    font-size: 20px;
+}
+
+.botao-especialidade{
+    height: 45px;
+    width: 120px;
+    background-color: rgba(22, 213, 41, 1);
+    border-radius: 8px;
+    transition: 1s;
+    box-shadow: 1px 5px 5px rgb(156, 156, 156);
+    margin-top: 18px;
+}
+.botao-especialidade:hover{
+    background-color: rgb(39, 234, 59)
+}
+
+.inputs-centralizados{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 24px;
+}
+
+.escolha-especialidade{
+    border: none;   
+    width: 280px;
+    height: 45px;
+    color:rgba(112, 115, 119, 1);
+    font-size: 13px;
+    border-radius: 8px;
+    box-shadow: 1px 5px 5px rgb(156, 156, 156);
+    padding-left:24px ;
+    margin-bottom: 8px;
+}
+
+.input-quantidade{
+    background-color: white;
+    border: none;   
+    width: 73px;
+    height: 45px;
+    color:rgba(112, 115, 119, 1);
+    font-size: 13px;
+    border-radius: 8px;
+    box-shadow: 1px 5px 5px rgb(156, 156, 156);
+    padding-left: 24px ;
+}
+
+.centralizando-inputs{
+    display: flex;
+    margin-top: 8px;
+}
+
+label{
+    margin-bottom: 9px;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 100%;
+    overflow: hidden;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+thead tr {
+    background-color: rgba(223, 223, 223, 1);
+    color: black;
+    text-align: center;   
+}
+
+th,td {
+    padding: 12px 15px;
+}
+
+tbody tr{
+    border-bottom: 1px solid #8b8c8c;
+    
+}
+
+.styled-table tbody tr.active-row {
+    color: rgba(112, 115, 119, 1);
+    text-align: center;
+}
+
+
+.botao-editar{
+    background-image: url('../../img/imagemFundo/img.editar.png');
+    width: 23px;
+    height: 21px;
+    background-color: transparent;
+}
+.botao-deletar{
+    background-image: url('../../img/imagemFundo/imgDeletar.png');
+    width: 23px;
+    height: 21px;
+    background-color: transparent;
+}
+.botao-deletar:hover{
+    background-color: transparent;
+}
+.botao-editar:hover{
+    background-color: transparent;
+}
