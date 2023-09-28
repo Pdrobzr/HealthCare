@@ -39,11 +39,15 @@ export function EspecialidadeDisponivel(){
 
         const data = response.data;
 
+        listarEspecialidadesDisponiveis();
+
         
     }
 
     const deletarEspecialidade = async (id) => {
         const response = await blogFetch.delete(`/deletarEspecialidade/${id}`);
+
+        setEspecialidadesDisponiveis(especialidadesDisponiveis.filter(especialidade => especialidade.idDisponibilidade !== id));
     }
 
     const redirecionarEspecialidade = (id) => {
@@ -57,7 +61,7 @@ export function EspecialidadeDisponivel(){
             listarEspecialidades();
             listarEspecialidadesDisponiveis();
         }
-    }, [especialidadesDisponiveis]);
+    }, []);
 
     return(
         <div>
