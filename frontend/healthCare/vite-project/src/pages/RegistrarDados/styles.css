@@ -70,3 +70,11 @@ label{
 .container-total{
     background-color: white;
 }
+@media screen and (max-width: 867px){
+    .parte-esquerda{
+        min-width: 100%;
+    }
+    .parte-direita{
+        display: none;
+    }
+}

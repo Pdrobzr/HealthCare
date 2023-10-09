@@ -6,6 +6,7 @@
 
 .container-total{
     min-height:100vh;
+    min-width: 100vh;
     display: flex;
 }
 
@@ -27,16 +28,19 @@
     align-items: center;
 }
 
+.responsivo{
+    max-width: 303px;
+}
 
 .formulario-entrar{
     display: flex;
     flex-direction: column;
     justify-content: right;
-    align-items: last baseline;
     margin-top: 25px;
-    width: 290px;
+    width: 100%;
     height: 280px;
 }
+
 
 .Propaganda-entrar{
     color: white;
@@ -46,3 +50,11 @@
     padding-top: 8px;
 }
 
+@media (max-width: 893px){
+    .parte-esquerda-entrar{
+        display: none;
+    }
+    .parte-direita-entrar{
+        min-width: 100%;
+    }
+}

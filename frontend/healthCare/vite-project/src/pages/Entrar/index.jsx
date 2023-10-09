@@ -51,14 +51,16 @@ export function Entrar(){
                 <p className='Propaganda-entrar'>+Agilidade</p>
             </div>
             <div className='parte-direita-entrar'>
-                <LogoDescricao title="Bem vindo novamente" description="Divulge o atendimento medico aos pacientes"/>
-                <form onSubmit={autenticarEmpresa} className='formulario-entrar'>
-                    <input onChange={(e) => setEmail(e.target.value)} type="text" text="Email" name="Email" placeholder="Email"/>
-                    <input onChange={(e) => setSenha(e.target.value)} type="password" text="Senha" name="senha" placeholder="Senha"/>
-                    <Button type="submit" content="Entrar" name="entrar"/>
-                    <Links content="Não tem uma conta? " text=" cadastre-se" link="/registrarDados"/>
-                    <Links content="Esqueceu a senha?" text=" recuperar" link="/recuperarSenha"/>
-                </form>
+                <div className='responsivo'>
+                    <LogoDescricao title="Bem vindo novamente" description="Divulge o atendimento medico aos pacientes"/>
+                    <form onSubmit={autenticarEmpresa} className='formulario-entrar'>
+                        <input onChange={(e) => setEmail(e.target.value)} type="text" text="Email" name="Email" placeholder="Email"/>
+                        <input onChange={(e) => setSenha(e.target.value)} type="password" text="Senha" name="senha" placeholder="Senha"/>
+                        <Button type="submit" content="Entrar" name="entrar"/>
+                        <Links content="Não tem uma conta? " text=" cadastre-se" link="/registrarDados"/>
+                        <Links content="Esqueceu a senha?" text=" recuperar" link="/recuperarSenha"/>
+                    </form>
+                </div>
             </div>
         </div>
     );
