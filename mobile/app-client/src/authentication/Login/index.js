@@ -1,16 +1,28 @@
 
 import { View,Text,StyleSheet ,TouchableOpacity,Platform, Pressable,TextInput, Image} from 'react-native';
 import * as React from 'react';
-//import {useFonts,Montserrat_600SemiBold} from '@expo-google-fonts/montserrat';
-
+import {useFonts} from 'expo-font';
+import { FloatingTitleTextInputField } from '../../components/CustomInputs/index';
 
 export default function Login(){
- //   const [fonteLoaded] = useFonts({
- //       Montserrat_600SemiBold,
- //   });
- //   if (!fonteLoaded) {
- //       return null;
- //   }
+    const [fontsLoaded] = useFonts({
+        'Montserrat-Bold': require('../../components/fonts/Montserrat-Bold.ttf'),
+        'Montserrat-SemiBold': require('../../components/fonts/Montserrat-SemiBold.ttf'),
+        'Montserrat-Medium': require('../../components/fonts/Montserrat-Medium.ttf'),
+    })
+    if(!fontsLoaded){
+        return undefined;
+    }
+
+    state = {
+        usuario: '',
+        senha: '',
+      }
+    
+      _updateMasterState = (attrName, value) => {
+        this.setState({ [attrName]: value });
+      }
+
     return(
         <View style={styles.container}>
            <View style={styles.image}>
@@ -19,19 +31,31 @@ export default function Login(){
                      source={require('../../../assets/logo.png')}
                  />
             </View>
-            <View style={styles.contentTitle}>
+          
+           <View style={styles.formsInput}>
+           <View style={styles.contentTitle}>
                 <Text style={styles.subTitle}>Prossiga com o seu</Text>
                 <Text style={styles.titleText}>Login</Text>
             </View>
-           <View style={styles.formsInput}>
-                <TextInput style={styles.formsTextInput} placeholder='Usuário'></TextInput>
-                <TextInput style={styles.formsTextInput} placeholder='Senha'></TextInput>
+           <FloatingTitleTextInputField 
+                attrName = 'usuario'
+                title = 'Usuario'
+                value = {this.state.lastName}
+                updateMasterState = {this._updateMasterState}
+            />
+           <FloatingTitleTextInputField 
+           style={styles.formsInputText}
+                attrName = 'senha'
+                title = 'Senha'
+                value = {this.state.lastName}
+                updateMasterState = {this._updateMasterState}
+            />
                 <Pressable style={styles.buttonLogin}>
-                     <Text style={styles.formsButtonText}>Login</Text>
+                     <Text style={styles.formsButtonText}>LOGIN</Text>
                 </Pressable> 
            </View>
            
-           
+          
         </View>
     )
 }
@@ -57,26 +81,22 @@ const styles = StyleSheet.create ({
     },
     contentTitle:{
         flex:0.2,
-        position:'fixed'
+        alignItems:'flex-start',
     },
     subTitle:{
-
+        fontFamily:"Montserrat-Medium",
+        fontSize:20,
+        color:'#4A4444'
     },
     titleText:{
-        align:'left',
+        fontFamily:"Montserrat-Bold",
+        color:'#48BBC6',
+        fontSize: 50,
     },
     formsInput:{
-        flex:1,
+        flex:2,
     },
-    formsTextInput:{
-        height: 45,
-        borderWidth: 1,
-        borderColor: '#222',
-        margin: 10,
-        fontSize: 20,
-        padding: 10,
-        borderRadius: 8
-    },  
+
     buttonLogin:{
         alignSelf: 'center',
         textAlign: 'center',
@@ -89,6 +109,7 @@ const styles = StyleSheet.create ({
     },
     formsButtonText:{
         color:'#fff',
-       
+        fontFamily:"Montserrat-SemiBold",
+        fontSize:30,
     }
 })
