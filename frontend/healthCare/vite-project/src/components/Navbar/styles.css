@@ -1,25 +1,23 @@
 
-body{
-    background-color: rgba(242, 242, 242, 1);
-    min-height: 99.6vh;
-}
-header{
+.header-especialidade{
     display: flex;
-    height: 55px;
-    min-width: 100%;
+    min-height: 5vh;
+    width: 100%;
     background-color: white;
+    padding-right: 10px;
 }
+
 .parte-esquerda-logo{
-    
     min-width: 50%;
-    
 }
+
 .imagem-logo{
     width: 75px;
-    padding-left: 30px;
+    
 }
+
 .parte-direita-logo{
-    min-width: 48%;
+    min-width: 50%;
     display: flex;
     align-items: center;
     justify-content: right;

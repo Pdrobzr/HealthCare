@@ -36,12 +36,11 @@ const Navbar = () => {
 
     return (
         <>
-        <header>
+        <header className='header-especialidade'>
             <div className="parte-esquerda-logo">
                 <img className="imagem-logo" src={Image} alt="" />
             </div>
             <div className="parte-direita-logo">
-                
                 <p>{nomeEmpresa}</p>
                 <Link className='link' to={'/alterarDados'}>Editar Dados</Link>
                 <p className='logout' onClick={logout}>Sair</p>

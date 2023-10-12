@@ -44,11 +44,9 @@ export function AlterarEspecialidade(){
         }
     }, []);
 
-    return(
-        <div>
+    return(  
         <body>
             <Navbar />
-            
             <div className="container-total-especialidade">
                 <div className="imagem-empresa-escolhe">
                     <button type="submit" className="botao-imagem" > 
@@ -59,8 +57,7 @@ export function AlterarEspecialidade(){
                 <form onSubmit={editarEspecialidade}>
                     <h1 className="titulo-editar-especialidade">Editar Quantidade</h1>
                     <div className="centralizando-inputs">
-                        <div className="inputs-centralizados">
-                            
+                        <div className="inputs-centralizados"> 
                             <label className="label-especialidade"htmlFor="escolha-especialidade">Especialidade</label>
                             <select className='escolha-especialidade' value={especialidade}>
                                 <option>{especialidade}</option>
@@ -73,16 +70,11 @@ export function AlterarEspecialidade(){
                         <div className="inputs-centralizados">
                             <button type="submit" className="botao-editarEspecialidade">Editar</button>
                         </div>
-                        
                     </div>
                     </form>
                 </div>
-        
             </div>
-        </body>
-            
-        </div>
-        
+        </body> 
     )
 }
 

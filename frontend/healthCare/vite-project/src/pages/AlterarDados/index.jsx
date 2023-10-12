@@ -110,9 +110,9 @@ export function AlterarDados() {
                     <label htmlFor="telefone">Telefone</label>
                     <input type="number" onChange={(e) => setTelefonePlaceholder(Number(e.target.value))} defaultValue={telefonePlaceholder} text="telefone" name="telefone" />
                     <Button type="submit" content="Editar" name="Editar" />
-                    
+                     <button className='delete' onClick={deletarEmpresa}>DELETAR EMPRESA</button>
                 </form>
-                <button className='delete' onClick={deletarEmpresa}>DELETAR EMPRESA</button>
+               
                 <Links content="Deseja continuar com esses dados? " text=" voltar" link="/especialidadeDisponivel" />
             </div>
             <div className='parte-direita'>
