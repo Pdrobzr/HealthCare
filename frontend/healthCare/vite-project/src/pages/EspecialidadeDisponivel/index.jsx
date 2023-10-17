@@ -20,8 +20,9 @@ export function EspecialidadeDisponivel() {
     const listarEspecialidades = async () => {
         const response = await blogFetch.get('/listarEspecialidades');
         const data = response.data;
-
+   
         setEspecialidades(data.listarEspecialidades);
+           
     }
 
     const listarEspecialidadesDisponiveis = async () => {
@@ -38,6 +39,9 @@ export function EspecialidadeDisponivel() {
             await blogFetch.post(`/adicionarEspecialidade/${idEmpresa}/${especialidade}`, {
                 quantidade: quantidade
             });
+
+            setEspecialidade('');
+            setQuantidade('');
         } catch (e) {
             Swal.fire({
                 icon: 'error',
@@ -97,7 +101,7 @@ export function EspecialidadeDisponivel() {
                                 </div>
                                 <div className="inputs-centralizados">
                                     <label htmlFor="input-quantidade">Quantidade</label>
-                                    <input className="input-quantidade" type="number" placeholder="Qtd" onChange={(e) => setQuantidade(Number(e.target.value))} />
+                                    <input className="input-quantidade" value={quantidade} type="number" placeholder="Qtd" onChange={(e) => setQuantidade(Number(e.target.value))} />
                                 </div>
                                 <div className="inputs-centralizados">
                                     <button type="submit" className="botao-especialidade">Adicionar</button>

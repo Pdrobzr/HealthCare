@@ -120,6 +120,10 @@ export class EmpresaController {
         const { nome, email, telefone } = req.body;
         const id = Number(req.params.id);
 
+        if(!nome || !email || !telefone) {
+            res.status(400).json({error: 'Erro ao atualizar!'});
+        } else {
+
         const emailCadastrado = await prisma.empresa.findFirst({
             where: {
                 emailEmpresa: email,
@@ -146,6 +150,7 @@ export class EmpresaController {
 
             return res.json({ message: 'Informações atualizadas com sucesso!', atualizarEmpresa });
         }
+    }
     }
 
     async deletarEmpresa(req: Request, res: Response) {
