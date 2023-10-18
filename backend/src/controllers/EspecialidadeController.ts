@@ -4,7 +4,11 @@ import { prisma } from "../utils/prisma";
 export class EspecialidadeController {
 
     async listarEspecialidades(req: Request, res: Response) {
-        const listarEspecialidades = await prisma.especialidade.findMany();
+        const listarEspecialidades = await prisma.especialidade.findMany({
+            orderBy: {
+                nomeEspecialidade: 'asc'
+            }
+        });
 
         res.json({ listarEspecialidades });
     }
@@ -62,7 +66,7 @@ export class EspecialidadeController {
         const idEspecialidade = Number(req.params.idEspecialidade);
         const { quantidade } = req.body;
 
-        if (!idEspecialidade || !quantidade || quantidade <= 0) {
+        if (!idEspecialidade || !quantidade || quantidade < 0) {
             res.status(400).json({ error: 'Erro! Adicione a quantidade de profissionais!' });
         } else {
 
@@ -94,7 +98,7 @@ export class EspecialidadeController {
         const idDisponibilidade = Number(req.params.idDisponibilidade);
         const { quantidade } = req.body;
 
-        if (quantidade <= 0 || !quantidade) {
+        if (quantidade < 0 || !quantidade) {
             res.status(400).json({ error: 'Erro ao editar informações!' });
         } else {
             const alterarDisponibilidade = await prisma.disponibilidadeEspecialidade.update({
