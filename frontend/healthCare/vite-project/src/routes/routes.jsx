@@ -8,11 +8,13 @@ import { EspecialidadeDisponivel } from "../pages/EspecialidadeDisponivel"
 import ListarEmpresas from "../pages/ListarEmpresas/ListarEmpresas";
 import { AlterarDados } from "../pages/AlterarDados";
 import { AlterarEspecialidade } from "../pages/AlterarEspecialidade";
+import { HomePage } from "../pages/HomePage";
 
 export const AppRoutes = () => {
     return(
         <BrowserRouter>
             <Routes>
+                <Route element={<HomePage/>} path="/homePage"/>
                 <Route element={<Entrar/>} path="/entrar"/>
                 <Route element={<ListarEmpresas/>} path="/listarEmpresas/"/>
                 <Route element={<AlterarDados/>} path="/alterarDados"/>
