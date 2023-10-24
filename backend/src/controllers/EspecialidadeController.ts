@@ -12,7 +12,7 @@ export class EspecialidadeController {
 
         res.json({ listarEspecialidades });
     }
-
+    
     async listarEspecialidadesEmpresas(req: Request, res: Response) {
 
         const idEmpresa = Number(req.params.idEmpresa);

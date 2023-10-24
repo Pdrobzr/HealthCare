@@ -15,9 +15,6 @@ export function AlterarEspecialidade() {
     const [especialidade, setEspecialidade] = useState();
     const [quantidade, setQuantidade] = useState();
 
-    const idEmpresa = localStorage.getItem("Empresa");
-
-
     const selecionarDisponibilidade = async (id) => {
         const response = await blogFetch.get(`/selecionarDisponibilidade/${id}`);
         const data = response.data;

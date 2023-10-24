@@ -120,37 +120,37 @@ export class EmpresaController {
         const { nome, email, telefone } = req.body;
         const id = Number(req.params.id);
 
-        if(!nome || !email || !telefone) {
-            res.status(400).json({error: 'Erro ao atualizar!'});
+        if (!nome || !email || !telefone) {
+            res.status(400).json({ error: 'Erro ao atualizar!' });
         } else {
 
-        const emailCadastrado = await prisma.empresa.findFirst({
-            where: {
-                emailEmpresa: email,
-                NOT: {
-                    idEmpresa: id
-                }
-            }
-        });
-
-        if (emailCadastrado) {
-            res.status(400).json({ error: 'Erro ao atualizar! E-mail já cadastrado!' });
-        } else {
-
-            const atualizarEmpresa = await prisma.empresa.update({
-                data: {
-                    nomeEmpresa: nome,
-                    emailEmpresa: email,
-                    telefoneEmpresa: telefone,
-                },
+            const emailCadastrado = await prisma.empresa.findFirst({
                 where: {
-                    idEmpresa: id
+                    emailEmpresa: email,
+                    NOT: {
+                        idEmpresa: id
+                    }
                 }
             });
 
-            return res.json({ message: 'Informações atualizadas com sucesso!', atualizarEmpresa });
+            if (emailCadastrado) {
+                res.status(400).json({ error: 'Erro ao atualizar! E-mail já cadastrado!' });
+            } else {
+
+                const atualizarEmpresa = await prisma.empresa.update({
+                    data: {
+                        nomeEmpresa: nome,
+                        emailEmpresa: email,
+                        telefoneEmpresa: telefone,
+                    },
+                    where: {
+                        idEmpresa: id
+                    }
+                });
+
+                return res.json({ message: 'Informações atualizadas com sucesso!', atualizarEmpresa });
+            }
         }
-    }
     }
 
     async deletarEmpresa(req: Request, res: Response) {

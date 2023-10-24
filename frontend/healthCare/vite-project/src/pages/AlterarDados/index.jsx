@@ -82,7 +82,7 @@ export function AlterarDados() {
                 } 
               })
         } catch (error) {
-            
+            console.log(error);
         }
     }
 

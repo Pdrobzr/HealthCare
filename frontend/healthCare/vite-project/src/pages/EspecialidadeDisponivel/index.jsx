@@ -54,7 +54,7 @@ export function EspecialidadeDisponivel() {
     }
 
     const deletarEspecialidade = async (id) => {
-        const response = await blogFetch.delete(`/deletarEspecialidade/${id}`);
+        await blogFetch.delete(`/deletarEspecialidade/${id}`);
 
         setEspecialidadesDisponiveis(especialidadesDisponiveis.filter(especialidade => especialidade.idDisponibilidade !== id));
     }
