@@ -11,38 +11,43 @@ export class EmpresaController {
     async adicionarEmpresa(req: Request, res: Response) {
         const { nome, email, senha, cnpj, telefone, bairro, endereco } = req.body;
 
-        const hashSenha = await hash(senha, 8);
-
-        const cpnjRegistrado = await prisma.empresa.findFirst({
-            where: {
-                OR: [
-                    {
-                        emailEmpresa: email
-                    },
-                    {
-                        cpnjEmpresa: cnpj
-                    }
-                ]
-            }
-        });
-
-        if (cpnjRegistrado) {
-            return res.status(400).json({ error: 'Erro! CNPJ ou email já cadastrados!' });
+        if (!nome || !email || !senha || !cnpj || !telefone || !bairro || !endereco) {
+            res.status(400).json({ error: 'Insira todas as informações' });
         } else {
 
-            const adicionarEmpresa = await prisma.empresa.create({
-                data: {
-                    nomeEmpresa: nome,
-                    emailEmpresa: email,
-                    senhaEmpresa: hashSenha,
-                    cpnjEmpresa: cnpj,
-                    telefoneEmpresa: telefone,
-                    bairrosId: bairro,
-                    enderecoEmpresa: endereco
+            const hashSenha = await hash(senha, 8);
+
+            const cpnjRegistrado = await prisma.empresa.findFirst({
+                where: {
+                    OR: [
+                        {
+                            emailEmpresa: email
+                        },
+                        {
+                            cpnjEmpresa: cnpj
+                        }
+                    ]
                 }
             });
 
-            return res.json({ message: 'Empresa adicionada com sucesso!', adicionarEmpresa });
+            if (cpnjRegistrado) {
+                return res.status(400).json({ error: 'Erro! CNPJ ou email já cadastrados!' });
+            } else {
+
+                const adicionarEmpresa = await prisma.empresa.create({
+                    data: {
+                        nomeEmpresa: nome,
+                        emailEmpresa: email,
+                        senhaEmpresa: hashSenha,
+                        cpnjEmpresa: cnpj,
+                        telefoneEmpresa: telefone,
+                        bairrosId: bairro,
+                        enderecoEmpresa: endereco
+                    }
+                });
+
+                return res.json({ message: 'Empresa adicionada com sucesso!', adicionarEmpresa });
+            }
         }
     }
 
@@ -115,6 +120,10 @@ export class EmpresaController {
         const { nome, email, telefone } = req.body;
         const id = Number(req.params.id);
 
+        if(!nome || !email || !telefone) {
+            res.status(400).json({error: 'Erro ao atualizar!'});
+        } else {
+
         const emailCadastrado = await prisma.empresa.findFirst({
             where: {
                 emailEmpresa: email,
@@ -142,6 +151,7 @@ export class EmpresaController {
             return res.json({ message: 'Informações atualizadas com sucesso!', atualizarEmpresa });
         }
     }
+    }
 
     async deletarEmpresa(req: Request, res: Response) {
         const id = Number(req.params.id);
@@ -151,7 +161,7 @@ export class EmpresaController {
                 idEmpresa: id
             }
         });
-        if(encontrarEspecialidade) {
+        if (encontrarEspecialidade) {
             const deletarEspecialidadesEmpresa = await prisma.disponibilidadeEspecialidade.deleteMany({
                 where: {
                     idEmpresa: id
@@ -165,7 +175,7 @@ export class EmpresaController {
             }
         });
 
-        if(encontrarComentariosEmpresa) {
+        if (encontrarComentariosEmpresa) {
             const deletarComentariosEmpresa = await prisma.comentario.deleteMany({
                 where: {
                     idEmpresa: id

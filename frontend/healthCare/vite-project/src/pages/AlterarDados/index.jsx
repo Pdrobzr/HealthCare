@@ -56,7 +56,7 @@ export function AlterarDados() {
         } catch (error) {
             Swal.fire({
                 icon: 'error',
-                text: 'Erro ao cadastrar!'
+                text: 'Erro ao atualizar!'
             })
         }
     }
@@ -65,7 +65,7 @@ export function AlterarDados() {
         try {
             Swal.fire({
                 title: 'Tem certeza que deseja apagar perfil da empresa?',
-                text: "Perfil apagados não podem ser recuperados!",
+                text: "Perfis apagados não podem ser recuperados!",
                 icon: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'Cancelar',
