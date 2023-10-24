@@ -58,7 +58,7 @@ export function Entrar(){
                         <input onChange={(e) => setSenha(e.target.value)} type="password" text="Senha" name="senha" placeholder="Senha"/>
                         <Button type="submit" content="Entrar" name="entrar"/>
                         <Links content="Não tem uma conta? " text=" cadastre-se" link="/registrarDados"/>
-                        <Links content="Esqueceu a senha?" text=" recuperar" link="/recuperarSenha"/>
+                        <Links content="Deseja voltar para home?" text=" voltar" link="/"/>
                     </form>
                 </div>
             </div>

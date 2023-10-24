@@ -2,6 +2,7 @@ import Image from '../../img/imgLogo/logo.png';
 import ImagePlus from '../../img/imagemFundo/Plus-Math.png'
 import ImagePlusBranco from '../../img/imagemFundo/Plus-Math-branco.png'
 import './styles.css'
+import { Link } from 'react-router-dom';
 
 export function HomePage() {
     return(
@@ -11,8 +12,8 @@ export function HomePage() {
                     <img className="imagem-logo-header" src={Image} alt="" />
                 </div>
                 <div className="parte-direita-header-homepage">
-                    <button className="botao-registrar-homepage"> Registre-se </button>
-                    <button className="botao-entrar-homepage"> Entrar </button>
+                    <Link to={'/registrarDados'}><button className="botao-registrar-homepage"> Registre-se </button></Link>
+                    <Link to={'/entrar'}><button className="botao-entrar-homepage"> Entrar </button></Link>
                 </div>
             </header>
             <main className="main-homepage">
