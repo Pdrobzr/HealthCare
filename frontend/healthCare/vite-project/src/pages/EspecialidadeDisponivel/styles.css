@@ -17,7 +17,6 @@
     align-items: center;
     justify-content: center;
     width: 800px;
-   
 }
 
 .responsivo-disponivel{
@@ -44,7 +43,6 @@
 
 .tabela-adicionar-especialidade-disponivel{
     max-width: 100%;
-    height: 300px;
     border-radius: 8px;
     box-shadow: 1px 5px 5px rgb(156, 156, 156);
 }
@@ -167,23 +165,27 @@ tbody tr{
     height: 21px;
     background-color: transparent;
 }
+
 .botao-deletar-disponivel:hover{
     background-color: transparent;
 }
+
 .botao-editar-disponivel:hover{
     background-color: transparent;
 }
 
 @media (max-width: 734px) {
+
     .body-disponivel {
         min-height: auto; /* Redefina a altura para o padrão */
     }
+
     .container-total-especialidade-disponivel {
         max-width: 100%; /* Faça com que o contêiner ocupe a largura total */
     }
+
     .botao-especialidade-disponivel {
         width: 60px;
-        text-content;
     }
 }
 

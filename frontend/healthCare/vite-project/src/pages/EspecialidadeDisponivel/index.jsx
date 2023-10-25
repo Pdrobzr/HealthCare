@@ -64,11 +64,8 @@ export function EspecialidadeDisponivel(){
     }, []);
 
     return(
-        
         <body className="body-disponivel">
-            
             <Navbar />
-            
             <div className="container-total-especialidade-disponivel">
                 <div className="responsivo-disponivel">
 
@@ -104,7 +101,6 @@ export function EspecialidadeDisponivel(){
                 </div>
                 <div className="tabela-adicionar-especialidade-disponivel">
                     <table className="styled-table-disponivel">
-                        
                         <thead>
                             <tr>
                                 <th>Especialidade</th>
@@ -112,7 +108,6 @@ export function EspecialidadeDisponivel(){
                                 <th>OFF/ON</th>
                             </tr>
                         </thead>
-                        
                         <tbody>
                             {especialidadesDisponiveis.map(especialidadeEmpresa =>  (
                                 <tr className="active-row-disponivel" key={especialidadeEmpresa.idDisponibilidade}>
@@ -124,17 +119,12 @@ export function EspecialidadeDisponivel(){
                                 </td>
                                 </tr>
                             ))}
-                            
                         </tbody>
                     </table>
                 </div> 
-                
                 </div>
-                
             </div>
         </body>
-            
-        
     )
 }
 
