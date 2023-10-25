@@ -1,25 +1,32 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-body{
+.body-disponivel{
     background-color: rgba(242, 242, 242, 1);
-    min-height: 99.6vh;
-}
-header{
     display: flex;
-    height: 55px;
-    min-width: 100%;
-    background-color: white;
+    flex-direction: column;
+    min-height: 99.8vh;
+    align-items: center;
 }
 
-.container-total-especialidade{
-    display: flex;
+
+.container-total-especialidade-disponivel {
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    width: 800px;
+   
 }
 
-.imagem-empresa-escolhe{
+.responsivo-disponivel{
+    max-width: 100%;
+}
+
+.imagem-empresa-escolhe-disponivel{
     margin: 24px 0px;
-    width: 705px;
+    max-width: 100%;
     height: 92px;
     border-radius: 8px;
     background-size: cover;
@@ -29,39 +36,40 @@ header{
     display: flex;
     justify-content: right;
 }
-.adicionar-especialidade{
+
+.adicionar-especialidade-disponivel{
     margin-bottom: 24px;
-    width: 705px;
+    max-width: 100%;
 }
 
-.tabela-adicionar-especialidade{
-    width: 705px;
-    height: 380px;
+.tabela-adicionar-especialidade-disponivel{
+    max-width: 100%;
+    height: 300px;
     border-radius: 8px;
     box-shadow: 1px 5px 5px rgb(156, 156, 156);
 }
 
-.botao-alterar-imagem{
+.botao-alterar-imagem-disponivel{
     height: 25px;
-    width: 25px;
+    max-width: 25px;
 }
 
-.botao-imagem{
-    width: 50px;
+.botao-imagem-disponivel{
+    max-width: 50px;
     height: 50px;
     margin: 8px;
     background-color: transparent;
 }
 
-.botao-imagem:hover{
+.botao-imagem-disponivel:hover{
     background-color: transparent;
 }
 
-.titulo-adicionar-especialidade{
+.titulo-adicionar-especialidade-disponivel{
     font-size: 20px;
 }
 
-.botao-especialidade{
+.botao-especialidade-disponivel{
     height: 45px;
     width: 120px;
     background-color: rgba(22, 213, 41, 1);
@@ -70,33 +78,35 @@ header{
     box-shadow: 1px 5px 5px rgb(156, 156, 156);
     margin-top: 18px;
 }
-.botao-especialidade:hover{
+
+.botao-especialidade-disponivel:hover{
     background-color: rgb(39, 234, 59)
 }
 
-.inputs-centralizados{
+.inputs-centralizados-disponivel{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-right: 24px;
+    max-width: 100%;
+    margin-right: 10px;
 }
 
-.escolha-especialidade{
+.escolha-especialidade-disponivel{
     border: none;   
-    width: 280px;
+    max-width: 280px;
     height: 45px;
     color:rgba(112, 115, 119, 1);
     font-size: 13px;
     border-radius: 8px;
     box-shadow: 1px 5px 5px rgb(156, 156, 156);
-    padding-left:24px ;
+    padding-left: 24px ;
     margin-bottom: 8px;
 }
 
-.input-quantidade{
+.input-quantidade-disponivel{
     background-color: white;
     border: none;   
-    width: 73px;
+    max-width: 73px;
     height: 45px;
     color:rgba(112, 115, 119, 1);
     font-size: 13px;
@@ -105,16 +115,17 @@ header{
     padding-left: 24px ;
 }
 
-.centralizando-inputs{
+.centralizando-inputs-disponivel{
     display: flex;
     margin-top: 8px;
 }
+
 
 label{
     margin-bottom: 9px;
 }
 
-.styled-table {
+.styled-table-disponivel{
     border-collapse: collapse;
     font-size: 13px;
     min-width: 100%;
@@ -135,30 +146,44 @@ th,td {
 
 tbody tr{
     border-bottom: 1px solid #8b8c8c;
-    
 }
 
-.styled-table tbody tr.active-row {
+.styled-table-disponivel tbody tr.active-row-disponivel {
     color: rgba(112, 115, 119, 1);
     text-align: center;
 }
 
 
-.botao-editar{
+.botao-editar-disponivel{
     background-image: url('../../img/imagemFundo/img.editar.png');
     width: 23px;
     height: 21px;
     background-color: transparent;
 }
-.botao-deletar{
+
+.botao-deletar-disponivel{
     background-image: url('../../img/imagemFundo/imgDeletar.png');
     width: 23px;
     height: 21px;
     background-color: transparent;
 }
-.botao-deletar:hover{
+.botao-deletar-disponivel:hover{
     background-color: transparent;
 }
-.botao-editar:hover{
+.botao-editar-disponivel:hover{
     background-color: transparent;
 }
+
+@media (max-width: 734px) {
+    .body-disponivel {
+        min-height: auto; /* Redefina a altura para o padrão */
+    }
+    .container-total-especialidade-disponivel {
+        max-width: 100%; /* Faça com que o contêiner ocupe a largura total */
+    }
+    .botao-especialidade-disponivel {
+        width: 60px;
+        text-content;
+    }
+}
+
