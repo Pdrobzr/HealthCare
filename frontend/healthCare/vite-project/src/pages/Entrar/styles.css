@@ -8,6 +8,7 @@
 .container-total {
     min-height: 100vh;
     display: flex;
+    flex-wrap: wrap; /* Adicionando flex-wrap para que os elementos quebrem para a próxima linha em telas menores */
 }
 
 .parte-esquerda-entrar {
@@ -19,7 +20,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px; /* Adicionei um padding para melhor espaçamento em telas menores */
 }
 
 .parte-direita-entrar {
@@ -27,13 +28,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px; 
+    padding: 20px; /* Adicionei um padding para melhor espaçamento em telas menores */
 }
 
 .responsivo {
-    max-width: 100%; 
-    display: flex;
-    flex-direction: column;
+    max-width: 100%; /* Definindo a largura máxima para que o elemento se ajuste à tela */
 }
 
 .formulario-entrar {
@@ -42,6 +41,7 @@
     justify-content: right;
     margin-top: 25px;
     width: 100%;
+    max-width: 303px; /* Alterando de width para max-width para que ele se ajuste em telas menores */
 }
 
 .Propaganda-entrar {

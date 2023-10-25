@@ -55,15 +55,16 @@ model DisponibilidadeEspecialidade {
 }
 
 model Comentario {
-  idComentario       Int     @id @default(autoincrement())
+  idComentario       Int      @id @default(autoincrement())
   conteudoComentario String
-  Usuario            Usuario @relation(fields: [idUsuario], references: [idUsuario])
+  dataPublicacao     DateTime @default(now())
+  Usuario            Usuario  @relation(fields: [idUsuario], references: [idUsuario])
   idUsuario          Int
-  Status             Status  @relation(fields: [idStatus], references: [idStatus])
+  Status             Status   @relation(fields: [idStatus], references: [idStatus])
   idStatus           Int
-  Empresa            Empresa @relation(fields: [idEmpresa], references: [idEmpresa])
-  idEmpresa   Int
-} 
+  Empresa            Empresa  @relation(fields: [idEmpresa], references: [idEmpresa])
+  idEmpresa          Int
+}
 
 model Status {
   idStatus   Int          @id @default(autoincrement())
