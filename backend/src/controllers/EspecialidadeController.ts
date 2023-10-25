@@ -8,7 +8,7 @@ export class EspecialidadeController {
             orderBy: {
                 nomeEspecialidade: 'asc'
             }
-        });
+        });//
 
         res.json({ listarEspecialidades });
     }
