@@ -50,44 +50,38 @@ export function AlterarEspecialidade() {
     }, []);
 
     return (
-        <div>
-            <body>
+            <body className="body-disponivel">
                 <Navbar />
-
                 <div className="container-total-especialidade">
-                    <div className="imagem-empresa-escolhe">
-                        <button type="submit" className="botao-imagem" >
-                            <img className="botao-alterar-imagem" src={ImagemBotao} />
-                        </button>
+                    <div className="responsivo-disponivel">
+                        <div className="imagem-empresa-escolhe">
+                            <button type="submit" className="botao-imagem" >
+                                <img className="botao-alterar-imagem" src={ImagemBotao} />
+                            </button>
+                        </div>
+                        <div className="adicionar-especialidade">
+                            <form onSubmit={editarEspecialidade}>
+                                <h1 className="titulo-editar-especialidade">Editar Quantidade</h1>
+                                <div className="centralizando-inputs">
+                                    <div className="inputs-centralizados">
+                                        <label className="label-especialidade" htmlFor="escolha-especialidade">Especialidade</label>
+                                        <select className='escolha-especialidade' value={especialidade}>
+                                            <option>{especialidade}</option>
+                                        </select>
+                                    </div>
+                                    <div className="inputs-centralizados">
+                                        <label htmlFor="input-quantidade">Quantidade</label>
+                                        <input defaultValue={quantidade} className="input-quantidade" type="number" placeholder="Qtd" onChange={(e) => setQuantidade(Number(e.target.value))} />
+                                    </div>
+                                    <div className="inputs-centralizados">
+                                        <button type="submit" className="botao-editarEspecialidade">Editar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div className="adicionar-especialidade">
-                        <form onSubmit={editarEspecialidade}>
-                            <h1 className="titulo-editar-especialidade">Editar Quantidade</h1>
-                            <div className="centralizando-inputs">
-                                <div className="inputs-centralizados">
-
-                                    <label className="label-especialidade" htmlFor="escolha-especialidade">Especialidade</label>
-                                    <select className='escolha-especialidade' value={especialidade}>
-                                        <option>{especialidade}</option>
-                                    </select>
-                                </div>
-                                <div className="inputs-centralizados">
-                                    <label htmlFor="input-quantidade">Quantidade</label>
-                                    <input defaultValue={quantidade} className="input-quantidade" type="number" placeholder="Qtd" onChange={(e) => setQuantidade(Number(e.target.value))} />
-                                </div>
-                                <div className="inputs-centralizados">
-                                    <button type="submit" className="botao-editarEspecialidade">Editar</button>
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
-
                 </div>
             </body>
-
-        </div>
-
     )
 }
 

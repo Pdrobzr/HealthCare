@@ -77,59 +77,59 @@ export function EspecialidadeDisponivel() {
             <Navbar />
             <div className="container-total-especialidade-disponivel">
                 <div className="responsivo-disponivel">
-                <div className="imagem-empresa-escolhe-disponivel">
-                    <button type="submit" className="botao-imagem-disponivel" > 
-                        <img className="botao-alterar-imagem-disponivel"src={ImagemBotao}/>
-                    </button>
-                </div>
-                <div className="adicionar-especialidade-disponivel">
-                    <form onSubmit={adicionarEspecialidade}>
-                        <h1 className="titulo-adicionar-especialidade-disponivel">Adicionar Especialidade</h1>
-                        <div className="centralizando-inputs-disponivel">
-                            <div className="inputs-centralizados-disponivel">
-                                <label className="label-especialidade-disponivel" htmlFor="escolha-especialidade">Especialidade</label>
-                                <select className='escolha-especialidade-disponivel' value={especialidade} onChange={(e) => setEspecialidade(Number(e.target.value))}>
-                                    <option>Selecionar especialidade</option>
-                                    {especialidades.map(especialidade => (
-                                        <option key={especialidade.idEspecialidade} value={especialidade.idEspecialidade}>
-                                            {especialidade.nomeEspecialidade}
-                                        </option>
-                                    ))}
-                                </select>
+                    <div className="imagem-empresa-escolhe-disponivel">
+                        <button type="submit" className="botao-imagem-disponivel" > 
+                            <img className="botao-alterar-imagem-disponivel"src={ImagemBotao}/>
+                        </button>
+                    </div>
+                    <div className="adicionar-especialidade-disponivel">
+                        <form onSubmit={adicionarEspecialidade}>
+                            <h1 className="titulo-adicionar-especialidade-disponivel">Adicionar Especialidade</h1>
+                            <div className="centralizando-inputs-disponivel">
+                                <div className="inputs-centralizados-disponivel">
+                                    <label className="label-especialidade-disponivel" htmlFor="escolha-especialidade">Especialidade</label>
+                                    <select className='escolha-especialidade-disponivel' value={especialidade} onChange={(e) => setEspecialidade(Number(e.target.value))}>
+                                        <option>Selecionar especialidade</option>
+                                        {especialidades.map(especialidade => (
+                                            <option key={especialidade.idEspecialidade} value={especialidade.idEspecialidade}>
+                                                {especialidade.nomeEspecialidade}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="inputs-centralizados-disponivel">
+                                    <label className="input-quantidade-disponivel-label" htmlFor="input-quantidade-disponivel">Quantidade</label>
+                                    <input className="input-quantidade-disponivel" type="number" value={quantidade} placeholder="Qtd" onChange={(e) => setQuantidade(Number(e.target.value))}/>
+                                </div>
+                                <div className="inputs-centralizados-disponivel">
+                                    <button type="submit" className="botao-especialidade-disponivel">Adicionar</button>
+                                </div>
                             </div>
-                            <div className="inputs-centralizados-disponivel">
-                                <label className="input-quantidade-disponivel-label" htmlFor="input-quantidade-disponivel">Quantidade</label>
-                                <input className="input-quantidade-disponivel" type="number" value={quantidade} placeholder="Qtd" onChange={(e) => setQuantidade(Number(e.target.value))}/>
-                            </div>
-                            <div className="inputs-centralizados-disponivel">
-                                <button type="submit" className="botao-especialidade-disponivel">Adicionar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div className="tabela-adicionar-especialidade-disponivel">
-                    <table className="styled-table-disponivel">
-                        <thead>
-                            <tr>
-                                <th>Especialidade</th>
-                                <th>Disponiveis</th>
-                                <th>OFF/ON</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {especialidadesDisponiveis.map(especialidadeEmpresa =>  (
-                                <tr className="active-row-disponivel" key={especialidadeEmpresa.idDisponibilidade}>
-                                <td>{especialidadeEmpresa.Especialidade.nomeEspecialidade}</td>
-                                <td>{especialidadeEmpresa.quantidadeEspecialidade}</td>
-                                <td>
-                                    <button className="botao-editar-disponivel" onClick={() => redirecionarEspecialidade(especialidadeEmpresa.idDisponibilidade)}></button>
-                                    <button className="botao-deletar-disponivel" onClick={() => deletarEspecialidade(especialidadeEmpresa.idDisponibilidade)}></button>
-                                </td>
+                        </form>
+                    </div>
+                    <div className="tabela-adicionar-especialidade-disponivel">
+                        <table className="styled-table-disponivel">
+                            <thead>
+                                <tr>
+                                    <th>Especialidade</th>
+                                    <th>Disponiveis</th>
+                                    <th>OFF/ON</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div> 
+                            </thead>
+                            <tbody>
+                                {especialidadesDisponiveis.map(especialidadeEmpresa =>  (
+                                    <tr className="active-row-disponivel" key={especialidadeEmpresa.idDisponibilidade}>
+                                    <td>{especialidadeEmpresa.Especialidade.nomeEspecialidade}</td>
+                                    <td>{especialidadeEmpresa.quantidadeEspecialidade}</td>
+                                    <td>
+                                        <button className="botao-editar-disponivel" onClick={() => redirecionarEspecialidade(especialidadeEmpresa.idDisponibilidade)}></button>
+                                        <button className="botao-deletar-disponivel" onClick={() => deletarEspecialidade(especialidadeEmpresa.idDisponibilidade)}></button>
+                                    </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div> 
                 </div>
             </div>
         </body>

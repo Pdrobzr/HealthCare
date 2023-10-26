@@ -1,25 +1,29 @@
 
-body{
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.body-disponivel{
     background-color: rgba(242, 242, 242, 1);
-    min-height: 99.6vh;
-}
-header{
     display: flex;
-    height: 55px;
-    min-width: 100%;
-    background-color: white;
+    flex-direction: column;
+    min-height: 99.8vh;
+    align-items: center;
 }
-
 .container-total-especialidade{
-    display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    align-items: center;
+    display: flex;
+    width: 100%;
 }
-
+.responsivo-disponivel{
+    width: 800px;
+}
 .imagem-empresa-escolhe{
     margin: 24px 0px;
-    width: 705px;
+    max-width: 100%;
     height: 92px;
     border-radius: 8px;
     background-size: cover;
@@ -31,36 +35,30 @@ header{
 }
 .adicionar-especialidade{
     margin-bottom: 24px;
-    width: 705px;
+    max-width: 100%;
 }
-
 .tabela-adicionar-especialidade{
-    width: 705px;
+    max-width: 100%;
     height: 380px;
     border-radius: 8px;
     box-shadow: 1px 5px 5px rgb(156, 156, 156);
 }
-
 .botao-alterar-imagem{
     height: 25px;
     width: 25px;
 }
-
 .botao-imagem{
     width: 50px;
     height: 50px;
     margin: 8px;
     background-color: transparent;
 }
-
 .botao-imagem:hover{
     background-color: transparent;
 }
-
 .titulo-editar-especialidade{
     font-size: 20px;
 }
-
 .botao-editarEspecialidade{
     height: 45px;
     width: 120px;
@@ -74,14 +72,14 @@ header{
 .botao-editarEspecialidade:hover{
     background-color: rgb(255, 230, 0);
 }
-
 .inputs-centralizados{
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-right: 24px;
+    max-width: 100%;
+    margin-right: 10px;
 }
-
 .escolha-especialidade{
     border: none;   
     width: 280px;
@@ -93,7 +91,6 @@ header{
     padding-left:24px ;
     margin-bottom: 8px;
 }
-
 .input-quantidade{
     background-color: white;
     border: none;   
@@ -104,17 +101,30 @@ header{
     border-radius: 8px;
     box-shadow: 1px 5px 5px rgb(156, 156, 156);
     padding-left: 24px ;
+    margin-left: 24px;
+    margin-right: 24px;
 }
-
 .centralizando-inputs{
     display: flex;
     margin-top: 8px;
 }
-
 label{
     margin-bottom: 9px;
 }
-
-
-
+@media (max-width: 518px) {
+    .body-disponivel {
+        min-height: auto; /* Redefina a altura para o padrão */
+    }
+    .botao-editarEspecialidade{
+        width: 60px;
+    }
+    .escolha-especialidade{
+        width: 160px;
+        padding-left: 10px ;
+    }
+    .input-quantidade{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
 
