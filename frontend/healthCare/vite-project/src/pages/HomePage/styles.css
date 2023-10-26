@@ -184,4 +184,12 @@
     .health-logo-homepage{
         font-size: 90px;
     }
+    .botao-registrar-homepage{
+        width: 95px;
+        margin-right: 10px;
+    }
+    .botao-entrar-homepage{
+        width: 95px;
+        margin-right: 10px;
+    }
 }
