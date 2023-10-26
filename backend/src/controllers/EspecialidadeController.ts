@@ -66,7 +66,7 @@ export class EspecialidadeController {
         const idEspecialidade = Number(req.params.idEspecialidade);
         const { quantidade } = req.body;
 
-        if (!idEspecialidade || !quantidade || quantidade < 0) {
+        if (!idEspecialidade || quantidade === undefined || quantidade < 0) {
             res.status(400).json({ error: 'Erro! Adicione a quantidade de profissionais!' });
         } else {
 

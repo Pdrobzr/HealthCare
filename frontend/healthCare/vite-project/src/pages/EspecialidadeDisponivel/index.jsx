@@ -99,7 +99,7 @@ export function EspecialidadeDisponivel() {
                             </div>
                             <div className="inputs-centralizados-disponivel">
                                 <label className="input-quantidade-disponivel-label" htmlFor="input-quantidade-disponivel">Quantidade</label>
-                                <input className="input-quantidade-disponivel" type="number" placeholder="Qtd" onChange={(e) => setQuantidade(Number(e.target.value))}/>
+                                <input className="input-quantidade-disponivel" type="number" value={quantidade} placeholder="Qtd" onChange={(e) => setQuantidade(Number(e.target.value))}/>
                             </div>
                             <div className="inputs-centralizados-disponivel">
                                 <button type="submit" className="botao-especialidade-disponivel">Adicionar</button>
