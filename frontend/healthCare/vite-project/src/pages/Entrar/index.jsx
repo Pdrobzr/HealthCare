@@ -15,6 +15,10 @@ export function Entrar(){
 
     const navigate = useNavigate();
 
+    function handleChangeEmail(e) {
+        setEmail(e.target.value);
+    }
+
     const autenticarEmpresa = async (e) => {
         e.preventDefault();
         try {
@@ -54,7 +58,7 @@ export function Entrar(){
                 <div className='responsivo'>
                     <LogoDescricao title="Bem vindo novamente" description="Divulge o atendimento medico aos pacientes"/>
                     <form onSubmit={autenticarEmpresa} className='formulario-entrar'>
-                        <input onChange={(e) => setEmail(e.target.value)} type="text" text="Email" name="Email" placeholder="Email"/>
+                        <input onChange={handleChangeEmail} type="text" text="Email" name="Email" placeholder="Email"/>
                         <input onChange={(e) => setSenha(e.target.value)} type="password" text="Senha" name="senha" placeholder="Senha"/>
                         <Button type="submit" content="Entrar" name="entrar"/>
                         <Links content="Não tem uma conta? " text=" cadastre-se" link="/registrarDados"/>

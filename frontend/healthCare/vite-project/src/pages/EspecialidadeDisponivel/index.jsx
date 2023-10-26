@@ -13,7 +13,7 @@ export function EspecialidadeDisponivel() {
     const [especialidades, setEspecialidades] = useState([]);
     const [especialidadesDisponiveis, setEspecialidadesDisponiveis] = useState([]);
     const [especialidade, setEspecialidade] = useState();
-    const [quantidade, setQuantidade] = useState();
+    const [quantidade, setQuantidade] = useState(0);
 
     const idEmpresa = localStorage.getItem("Empresa");
 
@@ -41,7 +41,7 @@ export function EspecialidadeDisponivel() {
             });
 
             setEspecialidade('');
-            setQuantidade('');
+            setQuantidade(0);
         } catch (e) {
             Swal.fire({
                 icon: 'error',
