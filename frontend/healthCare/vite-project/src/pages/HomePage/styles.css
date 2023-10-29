@@ -4,32 +4,26 @@
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
-
 .tela-total-homepage{
     min-height: 100vh;
 
 }
-
 .header-homepage{
     height: 94px;
 }
-
 .imagem-logo-header{
     width: 142px;
     height: 94px;
 }
-
 .parte-esquerda-header-homepage{
     width: 50%;
 }
-
 .parte-direita-header-homepage{
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: right;
 }
-
 .botao-entrar-homepage{
     border: 2px solid rgba(30, 205, 255, 1);
     color: rgba(30, 205, 255, 1);
@@ -56,7 +50,6 @@
 .botao-registrar-homepage:hover{
     background-color: rgb(52, 150, 230);    
 }
-
 .main-homepage{
     background-image:  url('../../img/imagemFundo/imagem-homepage.png');
     min-height: 83vh;
@@ -65,14 +58,12 @@
     background-origin: border-box;
     display: flex;
 }
-
 .parte-direita-main-homepage{
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .div-centralizadora-healthcare-homepagee{
     display: flex;
     align-items: center;
@@ -85,7 +76,6 @@
 .icone-plus-branco{
     margin-bottom: 300px;
 }
-
 .icone-plus-branco2{
     margin-top: 300px;
 }
@@ -93,21 +83,18 @@
     height: 160px;
     width: 375px;
 }
-
 .health-logo-homepage{
     color: white;
     font-size: 96px;
     font-weight: bold;
     height: 90px;
 }
-
 .care-logo-homepage{
     color: rgba(0, 77, 140, 1);
     font-size: 64px;
     font-weight: bold;
     height: 70px;
 }
-
 .medical-logo-homepage{
     width: 147px;
     height: 29px;
@@ -118,14 +105,12 @@
     margin-top: 1px;
     font-weight: bold;
 }
-
 .parte-esquerda-main-homepage{
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .div-descricao-homepage{
     width: 400px;
     margin-bottom: 70px;
@@ -135,7 +120,6 @@
     font-size: 32px;
     font-weight: bold;   
 }
-
 .descricao-homepage{
     margin-top: 25px ;
     color: white;
@@ -170,17 +154,14 @@
     .icone-plus-branco{
         display: none;
     }
-    
     .icone-plus-branco2{
         display: none;
     }
-
     .medical-logo-homepage-responsivo{
         font-size: 31px;
         color: rgba(119, 243, 255, 1);
         font-weight: bold;
     }
-
     .health-logo-homepage{
         font-size: 90px;
     }

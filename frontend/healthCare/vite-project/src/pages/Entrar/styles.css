@@ -52,7 +52,7 @@
     padding-top: 8px;
 }
 
-@media (max-width: 893px) {
+@media (max-width: 969px) {
     .parte-esquerda-entrar {
         display: none;
     }

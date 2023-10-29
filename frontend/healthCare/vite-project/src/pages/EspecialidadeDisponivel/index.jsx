@@ -5,6 +5,8 @@ import blogFetch from "../../axios/config";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 import  ImagemBotao from "../../img/imagemFundo/botao-editar.png";
+import fotoDeletar from "../../img/imagemFundo/fotoDeletar.png";
+import fotoEditar from "../../img/imagemFundo/fotoEditar.png";
 
 export function EspecialidadeDisponivel() {
 
@@ -113,7 +115,13 @@ export function EspecialidadeDisponivel() {
                                 <tr>
                                     <th>Especialidade</th>
                                     <th>Disponiveis</th>
-                                    <th>OFF/ON</th>
+                                    <th>Ações</th>
+                                    <th>
+                                        <label class="switch-disponivel">
+                                            <input type="checkbox" />
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -121,9 +129,9 @@ export function EspecialidadeDisponivel() {
                                     <tr className="active-row-disponivel" key={especialidadeEmpresa.idDisponibilidade}>
                                     <td>{especialidadeEmpresa.Especialidade.nomeEspecialidade}</td>
                                     <td>{especialidadeEmpresa.quantidadeEspecialidade}</td>
-                                    <td>
-                                        <button className="botao-editar-disponivel" onClick={() => redirecionarEspecialidade(especialidadeEmpresa.idDisponibilidade)}></button>
-                                        <button className="botao-deletar-disponivel" onClick={() => deletarEspecialidade(especialidadeEmpresa.idDisponibilidade)}></button>
+                                    <td className="td-botoes">
+                                        <button className="botao-editar-disponivel" onClick={() => redirecionarEspecialidade(especialidadeEmpresa.idDisponibilidade)}><img className="img-foto" src={fotoEditar}></img></button>
+                                        <button className="botao-deletar-disponivel" onClick={() => deletarEspecialidade(especialidadeEmpresa.idDisponibilidade)}><img className="img-foto" src={fotoDeletar}></img></button>
                                     </td>
                                     </tr>
                                 ))}
