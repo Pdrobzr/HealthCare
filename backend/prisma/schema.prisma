@@ -22,6 +22,7 @@ model Empresa {
   enderecoEmpresa              String
   DisponibilidadeEspecialidade DisponibilidadeEspecialidade[]
   Comentario                   Comentario[]
+  statusEmpresa                Boolean                        @default(false)
 }
 
 model Bairros {

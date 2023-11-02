@@ -16,7 +16,7 @@ export class UsuarioController {
 
     async adicionarUsuario(req: Request, res: Response) {
         const { nome, email, senha } = req.body;
-
+        
         const hashSenha = await hash(senha, 8);
 
         const role = "USER";
@@ -68,9 +68,36 @@ export class UsuarioController {
                 const token = sign({ id: emailValido.idUsuario }, secret as string, { expiresIn: "1d" });
                 const { idUsuario } = emailValido;
 
-                return res.json({ message: 'Usuáro logado com sucesso!', Empresa: { idUsuario, email }, token });
+                return res.json({ message: 'Usuário logado com sucesso!', Usuario: { idUsuario, email }, token });
             }
         }
+    }
+
+    async autenticarAdmin(req: Request, res: Response) {
+        const { email, senha } = req.body;
+        const secret = process.env.SECRET;
+
+        const verificarAdmin = await prisma.usuario.findFirst({
+            where:{
+                emailUsuario: email
+            }
+        });
+        if(!verificarAdmin) {
+            res.status(404).json({error: 'Erro! Email ou senha inválidos!'});
+        } else {
+            const validarSenha = await compare(senha, verificarAdmin.senhaUsuario);
+            if(!validarSenha) {
+                res.status(404).json({error: 'Erro! Email ou senha inválidos!'});
+            } else if(verificarAdmin.roleUsuario !== 'ADMIN') {
+                res.status(401).json({error: 'Erro! Usuário não possui autorização!'});
+            } else {
+                const token = sign({ id: verificarAdmin.idUsuario }, secret as string, { expiresIn: "1d" });
+                const { idUsuario, roleUsuario } = verificarAdmin;
+
+                return res.json({ message: 'Admin logado com sucesso!', Usuario: { idUsuario, email, roleUsuario }, token });
+            }
+        }
+        
     }
 
     async atualizarUsuario(req: Request, res: Response) {
