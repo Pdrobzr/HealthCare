@@ -1,10 +1,30 @@
 import './styles.css';
-import  Imagem from "../../img/imgLogo/logo.png";
+import Imagem from "../../img/imgLogo/logo.png";
 import { Link } from 'react-router-dom';
 import fotoDeletar from "../../img/imagemFundo/fotoDeletar.png"
+import { useEffect, useState } from 'react';
+import blogFetch from '../../axios/config';
 
-export function AdmEmpresa(){
-    return(
+export function AdmEmpresa() {
+
+    const [empresas, setEmpresas] = useState([]);
+
+    const listarEmpresas = async () => {
+        try {
+            const response = await blogFetch.get('/listarEmpresas');
+            const data = response.data;
+            setEmpresas(data.listarEmpresas);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        listarEmpresas();
+    }, []);
+
+    return (
         <body className="body-adm">
             <header>
                 <div className="parte-esquerda-logo">
@@ -12,7 +32,7 @@ export function AdmEmpresa(){
                 </div>
                 <div className="parte-direita-logo">
                     <Link className='link' to={'/admEmpresa'}>Empresas</Link>
-                    <Link className='link' to={'/admPaciente'}>Pacientes</Link>    
+                    <Link className='link' to={'/admPaciente'}>Pacientes</Link>
                     <p>nome do ADM</p>
                     <p className='logout'>Sair</p>
                 </div>
@@ -31,14 +51,17 @@ export function AdmEmpresa(){
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>bluemed</td>
-                                    <td>bluemed@hotmail.com</td>
-                                    <td className="td-botoes">
-                                        <button className="botao-deletar-disponivel" ><img className="img-foto" src={fotoDeletar}></img></button>
-                                    </td>
-                                </tr>
+                                {empresas.length == 0 ? <p>Carregando... </p> :
+                                    empresas.map((empresa) => (
+                                        <tr key={empresa.idEmpresa}>
+                                            <td>{empresa.idEmpresa}</td>
+                                            <td>{empresa.nomeEmpresa}</td>
+                                            <td>{empresa.emailEmpresa}</td>
+                                            <td className="td-botoes">
+                                                <button className="botao-deletar-disponivel" ><img className="img-foto" src={fotoDeletar}></img></button>
+                                            </td>
+                                        </tr>
+                                    ))}
                             </tbody>
                         </table>
                     </div>
