@@ -22,9 +22,18 @@ export function AdmEmpresa() {
         }
     }
 
+    const deletarEmpresa = async (id) => {
+        try {
+            await blogFetch.delete(`/deletarEmpresa/${id}`);
+            setEmpresas(empresas.filter(empresa => empresa.idEmpresa !== id));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const logout = () => {
         localStorage.clear();
-        navigate('/entrar');
+        navigate('/entrarAdmin');
     }
 
     useEffect(() => {
@@ -65,14 +74,13 @@ export function AdmEmpresa() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {empresas.length == 0 ? <p>Carregando... </p> :
-                                    empresas.map((empresa) => (
+                                {empresas.map((empresa) => (
                                         <tr key={empresa.idEmpresa}>
                                             <td>{empresa.idEmpresa}</td>
                                             <td>{empresa.nomeEmpresa}</td>
                                             <td>{empresa.emailEmpresa}</td>
                                             <td className="td-botoes">
-                                                <button className="botao-deletar-disponivel" ><img className="img-foto" src={fotoDeletar}></img></button>
+                                                <button className="botao-deletar-disponivel" onClick={() => deletarEmpresa(empresa.idEmpresa)} ><img className="img-foto" src={fotoDeletar}></img></button>
                                             </td>
                                         </tr>
                                     ))}

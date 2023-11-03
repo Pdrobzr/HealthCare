@@ -26,7 +26,7 @@ export function AdmPaciente() {
 
     const logout = () => {
         localStorage.clear();
-        navigate('/entrar');
+        navigate('/entrarAdmin');
     }
 
     const deletarUsuario = async (id) => {
@@ -78,8 +78,7 @@ export function AdmPaciente() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {usuarios.length == 0 ? <p>Carregando...</p> :
-                                    usuarios.map((usuario) => (
+                                {usuarios.map((usuario) => (
                                         <tr key={usuario.idUsuario}>
                                             <td>{usuario.idUsuario}</td>
                                             <td>{usuario.nomeUsuario}</td>
