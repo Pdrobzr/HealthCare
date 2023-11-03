@@ -1,11 +1,13 @@
 import './styles.css';
 import Imagem from "../../img/imgLogo/logo.png";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import fotoDeletar from "../../img/imagemFundo/fotoDeletar.png"
 import { useEffect, useState } from 'react';
 import blogFetch from '../../axios/config';
 
 export function AdmEmpresa() {
+
+    const navigate = useNavigate();
 
     const [empresas, setEmpresas] = useState([]);
 
@@ -20,8 +22,20 @@ export function AdmEmpresa() {
         }
     }
 
+    const logout = () => {
+        localStorage.clear();
+        navigate('/entrar');
+    }
+
     useEffect(() => {
-        listarEmpresas();
+        const admin = localStorage.getItem('admin');
+        if (localStorage.length == 0) {
+            navigate('/entrar');
+        } else if(!admin){
+            navigate('/especialidadeDisponivel');
+        } else {
+            listarEmpresas();
+        }
     }, []);
 
     return (
@@ -34,7 +48,7 @@ export function AdmEmpresa() {
                     <Link className='link' to={'/admEmpresa'}>Empresas</Link>
                     <Link className='link' to={'/admPaciente'}>Pacientes</Link>
                     <p>nome do ADM</p>
-                    <p className='logout'>Sair</p>
+                    <p className='logout' onClick={logout}>Sair</p>
                 </div>
             </header>
             <main className="container-total-adm">

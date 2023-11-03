@@ -1,12 +1,16 @@
 import './styles.css';
 import Imagem from "../../img/imgLogo/logo.png";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import fotoDeletar from "../../img/imagemFundo/fotoDeletar.png"
 import { useEffect, useState } from 'react';
 import blogFetch from '../../axios/config';
 
 
 export function AdmPaciente() {
+
+    const admin = localStorage.getItem('admin');
+
+    const navigate = useNavigate();
 
     const [usuarios, setUsuarios] = useState([]);
 
@@ -20,8 +24,30 @@ export function AdmPaciente() {
         }
     }
 
+    const logout = () => {
+        localStorage.clear();
+        navigate('/entrar');
+    }
+
+    const deletarUsuario = async (id) => {
+        try {
+            await blogFetch.delete(`/deletarUsuario/${id}`);
+            setUsuarios(usuarios.filter(usuario => usuario.idUsuario !== id));
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
     useEffect(() => {
-        listarUsuarios();
+        const admin = localStorage.getItem('admin');
+        if (localStorage.length == 0) {
+            navigate('/entrar');
+        } else if(!admin){
+            navigate('/especialidadeDisponivel');
+        } else {
+            listarUsuarios();
+        }
     }, []);
 
 
@@ -35,7 +61,7 @@ export function AdmPaciente() {
                     <Link className='link' to={'/admEmpresa'}>Empresas</Link>
                     <Link className='link' to={'/admPaciente'}>Pacientes</Link>
                     <p>nome do ADM</p>
-                    <p className='logout'>Sair</p>
+                    <p className='logout' onClick={logout}>Sair</p>
                 </div>
             </header>
             <main className="container-total-adm">
@@ -59,7 +85,7 @@ export function AdmPaciente() {
                                             <td>{usuario.nomeUsuario}</td>
                                             <td>{usuario.emailUsuario}</td>
                                             <td className="td-botoes">
-                                                <button className="botao-deletar-disponivel" ><img className="img-foto" src={fotoDeletar}></img></button>
+                                                <button className="botao-deletar-disponivel" onClick={() => deletarUsuario(usuario.idUsuario)} ><img className="img-foto" src={fotoDeletar}></img></button>
                                             </td>
                                         </tr>
                                     ))}
