@@ -36,7 +36,7 @@ export function AdmPaciente() {
             const data = response.data;
             setUsuario(data.selecionarUsuario.nomeUsuario);
         } catch (error) {
-            
+            console.log(error);
         }
     }
 

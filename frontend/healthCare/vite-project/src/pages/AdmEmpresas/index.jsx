@@ -29,7 +29,7 @@ export function AdmEmpresa() {
             const data = response.data;
             setUsuario(data.selecionarUsuario.nomeUsuario);
         } catch (error) {
-            
+            console.log(error);
         }
     }
 

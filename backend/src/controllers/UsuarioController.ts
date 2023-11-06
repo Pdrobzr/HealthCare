@@ -9,7 +9,13 @@ dotenv.config();
 export class UsuarioController {
 
     async listarUsuarios(req: Request, res: Response) {
-        const listarUsuarios = await prisma.usuario.findMany();
+        const listarUsuarios = await prisma.usuario.findMany({
+            where: {
+                NOT: {
+                    roleUsuario: 'ADMIN'
+                }
+            }
+        });
 
         res.json({listarUsuarios});
     }
