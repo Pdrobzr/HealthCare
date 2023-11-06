@@ -12,6 +12,7 @@ export function AdmPaciente() {
 
     const navigate = useNavigate();
 
+    const [usuario, setUsuario] = useState("");
     const [usuarios, setUsuarios] = useState([]);
 
     const listarUsuarios = async () => {
@@ -27,6 +28,16 @@ export function AdmPaciente() {
     const logout = () => {
         localStorage.clear();
         navigate('/entrarAdmin');
+    }
+
+    const selecionarUsuario = async(id) => {
+        try {
+            const response = await blogFetch.get(`/selecionarUsuario/${id}`);
+            const data = response.data;
+            setUsuario(data.selecionarUsuario.nomeUsuario);
+        } catch (error) {
+            
+        }
     }
 
     const deletarUsuario = async (id) => {
@@ -47,6 +58,7 @@ export function AdmPaciente() {
             navigate('/especialidadeDisponivel');
         } else {
             listarUsuarios();
+            selecionarUsuario(admin);
         }
     }, []);
 
@@ -58,9 +70,9 @@ export function AdmPaciente() {
                     <img className="imagem-logo" src={Imagem} alt="" />
                 </div>
                 <div className="parte-direita-logo">
+                    <p>{usuario}</p>
                     <Link className='link' to={'/admEmpresa'}>Empresas</Link>
                     <Link className='link' to={'/admPaciente'}>Pacientes</Link>
-                    <p>nome do ADM</p>
                     <p className='logout' onClick={logout}>Sair</p>
                 </div>
             </header>

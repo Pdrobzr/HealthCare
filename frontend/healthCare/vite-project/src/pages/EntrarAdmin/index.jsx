@@ -24,7 +24,7 @@ export function EntrarAdmin() {
             const data = response.data;
 
             localStorage.setItem("token", data.token);
-            localStorage.setItem("admin", data.idUsuario);
+            localStorage.setItem("admin", data.Usuario.idUsuario);
 
             Swal.fire({
                 icon: 'success',

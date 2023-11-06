@@ -14,6 +14,18 @@ export class UsuarioController {
         res.json({listarUsuarios});
     }
 
+    async selecionarUsuario(req: Request, res: Response) {
+        const id = Number(req.params.id);
+
+        const selecionarUsuario = await prisma.usuario.findFirst({
+            where: {
+                idUsuario: id
+            }
+        });
+
+        res.json({selecionarUsuario});
+    }
+
     async adicionarUsuario(req: Request, res: Response) {
         const { nome, email, senha } = req.body;
         

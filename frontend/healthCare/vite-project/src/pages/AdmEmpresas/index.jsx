@@ -10,6 +10,7 @@ export function AdmEmpresa() {
     const navigate = useNavigate();
 
     const [empresas, setEmpresas] = useState([]);
+    const [usuario, setUsuario] = useState([]);
 
     const listarEmpresas = async () => {
         try {
@@ -19,6 +20,16 @@ export function AdmEmpresa() {
 
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    const selecionarUsuario = async(id) => {
+        try {
+            const response = await blogFetch.get(`/selecionarUsuario/${id}`);
+            const data = response.data;
+            setUsuario(data.selecionarUsuario.nomeUsuario);
+        } catch (error) {
+            
         }
     }
 
@@ -44,6 +55,7 @@ export function AdmEmpresa() {
             navigate('/especialidadeDisponivel');
         } else {
             listarEmpresas();
+            selecionarUsuario(admin);
         }
     }, []);
 
@@ -54,9 +66,10 @@ export function AdmEmpresa() {
                     <img className="imagem-logo" src={Imagem} alt="" />
                 </div>
                 <div className="parte-direita-logo">
+                    <p>{usuario}</p>
                     <Link className='link' to={'/admEmpresa'}>Empresas</Link>
                     <Link className='link' to={'/admPaciente'}>Pacientes</Link>
-                    <p>nome do ADM</p>
+                    
                     <p className='logout' onClick={logout}>Sair</p>
                 </div>
             </header>
