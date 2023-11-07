@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar";
 import blogFetch from "../../axios/config";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
-import  ImagemBotao from "../../img/imagemFundo/botao-editar.png";
+import ImagemBotao from "../../img/imagemFundo/botao-editar.png";
 import fotoDeletar from "../../img/imagemFundo/fotoDeletar.png";
 import fotoEditar from "../../img/imagemFundo/fotoEditar.png";
 
@@ -16,19 +16,22 @@ export function EspecialidadeDisponivel() {
     const [especialidadesDisponiveis, setEspecialidadesDisponiveis] = useState([]);
     const [especialidade, setEspecialidade] = useState();
     const [quantidade, setQuantidade] = useState(0);
+    const [status, setStatus] = useState(true);
 
-    const idEmpresa = localStorage.getItem("Empresa");
+
+    const empresa = localStorage.getItem("Empresa");
+    const token = localStorage.getItem("token");
 
     const listarEspecialidades = async () => {
         const response = await blogFetch.get('/listarEspecialidades');
         const data = response.data;
-   
+
         setEspecialidades(data.listarEspecialidades);
-           
+
     }
 
     const listarEspecialidadesDisponiveis = async () => {
-        const response = await blogFetch.get(`/listarEspecialidades/${idEmpresa}`);
+        const response = await blogFetch.get(`/listarEspecialidades/${empresa}`);
         const data = response.data;
 
         setEspecialidadesDisponiveis(data.listarEspecialidadesEmpresas);
@@ -38,7 +41,7 @@ export function EspecialidadeDisponivel() {
     const adicionarEspecialidade = async (e) => {
         e.preventDefault();
         try {
-            await blogFetch.post(`/adicionarEspecialidade/${idEmpresa}/${especialidade}`, {
+            await blogFetch.post(`/adicionarEspecialidade/${empresa}/${especialidade}`, {
                 quantidade: quantidade
             });
 
@@ -48,11 +51,32 @@ export function EspecialidadeDisponivel() {
             Swal.fire({
                 icon: 'error',
                 text: 'Erro ao adicionar!'
-              });
+            });
         }
 
         listarEspecialidadesDisponiveis();
 
+    }
+  
+    const selecionarEmpresa = async (e) => {
+
+        const response = await blogFetch.get(`/selecionarEmpresa/${empresa}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        const data = response.data;
+        setStatus(data.selecionarEmpresa.statusEmpresa);
+
+    }
+
+    const alterarStatus = async () => {
+
+        await blogFetch.put(`/atualizarStatus/${empresa}`, {status: !status});
+
+        setStatus(!status);
+        
     }
 
     const deletarEspecialidade = async (id) => {
@@ -65,23 +89,25 @@ export function EspecialidadeDisponivel() {
         navigate(`/alterarEspecialidade/${id}`);
     }
 
+
     useEffect(() => {
         if (localStorage.length == 0) {
             navigate('/entrar');
         } else {
             listarEspecialidades();
             listarEspecialidadesDisponiveis();
+            selecionarEmpresa();
         }
     }, []);
 
-    return(
+    return (
         <body className="body-disponivel">
             <Navbar />
             <div className="container-total-especialidade-disponivel">
                 <div className="responsivo-disponivel">
                     <div className="imagem-empresa-escolhe-disponivel">
-                        <button type="submit" className="botao-imagem-disponivel" > 
-                            <img className="botao-alterar-imagem-disponivel"src={ImagemBotao}/>
+                        <button type="submit" className="botao-imagem-disponivel" >
+                            <img className="botao-alterar-imagem-disponivel" src={ImagemBotao} />
                         </button>
                     </div>
                     <div className="adicionar-especialidade-disponivel">
@@ -101,7 +127,7 @@ export function EspecialidadeDisponivel() {
                                 </div>
                                 <div className="inputs-centralizados-disponivel">
                                     <label className="input-quantidade-disponivel-label" htmlFor="input-quantidade-disponivel">Quantidade</label>
-                                    <input className="input-quantidade-disponivel" type="number" value={quantidade} placeholder="Qtd" onChange={(e) => setQuantidade(Number(e.target.value))}/>
+                                    <input className="input-quantidade-disponivel" type="number" value={quantidade} placeholder="Qtd" onChange={(e) => setQuantidade(Number(e.target.value))} />
                                 </div>
                                 <div className="inputs-centralizados-disponivel">
                                     <button type="submit" className="botao-especialidade-disponivel">Adicionar</button>
@@ -118,26 +144,26 @@ export function EspecialidadeDisponivel() {
                                     <th>Ações</th>
                                     <th>
                                         <label class="switch-disponivel">
-                                            <input type="checkbox" />
+                                            <input type="checkbox" checked={status} onChange={alterarStatus} />
                                             <span class="slider round"></span>
                                         </label>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {especialidadesDisponiveis.map(especialidadeEmpresa =>  (
+                                {especialidadesDisponiveis.map(especialidadeEmpresa => (
                                     <tr className="active-row-disponivel" key={especialidadeEmpresa.idDisponibilidade}>
-                                    <td>{especialidadeEmpresa.Especialidade.nomeEspecialidade}</td>
-                                    <td>{especialidadeEmpresa.quantidadeEspecialidade}</td>
-                                    <td className="td-botoes">
-                                        <button className="botao-editar-disponivel" onClick={() => redirecionarEspecialidade(especialidadeEmpresa.idDisponibilidade)}><img className="img-foto" src={fotoEditar}></img></button>
-                                        <button className="botao-deletar-disponivel" onClick={() => deletarEspecialidade(especialidadeEmpresa.idDisponibilidade)}><img className="img-foto" src={fotoDeletar}></img></button>
-                                    </td>
+                                        <td>{especialidadeEmpresa.Especialidade.nomeEspecialidade}</td>
+                                        <td>{especialidadeEmpresa.quantidadeEspecialidade}</td>
+                                        <td className="td-botoes">
+                                            <button className="botao-editar-disponivel" onClick={() => redirecionarEspecialidade(especialidadeEmpresa.idDisponibilidade)}><img className="img-foto" src={fotoEditar}></img></button>
+                                            <button className="botao-deletar-disponivel" onClick={() => deletarEspecialidade(especialidadeEmpresa.idDisponibilidade)}><img className="img-foto" src={fotoDeletar}></img></button>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </body>

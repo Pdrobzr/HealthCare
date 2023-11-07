@@ -23,7 +23,7 @@ export class EspecialidadeController {
                 idEmpresa: true,
                 quantidadeEspecialidade: true,
                 Empresa: {
-                    select: { nomeEmpresa: true }
+                    select: { nomeEmpresa: true, statusEmpresa: true }
                 },
                 Especialidade: {
                     select: { nomeEspecialidade: true }

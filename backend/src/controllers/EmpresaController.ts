@@ -95,6 +95,7 @@ export class EmpresaController {
                 emailEmpresa: true,
                 enderecoEmpresa: true,
                 telefoneEmpresa: true,
+                statusEmpresa: true,
                 bairro: {
                     select: {
                         nomeBairro: true,
@@ -106,6 +107,7 @@ export class EmpresaController {
                 idEmpresa: id,
             }
         });
+        
 
         const listarComentarios = await prisma.comentario.findMany({
             where: {
@@ -114,6 +116,46 @@ export class EmpresaController {
         });
 
         return res.json({ selecionarEmpresa, listarComentarios });
+    }
+
+    async atualizarStatus(req: Request, res: Response) {
+        const id = Number(req.params.id);
+
+        const status = Boolean(req.body.status);
+
+        const atualizarStatus = await prisma.empresa.update({
+            data: {
+                statusEmpresa: status
+            },
+            where: {
+                idEmpresa: id
+            }
+        });
+
+        return res.json({atualizarStatus});
+
+    }
+
+    async listarEmpresasAbertas(req: Request, res: Response) {
+        const listarEmpresasAbertas = await prisma.empresa.findMany({
+            include:{
+                DisponibilidadeEspecialidade: {
+                    include: {
+                        Especialidade: {
+                            select: {
+                                nomeEspecialidade: true
+                            }
+                        }
+                    }
+                }
+            },
+            
+            where: {
+                statusEmpresa: true
+            }
+        });
+
+        res.json({listarEmpresasAbertas});
     }
 
     async atualizarEmpresa(req: Request, res: Response) {

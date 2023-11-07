@@ -17,7 +17,9 @@ router.get('/selecionarEmpresa/:id', AuthMiddleware, empresaController.seleciona
 router.post('/autenticarEmpresa', empresaController.autenticarEmpresa);
 router.put('/atualizarEmpresa/:id', empresaController.atualizarEmpresa);
 router.delete('/deletarEmpresa/:id', empresaController.deletarEmpresa);
+router.put('/atualizarStatus/:id', empresaController.atualizarStatus);
 router.post('/pesquisarEmpresa', AuthMiddleware, empresaController.pesquisarEmpresa);
+router.get('/listarEmpresasAbertas', empresaController.listarEmpresasAbertas);
 
 // ROTAS DE BAIRROS
 router.get('/listarBairros', empresaController.listarBairros);
