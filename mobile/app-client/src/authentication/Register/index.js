@@ -2,9 +2,18 @@
 import { View, Text, StyleSheet, TouchableOpacity, Platform, Pressable, TextInput, Image } from 'react-native';
 import * as React from 'react';
 import { useFonts } from 'expo-font';
+import {useState} from 'react';
 import Input from '../../components/CustomInputs/index';
+import blogFetch from '../../axios/config';
 import { FontAwesome } from '@expo/vector-icons';
-export default function Register() {
+
+
+
+export default Register = ({ navigation }) =>{
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [confirmasenha, setConfirmasenha] = useState('');
     const [fontsLoaded] = useFonts({
         'Montserrat-Bold': require('../../components/fonts/Montserrat-Bold.ttf'),
         'Montserrat-SemiBold': require('../../components/fonts/Montserrat-SemiBold.ttf'),
@@ -14,29 +23,49 @@ export default function Register() {
         return undefined;
     }
 
-
+    const handleRegister = async () => {
+ 
+        try {
+            if(senha  != confirmasenha){
+                alert("Senhas diferentes")
+            }else{
+                const response = await blogFetch.post('/adicionarUsuario', {
+                    nome: nome, email: email, senha: senha
+                });
+    
+                const data = response.data;
+                alert(data.message);
+                 navigation.navigate('Login');
+            }      
+        } catch (error) {
+            console.log(error)
+        }
+    };
+    const backLogin = async () => {
+        navigation.navigate('Login')
+    };
     return (
         <View style={styles.container}>
          
-           <View style={styles.backTitle}>
+           <View style={styles.backTitle} >
            <FontAwesome 
                 name="angle-left" 
                 size={50} 
                 color={'#4A4444'} 
                 style={styles.icon} 
             />
-            <Text style={styles.backTitleText}>Voltar</Text>
+            <Text style={styles.backTitleText} onPress={backLogin} >Voltar</Text>
            </View>
             <View style={styles.formsInput}>
                 <View style={styles.contentTitle}>
                     <Text style={styles.subTitle}>Prossiga com o seu</Text>
                     <Text style={styles.titleText}>Registro</Text>
                 </View>
-                <Input placeholder="Nome" iconName="user" iconSize={24} />
-                <Input placeholder="Email" iconName="envelope" iconSize={23} />
-                <Input secureTextEntry={true} placeholder="Senha" iconName="lock" iconSize={24} />
-                <Input secureTextEntry={true} placeholder="Senha" iconName="lock" iconSize={24} />
-                <Pressable style={styles.buttonLogin}>
+                <Input placeholder="Nome" iconName="user" iconSize={24} onChangeText={(text) => setNome(text)}/>
+                <Input placeholder="Email" iconName="envelope" iconSize={23} onChangeText={(text) => setEmail(text)} />
+                <Input secureTextEntry={true} placeholder="Senha" iconName="lock" iconSize={24} onChangeText={(text) => setSenha(text)} />
+                <Input secureTextEntry={true} placeholder="Senha" iconName="lock" iconSize={24} onChangeText={(text) => setConfirmasenha(text)}/>
+                <Pressable style={styles.buttonLogin} onPress={handleRegister}>
                     <Text style={styles.formsButtonText}>CADASTRAR</Text>
                 </Pressable>
             

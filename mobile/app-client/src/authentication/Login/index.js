@@ -1,9 +1,11 @@
 
-import { View, Text, StyleSheet, TouchableOpacity, Platform, Pressable, TextInput, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform, Pressable, TextInput, Image,AsyncStorage } from 'react-native';
 import * as React from 'react';
 import { useState } from 'react';
 import { useFonts } from 'expo-font';
+import blogFetch from '../../axios/config';
 import Input from '../../components/CustomInputs/index';
+
 
 export default Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -18,37 +20,27 @@ export default Login = ({ navigation }) => {
     }
 
 
-    const handleLogin = () => {
-        // Construa o objeto de dados para enviar à API
-        const data = {
-            email,
-            senha,
-        };
-
-        // Faça uma chamada à sua API para autenticação
-        fetch('http://localhost:3000/autenticarUsuario', {
-            method: 'POST', // Depende da sua API
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                if (result.autenticado) {
-                    // Autenticação bem-sucedida, redirecione o usuário para a próxima tela
-                    navigation.navigate('MainContainer');
-                } else {
-                    // Autenticação falhou, exiba uma mensagem de erro ao usuário
-                    alert('Credenciais inválidas. Tente novamente.');
-                }
-            })
-            .catch((error) => {
-                console.error('Erro na autenticação:', error);
-                alert('Erro na autenticação. Tente novamente mais tarde.');
+    const handleLogin = async () => {
+        try {
+            const response = await blogFetch.post('/autenticarUsuario', {
+                email: email, senha: senha
             });
-    };
 
+            const data = response.data;
+            alert(data.message);
+            await AsyncStorage.setItem(
+                '@Usuario',data.Usuario
+            )
+
+
+             navigation.navigate('MainContainer');
+        } catch (error) {
+            console.log(error)
+        }
+    };
+    const newRegister = async ()=> {
+       navigation.navigate('Register')
+    };
     return (
         <View style={styles.container}>
             <View style={styles.image}>
@@ -72,7 +64,7 @@ export default Login = ({ navigation }) => {
                     <Text style={styles.formsButtonText}>LOGIN</Text>
                 </Pressable>
                 <Text style={styles.subsTitle}>Não tem uma conta ?
-                    <Text style={{ color: '#1387F1' }}> Cadastre-se</Text>
+                    <Text style={{ color: '#1387F1' }} onPress={newRegister}> Cadastre-se</Text>
                 </Text>
                 <Text style={styles.subsTitle}>Esqueceu sua senha ?
                     <Text style={{ color: '#1387F1' }}> Recupere aqui</Text>

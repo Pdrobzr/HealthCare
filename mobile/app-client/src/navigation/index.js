@@ -21,8 +21,9 @@ const Tab = createBottomTabNavigator();
 
 
  const MainContainer = ({ navigation }) => {
+
     return (
-        <NavigationContainer >
+        <NavigationContainer  independent={true}>
         <Tab.Navigator initialRouteName={homeName} screenOptions={{
             headerShown: false,
             tabBarHideOnKeyboard: true,
