@@ -17,52 +17,54 @@ import CustomTabBar from '../components/CustomTabBar';
 const homeName = 'Home';
 const profileName = 'Configurações';
 const mapsName = 'Mapa';
-
-
-
-
 const Tab = createBottomTabNavigator();
-export default function MainContainer() {
+
+
+ const MainContainer = ({ navigation }) => {
     return (
         <NavigationContainer >
-            <Tab.Navigator initialRouteName={homeName} screenOptions={{
-                headerShown: false,
-                tabBarHideOnKeyboard: true,
-                tabBarShowLabel: false,
-                tabBarActiveTintColor: 'rgba(0, 112, 239, 0.8)',
-                tabBarStyle: {
-                    borderTopWidth: 0,
-                    backgroundColor: "#FFF"
-                }
+        <Tab.Navigator initialRouteName={homeName} screenOptions={{
+            headerShown: false,
+            tabBarHideOnKeyboard: true,
+            tabBarShowLabel: false,
+            tabBarActiveTintColor: 'rgba(0, 112, 239, 0.8)',
+            tabBarStyle: {
+                borderTopWidth: 0,
+                backgroundColor: "#FFF"
             }
+        }
 
 
-            } tabBar={(props) => <CustomTabBar {...props} />}>
+        } tabBar={(props) => <CustomTabBar {...props} />}>
 
-                <Tab.Screen
-                    name={mapsName} 
-                    component={MapsScreen}
-                    options={{
-                        tabBarIcon: "location"
-                    }} 
-                 />
-                <Tab.Screen 
-                    name={homeName} 
-                    component={HomeScreen}
-                    options={{
-                        tabBarIcon: "home"
-                    }}  
-                />
-                <Tab.Screen 
-                    name={profileName} 
-                    component={ProfileScreen}
-                    options={{
-                        tabBarIcon: "settings"
-                    }}  
-                />
+            <Tab.Screen
+                name={mapsName} 
+                component={MapsScreen}
+                options={{
+                    tabBarIcon: "location"
+                }} 
+             />
+            <Tab.Screen 
+                name={homeName} 
+                component={HomeScreen}
+                options={{
+                    tabBarIcon: "home"
+                }}  
+            />
+            <Tab.Screen 
+                name={profileName} 
+                component={ProfileScreen}
+                options={{
+                    tabBarIcon: "settings"
+                }}  
+            />
 
-            </Tab.Navigator>
-        </NavigationContainer>
-    )
-}
+        </Tab.Navigator>
+    </NavigationContainer>
+    );
+  };
 
+
+
+
+export default MainContainer;
