@@ -121,12 +121,15 @@ export class UsuarioController {
     async atualizarUsuario(req: Request, res: Response) {
         const id = Number(req.params.id);
 
-        const {nome, email} = req.body;
+        const {nome, email, senha} = req.body;
+
+        const hashSenha = await hash(senha, 8);
 
         const atualizarUsuario = await prisma.usuario.update({
             data: {
                 nomeUsuario: nome,
-                emailUsuario: email
+                emailUsuario: email,
+                senhaUsuario: hashSenha
             },
             where: {
                 idUsuario: id
