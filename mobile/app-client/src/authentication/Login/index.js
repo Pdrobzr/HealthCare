@@ -1,15 +1,16 @@
 
-import { View, Text, StyleSheet, TouchableOpacity, Platform, Pressable, TextInput, Image,AsyncStorage } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform, Pressable, TextInput, Image } from 'react-native';
 import * as React from 'react';
 import { useState } from 'react';
 import { useFonts } from 'expo-font';
 import blogFetch from '../../axios/config';
 import Input from '../../components/CustomInputs/index';
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+
     const [fontsLoaded] = useFonts({
         'Montserrat-Bold': require('../../components/fonts/Montserrat-Bold.ttf'),
         'Montserrat-SemiBold': require('../../components/fonts/Montserrat-SemiBold.ttf'),
@@ -28,16 +29,18 @@ export default Login = ({ navigation }) => {
 
             const data = response.data;
             alert(data.message);
-            // await AsyncStorage.setItem(
-            //     '@Usuario',data.Usuario
-            // )
+            await AsyncStorage.setItem('@usuario', JSON.stringify(data.Usuario.idUsuario))
 
 
              navigation.navigate('MainContainer');
+            
         } catch (error) {
             alert(error);
         }
     };
+
+
+
     const newRegister = async ()=> {
        navigation.navigate('Register')
     };

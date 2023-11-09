@@ -2,6 +2,8 @@ import * as React from 'react';
 import {View , Text, StyleSheet,Pressable} from 'react-native';
 import Input from '../../../components/CustomInputs';
 import { FontAwesome } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect } from 'react';
 
 
 
