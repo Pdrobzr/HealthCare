@@ -1,7 +1,9 @@
 import axios from 'axios'
 
+const PORT = import.meta.env.VITE_REACT_APP_PORT;
+
 const blogFetch = axios.create({
-    baseURL: 'http://localhost:8081',
+    baseURL: `http://localhost:${PORT}`,
     headers: {
         "Content-Type": "application/json",
     }
