@@ -28,14 +28,14 @@ export default Login = ({ navigation }) => {
 
             const data = response.data;
             alert(data.message);
-            await AsyncStorage.setItem(
-                '@Usuario',data.Usuario
-            )
+            // await AsyncStorage.setItem(
+            //     '@Usuario',data.Usuario
+            // )
 
 
              navigation.navigate('MainContainer');
         } catch (error) {
-            console.log(error)
+            alert(error);
         }
     };
     const newRegister = async ()=> {
