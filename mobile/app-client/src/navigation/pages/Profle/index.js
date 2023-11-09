@@ -3,11 +3,35 @@ import {View , Text, StyleSheet,Pressable} from 'react-native';
 import Input from '../../../components/CustomInputs';
 import { FontAwesome } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import blogFetch from '../../../axios/config';
 
 
 
 export default function ProfileScreen({navigation}){
+
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+
+    const getUsuario = async () => {
+        const id = await AsyncStorage.getItem('@usuario');
+        try {
+            const response = await blogFetch.get(`/selecionarUsuario/${id}`);
+            const data = response.data;
+
+            setNome(data.selecionarUsuario.nomeUsuario);
+            setEmail(data.selecionarUsuario.emailUsuario);
+            setSenha(data.selecionarUsuario.senhaUsuario);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getUsuario();
+    }, []);
+
     return(
         <View style={{flex:1, alignItems: 'center', }}>
            {/* <Text onPress={() => navigation.navigate('Home')}
@@ -26,9 +50,9 @@ export default function ProfileScreen({navigation}){
                 <View style={styles.contentTitle}>
                     <Text style={styles.titleText}>DADOS PESSOAIS</Text>
                 </View>
-                <Input placeholder="Nome" iconName="user" iconSize={24} />
-                <Input placeholder="Email" iconName="envelope" iconSize={23} />
-                <Input secureTextEntry={true} placeholder="Senha" iconName="lock" iconSize={24}  />
+                <Input value={nome} placeholder="Nome" iconName="user" iconSize={24} />
+                <Input value={email} placeholder="Email" iconName="envelope" iconSize={23} />
+                <Input value={senha} secureTextEntry={true} placeholder="Senha" iconName="lock" iconSize={24}  />
                 <View style={styles.buttonsContet}>
                     <Pressable style={styles.buttonChangeData} >
                         <Text style={styles.formsButtonText}>ALTERAR DADOS</Text>
