@@ -36,7 +36,7 @@ const Tab = createBottomTabNavigator();
         }
 
 
-        } tabBar={(props) => <CustomTabBar {...props} />}>
+        } tabBar={(props) => <CustomTabBar {...props}  />}>
 
             <Tab.Screen
                 name={mapsName} 
