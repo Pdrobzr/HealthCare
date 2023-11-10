@@ -4,23 +4,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { FontAwesome } from '@expo/vector-icons';
 
 
- const Input =(props) => {
-  return(
-    <View style={styles.container}>
-      <TextInput 
-          style={styles.inputText} 
-          underlineColorAndroid="transparent" 
-          {...props}
-          secureTextEntry={props.secureTextEntry}
-          />
-      <FontAwesome 
-          name={props.iconName} 
-          size={props.iconSize} 
-          color={'#4A4444'} 
-          style={styles.icon} />
-    </View>
-  );
-};
 
 
 const InputModal =(props) => {
@@ -42,27 +25,13 @@ const InputModal =(props) => {
 };
 
 
-
-
 const styles = StyleSheet.create({
   container:{
     flexDirection:'row'
   },
-  inputText:{
-    width: 350,
-    height: 50,
-    borderRadius: 3,
-    borderStyle: 'solid',
-    borderWidth: 0.5,
-    borderTopWidth:0,
-    borderLeftWidth:0,
-    borderRightWidth:0,
-    height: 50,
-    marginVertical: 4,
-    paddingLeft:20
-  },
+
   inputTextModal:{
-    width: 150,
+    width: 280,
     height: 50,
     borderRadius: 3,
     borderStyle: 'solid',
@@ -81,4 +50,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Input;
+export default InputModal;
