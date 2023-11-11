@@ -4,7 +4,7 @@ import Login from './src/authentication/Login/index';
 import Register from './src/authentication/Register/index';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import ProfileScreen from './src/navigation/pages/Profle';
 const Stack = createNativeStackNavigator();
 
 function App(){
@@ -13,6 +13,7 @@ function App(){
       <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false,}}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="MainContainer" component={MainContainer} />
       </Stack.Navigator>
     </NavigationContainer>

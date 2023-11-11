@@ -9,7 +9,7 @@ import blogFetch from '../../../axios/config';
 
 
 
-export default function ProfileScreen({navigation}){
+ const ProfileScreen = ({navigation}) => {
    
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
@@ -30,19 +30,40 @@ export default function ProfileScreen({navigation}){
             console.log(error);
         }
     }
+//
+  //  const handleLogout = async () => {
+  //      try {
+  //        await AsyncStorage.removeItem('@usuario')
+  //        navigation.navigate('Login')
+  //       // navigation.navigate('App', { screen: 'Login' });
+  //      } catch(e) {
+  //        alert('Não foi possivel fazer o logout')
+  //      }
+  //    
+  //      console.log('Done.')
+  //    } 
 
   const updateUser = async () => {
          const id = await AsyncStorage.getItem('@usuario');
          try {
-             const response = await blogFetch.get(`/atualizarUsuario/${id}`);
+             const response = await blogFetch.put(`/atualizarUsuario/${id}`,{nome,email,senha});
              const data = response.data;
-             setNome(data.atualizarUsuario.nomeUsuario);
-             setEmail(data.atualizarUsuario.emailUsuario);
-             setSenha(data.atualizarUsuario.senhaUsuario);
+             alert('Atualizado com sucesso')
          } catch (error) {
              console.log(error);
          }
      }
+
+     const deleteUser = async () => {
+        const id = await AsyncStorage.getItem('@usuario');
+        try {
+            const response = await blogFetch.delete(`/deletarUsuario/${id}`);
+            alert('Usuario deletado com sucesso');
+            navigation.navigate('Login');
+        } catch (error) {
+            console.log(error);
+        }
+    }
     useEffect(() => {
         getUsuario();
     }, []);
@@ -84,12 +105,13 @@ export default function ProfileScreen({navigation}){
 
 
             <View style={styles.backTitle} >
-           <FontAwesome 
-                name="angle-left" 
-                size={50} 
-                color={'#4A4444'} 
-                style={styles.icon} 
-            />
+                <Pressable style={styles.buttonLogout}>
+                    <FontAwesome 
+                        name="angle-left" 
+                        size={15} 
+                        color={'white'} 
+                    />
+                </Pressable>
             <Text style={styles.backTitleText}  >Sair</Text>
            </View>
            <View style={styles.formsInput}>
@@ -101,10 +123,10 @@ export default function ProfileScreen({navigation}){
                 <Input value={senha} secureTextEntry={true} placeholder="Senha" iconName="lock" iconSize={24}  />
                 <View style={styles.buttonsContet}>
                     <Pressable style={styles.buttonChangeData} onPress={() => setModalActive(true)} >
-                        <Text style={styles.formsButtonText}>ALTERAR DADOS</Text>
+                        <Text style={styles.formsButtonText} >ALTERAR DADOS</Text>
                     </Pressable>
                     <Pressable style={styles.buttonDeleteAccount} >
-                        <Text style={styles.formsButtonText}>DELETAR CONTA</Text>
+                        <Text style={styles.formsButtonText}  onPress={deleteUser}>DELETAR CONTA</Text>
                     </Pressable>
                 </View>
             </View>
@@ -150,6 +172,15 @@ const styles = StyleSheet.create({
     },
 
 
+
+    buttonLogout:{
+        backgroundColor:'#4A4444',
+        alignItems:'center',
+        justifyContent:'center',
+        width:35,
+        height:35,
+        borderRadius:50
+    },  
     backTitle:{
         width:100,
         position:'absolute',
@@ -215,3 +246,5 @@ const styles = StyleSheet.create({
     },
 
 })
+
+export default ProfileScreen;
