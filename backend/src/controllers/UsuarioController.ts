@@ -150,5 +150,27 @@ export class UsuarioController {
 
         res.json({message: 'Usuário deletado com sucesso!', deletarUsuario});
     }
+
+    async realizarComentario(req: Request, res: Response) {
+        const { conteudo } = req.body;
+        const idStatus = Number(req.params.idStatus);
+
+        const idUsuario = Number(req.params.idUsuario);
+        const idEmpresa = Number(req.params.idEmpresa);
+
+        const realizarComentario = await prisma.comentario.create({
+            data: {
+                conteudoComentario: conteudo,
+                idUsuario: idUsuario,
+                idEmpresa: idEmpresa,
+                idStatus: idStatus,
+
+                
+                
+            }
+        });
+
+        res.json({message: 'Comentário realizado com sucesso!', realizarComentario});
+    }
     
 }

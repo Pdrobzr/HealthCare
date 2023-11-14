@@ -147,6 +147,11 @@ export class EmpresaController {
                             }
                         }
                     }
+                },
+                Comentario: {
+                    select: {
+                        conteudoComentario: true
+                    }
                 }
             },
             
