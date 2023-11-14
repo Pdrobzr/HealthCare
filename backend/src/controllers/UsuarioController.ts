@@ -153,10 +153,10 @@ export class UsuarioController {
 
     async realizarComentario(req: Request, res: Response) {
         const { conteudo } = req.body;
-        const idStatus = Number(req.params.idStatus);
+        const idStatus = Number(req.query.idStatus);
 
-        const idUsuario = Number(req.params.idUsuario);
-        const idEmpresa = Number(req.params.idEmpresa);
+        const idUsuario = Number(req.query.idUsuario);
+        const idEmpresa = Number(req.query.idEmpresa);
 
         const realizarComentario = await prisma.comentario.create({
             data: {

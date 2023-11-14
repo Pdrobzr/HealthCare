@@ -32,7 +32,7 @@ router.put('/atualizarUsuario/:id', usuarioController.atualizarUsuario);
 router.delete('/deletarUsuario/:id', usuarioController.deletarUsuario);
 router.get('/selecionarUsuario/:id', usuarioController.selecionarUsuario);
 router.post('/autenticarAdmin', usuarioController.autenticarAdmin);
-router.post('/realizarComentario/:idUsuario/:idEmpresa/:idStatus', usuarioController.realizarComentario);
+router.post('/realizarComentario', usuarioController.realizarComentario);
 
 // ROTAS DE ESPECIALIDADES 
 router.get('/listarEspecialidades', especialidadeController.listarEspecialidades);
