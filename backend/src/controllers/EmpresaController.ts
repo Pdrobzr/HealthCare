@@ -91,6 +91,7 @@ export class EmpresaController {
 
         const selecionarEmpresa = await prisma.empresa.findFirst({
             select: {
+                idEmpresa: true,
                 nomeEmpresa: true,
                 emailEmpresa: true,
                 enderecoEmpresa: true,
@@ -101,12 +102,24 @@ export class EmpresaController {
                         nomeBairro: true,
                     }
                 },
+                DisponibilidadeEspecialidade: {
+                    select: {
+                        Especialidade: {
+                            select: {
+                                idEspecialidade: true,
+                                nomeEspecialidade: true
+                            }
+                        },
+                        quantidadeEspecialidade: true
+                    }
+                }
 
             },
             where: {
                 idEmpresa: id,
             }
         });
+        
         
 
         const listarComentarios = await prisma.comentario.findMany({
@@ -116,6 +129,14 @@ export class EmpresaController {
         });
 
         return res.json({ selecionarEmpresa, listarComentarios });
+    }
+
+    async listarProfissionaisDisponiveis(req: Request, res: Response) {
+        const id = Number(req.params.id);
+
+        const listarProfissionaisDisponiveis = await prisma.empresa.findMany({
+            select: {}
+        })
     }
 
     async atualizarStatus(req: Request, res: Response) {

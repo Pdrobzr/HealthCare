@@ -10,6 +10,7 @@ const transparent = 'rgba(0,0,0,0.5)'
 export default function HomeScreen({ navigation }) {
 
     const [empresas, setEmpresas] = useState([]);
+    const [especialidades, setEspecialidades] = useState([]);
     const [nomeEmpresa, setNomeEmpresa] = useState('');
     const [endereco, setEndereco] = useState('');
     const [bairro, setBairro] = useState('');
@@ -23,9 +24,17 @@ export default function HomeScreen({ navigation }) {
 
     useEffect(() => {
         listarEmpresas();
+        listarProfissionais(selectedCompanyId);
     }, []);
 
     const [openModal, setOpenModal] = useState(false);
+
+    const listarProfissionais = async (id) => {
+        const response = await blogFetch.get(`/listarProfissionais/${id}`);
+        const data = response.data;
+
+        setEspecialidades(data.listarProfissionaisDisponiveis);
+    }
 
     function renderModal() {
 
@@ -33,12 +42,17 @@ export default function HomeScreen({ navigation }) {
             const selecionarEmpresa = async (id) => {
                 const response = await blogFetch.get(`/selecionarEmpresa/${id}`);
                 const data = response.data;
+               
                 setNomeEmpresa(data.selecionarEmpresa.nomeEmpresa);
                 setEndereco(data.selecionarEmpresa.enderecoEmpresa);
-                setBairro(data.selecionarEmpresa.bairro.nomeBairro);
+                setBairro(data.selecionarEmpresa.bairro.nomeBairro);          
+              
             };
 
+            
+
             selecionarEmpresa(selectedCompanyId);
+            
 
 
 
