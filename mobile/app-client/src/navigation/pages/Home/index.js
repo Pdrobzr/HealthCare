@@ -1,34 +1,303 @@
 import * as React from 'react';
-import {View , Text,StyleSheet} from 'react-native';
-import { useEffect } from 'react';
+import { View, Text, StyleSheet, Pressable, ScrollView, Modal, TouchableOpacity } from 'react-native';
+import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InputSearch from '../../../components/CustomInputs/inputSearch';
-export default function HomeScreen({navigation}){
+import { FontAwesome } from '@expo/vector-icons';
 
-    return(
-        <View style={{flex:1, alignItems: 'center'}}>
+const transparent = 'rgba(0,0,0,0.5)'
+export default function HomeScreen({ navigation }) {
+
+    const [openModal, setOpenModal] = useState(false);
+
+    function renderModal() {
+        return (
+            <Modal visible={openModal} animationType="slide" transparent={true}>
+                <View
+                    style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: transparent,
+                    }}>
+                    <View
+                        style={{
+                            backgroundColor: 'white',
+                            padding: 15,
+                            width: '90%',
+                            height: 320,
+                            borderRadius: 10,
+                        }}>
+                        <TouchableOpacity onPress={() => setOpenModal(false)}
+                            style={{
+                                position: 'absolute',
+                                top: 10,
+                                right: 20
+                            }}>
+                            <FontAwesome
+                                name="close"
+                                size={25}
+                                color={'#4A4444'}
+                            />
+                        </TouchableOpacity>
+                        <View
+                            style={{
+                                width: '97%',
+                                height: 200,
+                                flexDirection: "row",
+                                borderWidth: 1,
+                                borderTopWidth: 0,
+                                borderLeftWidth: 0,
+                                borderRightWidth: 0,
+                                top: 40
+                            }}>
+                            <View style={{
+                                width: 60,
+                                height: 40,
+                                borderColor: '#6CA8DA',
+                                borderWidth: 2,
+                                left: 10,
+                                top: 10,
+                                borderRadius: 10,
+                                alignContent: 'center',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <FontAwesome
+                                    name="ambulance"
+                                    size={30}
+                                    color={'#4A4444'}
+                                />
+                            </View>
+                            <View style={styles.contentText}>
+                                <Text>Blue Med Boqueirao</Text>
+                            </View>
+                            <View style={{
+                                width: '100%',
+                                height: 50,
+                                bottom: 70,
+                                position: 'absolute',
+                                borderWidth: 1,
+                                borderTopWidth: 0,
+                                borderLeftWidth: 0,
+                                borderRightWidth: 0,
+                                borderColor: '#6CA8DA'
+                            }}>
+                                <Text
+                                    style={{
+                                        color: '#4A4444',
+                                        fontFamily: "Montserrat-Medium",
+                                        fontSize: 15,
+                                    }}>
+                                    Endereço
+
+                                </Text>
+                                <Text
+                                    style={{
+                                        color: '#4A4444',
+                                        fontFamily: "Montserrat-Medium",
+                                        fontSize: 11,
+                                    }}>
+                                    Av.Pres.Costa e Silva, 1261 - Boqueião, Praia Grande
+                                </Text>
+                            </View>
+                            <View
+                                style={{
+                                    position: 'absolute',
+                                    bottom: 10,
+                                    width: '100%',
+                                    height: 50,
+
+                                    flexDirection: 'row'
+                                }}>
+                                <View
+                                    style={{
+                                        width: 60,
+                                        height: 40,
+
+                                        left: 6,
+                                        top: 5,
+                                        borderRadius: 10,
+                                        alignContent: 'center',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}>
+                                    <Pressable >
+                                        <FontAwesome
+                                            name="wechat"
+                                            size={30}
+                                            color={'#4A4444'}
+                                        />
+                                    </Pressable>
+                                </View>
+                                <View
+                                    style={{
+                                        position: 'absolute',
+                                        right: 5,
+                                        width: 120,
+                                        height: 50,
+
+                                        alignContent: 'center',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        flexDirection: 'row'
+                                    }}>
+                                    <View>
+                                        <Text
+                                            style={{
+                                                color: '#4A4444',
+
+                                            }}>
+                                            Lotação:
+                                        </Text>
+                                    </View>
+                                    <View
+                                        style={{
+                                            flex: 1,
+                                            flexDirection: 'row',
+                                            justifyContent: 'space-around',
+                                        }}>
+                                        <View style={{}}>
+                                            <FontAwesome
+                                                name="user"
+                                                size={15}
+                                                color={'#6CA8DA'}
+                                            />
+                                        </View>
+                                        <View>
+                                            <FontAwesome
+                                                name="user"
+                                                size={15}
+                                                color={'#6CA8DA'}
+                                            />
+                                        </View>
+                                        <View>
+                                            <FontAwesome
+                                                name="user"
+                                                size={15}
+                                                color={'#C5E4FF'}
+                                            />
+                                        </View>
+
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+        )
+    }
+
+    return (
+        <View style={{ flex: 1, backgroundColor: 'rgb(233, 233, 233)', alignItems: 'center' }}>
             {/* <Text onPress={() => alert('Esta é a "Pagina" inicial')}
             style={{fontSize:26,fontWeight:'bold'}}>Tela de inicio</Text> */}
             <View style={styles.searchInput}>
-                <InputSearch 
-                        placeholder="Procurar" 
-                        iconName="search" 
-                        iconSize={24} 
+                <InputSearch
+                    placeholder="Procurar"
+                    iconName="search"
+                    iconSize={24}
                 />
             </View>
             <View style={styles.content}>
+                <ScrollView>
+                    <View style={styles.componentModal}>
+                        <View style={styles.contentModalInt}>
+                            <View style={styles.hIcon}>
+                                <FontAwesome
+                                    name="ambulance"
+                                    size={30}
+                                    color={'#4A4444'}
+                                />
+                            </View>
+                            <View style={styles.contentText}>
+                                <Text>Blue Med Boqueirao</Text>
+                            </View>
+                            <View style={styles.button}>
+                                <Pressable onPress={() => setOpenModal(true)}>
+                                    <FontAwesome
+                                        name="angle-down"
+                                        size={35}
+                                        color={'black'}
+                                    />
+                                </Pressable>
+                                {renderModal()}
+                            </View>
+                        </View>
+                    </View>
+
+                </ScrollView>
+            </View>
+            <View>
 
             </View>
         </View>
+
     );
 }
 
 const styles = StyleSheet.create({
-    searchInput:{
-        position:'absolute',
-        top:70
+    searchInput: {
+        position: 'absolute',
+        top: 70
     },
-    content:{
-        flex:1
+    content: {
+        widht: 500,
+        height: 500,
+        position: 'absolute',
+        bottom: 0,
+        backgroundColor: 'white'
     },
+    componentModal: {
+        width: 380,
+        height: 100,
+        padding: 20,
+
+        alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    contentModalInt: {
+        width: 350,
+        height: 60,
+
+        flexDirection: "row",
+        borderWidth: 1,
+        borderTopWidth: 0,
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+    },
+    hIcon: {
+        width: 60,
+        height: 40,
+        borderColor: '#6CA8DA',
+        borderWidth: 2,
+        left: 10,
+        top: 10,
+        borderRadius: 10,
+        alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    contentText: {
+        width: 200,
+        height: 30,
+        left: 20,
+        top: 15,
+        fontFamily: "Montserrat-Bold",
+        color: '#4A4444',
+        fontSize: 40,
+        paddingTop: 5,
+
+    },
+    button: {
+        width: 50,
+        height: 30,
+        top: 13,
+        left: 50
+    },
+    hLine: {
+
+    }
 })
