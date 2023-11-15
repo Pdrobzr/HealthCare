@@ -9,10 +9,11 @@ import blogFetch from '../../../axios/config';
 const transparent = 'rgba(0,0,0,0.5)'
 export default function HomeScreen({ navigation }) {
 
-    const [empresas, setEmpresas] = useState([{}]);
+    const [empresas, setEmpresas] = useState([]);
     const [nomeEmpresa, setNomeEmpresa] = useState('');
     const [endereco, setEndereco] = useState('');
     const [bairro, setBairro] = useState('');
+    const [selectedCompanyId, setSelectedCompanyId] = useState(null);
 
     const listarEmpresas = async () => {
         const response = await blogFetch.get('/listarEmpresasAbertas');
@@ -26,7 +27,7 @@ export default function HomeScreen({ navigation }) {
 
     const [openModal, setOpenModal] = useState(false);
 
-    function renderModal(id) {
+    function renderModal() {
 
         if(openModal === true) {
             const selecionarEmpresa = async (id) => {
@@ -37,12 +38,12 @@ export default function HomeScreen({ navigation }) {
                 setBairro(data.selecionarEmpresa.bairro.nomeBairro);
             };
     
-            selecionarEmpresa(id);
-        }
+            selecionarEmpresa(selectedCompanyId);
+        
         
 
         return (
-            <Modal visible={openModal} animationType="slide" transparent={true}>
+            <Modal visible={true} animationType="slide" transparent={true}>
                 <View
                     style={{
                         flex: 1,
@@ -218,6 +219,7 @@ export default function HomeScreen({ navigation }) {
             </Modal>
         )
     }
+    }
 
     return (
         <View style={{ flex: 1, backgroundColor: 'rgb(233, 233, 233)', alignItems: 'center' }}>
@@ -230,9 +232,11 @@ export default function HomeScreen({ navigation }) {
                     iconSize={24}
                 />
             </View>
-            {empresas.map((empresa) => (
-            <View key={empresa.idEmpresa} style={styles.content}>
+            
+            <View  style={styles.content}>
+            
                 <ScrollView>
+                {empresas.map((empresa) => (
                     <View style={styles.componentModal}>
                         <View style={styles.contentModalInt}>
                             <View style={styles.hIcon}>
@@ -246,21 +250,24 @@ export default function HomeScreen({ navigation }) {
                                 <Text>{empresa.nomeEmpresa}</Text>
                             </View>
                             <View style={styles.button}>
-                                <Pressable onPress={() => setOpenModal(true)}>
+                                <Pressable onPress={() => { setSelectedCompanyId(empresa.idEmpresa)
+                                setOpenModal(true);
+                                }}>
                                     <FontAwesome
                                         name="angle-down"
                                         size={35}
                                         color={'black'}
                                     />
                                 </Pressable>
-                                {renderModal(empresa.idEmpresa)}
+                                {renderModal()}
                             </View>
                         </View>
                     </View>
-
+                     ))}
                 </ScrollView>
+               
             </View>
-            ))}
+            
             <View>
 
             </View>
