@@ -29,196 +29,281 @@ export default function HomeScreen({ navigation }) {
 
     function renderModal() {
 
-        if(openModal === true) {
+        if (openModal === true) {
             const selecionarEmpresa = async (id) => {
                 const response = await blogFetch.get(`/selecionarEmpresa/${id}`);
-                const data = response.data;   
+                const data = response.data;
                 setNomeEmpresa(data.selecionarEmpresa.nomeEmpresa);
                 setEndereco(data.selecionarEmpresa.enderecoEmpresa);
                 setBairro(data.selecionarEmpresa.bairro.nomeBairro);
             };
-    
-            selecionarEmpresa(selectedCompanyId);
-        
-        
 
-        return (
-            <Modal visible={true} animationType="slide" transparent={true}>
-                <View
-                    style={{
-                        flex: 1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: transparent,
-                    }}>
+            selecionarEmpresa(selectedCompanyId);
+
+
+
+            return (
+                <Modal visible={true} animationType="slide" transparent={true}>
                     <View
                         style={{
-                            backgroundColor: 'white',
-                            padding: 15,
-                            width: '90%',
-                            height: 320,
-                            borderRadius: 10,
+                            flex: 1,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            backgroundColor: transparent,
                         }}>
-                        <TouchableOpacity onPress={() => setOpenModal(false)}
-                            style={{
-                                position: 'absolute',
-                                top: 10,
-                                right: 20
-                            }}>
-                            <FontAwesome
-                                name="close"
-                                size={25}
-                                color={'#4A4444'}
-                            />
-                        </TouchableOpacity>
                         <View
                             style={{
-                                width: '97%',
-                                height: 200,
-                                flexDirection: "row",
-                                borderWidth: 1,
-                                borderTopWidth: 0,
-                                borderLeftWidth: 0,
-                                borderRightWidth: 0,
-                                top: 40
-                            }}>
-                            <View style={{
-                                width: 60,
-                                height: 40,
-                                borderColor: '#6CA8DA',
-                                borderWidth: 2,
-                                left: 10,
-                                top: 10,
+                                backgroundColor: 'white',
+                                padding: 15,
+                                width: '90%',
+                                height: 500,
                                 borderRadius: 10,
-                                alignContent: 'center',
-                                alignItems: 'center',
-                                justifyContent: 'center'
                             }}>
-                                <FontAwesome
-                                    name="ambulance"
-                                    size={30}
-                                    color={'#4A4444'}
-                                />
-                            </View>
-                            <View style={styles.contentText}>
-                                <Text>{nomeEmpresa}</Text>
-                            </View>
-                            <View style={{
-                                width: '100%',
-                                height: 50,
-                                bottom: 70,
-                                position: 'absolute',
-                                borderWidth: 1,
-                                borderTopWidth: 0,
-                                borderLeftWidth: 0,
-                                borderRightWidth: 0,
-                                borderColor: '#6CA8DA'
-                            }}>
-                                <Text
-                                    style={{
-                                        color: '#4A4444',
-                                        fontFamily: "Montserrat-Medium",
-                                        fontSize: 15,
-                                    }}>
-                                    Endereço
-
-                                </Text>
-                                <Text
-                                    style={{
-                                        color: '#4A4444',
-                                        fontFamily: "Montserrat-Medium",
-                                        fontSize: 11,
-                                    }}>
-                                    {endereco} - {bairro}, Praia Grande
-                                </Text>
-                            </View>
-                            <View
+                            <TouchableOpacity onPress={() => setOpenModal(false)}
                                 style={{
                                     position: 'absolute',
-                                    bottom: 10,
+                                    top: 10,
+                                    right: 20
+                                }}>
+                                <FontAwesome
+                                    name="close"
+                                    size={25}
+                                    color={'#4A4444'}
+                                />
+                            </TouchableOpacity>
+                            <View
+                                style={{
+                                    width: '97%',
+                                    height: 200,
+                                    flexDirection: "row",
+                                    borderWidth: 1,
+                                    borderTopWidth: 0,
+                                    borderLeftWidth: 0,
+                                    borderRightWidth: 0,
+                                    top: 40
+                                }}>
+                                <View style={{
+                                    width: 60,
+                                    height: 40,
+                                    borderColor: '#6CA8DA',
+                                    borderWidth: 2,
+                                    left: 10,
+                                    top: 10,
+                                    borderRadius: 10,
+                                    alignContent: 'center',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                    <FontAwesome
+                                        name="ambulance"
+                                        size={30}
+                                        color={'#4A4444'}
+                                    />
+                                </View>
+                                <View style={styles.contentText}>
+                                    <Text>{nomeEmpresa}</Text>
+                                </View>
+                                <View style={{
                                     width: '100%',
                                     height: 50,
-
-                                    flexDirection: 'row'
+                                    bottom: 70,
+                                    position: 'absolute',
+                                    borderWidth: 1,
+                                    borderTopWidth: 0,
+                                    borderLeftWidth: 0,
+                                    borderRightWidth: 0,
+                                    borderColor: '#6CA8DA'
                                 }}>
-                                <View
-                                    style={{
-                                        width: 60,
-                                        height: 40,
+                                    <Text
+                                        style={{
+                                            color: '#4A4444',
+                                            fontFamily: "Montserrat-Medium",
+                                            fontSize: 15,
+                                        }}>
+                                        Endereço
 
-                                        left: 6,
-                                        top: 5,
-                                        borderRadius: 10,
-                                        alignContent: 'center',
-                                        alignItems: 'center',
-                                        justifyContent: 'center'
-                                    }}>
-                                    <Pressable >
-                                        <FontAwesome
-                                            name="wechat"
-                                            size={30}
-                                            color={'#4A4444'}
-                                        />
-                                    </Pressable>
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            color: '#4A4444',
+                                            fontFamily: "Montserrat-Medium",
+                                            fontSize: 11,
+                                        }}>
+                                        {endereco} - {bairro}, Praia Grande
+                                    </Text>
                                 </View>
                                 <View
                                     style={{
                                         position: 'absolute',
-                                        right: 5,
-                                        width: 120,
+                                        bottom: 10,
+                                        width: '100%',
                                         height: 50,
 
-                                        alignContent: 'center',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
                                         flexDirection: 'row'
+                                    }}>
+                                    <View
+                                        style={{
+                                            width: 60,
+                                            height: 40,
+
+                                            left: 6,
+                                            top: 5,
+                                            borderRadius: 10,
+                                            alignContent: 'center',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                        <Pressable >
+                                            <FontAwesome
+                                                name="wechat"
+                                                size={30}
+                                                color={'#4A4444'}
+                                            />
+                                        </Pressable>
+                                    </View>
+                                    <View
+                                        style={{
+                                            position: 'absolute',
+                                            right: 5,
+                                            width: 120,
+                                            height: 50,
+
+                                            alignContent: 'center',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            flexDirection: 'row'
+                                        }}>
+                                        <View>
+                                            <Text
+                                                style={{
+                                                    color: '#4A4444',
+
+                                                }}>
+                                                Lotação:
+                                            </Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                flex: 1,
+                                                flexDirection: 'row',
+                                                justifyContent: 'space-around',
+                                            }}>
+                                            <View style={{}}>
+                                                <FontAwesome
+                                                    name="user"
+                                                    size={15}
+                                                    color={'#6CA8DA'}
+                                                />
+                                            </View>
+                                            <View>
+                                                <FontAwesome
+                                                    name="user"
+                                                    size={15}
+                                                    color={'#6CA8DA'}
+                                                />
+                                            </View>
+                                            <View>
+                                                <FontAwesome
+                                                    name="user"
+                                                    size={15}
+                                                    color={'#C5E4FF'}
+                                                />
+                                            </View>
+
+                                        </View>
+
+                                    </View>
+                                </View>
+                            </View>
+                            <View
+                                style={{
+
+                                    top: 50,
+                                    widht: 50,
+                                    height: 225,
+                                    flexDirection: 'row',
+
+                                }}>
+                                <View
+                                    style={{
+                                        width: '50%',
+                                        height: '100%',
+                                        flexDirection: 'column'
+
+                                    }}>
+                                    <View style={{
+                                        height: '100%',
+                                        widht: '100',
+
+                                    }}>
+                                        <Text
+                                            style={{
+                                                color: '#4A4444',
+                                                fontFamily: "Montserrat-Medium",
+                                                fontSize: 10,
+                                                top: 10,
+                                                left: 30
+                                            }}>
+                                            ESPECIALIDADE
+                                        </Text>
+                                        <ScrollView>
+                                            <View
+                                                style={{
+                                                    width: '100%',
+                                                    height: '300',
+                                                    top: 20,
+                                                    justifyContent: 'center',
+                                                    alignContent: 'center',
+                                                    alignItems: 'center'
+                                                }}>
+                                                <Text>
+                                                    a
+                                                </Text>
+
+                                            </View>
+                                        </ScrollView>
+
+                                    </View>
+                                </View>
+                                <View
+                                    style={{
+                                        width: '50%',
+                                        height: '100%',
                                     }}>
                                     <View>
                                         <Text
                                             style={{
                                                 color: '#4A4444',
-
+                                                fontFamily: "Montserrat-Medium",
+                                                fontSize: 10,
+                                                top: 10,
+                                                left: 40
                                             }}>
-                                            Lotação:
+                                            Quantidade
                                         </Text>
-                                    </View>
-                                    <View
-                                        style={{
-                                            flex: 1,
-                                            flexDirection: 'row',
-                                            justifyContent: 'space-around',
-                                        }}>
-                                        <View style={{}}>
-                                            <FontAwesome
-                                                name="user"
-                                                size={15}
-                                                color={'#6CA8DA'}
-                                            />
-                                        </View>
-                                        <View>
-                                            <FontAwesome
-                                                name="user"
-                                                size={15}
-                                                color={'#6CA8DA'}
-                                            />
-                                        </View>
-                                        <View>
-                                            <FontAwesome
-                                                name="user"
-                                                size={15}
-                                                color={'#C5E4FF'}
-                                            />
-                                        </View>
-
+                                        <ScrollView>
+                                            <View
+                                                style={{
+                                                    width: '100%',
+                                                    height: '300',
+                                                    top: 20,
+                                                    justifyContent: 'center',
+                                                    alignContent: 'center',
+                                                    alignItems: 'center'
+                                                }}>
+                                                <Text>
+                                                    a
+                                                </Text>
+                                            </View>
+                                        </ScrollView>
                                     </View>
                                 </View>
                             </View>
                         </View>
                     </View>
-                </View>
-            </Modal>
-        )
-    }
+                </Modal>
+            )
+        }
     }
 
     return (
@@ -232,42 +317,43 @@ export default function HomeScreen({ navigation }) {
                     iconSize={24}
                 />
             </View>
-            
-            <View  style={styles.content}>
-            
+
+            <View style={styles.content}>
+
                 <ScrollView>
-                {empresas.map((empresa) => (
-                    <View style={styles.componentModal}>
-                        <View style={styles.contentModalInt}>
-                            <View style={styles.hIcon}>
-                                <FontAwesome
-                                    name="ambulance"
-                                    size={30}
-                                    color={'#4A4444'}
-                                />
-                            </View>
-                            <View style={styles.contentText}>
-                                <Text>{empresa.nomeEmpresa}</Text>
-                            </View>
-                            <View style={styles.button}>
-                                <Pressable onPress={() => { setSelectedCompanyId(empresa.idEmpresa)
-                                setOpenModal(true);
-                                }}>
+                    {empresas.map((empresa) => (
+                        <View style={styles.componentModal}>
+                            <View style={styles.contentModalInt}>
+                                <View style={styles.hIcon}>
                                     <FontAwesome
-                                        name="angle-down"
-                                        size={35}
-                                        color={'black'}
+                                        name="ambulance"
+                                        size={30}
+                                        color={'#4A4444'}
                                     />
-                                </Pressable>
-                                {renderModal()}
+                                </View>
+                                <View style={styles.contentText}>
+                                    <Text>{empresa.nomeEmpresa}</Text>
+                                </View>
+                                <View style={styles.button}>
+                                    <Pressable onPress={() => {
+                                        setSelectedCompanyId(empresa.idEmpresa)
+                                        setOpenModal(true);
+                                    }}>
+                                        <FontAwesome
+                                            name="angle-down"
+                                            size={35}
+                                            color={'black'}
+                                        />
+                                    </Pressable>
+                                    {renderModal()}
+                                </View>
                             </View>
                         </View>
-                    </View>
-                     ))}
+                    ))}
                 </ScrollView>
-               
+
             </View>
-            
+
             <View>
 
             </View>
