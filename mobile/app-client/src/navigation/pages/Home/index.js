@@ -4,13 +4,43 @@ import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InputSearch from '../../../components/CustomInputs/inputSearch';
 import { FontAwesome } from '@expo/vector-icons';
+import blogFetch from '../../../axios/config';
 
 const transparent = 'rgba(0,0,0,0.5)'
 export default function HomeScreen({ navigation }) {
 
+    const [empresas, setEmpresas] = useState([{}]);
+    const [nomeEmpresa, setNomeEmpresa] = useState('');
+    const [endereco, setEndereco] = useState('');
+    const [bairro, setBairro] = useState('');
+
+    const listarEmpresas = async () => {
+        const response = await blogFetch.get('/listarEmpresasAbertas');
+        const data = response.data;
+        setEmpresas(data.listarEmpresasAbertas);
+    }
+
+    useEffect(() => {
+        listarEmpresas();
+    }, []);
+
     const [openModal, setOpenModal] = useState(false);
 
-    function renderModal() {
+    function renderModal(id) {
+
+        if(openModal === true) {
+            const selecionarEmpresa = async (id) => {
+                const response = await blogFetch.get(`/selecionarEmpresa/${id}`);
+                const data = response.data;   
+                setNomeEmpresa(data.selecionarEmpresa.nomeEmpresa);
+                setEndereco(data.selecionarEmpresa.enderecoEmpresa);
+                setBairro(data.selecionarEmpresa.bairro.nomeBairro);
+            };
+    
+            selecionarEmpresa(id);
+        }
+        
+
         return (
             <Modal visible={openModal} animationType="slide" transparent={true}>
                 <View
@@ -70,7 +100,7 @@ export default function HomeScreen({ navigation }) {
                                 />
                             </View>
                             <View style={styles.contentText}>
-                                <Text>Blue Med Boqueirao</Text>
+                                <Text>{nomeEmpresa}</Text>
                             </View>
                             <View style={{
                                 width: '100%',
@@ -98,7 +128,7 @@ export default function HomeScreen({ navigation }) {
                                         fontFamily: "Montserrat-Medium",
                                         fontSize: 11,
                                     }}>
-                                    Av.Pres.Costa e Silva, 1261 - Boqueião, Praia Grande
+                                    {endereco} - {bairro}, Praia Grande
                                 </Text>
                             </View>
                             <View
@@ -200,7 +230,8 @@ export default function HomeScreen({ navigation }) {
                     iconSize={24}
                 />
             </View>
-            <View style={styles.content}>
+            {empresas.map((empresa) => (
+            <View key={empresa.idEmpresa} style={styles.content}>
                 <ScrollView>
                     <View style={styles.componentModal}>
                         <View style={styles.contentModalInt}>
@@ -212,7 +243,7 @@ export default function HomeScreen({ navigation }) {
                                 />
                             </View>
                             <View style={styles.contentText}>
-                                <Text>Blue Med Boqueirao</Text>
+                                <Text>{empresa.nomeEmpresa}</Text>
                             </View>
                             <View style={styles.button}>
                                 <Pressable onPress={() => setOpenModal(true)}>
@@ -222,13 +253,14 @@ export default function HomeScreen({ navigation }) {
                                         color={'black'}
                                     />
                                 </Pressable>
-                                {renderModal()}
+                                {renderModal(empresa.idEmpresa)}
                             </View>
                         </View>
                     </View>
 
                 </ScrollView>
             </View>
+            ))}
             <View>
 
             </View>
