@@ -132,11 +132,27 @@ export class EmpresaController {
     }
 
     async listarProfissionaisDisponiveis(req: Request, res: Response) {
-        const id = Number(req.params.id);
+       const listarProfissionaisDisponiveis = await prisma.disponibilidadeEspecialidade.findMany({
+            select: {
+                        Especialidade: {
+                            select: {
+                                idEspecialidade: true,
+                                nomeEspecialidade: true
+                            }
+                        },
+                        Empresa: {
+                            select: {
+                                idEmpresa: true,
+                            }
+                        },
+                        quantidadeEspecialidade: true
+                    
+                
+            }
+        });
+        
 
-        const listarProfissionaisDisponiveis = await prisma.empresa.findMany({
-            select: {}
-        })
+        return res.json({ listarProfissionaisDisponiveis});
     }
 
     async atualizarStatus(req: Request, res: Response) {
