@@ -5,14 +5,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import InputSearch from '../../../components/CustomInputs/inputSearch';
 import { FontAwesome } from '@expo/vector-icons';
 import blogFetch from '../../../axios/config';
+import Login from '../../../authentication/Login/index'
 
 const transparent = 'rgba(0,0,0,0.5)'
-export default function HomeScreen({ navigation }) {
+export default HomeScreen = ({ navigation }) => {
+
+
 
     const [empresas, setEmpresas] = useState([]);
 
     const [selectedCompanyId, setSelectedCompanyId] = useState(null);
 
+   
+   // const handleChat = async () => {
+   //     navigation.navigate('Chat');    
+   // };
+    
 
     const listarEmpresas = async () => {
         const response = await blogFetch.get('/listarEmpresasAbertas');
@@ -53,6 +61,8 @@ export default function HomeScreen({ navigation }) {
                 listarProfissionais(selectedCompanyId);
             }
         }, [])
+
+        
 
         if (openModal === true) {
 
@@ -111,11 +121,12 @@ export default function HomeScreen({ navigation }) {
                                     alignItems: 'center',
                                     justifyContent: 'center'
                                 }}>
-                                    <FontAwesome
-                                        name="ambulance"
-                                        size={30}
-                                        color={'#4A4444'}
-                                    />
+                                        <FontAwesome
+                                            name="ambulance"
+                                            size={30}
+                                            color={'#4A4444'}
+                                        />
+                                    
                                 </View>
                                 <View style={styles.contentText}>
                                     <Text>{nomeEmpresa}</Text>
@@ -170,13 +181,13 @@ export default function HomeScreen({ navigation }) {
                                             alignItems: 'center',
                                             justifyContent: 'center'
                                         }}>
-                                        <Pressable >
+                                        <TouchableOpacity  >
                                             <FontAwesome
                                                 name="wechat"
                                                 size={30}
                                                 color={'#4A4444'}
                                             />
-                                        </Pressable>
+                                        </TouchableOpacity>
                                     </View>
                                     <View
                                         style={{
@@ -377,6 +388,7 @@ export default function HomeScreen({ navigation }) {
             <View>
 
             </View>
+           
         </View>
 
     );
@@ -446,3 +458,4 @@ const styles = StyleSheet.create({
 
     }
 })
+

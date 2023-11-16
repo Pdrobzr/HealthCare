@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { View,Text,StyleSheet ,TouchableOpacity,Platform, Pressable,TextInput, Image} from 'react-native';
 
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -18,12 +19,11 @@ const homeName = 'Home';
 const profileName = 'Configurações';
 const mapsName = 'Mapa';
 const Tab = createBottomTabNavigator();
-
-
  const MainContainer = ({ navigation }) => {
 
     return (
-        <NavigationContainer  independent={true}>
+       
+       
         <Tab.Navigator initialRouteName={homeName} screenOptions={{
             headerShown: false,
             tabBarHideOnKeyboard: true,
@@ -36,9 +36,11 @@ const Tab = createBottomTabNavigator();
         }
 
 
+
         } tabBar={(props) => <CustomTabBar {...props}  />}>
 
             <Tab.Screen
+                
                 name={mapsName} 
                 component={MapsScreen}
                 options={{
@@ -59,9 +61,10 @@ const Tab = createBottomTabNavigator();
                     tabBarIcon: "settings"
                 }}  
             />
-
         </Tab.Navigator>
-    </NavigationContainer>
+        
+ 
+    
     );
   };
 

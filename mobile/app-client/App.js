@@ -2,6 +2,7 @@ import * as React from 'react';
 import MainContainer from './src/navigation';
 import Login from './src/authentication/Login/index';
 import Register from './src/authentication/Register/index';
+import Chat from './src/navigation/pages/Chat/index'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProfileScreen from './src/navigation/pages/Profle';
@@ -15,6 +16,7 @@ function App(){
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="MainContainer" component={MainContainer} />
+        <Stack.Screen name="Chat" component={Chat} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View ,Modal, Text, StyleSheet,Pressable, TextInput} from 'react-native';
+import {View ,Modal, Text, StyleSheet,Pressable, TextInput,TouchableOpacity} from 'react-native';
 import Input from '../../../components/CustomInputs';
 import InputModal from '../../../components/CustomInputs/inputModal';
 import { FontAwesome } from '@expo/vector-icons';
@@ -31,17 +31,17 @@ import blogFetch from '../../../axios/config';
         }
     }
 //
-  //  const handleLogout = async () => {
-  //      try {
-  //        await AsyncStorage.removeItem('@usuario')
-  //        navigation.navigate('Login')
-  //       // navigation.navigate('App', { screen: 'Login' });
-  //      } catch(e) {
-  //        alert('Não foi possivel fazer o logout')
-  //      }
-  //    
-  //      console.log('Done.')
-  //    } 
+   const handleLogout = async () => {
+       try {
+         await AsyncStorage.removeItem('@usuario')
+         navigation.navigate('Login')
+        // navigation.navigate('App', { screen: 'Login' });
+       } catch(e) {
+         alert('Não foi possivel fazer o logout')
+       }
+     
+       console.log('Done.')
+     } 
 
   const updateUser = async () => {
          const id = await AsyncStorage.getItem('@usuario');
@@ -105,13 +105,13 @@ import blogFetch from '../../../axios/config';
 
 
             <View style={styles.backTitle} >
-                <Pressable style={styles.buttonLogout}>
+                <TouchableOpacity style={styles.buttonLogout} onPress={handleLogout}>
                     <FontAwesome 
                         name="angle-left" 
                         size={15} 
                         color={'white'} 
                     />
-                </Pressable>
+                </TouchableOpacity>
             <Text style={styles.backTitleText}  >Sair</Text>
            </View>
            <View style={styles.formsInput}>
