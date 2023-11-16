@@ -10,10 +10,9 @@ const transparent = 'rgba(0,0,0,0.5)'
 export default function HomeScreen({ navigation }) {
 
     const [empresas, setEmpresas] = useState([]);
-    const [nomeEmpresa, setNomeEmpresa] = useState('');
-    const [endereco, setEndereco] = useState('');
-    const [bairro, setBairro] = useState('');
+
     const [selectedCompanyId, setSelectedCompanyId] = useState(null);
+
 
     const listarEmpresas = async () => {
         const response = await blogFetch.get('/listarEmpresasAbertas');
@@ -27,20 +26,35 @@ export default function HomeScreen({ navigation }) {
 
     const [openModal, setOpenModal] = useState(false);
 
-    function renderModal() {
+    function RenderModal({ id }) {
+
+        const [nomeEmpresa, setNomeEmpresa] = useState('');
+        const [endereco, setEndereco] = useState('');
+        const [bairro, setBairro] = useState('');
+        const [especialidades, setEspecialidades] = useState([])
+
+        useEffect(() => {
+            if (openModal === true && selectedCompanyId === id) {
+                const selecionarEmpresa = async (id) => {
+                    const response = await blogFetch.get(`/selecionarEmpresa/${id}`);
+                    const data = response.data;
+                    setNomeEmpresa(data.selecionarEmpresa.nomeEmpresa);
+                    setEndereco(data.selecionarEmpresa.enderecoEmpresa);
+                    setBairro(data.selecionarEmpresa.bairro.nomeBairro);
+                };
+
+                const listarProfissionais = async (id) => {
+                    const response = await blogFetch.get(`/listarProfissionais/${id}`);
+                    const data = response.data;
+                    setEspecialidades(data.listarProfissionaisDisponiveis);
+                }
+
+                selecionarEmpresa(selectedCompanyId);
+                listarProfissionais(selectedCompanyId);
+            }
+        }, [])
 
         if (openModal === true) {
-            const selecionarEmpresa = async (id) => {
-                const response = await blogFetch.get(`/selecionarEmpresa/${id}`);
-                const data = response.data;
-                setNomeEmpresa(data.selecionarEmpresa.nomeEmpresa);
-                setEndereco(data.selecionarEmpresa.enderecoEmpresa);
-                setBairro(data.selecionarEmpresa.bairro.nomeBairro);
-            };
-
-            selecionarEmpresa(selectedCompanyId);
-
-
 
             return (
                 <Modal visible={true} animationType="slide" transparent={true}>
@@ -59,7 +73,10 @@ export default function HomeScreen({ navigation }) {
                                 height: 500,
                                 borderRadius: 10,
                             }}>
-                            <TouchableOpacity onPress={() => setOpenModal(false)}
+                            <TouchableOpacity onPress={() => {
+                                setOpenModal(false)
+                                setSelectedCompanyId(null);
+                            }}
                                 style={{
                                     position: 'absolute',
                                     top: 10,
@@ -246,7 +263,7 @@ export default function HomeScreen({ navigation }) {
                                             }}>
                                             ESPECIALIDADE
                                         </Text>
-                                        <ScrollView>
+                                        
                                             <View
                                                 style={{
                                                     width: '100%',
@@ -256,12 +273,13 @@ export default function HomeScreen({ navigation }) {
                                                     alignContent: 'center',
                                                     alignItems: 'center'
                                                 }}>
-                                                <Text>
-                                                    a
-                                                </Text>
-
+                                                {especialidades.map((especialidade) => (
+                                                    <Text>
+                                                        {especialidade.Especialidade.nomeEspecialidade}
+                                                    </Text>
+                                                ))}
                                             </View>
-                                        </ScrollView>
+                                        
 
                                     </View>
                                 </View>
@@ -281,7 +299,7 @@ export default function HomeScreen({ navigation }) {
                                             }}>
                                             Quantidade
                                         </Text>
-                                        <ScrollView>
+                                       
                                             <View
                                                 style={{
                                                     width: '100%',
@@ -291,11 +309,13 @@ export default function HomeScreen({ navigation }) {
                                                     alignContent: 'center',
                                                     alignItems: 'center'
                                                 }}>
+                                                    {especialidades.map((especialidade) => (
                                                 <Text>
-                                                    a
+                                                    {especialidade.quantidadeEspecialidade}
                                                 </Text>
+                                                ))}
                                             </View>
-                                        </ScrollView>
+                                        
                                     </View>
                                 </View>
                             </View>
@@ -345,7 +365,7 @@ export default function HomeScreen({ navigation }) {
                                             color={'black'}
                                         />
                                     </Pressable>
-                                    {renderModal()}
+                                    {selectedCompanyId === empresa.idEmpresa && <RenderModal id={empresa.idEmpresa} />}
                                 </View>
                             </View>
                         </View>

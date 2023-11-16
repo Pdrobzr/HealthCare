@@ -20,7 +20,7 @@ router.delete('/deletarEmpresa/:id', empresaController.deletarEmpresa);
 router.put('/atualizarStatus/:id', empresaController.atualizarStatus);
 router.post('/pesquisarEmpresa', AuthMiddleware, empresaController.pesquisarEmpresa);
 router.get('/listarEmpresasAbertas', empresaController.listarEmpresasAbertas);
-router.get('/listarProfissionais', empresaController.listarProfissionaisDisponiveis);
+router.get('/listarProfissionais/:id', empresaController.listarProfissionaisDisponiveis);
 
 // ROTAS DE BAIRROS
 router.get('/listarBairros', empresaController.listarBairros);
