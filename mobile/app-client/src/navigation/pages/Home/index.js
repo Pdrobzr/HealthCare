@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, Modal, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, Modal, TouchableOpacity, FlatList, Image } from 'react-native';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InputSearch from '../../../components/CustomInputs/inputSearch';
@@ -16,6 +16,8 @@ export default HomeScreen = ({ navigation }) => {
 
     const [selectedCompanyId, setSelectedCompanyId] = useState(null);
 
+
+    const imagem = 'https://cdn-icons-png.flaticon.com/512/61/61444.png';
 
     // const handleChat = async () => {
     //     navigation.navigate('Chat');    
@@ -361,7 +363,9 @@ export default HomeScreen = ({ navigation }) => {
                     iconName="search"
                     iconSize={24}
                 />
-                <Text style={styles.atualizar} onPress={atualizarEmpresas}>ATUALIZAR</Text>
+                <TouchableOpacity onPress={atualizarEmpresas}> 
+                    <Image source={{uri: imagem}} style={styles.image} />
+                </TouchableOpacity>
             </View>
             
             <View style={styles.content}>
@@ -473,8 +477,15 @@ const styles = StyleSheet.create({
 
     },
     atualizar: {
-        textAlign: 'center',
+        width: 200,
+        alignSelf: 'center',
         marginTop: 100
-    }
+    },
+    image: {
+        width:100, 
+        height: 100,
+        alignSelf: 'center',
+        marginTop: 50
+      }
 })
 
