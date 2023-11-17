@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, Modal, TouchableOpacity, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, Modal, TouchableOpacity, FlatList, Image, RefreshControl } from 'react-native';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InputSearch from '../../../components/CustomInputs/inputSearch';
@@ -86,7 +86,7 @@ export default HomeScreen = ({ navigation }) => {
                             alignItems: 'center',
                             backgroundColor: transparent,
                         }}>
-                        
+
                         <View
                             style={{
                                 backgroundColor: 'white',
@@ -353,6 +353,16 @@ export default HomeScreen = ({ navigation }) => {
         listarEmpresas();
     }
 
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        atualizarEmpresas();
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 1000);
+    }, []);
+
     return (
         <View style={{ flex: 1, backgroundColor: 'rgb(233, 233, 233)', alignItems: 'center' }}>
             {/* <Text onPress={() => alert('Esta é a "Pagina" inicial')}
@@ -363,14 +373,16 @@ export default HomeScreen = ({ navigation }) => {
                     iconName="search"
                     iconSize={24}
                 />
-                <TouchableOpacity onPress={atualizarEmpresas}> 
-                    <Image source={{uri: imagem}} style={styles.image} />
-                </TouchableOpacity>
+                {/* <TouchableOpacity onPress={atualizarEmpresas}>
+                    <Image source={{ uri: imagem }} style={styles.image} />
+                </TouchableOpacity> */}
             </View>
-            
+
             <View style={styles.content}>
-            
-                <ScrollView>
+
+                <ScrollView refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                }>
                     {empresas.map((empresa) => (
                         <View style={styles.componentModal}>
                             <View style={styles.contentModalInt}>
@@ -482,10 +494,10 @@ const styles = StyleSheet.create({
         marginTop: 100
     },
     image: {
-        width:100, 
+        width: 100,
         height: 100,
         alignSelf: 'center',
         marginTop: 50
-      }
+    }
 })
 
