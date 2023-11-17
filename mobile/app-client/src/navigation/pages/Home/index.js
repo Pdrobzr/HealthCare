@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, Modal, TouchableOpacity, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InputSearch from '../../../components/CustomInputs/inputSearch';
@@ -16,11 +16,11 @@ export default HomeScreen = ({ navigation }) => {
 
     const [selectedCompanyId, setSelectedCompanyId] = useState(null);
 
-   
-   // const handleChat = async () => {
-   //     navigation.navigate('Chat');    
-   // };
-    
+
+    // const handleChat = async () => {
+    //     navigation.navigate('Chat');    
+    // };
+
 
     const listarEmpresas = async () => {
         const response = await blogFetch.get('/listarEmpresasAbertas');
@@ -62,9 +62,18 @@ export default HomeScreen = ({ navigation }) => {
             }
         }, [])
 
-        
+
 
         if (openModal === true) {
+
+
+            const renderQuantidade = ({ item }) => (
+                <Text>{item.quantidadeEspecialidade}</Text>
+            );
+
+            const renderNome = ({ item }) => (
+                <Text>{item.Especialidade.nomeEspecialidade}</Text>
+            );
 
             return (
                 <Modal visible={true} animationType="slide" transparent={true}>
@@ -75,6 +84,7 @@ export default HomeScreen = ({ navigation }) => {
                             alignItems: 'center',
                             backgroundColor: transparent,
                         }}>
+                        
                         <View
                             style={{
                                 backgroundColor: 'white',
@@ -121,12 +131,12 @@ export default HomeScreen = ({ navigation }) => {
                                     alignItems: 'center',
                                     justifyContent: 'center'
                                 }}>
-                                        <FontAwesome
-                                            name="ambulance"
-                                            size={30}
-                                            color={'#4A4444'}
-                                        />
-                                    
+                                    <FontAwesome
+                                        name="ambulance"
+                                        size={30}
+                                        color={'#4A4444'}
+                                    />
+
                                 </View>
                                 <View style={styles.contentText}>
                                     <Text>{nomeEmpresa}</Text>
@@ -274,23 +284,23 @@ export default HomeScreen = ({ navigation }) => {
                                             }}>
                                             ESPECIALIDADE
                                         </Text>
-                                        
-                                            <View
-                                                style={{
-                                                    width: '100%',
-                                                    height: '300',
-                                                    top: 20,
-                                                    justifyContent: 'center',
-                                                    alignContent: 'center',
-                                                    alignItems: 'center'
-                                                }}>
-                                                {especialidades.map((especialidade) => (
-                                                    <Text>
-                                                        {especialidade.Especialidade.nomeEspecialidade}
-                                                    </Text>
-                                                ))}
-                                            </View>
-                                        
+
+                                        <View
+                                            style={{
+                                                width: '100%',
+                                                height: '300',
+                                                top: 20,
+                                                justifyContent: 'center',
+                                                alignContent: 'center',
+                                                alignItems: 'center'
+                                            }}>
+                                            <FlatList
+                                                data={especialidades}
+                                                renderItem={renderNome}
+                                                keyExtractor={(item, index) => index.toString()} // ou outra lógica para gerar chaves únicas
+                                            />
+                                        </View>
+
 
                                     </View>
                                 </View>
@@ -310,23 +320,23 @@ export default HomeScreen = ({ navigation }) => {
                                             }}>
                                             Quantidade
                                         </Text>
-                                       
-                                            <View
-                                                style={{
-                                                    width: '100%',
-                                                    height: '300',
-                                                    top: 20,
-                                                    justifyContent: 'center',
-                                                    alignContent: 'center',
-                                                    alignItems: 'center'
-                                                }}>
-                                                    {especialidades.map((especialidade) => (
-                                                <Text>
-                                                    {especialidade.quantidadeEspecialidade}
-                                                </Text>
-                                                ))}
-                                            </View>
-                                        
+
+                                        <View
+                                            style={{
+                                                width: '100%',
+                                                height: '300',
+                                                top: 20,
+                                                justifyContent: 'center',
+                                                alignContent: 'center',
+                                                alignItems: 'center'
+                                            }}>
+                                            <FlatList
+                                                data={especialidades}
+                                                renderItem={renderQuantidade}
+                                                keyExtractor={(item, index) => index.toString()} // ou outra lógica para gerar chaves únicas
+                                            />
+                                        </View>
+
                                     </View>
                                 </View>
                             </View>
@@ -388,7 +398,7 @@ export default HomeScreen = ({ navigation }) => {
             <View>
 
             </View>
-           
+
         </View>
 
     );
