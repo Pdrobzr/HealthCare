@@ -347,6 +347,10 @@ export default HomeScreen = ({ navigation }) => {
         }
     }
 
+    const atualizarEmpresas = () => {
+        listarEmpresas();
+    }
+
     return (
         <View style={{ flex: 1, backgroundColor: 'rgb(233, 233, 233)', alignItems: 'center' }}>
             {/* <Text onPress={() => alert('Esta é a "Pagina" inicial')}
@@ -357,10 +361,11 @@ export default HomeScreen = ({ navigation }) => {
                     iconName="search"
                     iconSize={24}
                 />
+                <Text style={styles.atualizar} onPress={atualizarEmpresas}>ATUALIZAR</Text>
             </View>
-
+            
             <View style={styles.content}>
-
+            
                 <ScrollView>
                     {empresas.map((empresa) => (
                         <View style={styles.componentModal}>
@@ -466,6 +471,10 @@ const styles = StyleSheet.create({
     },
     hLine: {
 
+    },
+    atualizar: {
+        textAlign: 'center',
+        marginTop: 100
     }
 })
 
