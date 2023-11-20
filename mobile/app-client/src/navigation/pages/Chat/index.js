@@ -45,7 +45,7 @@ export default Chat = ({ navigation }) =>  {
             </View>
             <ScrollView contentContainerStyle={styles.scrollViewContainer}>
                 <View>
-                    <Balloon message={"asdasdasdasd"}/>
+                    <Balloon message={"Sla so sei que a sorte um dia vem e se esse dia chegar"}  name={"Pedro Vinicius"} date={"19/11/2023 13:15"}/>
                 </View>
             </ScrollView>
             <KeyboardAvoidingView

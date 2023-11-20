@@ -4,11 +4,11 @@ import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 
 
-const Balloon = ({ message }) => {
+const Balloon = ({ message,name,date }) => {
 
   return (
     <View>
-      <View style={styles.bubbleWrapper}>
+      {/* <View style={styles.bubbleWrapper}>
         <View style={styles.bubbleWrapperSent}>
           <View style={styles.balloon}>
             <View style={styles.balloonSent}>
@@ -18,16 +18,24 @@ const Balloon = ({ message }) => {
             </View>
           </View>
         </View>
-      </View>
+      </View> */}
       <View style={styles.bubbleWrapper}>
         <View style={styles.bubbleWrapperReceived}>
+          <View style={styles.nameContent}>
+          <Text style={styles.nameText}>{name}</Text>
+          </View>
           <View style={styles.balloon}>
             <View style={styles.balloonReceived}>
               <Text style={styles.balloonText}>
                 <Text style={styles.balloonTextReceived} >{message}</Text>
+                
               </Text>
             </View>
-          </View>
+           
+          </View> 
+          <View style={styles.dateContent}>
+                <Text style={styles.dateText}>{date}</Text>
+            </View>
         </View>
       </View>
     </View>
@@ -48,20 +56,22 @@ const styles = StyleSheet.create({
   bubbleWrapperReceived: {
     alignSelf: 'flex-start',
     marginRight: 40,
+
   },
   balloon: {
     paddingHorizontal: 8,
     paddingVertical: 8,
-
+    flexDirection:'row'
 
   },
+
   balloonSent: {
     backgroundColor: "white",
     borderRadius: 20,
   },
   balloonReceived: {
     backgroundColor: "rgba(39, 161, 245, 0.8)",
-    borderRadius: 20,
+    borderRadius: 10,
   },
   balloonText: {
     fontSize: 18,
@@ -72,6 +82,20 @@ const styles = StyleSheet.create({
   balloonTextReceived: {
     color: "white",
   },
+  nameContent:{
+    bottom:0,
+    left:10
+  },
+  nameText:{
+    color:'#4A4444'
+  },
+  dateContent:{
+    top:0,
+    left:230
+  },
+  dateText:{
+    fontSize:10
+  }
 })
 
 
