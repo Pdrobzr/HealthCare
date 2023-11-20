@@ -67,7 +67,7 @@ export default HomeScreen = ({ navigation }) => {
 
 
             const handleChat = async () => {
-                navigation.navigate('Chat', {id: selectedCompanyId, nomeEmpresa});    
+                navigation.navigate('Chat', {idEmpresa: selectedCompanyId, nomeEmpresa});    
             };
 
             const renderQuantidade = ({ item }) => (

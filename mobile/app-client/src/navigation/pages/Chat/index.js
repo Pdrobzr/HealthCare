@@ -14,6 +14,7 @@ import {
 import Balloon from './Balloon';
 import { FontAwesome } from '@expo/vector-icons';
 import blogFetch from '../../../axios/config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const KEYBOARD_AVOIDING_BEHAVIOR = Platform.select({
     ios: 'padding',
@@ -21,10 +22,10 @@ const KEYBOARD_AVOIDING_BEHAVIOR = Platform.select({
 });
 export default Chat = ({ navigation, route }) => {
 
-    const { nomeEmpresa, id } = route.params;
+    const { nomeEmpresa, idEmpresa } = route.params;
 
     const [comentarios, setComentarios] = useState([]);
-    const [message, setMessage] = useState('')
+    const [conteudo, setConteudo] = useState("");
     const backHome = async () => {
         navigation.navigate('MainContainer');
     };
@@ -32,15 +33,34 @@ export default Chat = ({ navigation, route }) => {
     // const renderChat = ({ item }) => (
     //     <Balloon message={item.conteudoComentario} name={item.Usuario.nomeUsuario} date={item.dataPublicacao} />
     // );
+   
 
-    useEffect(() => {
-        const listarComentarios = async (id) => {
-            const response = await blogFetch.get(`/listarComentarios/${id}`);
-            const data = response.data;
-            setComentarios(data);
-        }
-        listarComentarios(id);
+    const listarComentarios = async (id) => {
+        const response = await blogFetch.get(`/listarComentarios/${id}`);
+        const data = response.data;
+        setComentarios(data);
+    }
+
+    useEffect(() => {    
+        listarComentarios(idEmpresa);
     }, []);
+
+    const adicionarComentario = async () => {
+
+        const idUsuario = await AsyncStorage.getItem('@usuario');
+        try {
+            const response = await blogFetch.post(`realizarComentario?idUsuario=${idUsuario}&idEmpresa=${idEmpresa}`, {
+                conteudo: conteudo
+            });
+            const data = response.data;
+            alert(data.message);
+            listarComentarios(idEmpresa);
+
+        } catch (error) {
+            console.log(error);
+        }
+       
+    }
 
     return (
         <Fragment>
@@ -80,12 +100,12 @@ export default Chat = ({ navigation, route }) => {
                             placeholder="Digite sua mensagem..."
                             placeholderTextColor={"white"}
                             multiline
-                            value={message} onChangeText={setMessage}
+                            value={conteudo} onChangeText={setConteudo}
                         />
                         <TouchableOpacity
                             style={styles.sendButton}
-                            disabled={!message}
-                            onPress={() => null}>
+                            disabled={!conteudo}
+                            onPress={adicionarComentario}>
                             <Text style={styles.sendButtonText}>Enviar</Text>
                         </TouchableOpacity>
                     </View>
