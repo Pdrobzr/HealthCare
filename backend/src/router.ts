@@ -21,6 +21,7 @@ router.put('/atualizarStatus/:id', empresaController.atualizarStatus);
 router.post('/pesquisarEmpresa', AuthMiddleware, empresaController.pesquisarEmpresa);
 router.get('/listarEmpresasAbertas', empresaController.listarEmpresasAbertas);
 router.get('/listarProfissionais/:id', empresaController.listarProfissionaisDisponiveis);
+router.get('/listarComentarios/:id', empresaController.listarComentarios);
 
 // ROTAS DE BAIRROS
 router.get('/listarBairros', empresaController.listarBairros);

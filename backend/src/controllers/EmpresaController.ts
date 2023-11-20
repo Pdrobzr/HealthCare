@@ -308,4 +308,25 @@ export class EmpresaController {
         return res.json({ listarBairros });
     }
 
+    async listarComentarios(req: Request, res: Response) {
+        const id = Number(req.params.id);
+
+        const listarComentarios = await prisma.comentario.findMany({
+            select: {
+                conteudoComentario:true,
+                dataPublicacao: true,
+                Usuario: {
+                    select: {
+                        nomeUsuario: true,
+                    }
+                },
+            },
+            where: {
+                idEmpresa: id,
+            },
+        });
+
+        res.json(listarComentarios);
+    }
+
 }

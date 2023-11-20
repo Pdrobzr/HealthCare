@@ -123,6 +123,7 @@ export class EspecialidadeController {
             }
         });
 
-        res.json({ message: 'Especialidade deletada com sucesso!', deletarEspecialidade });
+        return res.json({ message: 'Especialidade deletada com sucesso!', deletarEspecialidade });
     }
+
 }

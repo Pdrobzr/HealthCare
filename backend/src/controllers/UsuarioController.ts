@@ -153,7 +153,6 @@ export class UsuarioController {
 
     async realizarComentario(req: Request, res: Response) {
         const { conteudo } = req.body;
-        const idStatus = Number(req.query.idStatus);
 
         const idUsuario = Number(req.query.idUsuario);
         const idEmpresa = Number(req.query.idEmpresa);
@@ -162,11 +161,7 @@ export class UsuarioController {
             data: {
                 conteudoComentario: conteudo,
                 idUsuario: idUsuario,
-                idEmpresa: idEmpresa,
-                idStatus: idStatus,
-
-                
-                
+                idEmpresa: idEmpresa,              
             }
         });
 
