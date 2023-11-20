@@ -3,6 +3,7 @@ import MainContainer from './src/navigation';
 import Login from './src/authentication/Login/index';
 import Register from './src/authentication/Register/index';
 import Chat from './src/navigation/pages/Chat/index'
+import HomeScreen from './src/navigation/pages/Chat/index'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProfileScreen from './src/navigation/pages/Profle';
@@ -17,6 +18,7 @@ function App(){
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="MainContainer" component={MainContainer} />
         <Stack.Screen name="Chat" component={Chat} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -19,9 +19,9 @@ export default HomeScreen = ({ navigation }) => {
 
     const imagem = 'https://cdn-icons-png.flaticon.com/512/61/61444.png';
 
-    // const handleChat = async () => {
-    //     navigation.navigate('Chat');    
-    // };
+     const handleChat = async () => {
+         navigation.navigate('Chat');    
+     };
 
 
     const listarEmpresas = async () => {
@@ -193,7 +193,7 @@ export default HomeScreen = ({ navigation }) => {
                                             alignItems: 'center',
                                             justifyContent: 'center'
                                         }}>
-                                        <TouchableOpacity  >
+                                        <TouchableOpacity  onPress={handleChat} >
                                             <FontAwesome
                                                 name="wechat"
                                                 size={30}
