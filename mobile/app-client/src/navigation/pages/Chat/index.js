@@ -55,6 +55,7 @@ export default Chat = ({ navigation, route }) => {
             const data = response.data;
             alert(data.message);
             listarComentarios(idEmpresa);
+            setConteudo('');
 
         } catch (error) {
             console.log(error);
