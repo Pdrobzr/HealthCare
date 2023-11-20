@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {
     KeyboardAvoidingView,
     Platform,
@@ -9,44 +9,66 @@ import {
     TextInput,
     TouchableOpacity,
     View,
+    FlatList
 } from 'react-native';
 import Balloon from './Balloon';
 import { FontAwesome } from '@expo/vector-icons';
+import blogFetch from '../../../axios/config';
 
 const KEYBOARD_AVOIDING_BEHAVIOR = Platform.select({
     ios: 'padding',
     android: 'height',
 });
-export default Chat = ({ navigation }) =>  {
+export default Chat = ({ navigation, route }) => {
+
+    const { nomeEmpresa, id } = route.params;
+
+    const [comentarios, setComentarios] = useState([]);
     const [message, setMessage] = useState('')
     const backHome = async () => {
-        navigation.navigate('MainContainer');    
-    };    
+        navigation.navigate('MainContainer');
+    };
+
+    // const renderChat = ({ item }) => (
+    //     <Balloon message={item.conteudoComentario} name={item.Usuario.nomeUsuario} date={item.dataPublicacao} />
+    // );
+
+    useEffect(() => {
+        const listarComentarios = async (id) => {
+            const response = await blogFetch.get(`/listarComentarios/${id}`);
+            const data = response.data;
+            setComentarios(data);
+        }
+        listarComentarios(id);
+    }, []);
+
     return (
         <Fragment>
-            <View style={{ width: '100%', height: '13%', backgroundColor: 'white', top: '0%', alignItems: 'center',flexDirection:'row' }}>
-                <View style={{left:8,top:'7%',width:'23%',height:'50%',justifyContent: 'center'}}>
-                <TouchableOpacity onPress={backHome}>
-                <FontAwesome 
-                        name="angle-left" 
-                        size={30} 
-                        color={'black'} 
-                    />
-                
-                </TouchableOpacity>
-                  
+            <View style={{ width: '100%', height: '13%', backgroundColor: 'white', top: '0%', alignItems: 'center', flexDirection: 'row' }}>
+                <View style={{ left: 8, top: '7%', width: '23%', height: '50%', justifyContent: 'center' }}>
+                    <TouchableOpacity onPress={backHome}>
+                        <FontAwesome
+                            name="angle-left"
+                            size={30}
+                            color={'black'}
+                        />
+
+                    </TouchableOpacity>
+
                 </View>
-                <View  style={{left:63,top:'7%',width:'23%',height:'50%',justifyContent: 'center',alignItems:'center'}}>
-                <Text
-                    style={{
-                        
-                    }}>SANTA CASA</Text>
+                <View style={{ left: 63, top: '7%', width: '23%', height: '50%', justifyContent: 'center', alignItems: 'center' }}>
+                    <Text
+                        style={{
+
+                        }}>{nomeEmpresa}</Text>
                 </View>
             </View>
             <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-                <View>
-                    <Balloon message={"Sla so sei que a sorte um dia vem e se esse dia chegar"}  name={"Pedro Vinicius"} date={"19/11/2023 13:15"}/>
-                </View>
+                {comentarios.map((comentario) => (
+                    <View>
+                        <Balloon message={comentario.conteudoComentario} name={comentario.Usuario.nomeUsuario} date={comentario.dataPublicacao} />
+                    </View>
+                ))}
             </ScrollView>
             <KeyboardAvoidingView
                 behavior={KEYBOARD_AVOIDING_BEHAVIOR}
@@ -93,7 +115,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginRight: 5,
     },
-    sendButtonText:{
+    sendButtonText: {
         color: 'white',
     },
     messageTextInputContainer: {
@@ -104,7 +126,7 @@ const styles = StyleSheet.create({
         borderTopColor: 'white',
         alignItems: 'center',
         flexDirection: 'row',
-        bottom:8
+        bottom: 8
     },
     messageTextInput: {
         flex: 1,

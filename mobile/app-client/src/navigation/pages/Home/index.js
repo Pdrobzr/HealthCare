@@ -19,10 +19,7 @@ export default HomeScreen = ({ navigation }) => {
 
     const imagem = 'https://cdn-icons-png.flaticon.com/512/61/61444.png';
 
-     const handleChat = async () => {
-         navigation.navigate('Chat');    
-     };
-
+     
 
     const listarEmpresas = async () => {
         const response = await blogFetch.get('/listarEmpresasAbertas');
@@ -68,6 +65,10 @@ export default HomeScreen = ({ navigation }) => {
 
         if (openModal === true) {
 
+
+            const handleChat = async () => {
+                navigation.navigate('Chat', {id: selectedCompanyId, nomeEmpresa});    
+            };
 
             const renderQuantidade = ({ item }) => (
                 <Text>{item.quantidadeEspecialidade}</Text>
