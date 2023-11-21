@@ -1,10 +1,22 @@
-import React from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 
 
-const Balloon = ({ message,name,date }) => {
+const Balloon = ({ message,name,date, id }) => {
+
+  const [idUsuario, setIdUsuario] = useState(null);
+
+  useEffect(() => {
+    // Função assíncrona para recuperar o valor do AsyncStorage
+    const getUser = async () => {
+      const id = await AsyncStorage.getItem('@usuario');
+      setIdUsuario(id)
+    }
+    getUser();
+  }, []); 
 
   return (
     <View>
@@ -18,11 +30,12 @@ const Balloon = ({ message,name,date }) => {
             </View>
           </View>
         </View>
-      </View> */}
+      </View>  */}
+      
       <View style={styles.bubbleWrapper}>
         <View style={styles.bubbleWrapperReceived}>
           <View style={styles.nameContent}>
-          <Text style={styles.nameText}>{name}</Text>
+          <Text style={styles.nameText}>{idUsuario == id ? 'Eu' : name}</Text>
           </View>
           <View style={styles.balloon}>
             <View style={styles.balloonReceived}>
@@ -38,6 +51,8 @@ const Balloon = ({ message,name,date }) => {
             </View>
         </View>
       </View>
+      
+      
     </View>
 
 

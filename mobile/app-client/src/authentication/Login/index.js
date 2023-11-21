@@ -31,6 +31,8 @@ export default Login = ({ navigation }) => {
             alert(data.message);
             await AsyncStorage.setItem('@usuario', JSON.stringify(data.Usuario.idUsuario))
 
+            setEmail('');
+            setSenha('');
 
              navigation.navigate('MainContainer');
             

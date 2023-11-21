@@ -87,7 +87,7 @@ export default Chat = ({ navigation, route }) => {
             <ScrollView contentContainerStyle={styles.scrollViewContainer}>
                 {comentarios.map((comentario) => (
                     <View>
-                        <Balloon message={comentario.conteudoComentario} name={comentario.Usuario.nomeUsuario} date={comentario.dataPublicacao} />
+                        <Balloon message={comentario.conteudoComentario} name={comentario.Usuario.nomeUsuario} date={comentario.dataPublicacao} id={comentario.Usuario.idUsuario} />
                     </View>
                 ))}
             </ScrollView>

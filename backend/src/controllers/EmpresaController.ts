@@ -322,6 +322,7 @@ export class EmpresaController {
                 Usuario: {
                     select: {
                         nomeUsuario: true,
+                        idUsuario: true,
                     }
                 },
             },
