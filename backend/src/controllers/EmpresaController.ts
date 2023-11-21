@@ -201,6 +201,10 @@ export class EmpresaController {
             
             where: {
                 statusEmpresa: true
+            },
+
+            orderBy: {
+                nomeEmpresa: 'asc'
             }
         });
 
@@ -324,6 +328,9 @@ export class EmpresaController {
             where: {
                 idEmpresa: id,
             },
+            orderBy: {
+                dataPublicacao: 'desc'
+            }
         });
 
         res.json(listarComentarios);
