@@ -47,7 +47,8 @@ import blogFetch from '../../../axios/config';
          try {
              const response = await blogFetch.put(`/atualizarUsuario/${id}`,{nome,email,senha});
              const data = response.data;
-             alert('Atualizado com sucesso')
+             alert('Atualizado com sucesso');
+             setSenha('');
          } catch (error) {
              console.log(error);
          }
