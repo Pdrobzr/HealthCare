@@ -350,15 +350,11 @@ export default HomeScreen = ({ navigation }) => {
         }
     }
 
-    const atualizarEmpresas = () => {
-        listarEmpresas();
-    }
-
     const [refreshing, setRefreshing] = React.useState(false);
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        atualizarEmpresas();
+        listarEmpresas();
         setTimeout(() => {
             setRefreshing(false);
         }, 1000);
