@@ -35,7 +35,7 @@ const Balloon = ({ message,name,date, id }) => {
       <View style={styles.bubbleWrapper}>
         <View style={styles.bubbleWrapperReceived}>
           <View style={styles.nameContent}>
-          <Text style={styles.nameText}>{idUsuario == id ? 'Eu' : name}</Text>
+          <Text style={styles.nameText}>{idUsuario == id ? 'Você' : name}</Text>
           </View>
           <View style={styles.balloon}>
             <View style={styles.balloonReceived}>

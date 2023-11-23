@@ -17,7 +17,7 @@ export class UsuarioController {
             }
         });
 
-        res.json({listarUsuarios});
+        res.json({ listarUsuarios });
     }
 
     async selecionarUsuario(req: Request, res: Response) {
@@ -29,12 +29,12 @@ export class UsuarioController {
             }
         });
 
-        res.json({selecionarUsuario});
+        res.json({ selecionarUsuario });
     }
 
     async adicionarUsuario(req: Request, res: Response) {
         const { nome, email, senha } = req.body;
-        
+
         const hashSenha = await hash(senha, 8);
 
         const role = "USER";
@@ -68,7 +68,7 @@ export class UsuarioController {
         const secret = process.env.SECRET;
 
         const emailValido = await prisma.usuario.findFirst({
-            
+
             where: {
                 emailUsuario: email
             }
@@ -96,18 +96,18 @@ export class UsuarioController {
         const secret = process.env.SECRET;
 
         const verificarAdmin = await prisma.usuario.findFirst({
-            where:{
+            where: {
                 emailUsuario: email
             }
         });
-        if(!verificarAdmin) {
-            res.status(404).json({error: 'Erro! Email ou senha inválidos!'});
+        if (!verificarAdmin) {
+            res.status(404).json({ error: 'Erro! Email ou senha inválidos!' });
         } else {
             const validarSenha = await compare(senha, verificarAdmin.senhaUsuario);
-            if(!validarSenha) {
-                res.status(404).json({error: 'Erro! Email ou senha inválidos!'});
-            } else if(verificarAdmin.roleUsuario !== 'ADMIN') {
-                res.status(401).json({error: 'Erro! Usuário não possui autorização!'});
+            if (!validarSenha) {
+                res.status(404).json({ error: 'Erro! Email ou senha inválidos!' });
+            } else if (verificarAdmin.roleUsuario !== 'ADMIN') {
+                res.status(401).json({ error: 'Erro! Usuário não possui autorização!' });
             } else {
                 const token = sign({ id: verificarAdmin.idUsuario }, secret as string, { expiresIn: "1d" });
                 const { idUsuario, roleUsuario } = verificarAdmin;
@@ -115,40 +115,61 @@ export class UsuarioController {
                 return res.json({ message: 'Admin logado com sucesso!', Usuario: { idUsuario, email, roleUsuario }, token });
             }
         }
-        
+
     }
 
     async atualizarUsuario(req: Request, res: Response) {
         const id = Number(req.params.id);
 
-        const {nome, email, senha} = req.body;
+        const { nome, email, senha } = req.body;
 
         const hashSenha = await hash(senha, 8);
 
-        const atualizarUsuario = await prisma.usuario.update({
-            data: {
-                nomeUsuario: nome,
-                emailUsuario: email,
-                senhaUsuario: hashSenha
-            },
+        if (senha == '') {
+            const atualizarUsuario = await prisma.usuario.update({
+                data: {
+                    nomeUsuario: nome,
+                    emailUsuario: email,
+                },
+                where: {
+                    idUsuario: id
+                }
+            });
+        } else {
+
+            const atualizarUsuario = await prisma.usuario.update({
+                data: {
+                    nomeUsuario: nome,
+                    emailUsuario: email,
+                    senhaUsuario: hashSenha
+                },
+                where: {
+                    idUsuario: id
+                }
+            });
+
+        }
+
+        res.json({ message: 'Usuário atualizado com sucesso!' });
+    }
+
+    async deletarUsuario(req: Request, res: Response) {
+        const id = Number(req.params.id);
+
+        const deletarComentarios = await prisma.comentario.deleteMany({
             where: {
                 idUsuario: id
             }
         });
 
-        res.json({message: 'Usuário atualizado com sucesso!', atualizarUsuario});
-    }
-
-    async deletarUsuario(req: Request, res: Response) {
-        const id = Number(req.params.id);
-        
         const deletarUsuario = await prisma.usuario.delete({
             where: {
                 idUsuario: id
             }
         });
 
-        res.json({message: 'Usuário deletado com sucesso!', deletarUsuario});
+
+        res.json({ message: 'Usuário deletado com sucesso!', deletarUsuario });
     }
 
     async realizarComentario(req: Request, res: Response) {
@@ -160,7 +181,7 @@ export class UsuarioController {
         function obterDataEHoraBrasil() {
             // Obtém a data e hora atuais no fuso horário do sistema local
             const dataEHoraAtual = new Date();
-            
+
             // Extrai os componentes da data e hora
             const dia = String(dataEHoraAtual.getDate()).padStart(2, '0');
             const mes = String(dataEHoraAtual.getMonth() + 1).padStart(2, '0');
@@ -168,26 +189,26 @@ export class UsuarioController {
             const hora = String(dataEHoraAtual.getHours()).padStart(2, '0');
             const minuto = String(dataEHoraAtual.getMinutes()).padStart(2, '0');
             const segundo = String(dataEHoraAtual.getSeconds()).padStart(2, '0');
-          
+
             // Cria a string no formato desejado (DD/MM/YYYY HH:mm:ss)
             const dataEHoraFormatadas = `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
-          
-            return dataEHoraFormatadas;
-          }
 
-          const dataEHoraBrasil = obterDataEHoraBrasil().toString();
+            return dataEHoraFormatadas;
+        }
+
+        const dataEHoraBrasil = obterDataEHoraBrasil().toString();
 
 
         const realizarComentario = await prisma.comentario.create({
             data: {
                 conteudoComentario: conteudo,
                 idUsuario: idUsuario,
-                idEmpresa: idEmpresa,   
-                dataPublicacao: dataEHoraBrasil           
+                idEmpresa: idEmpresa,
+                dataPublicacao: dataEHoraBrasil
             }
         });
 
-        res.json({message: 'Comentário realizado com sucesso!', realizarComentario});
+        res.json({ message: 'Comentário realizado com sucesso!', realizarComentario });
     }
-    
+
 }

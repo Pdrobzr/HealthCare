@@ -25,7 +25,6 @@ import blogFetch from '../../../axios/config';
 
             setNome(data.selecionarUsuario.nomeUsuario);
             setEmail(data.selecionarUsuario.emailUsuario);
-            setSenha(data.selecionarUsuario.senhaUsuario);
         } catch (error) {
             console.log(error);
         }
