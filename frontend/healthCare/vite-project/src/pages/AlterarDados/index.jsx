@@ -21,7 +21,7 @@ export function AlterarDados() {
     const [emailPlaceholder, setEmailPlaceholder] = useState("");
     const [telefonePlaceholder, setTelefonePlaceholder] = useState();
 
-    const selecionarEmpresa = async (e) => {
+    const selecionarEmpresa = async () => {
         const response = await blogFetch.get(`/selecionarEmpresa/${idEmpresa}`, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -39,10 +39,15 @@ export function AlterarDados() {
         e.preventDefault();
 
         try {
+
             const response = await blogFetch.put(`/atualizarEmpresa/${idEmpresa}`, {
                 nome: nomePlaceholder,
                 email: emailPlaceholder,
                 telefone: telefonePlaceholder,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
 
             const data = response.data;
@@ -72,15 +77,19 @@ export function AlterarDados() {
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Deletar'
-              }).then(async (result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
-                  const response = await blogFetch.delete(`/deletarEmpresa/${idEmpresa}`);
-                  const data = response.data;
-                  Swal.fire(data.message, '', 'success');
-                  localStorage.clear();
-                  navigate('/entrar');
-                } 
-              })
+                    const response = await blogFetch.delete(`/deletarEmpresa/${idEmpresa}`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    });
+                    const data = response.data;
+                    Swal.fire(data.message, '', 'success');
+                    localStorage.clear();
+                    navigate('/entrar');
+                }
+            })
         } catch (error) {
             console.log(error);
         }
@@ -98,26 +107,26 @@ export function AlterarDados() {
 
     return (
         <>
-        <div className='container-total'>
-            
-            <div className='parte-esquerda'>
-                <LogoDescricao title="Atualizar Dados" description="" />
-                <form onSubmit={atualizarEmpresa} className='formulario'>
-                    <label htmlFor="nome fantasia">Nome Fantasia</label>
-                    <input type="text" onChange={(e) => setNomePlaceholder(e.target.value)} defaultValue={nomePlaceholder} name="nome fantasia" />
-                    <label htmlFor="e-mail">E-mail</label>
-                    <input type="email" onChange={(e) => setEmailPlaceholder(e.target.value)} defaultValue={emailPlaceholder} text="E-mail" name="e-mail" />
-                    <label htmlFor="telefone">Telefone</label>
-                    <input type="number" onChange={(e) => setTelefonePlaceholder(Number(e.target.value))} defaultValue={telefonePlaceholder} text="telefone" name="telefone" />
-                    <Button type="submit" content="Editar" name="Editar" />
-                    
-                </form>
-                <button className='delete' onClick={deletarEmpresa}>DELETAR EMPRESA</button>
-                <Links content="Deseja continuar com esses dados? " text=" voltar" link="/especialidadeDisponivel" />
+            <div className='container-total'>
+
+                <div className='parte-esquerda'>
+                    <LogoDescricao title="Atualizar Dados" description="" />
+                    <form onSubmit={atualizarEmpresa} className='formulario'>
+                        <label htmlFor="nome fantasia">Nome Fantasia</label>
+                        <input type="text" onChange={(e) => setNomePlaceholder(e.target.value)} defaultValue={nomePlaceholder} name="nome fantasia" />
+                        <label htmlFor="e-mail">E-mail</label>
+                        <input type="email" onChange={(e) => setEmailPlaceholder(e.target.value)} defaultValue={emailPlaceholder} text="E-mail" name="e-mail" />
+                        <label htmlFor="telefone">Telefone</label>
+                        <input type="number" onChange={(e) => setTelefonePlaceholder(Number(e.target.value))} defaultValue={telefonePlaceholder} text="telefone" name="telefone" />
+                        <Button type="submit" content="Editar" name="Editar" />
+
+                    </form>
+                    <button className='delete' onClick={deletarEmpresa}>DELETAR EMPRESA</button>
+                    <Links content="Deseja continuar com esses dados? " text=" voltar" link="/especialidadeDisponivel" />
+                </div>
+                <div className='parte-direita'>
+                </div>
             </div>
-            <div className='parte-direita'>
-            </div>
-        </div>
         </>
     );
 };

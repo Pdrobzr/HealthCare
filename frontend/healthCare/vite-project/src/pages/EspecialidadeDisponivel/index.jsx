@@ -58,7 +58,7 @@ export function EspecialidadeDisponivel() {
 
     }
   
-    const selecionarEmpresa = async (e) => {
+    const selecionarEmpresa = async () => {
 
         const response = await blogFetch.get(`/selecionarEmpresa/${empresa}`, {
             headers: {
@@ -73,7 +73,9 @@ export function EspecialidadeDisponivel() {
 
     const alterarStatus = async () => {
 
-        await blogFetch.put(`/atualizarStatus/${empresa}`, {status: !status});
+        await blogFetch.put(`/atualizarStatus/${empresa}`, {
+            status: !status
+        });
 
         setStatus(!status);
         
