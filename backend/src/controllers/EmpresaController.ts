@@ -12,7 +12,7 @@ export class EmpresaController {
         const { nome, email, senha, cnpj, telefone, bairro, endereco } = req.body;
 
         if (!nome || !email || !senha || !cnpj || !telefone || !bairro || !endereco) {
-            res.status(400).json({ error: 'Insira todas as informações' });
+            return res.status(400).json({ error: 'Insira todas as informações' });
         } else {
 
             const hashSenha = await hash(senha, 8);
@@ -208,7 +208,7 @@ export class EmpresaController {
             }
         });
 
-        res.json({listarEmpresasAbertas});
+        return res.json({listarEmpresasAbertas});
     }
 
     async atualizarEmpresa(req: Request, res: Response) {
@@ -216,7 +216,7 @@ export class EmpresaController {
         const id = Number(req.params.id);
 
         if (!nome || !email || !telefone) {
-            res.status(400).json({ error: 'Erro ao atualizar!' });
+            return res.status(400).json({ error: 'Erro ao atualizar!' });
         } else {
 
             const emailCadastrado = await prisma.empresa.findFirst({
@@ -229,7 +229,7 @@ export class EmpresaController {
             });
 
             if (emailCadastrado) {
-                res.status(400).json({ error: 'Erro ao atualizar! E-mail já cadastrado!' });
+                return res.status(400).json({ error: 'Erro ao atualizar! E-mail já cadastrado!' });
             } else {
 
                 const atualizarEmpresa = await prisma.empresa.update({
@@ -334,7 +334,7 @@ export class EmpresaController {
             }
         });
 
-        res.json(listarComentarios);
+        return res.json(listarComentarios);
     }
 
 }

@@ -17,7 +17,7 @@ export class UsuarioController {
             }
         });
 
-        res.json({ listarUsuarios });
+        return res.json({ listarUsuarios });
     }
 
     async selecionarUsuario(req: Request, res: Response) {
@@ -29,7 +29,7 @@ export class UsuarioController {
             }
         });
 
-        res.json({ selecionarUsuario });
+        return res.json({ selecionarUsuario });
     }
 
     async adicionarUsuario(req: Request, res: Response) {
@@ -46,7 +46,7 @@ export class UsuarioController {
         });
 
         if (emailRegistrado) {
-            res.json({ error: 'Erro! Email já cadastrado!' });
+            return res.json({ error: 'Erro! Email já cadastrado!' });
         } else {
 
             const adicionarUsuario = await prisma.usuario.create({
@@ -101,13 +101,13 @@ export class UsuarioController {
             }
         });
         if (!verificarAdmin) {
-            res.status(404).json({ error: 'Erro! Email ou senha inválidos!' });
+            return res.status(404).json({ error: 'Erro! Email ou senha inválidos!' });
         } else {
             const validarSenha = await compare(senha, verificarAdmin.senhaUsuario);
             if (!validarSenha) {
-                res.status(404).json({ error: 'Erro! Email ou senha inválidos!' });
+                return res.status(404).json({ error: 'Erro! Email ou senha inválidos!' });
             } else if (verificarAdmin.roleUsuario !== 'ADMIN') {
-                res.status(401).json({ error: 'Erro! Usuário não possui autorização!' });
+                return res.status(401).json({ error: 'Erro! Usuário não possui autorização!' });
             } else {
                 const token = sign({ id: verificarAdmin.idUsuario }, secret as string, { expiresIn: "1d" });
                 const { idUsuario, roleUsuario } = verificarAdmin;
@@ -150,7 +150,7 @@ export class UsuarioController {
 
         }
 
-        res.json({ message: 'Usuário atualizado com sucesso!' });
+        return res.json({ message: 'Usuário atualizado com sucesso!' });
     }
 
     async deletarUsuario(req: Request, res: Response) {
@@ -169,7 +169,7 @@ export class UsuarioController {
         });
 
 
-        res.json({ message: 'Usuário deletado com sucesso!', deletarUsuario });
+        return res.json({ message: 'Usuário deletado com sucesso!', deletarUsuario });
     }
 
     async realizarComentario(req: Request, res: Response) {
@@ -208,7 +208,7 @@ export class UsuarioController {
             }
         });
 
-        res.json({ message: 'Comentário realizado com sucesso!', realizarComentario });
+        return res.json({ message: 'Comentário realizado com sucesso!', realizarComentario });
     }
 
 }

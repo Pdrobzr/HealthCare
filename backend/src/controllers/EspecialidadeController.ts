@@ -10,7 +10,7 @@ export class EspecialidadeController {
             }
         });//
 
-        res.json({ listarEspecialidades });
+        return res.json({ listarEspecialidades });
     }
     
     async listarEspecialidadesEmpresas(req: Request, res: Response) {
@@ -39,7 +39,7 @@ export class EspecialidadeController {
             }
         })
 
-        res.json({ listarEspecialidadesEmpresas });
+        return res.json({ listarEspecialidadesEmpresas });
     }
 
     async selecionarDisponibilidade(req: Request, res: Response) {
@@ -58,7 +58,7 @@ export class EspecialidadeController {
 
         });
 
-        res.json({ selecionarDisponibilidade });
+        return res.json({ selecionarDisponibilidade });
     }
 
     async adicionarEspecialidade(req: Request, res: Response) {
@@ -67,7 +67,7 @@ export class EspecialidadeController {
         const { quantidade } = req.body;
 
         if (!idEspecialidade || quantidade === undefined || quantidade < 0) {
-            res.status(400).json({ error: 'Erro! Adicione a quantidade de profissionais!' });
+            return res.status(400).json({ error: 'Erro! Adicione a quantidade de profissionais!' });
         } else {
 
             const verificarEspecialidadeExistente = await prisma.disponibilidadeEspecialidade.findFirst({
@@ -78,7 +78,7 @@ export class EspecialidadeController {
             });
 
             if (verificarEspecialidadeExistente) {
-                res.status(400).json({ error: 'Erro! Especialidade já adicionada!' });
+                return res.status(400).json({ error: 'Erro! Especialidade já adicionada!' });
             } else {
 
                 const adicionarEspecialidade = await prisma.disponibilidadeEspecialidade.create({
@@ -89,7 +89,7 @@ export class EspecialidadeController {
                     },
                 });
 
-                res.json({ message: 'Especialidade adicionada com sucesso!', adicionarEspecialidade });
+                return res.json({ message: 'Especialidade adicionada com sucesso!', adicionarEspecialidade });
             }
         }
     }
@@ -99,7 +99,7 @@ export class EspecialidadeController {
         const { quantidade } = req.body;
 
         if (quantidade < 0 || !quantidade) {
-            res.status(400).json({ error: 'Erro ao editar informações!' });
+            return res.status(400).json({ error: 'Erro ao editar informações!' });
         } else {
             const alterarDisponibilidade = await prisma.disponibilidadeEspecialidade.update({
                 data: {
@@ -110,7 +110,7 @@ export class EspecialidadeController {
                 }
             });
 
-            res.json({ message: 'Quantidade alterada com sucesso!', alterarDisponibilidade });
+            return res.json({ message: 'Quantidade alterada com sucesso!', alterarDisponibilidade });
         }
     }
 
