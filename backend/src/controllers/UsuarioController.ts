@@ -126,7 +126,7 @@ export class UsuarioController {
         const hashSenha = await hash(senha, 8);
 
         if (senha == '') {
-            const atualizarUsuario = await prisma.usuario.update({
+            await prisma.usuario.update({
                 data: {
                     nomeUsuario: nome,
                     emailUsuario: email,
@@ -137,7 +137,7 @@ export class UsuarioController {
             });
         } else {
 
-            const atualizarUsuario = await prisma.usuario.update({
+            await prisma.usuario.update({
                 data: {
                     nomeUsuario: nome,
                     emailUsuario: email,
@@ -156,7 +156,7 @@ export class UsuarioController {
     async deletarUsuario(req: Request, res: Response) {
         const id = Number(req.params.id);
 
-        const deletarComentarios = await prisma.comentario.deleteMany({
+        await prisma.comentario.deleteMany({
             where: {
                 idUsuario: id
             }

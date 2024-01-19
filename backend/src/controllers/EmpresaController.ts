@@ -257,7 +257,7 @@ export class EmpresaController {
             }
         });
         if (encontrarEspecialidade) {
-            const deletarEspecialidadesEmpresa = await prisma.disponibilidadeEspecialidade.deleteMany({
+            await prisma.disponibilidadeEspecialidade.deleteMany({
                 where: {
                     idEmpresa: id
                 }
@@ -271,7 +271,7 @@ export class EmpresaController {
         });
 
         if (encontrarComentariosEmpresa) {
-            const deletarComentariosEmpresa = await prisma.comentario.deleteMany({
+            await prisma.comentario.deleteMany({
                 where: {
                     idEmpresa: id
                 }
