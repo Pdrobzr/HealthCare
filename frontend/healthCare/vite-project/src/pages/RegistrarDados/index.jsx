@@ -83,6 +83,16 @@ export function RegistrarDados() {
 
     }
 
+    function validarNumeroTelefone(telefone) {
+        const regex = /^[1-9]{2}9?[0-9]{8}$/;
+
+        if (regex.test(telefone)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     const registrarEmpresa = async (e) => {
         e.preventDefault();
 
@@ -92,7 +102,14 @@ export function RegistrarDados() {
                     icon: 'error',
                     text: 'CNPJ inválido!'
                 });
-            } else {
+                return;
+            } if(!validarNumeroTelefone(telefone)){
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Numero de celular inválido!'
+                });
+                return;
+            } 
                 const response = await blogFetch.post('/adicionarEmpresa', {
                     nome: nome,
                     email: email,
@@ -111,7 +128,7 @@ export function RegistrarDados() {
                 });
 
                 navigate('/entrar');
-            }
+            
         } catch (error) {
             Swal.fire({
                 icon: 'error',
