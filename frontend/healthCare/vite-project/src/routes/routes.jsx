@@ -11,6 +11,7 @@ import { HomePage } from "../pages/HomePage";
 import { EntrarAdmin } from "../pages/EntrarAdmin";
 import { AdmEmpresa } from "../pages/AdmEmpresas";
 import { AdmPaciente } from "../pages/AdmPacientes";
+import { AlterarSenha } from "../pages/AlterarSenha";
 
 export const AppRoutes = () => {
     return(
@@ -26,6 +27,7 @@ export const AppRoutes = () => {
                 <Route element={<EntrarAdmin/>} path="entrarAdmin"/>
                 <Route element={<AdmEmpresa/>} path="admEmpresa"/>
                 <Route element={<AdmPaciente/>} path="admPaciente"/>
+                <Route element={<AlterarSenha/>} path="alterarSenha" />
             </Routes>
         </BrowserRouter>
     )
