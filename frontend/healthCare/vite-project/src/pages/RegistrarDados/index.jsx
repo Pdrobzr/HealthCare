@@ -15,6 +15,7 @@ export function RegistrarDados() {
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [confimarSenha, setConfirmarSenha] = useState("");
     const [telefone, setTelefone] = useState(0);
     const [cnpj, setCnpj] = useState(0);
     const [endereco, setEndereco] = useState("");
@@ -109,7 +110,14 @@ export function RegistrarDados() {
                     text: 'Numero de celular inválido!'
                 });
                 return;
-            } 
+            } if(senha != confimarSenha){
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Digite a mesma senha nos dois campos!'
+                });
+                return;
+            }
+
                 const response = await blogFetch.post('/adicionarEmpresa', {
                     nome: nome,
                     email: email,
@@ -157,6 +165,8 @@ export function RegistrarDados() {
                     <input type="number" onChange={(e) => setTelefone(Number(e.target.value))} text="telefone" name="telefone" placeholder="Telefone" />
                     <label htmlFor="senha">Senha</label>
                     <input type="password" onChange={(e) => setSenha(e.target.value)} text="Senha" name="senha" placeholder="Senha" />
+                    <label htmlFor="senha">Confirmar senha</label>
+                    <input type="password" onChange={(e) => setConfirmarSenha(e.target.value)} text="Senha" name="senha" placeholder="Confirmar senha" />
                     <div className='div-lado-a-lado'>
 
                         <div className='input-esquerdo'>
