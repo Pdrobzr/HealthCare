@@ -27,7 +27,7 @@ export const AppRoutes = () => {
                 <Route element={<EntrarAdmin/>} path="entrarAdmin"/>
                 <Route element={<AdmEmpresa/>} path="admEmpresa"/>
                 <Route element={<AdmPaciente/>} path="admPaciente"/>
-                <Route element={<AlterarSenha/>} path="alterarSenha" />
+                <Route element={<AlterarSenha/>} path="alterarSenha/:id" />
             </Routes>
         </BrowserRouter>
     )

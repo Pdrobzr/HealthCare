@@ -248,6 +248,42 @@ export class EmpresaController {
         }
     }
 
+    async atualizarSenha(req: Request, res: Response) {
+        const id = Number(req.params.id);
+
+        const {senhaAntiga, senhaNova} = req.body;
+
+        const buscarSenhaAntiga = await prisma.empresa.findFirst({
+            where: {
+                idEmpresa: id
+            }
+        });
+
+        if(!buscarSenhaAntiga) {
+            return res.status(400).json({ error: 'Erro ao encontrar empresa!' });
+        }
+
+        const validarSenha = await compare(senhaAntiga, buscarSenhaAntiga.senhaEmpresa);
+
+        if(!validarSenha) {
+            return res.status(404).json({ error: 'Erro! Senha inválida!'});
+        } else {
+            const hashSenha = await hash(senhaNova, 8);
+
+            await prisma.empresa.update({
+                data: {
+                    senhaEmpresa: hashSenha
+                },
+                where: {
+                    idEmpresa: id
+                }
+            });
+
+            return res.status(200).json({message: 'Senha atualizada com sucesso!'});
+        }
+        
+    }
+
     async deletarEmpresa(req: Request, res: Response) {
         const id = Number(req.params.id);
 
