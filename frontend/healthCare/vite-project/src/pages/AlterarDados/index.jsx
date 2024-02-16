@@ -122,8 +122,8 @@ export function AlterarDados() {
 
                     </form>
                     <button className='delete' onClick={deletarEmpresa}>DELETAR EMPRESA</button>
-                    <Links content="Deseja continuar com esses dados? " text=" voltar" link="/especialidadeDisponivel" />
                     <Links content="Deseja alterar a senha? " text=" clique aqui" link={`/alterarSenha/${idEmpresa}`} />
+                    <Links content="Deseja continuar com esses dados? " text=" voltar" link="/especialidadeDisponivel" />                  
                 </div>
                 <div className='parte-direita'>
                 </div>

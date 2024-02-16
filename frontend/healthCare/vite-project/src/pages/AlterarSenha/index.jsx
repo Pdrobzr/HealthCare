@@ -79,10 +79,10 @@ export function AlterarSenha() {
                         <input type="password" onChange={(e) => setSenhaNova(e.target.value)} placeholder="Digite a nova senha..." />
                         <label htmlFor="telefone">Confirmar senha</label>
                         <input type="password" onChange={(e) => setConfirmarSenhaNova(e.target.value)} placeholder="Confimar nova senha..." />
-                        <Button type="submit" content="Alterar" name="Editar" />
+                        <Button type="submit" content="ALTERAR SENHA" name="Editar" />
 
                     </form>
-                    <Links content="Deseja continuar com essa senha? " text=" voltar" link="/especialidadeDisponivel" />
+                    <Links content="Deseja continuar com a senha atual? " text=" voltar" link="/alterarDados" />
                 </div>
                 <div className='parte-direita'>
                 </div>
