@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
 }
+
 .body-disponivel{
     background-color: rgba(242, 242, 242, 1);
     display: flex;
@@ -11,6 +12,7 @@
     min-height: 99.8vh;
     align-items: center;
 }
+
 .container-total-especialidade{
     align-items: center;
     justify-content: center;

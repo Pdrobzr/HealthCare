@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import './styles.css';
-import { Input } from '../../components/Input';
 import { Button } from '../../components/Button'
 import { Links } from '../../components/linksBaixoBotao';
-import { LogoDescricao } from '../../components/LogoDescricao';
 import blogFetch from '../../axios/config';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
+import imagemLogo from '../../img/imgLogo/logo.png'
 
 export function RegistrarDados() {
 
@@ -153,7 +152,7 @@ export function RegistrarDados() {
     return (
         <div className='container-total'>
             <div className='parte-esquerda'>
-                <LogoDescricao title="Registre-se" description="" />
+                <img className="logoRegistrar" src={imagemLogo} alt="" />
                 <form onSubmit={registrarEmpresa} className='formulario'>
                     <label htmlFor="nome fantasia">Nome Fantasia</label>
                     <input type="text" onChange={(e) => setNome(e.target.value)} text="Nome Fantasia" name="nome fantasia" placeholder="Nome Fantasia" />

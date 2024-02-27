@@ -4,6 +4,10 @@
     font-family: 'Roboto', sans-serif;  
 }
 
+.logoRegistrar{
+  height: 100px;
+  width: 150px;    
+}
 .div-lado-a-lado{
     display: flex;
     min-width: 100%;
