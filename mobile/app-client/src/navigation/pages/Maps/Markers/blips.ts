@@ -2,18 +2,17 @@ export const blips = [
     {
         latitude: -24.0047,
         longitude: -46.4189,
-        name: 'Complexo Hospitalar Irmã Dulce',
+        title: 'Complexo Hospitalar Irmã Dulce',
     },
     {
         latitude: -24.0056,
         longitude: -46.4241,
-        name: "Pronto Socorro Central de Praia Grande",
+        title: "Pronto Socorro Central de Praia Grande",
     },
     {
         latitude: -24.0130,
         longitude: -46.4459,
- 
-        name: "Hospital Ana Cosata de Praia Grande",
+        title: "Hospital Ana Cosata de Praia Grande",
     },
 
 ]
