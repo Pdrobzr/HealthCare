@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, Modal, TouchableOpacity, FlatList, Image, RefreshControl } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, Modal, TouchableOpacity, TextInput, Platform, FlatList, Image, RefreshControl } from 'react-native';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import InputSearch from '../../../components/CustomInputs/inputSearch';
@@ -19,7 +19,7 @@ export default HomeScreen = ({ navigation }) => {
 
     const imagem = 'https://cdn-icons-png.flaticon.com/512/61/61444.png';
 
-     
+
 
     const listarEmpresas = async () => {
         const response = await blogFetch.get('/listarEmpresasAbertas');
@@ -59,6 +59,8 @@ export default HomeScreen = ({ navigation }) => {
                 selecionarEmpresa(selectedCompanyId);
                 listarProfissionais(selectedCompanyId);
             }
+
+            
         }, [])
 
 
@@ -67,7 +69,7 @@ export default HomeScreen = ({ navigation }) => {
 
 
             const handleChat = async () => {
-                navigation.navigate('Chat', {idEmpresa: selectedCompanyId, nomeEmpresa});    
+                navigation.navigate('Chat', { idEmpresa: selectedCompanyId, nomeEmpresa });
             };
 
             const renderQuantidade = ({ item }) => (
@@ -194,7 +196,7 @@ export default HomeScreen = ({ navigation }) => {
                                             alignItems: 'center',
                                             justifyContent: 'center'
                                         }}>
-                                        <TouchableOpacity  onPress={handleChat} >
+                                        <TouchableOpacity onPress={handleChat} >
                                             <FontAwesome
                                                 name="wechat"
                                                 size={30}
@@ -360,23 +362,27 @@ export default HomeScreen = ({ navigation }) => {
         }, 1000);
     }, []);
 
+
     return (
         <View style={{ flex: 1, backgroundColor: 'rgb(233, 233, 233)', alignItems: 'center' }}>
             {/* <Text onPress={() => alert('Esta é a "Pagina" inicial')}
             style={{fontSize:26,fontWeight:'bold'}}>Tela de inicio</Text> */}
-            <View style={styles.searchInput}>
-                <InputSearch
-                    placeholder="Procurar"
-                    iconName="search"
-                    iconSize={24}
+            <View style={styles.searchBox}>
+                <TextInput
+                    placeholder='Pesquisar'
+                    placeholderTextColor='#000'
+                    autoCapitalize='none'
+                    onChangeText={(text) => searchUser(text)}
+                    style={{ flex: 1, padding: 0 }}
                 />
-                {/* <TouchableOpacity onPress={atualizarEmpresas}>
-                    <Image source={{ uri: imagem }} style={styles.image} />
-                </TouchableOpacity> */}
+                <FontAwesome
+                    name="search"
+                    size={15}
+                    color={'#000'}
+                />
             </View>
 
             <View style={styles.content}>
-
                 <ScrollView refreshControl={
                     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                 }>
@@ -423,16 +429,31 @@ export default HomeScreen = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-    searchInput: {
+    searchBox: {
         position: 'absolute',
-        top: 70
+        marginTop: Platform.OS == 'ios' ? 40 : 40,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        width: '90%',
+        alignSelf: 'center',
+        borderRadius: 5,
+        padding: 10,
+        shadowColor: '#ccc',
+        shadowOffset: { widht: 0, height: 3 },
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        elevation: 10,
     },
     content: {
-        widht: 500,
-        height: 500,
         position: 'absolute',
-        bottom: 0,
-        backgroundColor: 'white'
+        widht: 500,
+        height: 600,
+        marginTop: Platform.OS == 'ios' ? 70 : 150,
+        top: 0,
+        backgroundColor: 'white',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     componentModal: {
         width: 380,

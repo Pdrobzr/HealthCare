@@ -99,11 +99,10 @@ export default function MapsScreen({ navigation }) {
 
             resizeMode="contain"
           >
-            <Callout >
-              <View>
+            <Callout tooltip  style={styles.callout}>
+              <View style={styles.contentCallout}>
                 <View style={styles.bubble}>
                   <Text style={styles.title}>{blips.title}</Text>
-                  <Text>tt</Text>
                 </View>
                
               </View>
@@ -151,6 +150,13 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 10,
   },
+  callout:{
+    width:'600px'
+  },
+  contentCallout:{
+    width:500,
+    height:500,
+  },  
   //Bubble
   bubble: {
     flexDirection: 'column',
@@ -158,7 +164,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 6,
     borderColor: '#ccc',
-    borderWidth: 0.5,
+    
     padding: 15,
     width: 150
   },
