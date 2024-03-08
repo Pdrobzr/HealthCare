@@ -13,7 +13,7 @@ export const router = Router();
 // ROTAS DE EMPRESA
 router.post('/adicionarEmpresa', empresaController.adicionarEmpresa);
 router.get('/listarEmpresas', empresaController.listarEmpresas);
-router.get('/selecionarEmpresa/:id',AuthMiddleware, empresaController.selecionarEmpresa);
+router.get('/selecionarEmpresa/:id', empresaController.selecionarEmpresa);
 router.post('/autenticarEmpresa', empresaController.autenticarEmpresa);
 router.put('/atualizarEmpresa/:id',AuthMiddleware, empresaController.atualizarEmpresa);
 router.delete('/deletarEmpresa/:id', AuthMiddleware, empresaController.deletarEmpresa);
