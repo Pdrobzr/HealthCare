@@ -10,7 +10,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './pages/Home';
 import ProfileScreen from './pages/Profle';
 import MapsScreen from './pages/Maps';
-
+import HealthScreen from './pages/Health';
 //CustomTab
 import CustomTabBar from '../components/CustomTabBar';
 //Screens names
@@ -18,6 +18,7 @@ import CustomTabBar from '../components/CustomTabBar';
 const homeName = 'Home';
 const profileName = 'Configurações';
 const mapsName = 'Mapa';
+const healthName = 'Saude'
 const Tab = createBottomTabNavigator();
  const MainContainer = ({ navigation }) => {
 
@@ -52,6 +53,13 @@ const Tab = createBottomTabNavigator();
                 component={HomeScreen}
                 options={{
                     tabBarIcon: "home"
+                }}  
+            />
+              <Tab.Screen 
+                name={healthName} 
+                component={HealthScreen}
+                options={{
+                    tabBarIcon: "accessibility"
                 }}  
             />
             <Tab.Screen 

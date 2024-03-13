@@ -2,7 +2,7 @@ import axios from 'axios'
 //import { IP } from "@env"
 
 const blogFetch = axios.create({
-    baseURL: `http://192.168.85.169:8080`,
+    baseURL: `http://10.171.1.68:8080`,
     headers: {
         "Content-Type": "application/json",
     }
