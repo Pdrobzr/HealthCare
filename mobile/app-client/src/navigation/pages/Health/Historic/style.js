@@ -67,9 +67,31 @@ const styles = StyleSheet.create({
         height:100,
         marginTop:20,
         marginLeft:13,
-        borderWidth:1,
-        shadowColor: '#ccc',
-
+        borderRadius:10,
+        backgroundColor:'#fff',
+        padding:5,
+        shadowColor: '#000', 
+        shawdowOffset: {
+            width: 0,
+            heigth: 2,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 3.80,
+        elevation:5
+    },
+    descriptionTop:{
+        widht:'100%',
+        height:35,
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+    descriptionBottom:{
+        marginTop:5,
+        marginLeft:5,
+        widht:'100%',
+        height:35,
+        padding:1,
+        flexDirection:'column',
     }
 })
 

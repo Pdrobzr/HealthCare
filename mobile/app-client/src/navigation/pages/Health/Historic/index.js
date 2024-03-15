@@ -3,6 +3,7 @@ import { View, TextInput, Animated, ScrollView, Text, TouchableOpacity } from 'r
 import styles from './style';
 import { useFonts } from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const HistoricScreen = ({ navigation }) => {
     const [fontsLoaded] = useFonts({
@@ -13,8 +14,11 @@ const HistoricScreen = ({ navigation }) => {
     if (!fontsLoaded) {
         return undefined;
     }
+
+   
+
     return (
-        <View style={{ flex: 1, flexDirection: 'column', padding: 15 }}>
+        <View style={{ flex: 1, flexDirection: 'column', padding: 15 ,backgroundColor:'#F1F5F8'}}>
             <View style={styles.descriptionContent}>
                 <Text style={{ fontSize: 35, fontFamily: 'Montserrat-Bold', color: '#4A4444' }}>Sua Sáude</Text>
                 <View style={{ height: 50 }}>
@@ -54,28 +58,118 @@ const HistoricScreen = ({ navigation }) => {
                 </View>
 
             </View>
-            <ScrollView style={{flex:1}}>
+            <ScrollView style={{ flex: 1 }}>
                 <View style={styles.cardsContent}>
                     <View style={styles.card}>
-                        
+                        <View style={styles.descriptionTop}>
+                            <Ionicons name="clipboard" size={30} color={'#6CA8DA'}/>
+                            <Text style={{fontSize:10,fontFamily:'Montserrat-Medium',color:'#A4A4A4',right:15,top:5}}>#1064235</Text>
+                        </View>
+                        <View style={styles.descriptionBottom}>
+                            <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:20,color:'#4A4444'}}>Laparoscopia</Text>
+                            <Text style={{fontFamily:'Montserrat-Medium',fontSize:10,color:'#A4A4A4'}}>Criado: 22.10.2024</Text>
+                        </View>
                     </View>
                     <View style={styles.card}>
-                    <Text>teste</Text>
+                        <View style={styles.descriptionTop}>
+                            <Ionicons name="clipboard" size={30} color={'#6CA8DA'}/>
+                            <Text style={{fontSize:10,fontFamily:'Montserrat-Medium',color:'#A4A4A4',right:15,top:5}}>#1064235</Text>
+                        </View>
+                        <View style={styles.descriptionBottom}>
+                            <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:20,color:'#4A4444'}}>Laparoscopia</Text>
+                            <Text style={{fontFamily:'Montserrat-Medium',fontSize:10,color:'#A4A4A4'}}>Criado: 22.10.2024</Text>
+                        </View>
                     </View>
                     <View style={styles.card}>
-                    <Text>teste</Text>
+                        <View style={styles.descriptionTop}>
+                            <Ionicons name="clipboard" size={30} color={'#6CA8DA'}/>
+                            <Text style={{fontSize:10,fontFamily:'Montserrat-Medium',color:'#A4A4A4',right:15,top:5}}>#1064235</Text>
+                        </View>
+                        <View style={styles.descriptionBottom}>
+                            <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:20,color:'#4A4444'}}>Laparoscopia</Text>
+                            <Text style={{fontFamily:'Montserrat-Medium',fontSize:10,color:'#A4A4A4'}}>Criado: 22.10.2024</Text>
+                        </View>
                     </View>
                     <View style={styles.card}>
-                    <Text>teste</Text>
+                        <View style={styles.descriptionTop}>
+                            <Ionicons name="clipboard" size={30} color={'#6CA8DA'}/>
+                            <Text style={{fontSize:10,fontFamily:'Montserrat-Medium',color:'#A4A4A4',right:15,top:5}}>#1064235</Text>
+                        </View>
+                        <View style={styles.descriptionBottom}>
+                            <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:20,color:'#4A4444'}}>Laparoscopia</Text>
+                            <Text style={{fontFamily:'Montserrat-Medium',fontSize:10,color:'#A4A4A4'}}>Criado: 22.10.2024</Text>
+                        </View>
                     </View>
                     <View style={styles.card}>
-                    <Text>teste</Text>
+                        <View style={styles.descriptionTop}>
+                            <Ionicons name="clipboard" size={30} color={'#6CA8DA'}/>
+                            <Text style={{fontSize:10,fontFamily:'Montserrat-Medium',color:'#A4A4A4',right:15,top:5}}>#1064235</Text>
+                        </View>
+                        <View style={styles.descriptionBottom}>
+                            <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:20,color:'#4A4444'}}>Laparoscopia</Text>
+                            <Text style={{fontFamily:'Montserrat-Medium',fontSize:10,color:'#A4A4A4'}}>Criado: 22.10.2024</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.card}>
+                        <View style={styles.descriptionTop}>
+                            <Ionicons name="clipboard" size={30} color={'#6CA8DA'}/>
+                            <Text style={{fontSize:10,fontFamily:'Montserrat-Medium',color:'#A4A4A4',right:15,top:5}}>#1064235</Text>
+                        </View>
+                        <View style={styles.descriptionBottom}>
+                            <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:20,color:'#4A4444'}}>Laparoscopia</Text>
+                            <Text style={{fontFamily:'Montserrat-Medium',fontSize:10,color:'#A4A4A4'}}>Criado: 22.10.2024</Text>
+                        </View>
                     </View>
                     <View style={styles.card}>
-                    <Text>teste</Text>
+                        <View style={styles.descriptionTop}>
+                            <Ionicons name="clipboard" size={30} color={'#6CA8DA'}/>
+                            <Text style={{fontSize:10,fontFamily:'Montserrat-Medium',color:'#A4A4A4',right:15,top:5}}>#1064235</Text>
+                        </View>
+                        <View style={styles.descriptionBottom}>
+                            <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:20,color:'#4A4444'}}>Laparoscopia</Text>
+                            <Text style={{fontFamily:'Montserrat-Medium',fontSize:10,color:'#A4A4A4'}}>Criado: 22.10.2024</Text>
+                        </View>
                     </View>
                     <View style={styles.card}>
-                    <Text>teste</Text>
+                        <View style={styles.descriptionTop}>
+                            <Ionicons name="clipboard" size={30} color={'#6CA8DA'}/>
+                            <Text style={{fontSize:10,fontFamily:'Montserrat-Medium',color:'#A4A4A4',right:15,top:5}}>#1064235</Text>
+                        </View>
+                        <View style={styles.descriptionBottom}>
+                            <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:20,color:'#4A4444'}}>Laparoscopia</Text>
+                            <Text style={{fontFamily:'Montserrat-Medium',fontSize:10,color:'#A4A4A4'}}>Criado: 22.10.2024</Text>
+                        </View>
+                    </View>
+                    <View style={styles.card}>
+                        <View style={styles.descriptionTop}>
+                            <Ionicons name="clipboard" size={30} color={'#6CA8DA'}/>
+                            <Text style={{fontSize:10,fontFamily:'Montserrat-Medium',color:'#A4A4A4',right:15,top:5}}>#1064235</Text>
+                        </View>
+                        <View style={styles.descriptionBottom}>
+                            <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:20,color:'#4A4444'}}>Laparoscopia</Text>
+                            <Text style={{fontFamily:'Montserrat-Medium',fontSize:10,color:'#A4A4A4'}}>Criado: 22.10.2024</Text>
+                        </View>
+                    </View>
+                    <View style={styles.card}>
+                        <View style={styles.descriptionTop}>
+                            <Ionicons name="clipboard" size={30} color={'#6CA8DA'}/>
+                            <Text style={{fontSize:10,fontFamily:'Montserrat-Medium',color:'#A4A4A4',right:15,top:5}}>#1064235</Text>
+                        </View>
+                        <View style={styles.descriptionBottom}>
+                            <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:20,color:'#4A4444'}}>Laparoscopia</Text>
+                            <Text style={{fontFamily:'Montserrat-Medium',fontSize:10,color:'#A4A4A4'}}>Criado: 22.10.2024</Text>
+                        </View>
+                    </View>
+                    <View style={styles.card}>
+                        <View style={styles.descriptionTop}>
+                            <Ionicons name="clipboard" size={30} color={'#6CA8DA'}/>
+                            <Text style={{fontSize:10,fontFamily:'Montserrat-Medium',color:'#A4A4A4',right:15,top:5}}>#1064235</Text>
+                        </View>
+                        <View style={styles.descriptionBottom}>
+                            <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:20,color:'#4A4444'}}>Laparoscopia</Text>
+                            <Text style={{fontFamily:'Montserrat-Medium',fontSize:10,color:'#A4A4A4'}}>Criado: 22.10.2024</Text>
+                        </View>
                     </View>
                     
                 </View>
