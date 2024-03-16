@@ -5,7 +5,8 @@ import { Links } from '../../components/linksBaixoBotao';
 import blogFetch from '../../axios/config';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
-import imagemLogo from '../../img/imgLogo/logo.png'
+import { CaretDoubleLeft } from "@phosphor-icons/react";
+import { LogoDescricao } from '../../components/LogoDescricao';
 
 export function RegistrarDados() {
 
@@ -17,8 +18,13 @@ export function RegistrarDados() {
     const [confimarSenha, setConfirmarSenha] = useState("");
     const [telefone, setTelefone] = useState(0);
     const [cnpj, setCnpj] = useState(0);
+
+    const [mudarParteEndereco, setMudarParteEndereco] = useState(false)
+
     const [endereco, setEndereco] = useState("");
-    const [bairro, setBairro] = useState();
+    const [bairro, setBairro] = useState("");
+    const [cep, setCep] = useState(0);
+    const [complemento ,setComplemento] = useState("");
 
     const [bairros, setBairros] = useState([]);
 
@@ -149,44 +155,57 @@ export function RegistrarDados() {
         listarBairros();
     }, [])
 
+    
+
     return (
         <div className='container-total'>
             <div className='parte-esquerda'>
-                <img className="logoRegistrar" src={imagemLogo} alt="" />
+            <LogoDescricao title='registre-se'/>
                 <form onSubmit={registrarEmpresa} className='formulario'>
-                    <label htmlFor="nome fantasia">Nome Fantasia</label>
-                    <input type="text" onChange={(e) => setNome(e.target.value)} text="Nome Fantasia" name="nome fantasia" placeholder="Nome Fantasia" />
-                    <label htmlFor="e-mail">E-mail</label>
-                    <input type="email" onChange={(e) => setEmail(e.target.value)} text="E-mail" name="e-mail" placeholder="E-mail" />
-                    <label htmlFor="cnpj">CNPJ</label>
-                    <input type="number" onChange={(e) => setCnpj(e.target.value)} text="Cnpj" name="cnpj" placeholder="CNPJ" />
-                    <label htmlFor="telefone">Telefone</label>
-                    <input type="number" onChange={(e) => setTelefone(Number(e.target.value))} text="telefone" name="telefone" placeholder="Telefone" />
-                    <label htmlFor="senha">Senha</label>
-                    <input type="password" onChange={(e) => setSenha(e.target.value)} text="Senha" name="senha" placeholder="Senha" />
-                    <label htmlFor="senha">Confirmar senha</label>
-                    <input type="password" onChange={(e) => setConfirmarSenha(e.target.value)} text="Senha" name="senha" placeholder="Confirmar senha" />
-                    <div className='div-lado-a-lado'>
-
-                        <div className='input-esquerdo'>
-                            <label htmlFor="bairro">Bairro</label>
-                            <select className='input-bairro' name='bairro' onChange={(e) => setBairro(Number(e.target.value))}>
-                                {<option value="" disabled selected hidden>Canto do Forte</option>}
-                                <option disabled>Selecionar bairro</option>
-                                {bairros.map(bairros => (
-                                    <option key={bairros.idBairro} value={bairros.idBairro}>
-                                        {bairros.nomeBairro}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <div className='input-direito'>
-                            <label htmlFor="endereço">Endereço</label>
-                            <input className="input-endereco" type="text" text="endereço" name="endereço" placeholder="Endereço" onChange={(e) => setEndereco(e.target.value)} />
-                        </div>
-                    </div>
-                    <Button type="submit" content="Registrar" name="Registrar" />
+                    {!mudarParteEndereco ? 
+                    (<div className='formulario'>
+                        <label htmlFor="nome fantasia">Nome Fantasia</label>
+                        <input value={nome} type="text" onChange={(e) => setNome(e.target.value)} text="Nome Fantasia" name="nome fantasia" placeholder="Nome Fantasia" />
+                        <label htmlFor="e-mail">E-mail</label>
+                        <input value={email} type="email" onChange={(e) => setEmail(e.target.value)} text="E-mail" name="e-mail" placeholder="E-mail" />
+                        <label htmlFor="cnpj">CNPJ</label>
+                        <input type="number" onChange={(e) => setCnpj(e.target.value)} text="Cnpj" name="cnpj" placeholder="CNPJ" />
+                        <label htmlFor="telefone">Telefone</label>
+                        <input type="number" onChange={(e) => setTelefone(Number(e.target.value))} text="telefone" name="telefone" placeholder="Telefone" />
+                        <label htmlFor="senha">Senha</label>
+                        <input type="password" onChange={(e) => setSenha(e.target.value)} text="Senha" name="senha" placeholder="Senha" />
+                        <label htmlFor="senha">Confirmar senha</label>
+                        <input type="password" onChange={(e) => setConfirmarSenha(e.target.value)} text="Senha" name="senha" placeholder="Confirmar senha" />
+                        <button onClick={() => setMudarParteEndereco(true)} >Continuar</button>
+                    </div>) : 
+                    (<div className='formulario'>
+                        <button onClick={() => setMudarParteEndereco(false)} className='botao-voltar'>
+                            <CaretDoubleLeft size={22}/>
+                        </button>
+                        <label htmlFor="cep">Cep</label>
+                        <input onChange={(e) => setCep(e.target.value)} type="text" text="cep" name="cep" placeholder="Cep"/>
+                        
+                        <label htmlFor="endereço">Endereço</label>
+                        <input  onChange={(e) => setEndereco(e.target.value)} type="text" text="endereço" name="endereço" placeholder="Endereço"/>
+                        
+                        <label htmlFor="bairro">Bairro</label>
+                        <select className='input-bairro' name='bairro' onChange={(e) => setBairro(Number(e.target.value))}>
+                            {<option value="" disabled selected hidden>Canto do Forte</option>}
+                            <option disabled>Selecionar bairro</option>
+                            {bairros.map(bairros => (
+                                <option key={bairros.idBairro} value={bairros.idBairro}>
+                                    {bairros.nomeBairro}
+                                </option>
+                            ))}
+                        </select>
+                        
+                        <label htmlFor="complemento">Complemento</label>
+                        <input onChange={(e) => setComplemento(e.target.value) type="text" text="complemento" name="complemento" placeholder="Complemento"} />
+                        
+                        
+                        <Button type="submit" content="Registrar" name="Registrar" />
+                    </div>)
+                    }
                     <Links content="É registrado? " text=" Entrar" link="/entrar" />
                 </form>
             </div>

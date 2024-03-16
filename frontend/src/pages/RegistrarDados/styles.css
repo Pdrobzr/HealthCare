@@ -5,8 +5,8 @@
 }
 
 .logoRegistrar{
-  height: 100px;
-  width: 150px;    
+  height: 150px;
+  width: 200px;    
 }
 .div-lado-a-lado{
     display: flex;
@@ -26,21 +26,14 @@
 
 .input-bairro{
     background-color: rgba(208, 231, 253, 0.4);
-    width: 110px;
+    max-width: 100%;
     height: 45px;
     border-radius: 2px;
     border: none;
-    margin-right: 8px;
+    padding-left: 23px;
+    margin-bottom: 8px;
 }
 
-.input-endereco{
-    background-color: rgba(208, 231, 253, 0.4);
-    border-radius: 2px;
-    border: none;
-    
-    width: 185px;
-    padding: 0px;
-}
 
 label{
     font-size: 15px;
@@ -73,6 +66,11 @@ label{
 
 .container-total{
     background-color: white;
+}
+.botao-voltar{
+    width: 50px ;
+    border-radius: 8px;
+    margin-bottom: 10px;
 }
 @media screen and (max-width: 867px){
     .parte-esquerda{
