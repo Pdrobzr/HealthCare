@@ -5,7 +5,7 @@ import { Links } from '../../components/linksBaixoBotao';
 import blogFetch from '../../axios/config';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
-import { CaretDoubleLeft } from "@phosphor-icons/react";
+import imagemVoltar from '../../img/imagemFundo/Voltar.png'
 import { LogoDescricao } from '../../components/LogoDescricao';
 
 export function RegistrarDados() {
@@ -180,7 +180,7 @@ export function RegistrarDados() {
                     </div>) : 
                     (<div className='formulario'>
                         <button onClick={() => setMudarParteEndereco(false)} className='botao-voltar'>
-                            <CaretDoubleLeft size={22}/>
+                            <img style={{width: 29}} src={imagemVoltar} alt="" />
                         </button>
                         <label htmlFor="cep">Cep</label>
                         <input onChange={(e) => setCep(e.target.value)} type="text" text="cep" name="cep" placeholder="Cep"/>
@@ -200,7 +200,7 @@ export function RegistrarDados() {
                         </select>
                         
                         <label htmlFor="complemento">Complemento</label>
-                        <input onChange={(e) => setComplemento(e.target.value) type="text" text="complemento" name="complemento" placeholder="Complemento"} />
+                        <input onChange={(e) => setComplemento(e.target.value)} type="text" text="complemento" name="complemento" placeholder="Complemento"/>
                         
                         
                         <Button type="submit" content="Registrar" name="Registrar" />
