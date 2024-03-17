@@ -155,7 +155,15 @@ export function RegistrarDados() {
         listarBairros();
     }, [])
 
-    
+    const checkCep = (e) => {
+        const cep = e.target.value.replace(/\D/g, '');
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(res => res.json())
+        .then(data => {
+            setBairro(data.bairro)
+            setEndereco(data.logradouro)
+        })
+    }
 
     return (
         <div className='container-total'>
@@ -182,27 +190,27 @@ export function RegistrarDados() {
                         <button onClick={() => setMudarParteEndereco(false)} className='botao-voltar'>
                             <img style={{width: 29}} src={imagemVoltar} alt="" />
                         </button>
-                        <label htmlFor="cep">Cep</label>
-                        <input onChange={(e) => setCep(e.target.value)} type="text" text="cep" name="cep" placeholder="Cep"/>
+                        <label htmlFor="cep">CEP</label>
+                        <input onBlur={checkCep} onChange={(e) => setCep(Number(e.target.value))} type='number' text="cep" name="cep" placeholder="CEP"/>
                         
                         <label htmlFor="endereço">Endereço</label>
-                        <input  onChange={(e) => setEndereco(e.target.value)} type="text" text="endereço" name="endereço" placeholder="Endereço"/>
+                        <input value={endereco} onChange={(e) => setEndereco(e.target.value)} type="text" text="endereço" name="endereço" placeholder="Endereço"/>
                         
                         <label htmlFor="bairro">Bairro</label>
                         <select className='input-bairro' name='bairro' onChange={(e) => setBairro(Number(e.target.value))}>
-                            {<option value="" disabled selected hidden>Canto do Forte</option>}
-                            <option disabled>Selecionar bairro</option>
-                            {bairros.map(bairros => (
-                                <option key={bairros.idBairro} value={bairros.idBairro}>
-                                    {bairros.nomeBairro}
-                                </option>
-                            ))}
+                            {cep ? 
+                                (<option >{bairro}</option>) 
+                                : 
+                                (bairros.map(bairros => (
+                                    <option key={bairros.idBairro} value={bairros.idBairro}>
+                                        {bairros.nomeBairro}
+                                    </option>
+                                )))
+                            }
                         </select>
                         
                         <label htmlFor="complemento">Complemento</label>
                         <input onChange={(e) => setComplemento(e.target.value)} type="text" text="complemento" name="complemento" placeholder="Complemento"/>
-                        
-                        
                         <Button type="submit" content="Registrar" name="Registrar" />
                     </div>)
                     }
