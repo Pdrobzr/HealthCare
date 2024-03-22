@@ -3,10 +3,14 @@ import { EmpresaController } from "./controllers/EmpresaController";
 import { AuthMiddleware } from "./middlewares/auth";
 import { UsuarioController } from "./controllers/UsuarioController";
 import { EspecialidadeController } from "./controllers/EspecialidadeController";
+import { storage } from "./utils/multerConfig";
+import multer from 'multer';
 
 const empresaController = new EmpresaController();
 const usuarioController = new UsuarioController();
 const especialidadeController = new EspecialidadeController();
+
+const upload = multer({ storage: storage });
 
 export const router = Router();
 
@@ -36,6 +40,7 @@ router.delete('/deletarUsuario/:id', usuarioController.deletarUsuario);
 router.get('/selecionarUsuario/:id', usuarioController.selecionarUsuario);
 router.post('/autenticarAdmin', usuarioController.autenticarAdmin);
 router.post('/realizarComentario', usuarioController.realizarComentario);
+router.post('/adicionarExame/:id', upload.single('file'), usuarioController.adicionarExame);
 
 // ROTAS DE ESPECIALIDADES 
 router.get('/listarEspecialidades', especialidadeController.listarEspecialidades);

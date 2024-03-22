@@ -211,4 +211,30 @@ export class UsuarioController {
         return res.json({ message: 'Comentário realizado com sucesso!', realizarComentario });
     }
 
+    async adicionarExame(req: Request, res: Response) {
+        if (req.file) {
+            const idUsuario = Number(req.params.id);
+            const urlImagem = req.file.path;
+            const nomeImagem = req.file.filename;
+            const { nomeExame } = req.body;
+
+            try {
+                const adicionarExame = await prisma.exame.create({
+                    data: {
+                        urlImagem,
+                        nomeImagem,
+                        idUsuario,
+                        nomeExame
+                    }
+                });
+
+                return res.json({adicionarExame});
+            } catch (e) {
+                return res.status(400).json({message: e});
+            }
+
+            
+        }
+    }
+
 }
