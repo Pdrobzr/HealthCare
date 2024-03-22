@@ -241,6 +241,11 @@ export class UsuarioController {
         const idUsuario = Number(req.params.id);
 
         const listarExames = await prisma.exame.findMany({
+            select: {
+                idExame: true,
+                nomeExame: true,
+                nomeImagem: true
+            },
             where: {
                 idUsuario
             }
