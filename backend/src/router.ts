@@ -14,6 +14,7 @@ const upload = multer({ storage: storage });
 
 export const router = Router();
 
+
 // ROTAS DE EMPRESA
 router.post('/adicionarEmpresa', empresaController.adicionarEmpresa);
 router.get('/listarEmpresas', empresaController.listarEmpresas);
@@ -41,6 +42,7 @@ router.get('/selecionarUsuario/:id', usuarioController.selecionarUsuario);
 router.post('/autenticarAdmin', usuarioController.autenticarAdmin);
 router.post('/realizarComentario', usuarioController.realizarComentario);
 router.post('/adicionarExame/:id', upload.single('file'), usuarioController.adicionarExame);
+router.get('/listarExames/:id', usuarioController.listarExames);
 
 // ROTAS DE ESPECIALIDADES 
 router.get('/listarEspecialidades', especialidadeController.listarEspecialidades);

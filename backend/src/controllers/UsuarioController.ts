@@ -237,4 +237,20 @@ export class UsuarioController {
         }
     }
 
+    async listarExames(req: Request, res: Response) {
+        const idUsuario = Number(req.params.id);
+
+        const listarExames = await prisma.exame.findMany({
+            where: {
+                idUsuario
+            }
+        });
+
+        if(listarExames) {
+            return res.json({listarExames});
+        } else {
+            return res.json({message: 'Esse usuário ainda não possuí nenhum exame!'});
+        }
+    }
+
 }

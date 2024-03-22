@@ -3,7 +3,7 @@ import path from 'path';
 
 export const storage = multer.diskStorage({
     destination: (_req, _file, callback) => {
-        callback(null, path.resolve('uploads'));
+        callback(null, path.resolve('src/uploads'));
     },
     filename: (_req, file, callback) => {
         const time = new Date().getTime();
