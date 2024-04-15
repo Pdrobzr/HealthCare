@@ -3,6 +3,9 @@ import { prisma } from "../utils/prisma";
 import { compare, hash } from "bcryptjs";
 import * as dotenv from 'dotenv';
 import { sign } from "jsonwebtoken";
+import  S3Storage  from '../utils/S3Storage';
+import { UploadImagesServices } from "../services/UploadImagesServices";
+import multer from 'multer';
 
 dotenv.config();
 
@@ -212,28 +215,15 @@ export class UsuarioController {
     }
 
     async adicionarExame(req: Request, res: Response) {
+
         if (req.file) {
-            const idUsuario = Number(req.params.id);
-            const urlImagem = req.file.path;
-            const nomeImagem = req.file.filename;
-            const { nomeExame } = req.body;
+            const { file } = req;
 
-            try {
-                const adicionarExame = await prisma.exame.create({
-                    data: {
-                        urlImagem,
-                        nomeImagem,
-                        idUsuario,
-                        nomeExame
-                    }
-                });
+            const uploadImagesServices = new UploadImagesServices();
 
-                return res.json({adicionarExame});
-            } catch (e) {
-                return res.status(400).json({message: e});
-            }
+            await uploadImagesServices.execute(file);
 
-            
+            return res.send();
         }
     }
 
@@ -251,10 +241,10 @@ export class UsuarioController {
             }
         });
 
-        if(listarExames) {
-            return res.json({listarExames});
+        if (listarExames) {
+            return res.json({ listarExames });
         } else {
-            return res.json({message: 'Esse usuário ainda não possuí nenhum exame!'});
+            return res.json({ message: 'Esse usuário ainda não possuí nenhum exame!' });
         }
     }
 
