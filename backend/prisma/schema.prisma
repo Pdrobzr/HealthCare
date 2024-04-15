@@ -45,7 +45,6 @@ model Exame {
   idExame          Int     @id @default(autoincrement())
   nomeExame        String?
   nomeImagem       String
-  urlImagem        String
   usuarioIdUsuario Usuario @relation(fields: [idUsuario], references: [idUsuario])
   idUsuario        Int
 }
