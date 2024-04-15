@@ -30,7 +30,8 @@ class S3Storage {
         const fileContent = await fs.promises.readFile(originalPath);
 
         this.client.putObject({
-            Bucket: 'exames-healthcare',
+            Bucket: 'exames-usuarios',
+            ACL: 'public-read',
             Key: filename,
             Body: fileContent,
             ContentType

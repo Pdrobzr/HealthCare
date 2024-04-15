@@ -223,7 +223,7 @@ export class UsuarioController {
 
             await uploadImagesServices.execute(file);
 
-            return res.send();
+            return res.send(file.filename);
         }
     }
 
