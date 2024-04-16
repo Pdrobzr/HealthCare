@@ -41,7 +41,7 @@ router.delete('/deletarUsuario/:id', usuarioController.deletarUsuario);
 router.get('/selecionarUsuario/:id', usuarioController.selecionarUsuario);
 router.post('/autenticarAdmin', usuarioController.autenticarAdmin);
 router.post('/realizarComentario', usuarioController.realizarComentario);
-router.post('/adicionarExame', upload.single('image'), usuarioController.adicionarExame);
+router.post('/adicionarExame/:id', upload.single('image'), usuarioController.adicionarExame);
 router.get('/listarExames/:id', usuarioController.listarExames);
 
 // ROTAS DE ESPECIALIDADES 

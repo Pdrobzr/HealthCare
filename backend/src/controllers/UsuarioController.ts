@@ -3,7 +3,7 @@ import { prisma } from "../utils/prisma";
 import { compare, hash } from "bcryptjs";
 import * as dotenv from 'dotenv';
 import { sign } from "jsonwebtoken";
-import  S3Storage  from '../utils/S3Storage';
+import S3Storage from '../utils/S3Storage';
 import { UploadImagesServices } from "../services/UploadImagesServices";
 import multer from 'multer';
 
@@ -219,11 +219,27 @@ export class UsuarioController {
         if (req.file) {
             const { file } = req;
 
+            const id = Number(req.params.id);
+
             const uploadImagesServices = new UploadImagesServices();
 
             await uploadImagesServices.execute(file);
 
-            return res.send(file.filename);
+            try {
+                const adicionarExame = await prisma.exame.create({
+                    data: {
+                        nomeImagem: file.filename,
+                        idUsuario: id
+                    }
+                });
+
+                if(adicionarExame) {
+                    return res.status(200).json({message: 'Exame criado com sucesso!'});
+                }
+
+            } catch (error) {   
+                return res.status(400).json({error});
+            }
         }
     }
 
