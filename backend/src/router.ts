@@ -43,6 +43,7 @@ router.post('/autenticarAdmin', usuarioController.autenticarAdmin);
 router.post('/realizarComentario', usuarioController.realizarComentario);
 router.post('/adicionarExame/:id', upload.single('image'), usuarioController.adicionarExame);
 router.get('/listarExames/:id', usuarioController.listarExames);
+router.delete('/deletarExame/:id', usuarioController.deletarExame);
 
 // ROTAS DE ESPECIALIDADES 
 router.get('/listarEspecialidades', especialidadeController.listarEspecialidades);

@@ -40,6 +40,14 @@ class S3Storage {
 
         await fs.promises.unlink(originalPath);
     }
+
+    async deleteFile(filename: string): Promise<void> {
+        this.client.deleteObject({
+            Bucket: 'exames-usuarios',
+            Key: filename
+        })
+        .promise();
+    }
 }
 
 export default S3Storage;

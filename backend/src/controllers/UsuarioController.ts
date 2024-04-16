@@ -6,6 +6,7 @@ import { sign } from "jsonwebtoken";
 import S3Storage from '../utils/S3Storage';
 import { UploadImagesServices } from "../services/UploadImagesServices";
 import multer from 'multer';
+import DeleteImagesService from "../services/DeleteImagesService";
 
 dotenv.config();
 
@@ -262,6 +263,32 @@ export class UsuarioController {
         } else {
             return res.json({ message: 'Esse usuário ainda não possuí nenhum exame!' });
         }
+    }
+
+    async deletarExame(req: Request, res: Response) {
+        const id = Number(req.params.id);
+
+        const { filename } = req.body;
+
+        const deleteImagesServices = new DeleteImagesService();
+
+        await deleteImagesServices.execute(filename);
+
+        try {
+            const deletarExame = await prisma.exame.delete({
+                where: {
+                    idExame: id
+                }
+            });
+
+            if(deletarExame) {
+                return res.status(201).json({message: 'Exame deletado com sucesso!'});
+            }
+        } catch (error) {
+            return res.status(400).json({error});
+        }
+
+
     }
 
 }
