@@ -16,8 +16,8 @@ export function RegistrarDados() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [confimarSenha, setConfirmarSenha] = useState("");
-    const [telefone, setTelefone] = useState(0);
-    const [cnpj, setCnpj] = useState(0);
+    const [telefone, setTelefone] = useState('');
+    const [cnpj, setCnpj] = useState('');
 
     const [mudarParteEndereco, setMudarParteEndereco] = useState(false)
 
@@ -26,7 +26,7 @@ export function RegistrarDados() {
     const [cep, setCep] = useState(0);
     const [complemento ,setComplemento] = useState("");
 
-    
+
     function validarCNPJ(cnpj) {
 
         cnpj = cnpj.replace(/[^\d]+/g, '');
@@ -168,13 +168,13 @@ export function RegistrarDados() {
                         <label htmlFor="e-mail">E-mail</label>
                         <input value={email} type="email" onChange={(e) => setEmail(e.target.value)} text="E-mail" name="e-mail" placeholder="E-mail" />
                         <label htmlFor="cnpj">CNPJ</label>
-                        <input type="number" onChange={(e) => setCnpj(e.target.value)} text="Cnpj" name="cnpj" placeholder="CNPJ" />
+                        <input value={cnpj} type="number" onChange={(e) => setCnpj(e.target.value)} text="Cnpj" name="cnpj" placeholder="CNPJ" />
                         <label htmlFor="telefone">Telefone</label>
-                        <input type="number" onChange={(e) => setTelefone(e.target.value)} text="telefone" name="telefone" placeholder="Telefone" />
+                        <input value={telefone} type="number" onChange={(e) => setTelefone(e.target.value)} text="telefone" name="telefone" placeholder="Telefone" />
                         <label htmlFor="senha">Senha</label>
-                        <input type="password" onChange={(e) => setSenha(e.target.value)} text="Senha" name="senha" placeholder="Senha" />
+                        <input value={senha} type="password" onChange={(e) => setSenha(e.target.value)} text="Senha" name="senha" placeholder="Senha" />
                         <label htmlFor="senha">Confirmar senha</label>
-                        <input type="password" onChange={(e) => setConfirmarSenha(e.target.value)} text="Senha" name="senha" placeholder="Confirmar senha" />
+                        <input value={confimarSenha} type="password" onChange={(e) => setConfirmarSenha(e.target.value)} text="Senha" name="senha" placeholder="Confirmar senha" />
                         <button onClick={() => setMudarParteEndereco(true)} >Continuar</button>
                     </div>) : 
                     (<div className='formulario'>
