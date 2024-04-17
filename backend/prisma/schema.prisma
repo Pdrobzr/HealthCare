@@ -47,6 +47,7 @@ model Exame {
   nomeImagem       String
   usuarioIdUsuario Usuario @relation(fields: [idUsuario], references: [idUsuario])
   idUsuario        Int
+  dataCriacao      String
 }
 
 model Especialidade {

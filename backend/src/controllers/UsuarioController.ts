@@ -7,6 +7,7 @@ import S3Storage from '../utils/S3Storage';
 import { UploadImagesServices } from "../services/UploadImagesServices";
 import multer from 'multer';
 import DeleteImagesService from "../services/DeleteImagesService";
+import obterDataEHoraBrasil from "../utils/getDateNow";
 
 dotenv.config();
 
@@ -176,32 +177,14 @@ export class UsuarioController {
         return res.json({ message: 'Usuário deletado com sucesso!', deletarUsuario });
     }
 
+
     async realizarComentario(req: Request, res: Response) {
         const { conteudo } = req.body;
 
         const idUsuario = Number(req.query.idUsuario);
         const idEmpresa = Number(req.query.idEmpresa);
 
-        function obterDataEHoraBrasil() {
-            // Obtém a data e hora atuais no fuso horário do sistema local
-            const dataEHoraAtual = new Date();
-
-            // Extrai os componentes da data e hora
-            const dia = String(dataEHoraAtual.getDate()).padStart(2, '0');
-            const mes = String(dataEHoraAtual.getMonth() + 1).padStart(2, '0');
-            const ano = dataEHoraAtual.getFullYear();
-            const hora = String(dataEHoraAtual.getHours()).padStart(2, '0');
-            const minuto = String(dataEHoraAtual.getMinutes()).padStart(2, '0');
-            const segundo = String(dataEHoraAtual.getSeconds()).padStart(2, '0');
-
-            // Cria a string no formato desejado (DD/MM/YYYY HH:mm:ss)
-            const dataEHoraFormatadas = `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
-
-            return dataEHoraFormatadas;
-        }
-
         const dataEHoraBrasil = obterDataEHoraBrasil().toString();
-
 
         const realizarComentario = await prisma.comentario.create({
             data: {
@@ -226,20 +209,23 @@ export class UsuarioController {
 
             await uploadImagesServices.execute(file);
 
+            const dataEHoraBrasil = obterDataEHoraBrasil().toString();
+
             try {
                 const adicionarExame = await prisma.exame.create({
                     data: {
                         nomeImagem: file.filename,
-                        idUsuario: id
+                        idUsuario: id,
+                        dataCriacao: dataEHoraBrasil
                     }
                 });
 
-                if(adicionarExame) {
-                    return res.status(200).json({message: 'Exame criado com sucesso!'});
+                if (adicionarExame) {
+                    return res.status(200).json({ message: 'Exame criado com sucesso!', adicionarExame });
                 }
 
-            } catch (error) {   
-                return res.status(400).json({error});
+            } catch (error) {
+                return res.status(400).json({ error });
             }
         }
     }
@@ -281,14 +267,16 @@ export class UsuarioController {
                 }
             });
 
-            if(deletarExame) {
-                return res.status(201).json({message: 'Exame deletado com sucesso!'});
+            if (deletarExame) {
+                return res.status(201).json({ message: 'Exame deletado com sucesso!' });
             }
         } catch (error) {
-            return res.status(400).json({error});
+            return res.status(400).json({ error });
         }
 
 
     }
+
+
 
 }
