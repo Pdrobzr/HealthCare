@@ -26,15 +26,7 @@ export function RegistrarDados() {
     const [cep, setCep] = useState(0);
     const [complemento ,setComplemento] = useState("");
 
-    const [bairros, setBairros] = useState([]);
-
-    const listarBairros = async () => {
-        const response = await blogFetch.get('/listarBairros');
-        const data = response.data;
-        setBairros(data.listarBairros);
-    }
-
-
+    
     function validarCNPJ(cnpj) {
 
         cnpj = cnpj.replace(/[^\d]+/g, '');
@@ -130,7 +122,9 @@ export function RegistrarDados() {
                     cnpj: cnpj,
                     telefone: telefone,
                     bairro: bairro,
-                    endereco: endereco
+                    endereco: endereco,
+                    cep: cep,
+                    complemento: complemento
                 });
 
                 const data = response.data;
@@ -151,9 +145,6 @@ export function RegistrarDados() {
         }
     }
 
-    useEffect(() => {
-        listarBairros();
-    }, [])
 
     const checkCep = (e) => {
         const cep = e.target.value.replace(/\D/g, '');
@@ -168,7 +159,7 @@ export function RegistrarDados() {
     return (
         <div className='container-total'>
             <div className='parte-esquerda'>
-            <LogoDescricao title='registre-se'/>
+            <LogoDescricao title='Registre-se'/>
                 <form onSubmit={registrarEmpresa} className='formulario'>
                     {!mudarParteEndereco ? 
                     (<div className='formulario'>
@@ -179,7 +170,7 @@ export function RegistrarDados() {
                         <label htmlFor="cnpj">CNPJ</label>
                         <input type="number" onChange={(e) => setCnpj(e.target.value)} text="Cnpj" name="cnpj" placeholder="CNPJ" />
                         <label htmlFor="telefone">Telefone</label>
-                        <input type="number" onChange={(e) => setTelefone(Number(e.target.value))} text="telefone" name="telefone" placeholder="Telefone" />
+                        <input type="number" onChange={(e) => setTelefone(e.target.value)} text="telefone" name="telefone" placeholder="Telefone" />
                         <label htmlFor="senha">Senha</label>
                         <input type="password" onChange={(e) => setSenha(e.target.value)} text="Senha" name="senha" placeholder="Senha" />
                         <label htmlFor="senha">Confirmar senha</label>
@@ -191,23 +182,13 @@ export function RegistrarDados() {
                             <img style={{width: 29}} src={imagemVoltar} alt="" />
                         </button>
                         <label htmlFor="cep">CEP</label>
-                        <input onBlur={checkCep} onChange={(e) => setCep(Number(e.target.value))} type='number' text="cep" name="cep" placeholder="CEP"/>
+                        <input onBlur={checkCep} onChange={(e) => setCep(e.target.value)} type='number' text="cep" name="cep" placeholder="CEP"/>
                         
                         <label htmlFor="endereço">Endereço</label>
                         <input value={endereco} onChange={(e) => setEndereco(e.target.value)} type="text" text="endereço" name="endereço" placeholder="Endereço"/>
                         
                         <label htmlFor="bairro">Bairro</label>
-                        <select className='input-bairro' name='bairro' onChange={(e) => setBairro(Number(e.target.value))}>
-                            {cep ? 
-                                (<option >{bairro}</option>) 
-                                : 
-                                (bairros.map(bairros => (
-                                    <option key={bairros.idBairro} value={bairros.idBairro}>
-                                        {bairros.nomeBairro}
-                                    </option>
-                                )))
-                            }
-                        </select>
+                        <input value={bairro} type="text" className='input-bairro' name='bairro' onChange={(e) => setBairro(e.target.value)} placeholder='Bairro'/>                    
                         
                         <label htmlFor="complemento">Complemento</label>
                         <input onChange={(e) => setComplemento(e.target.value)} type="text" text="complemento" name="complemento" placeholder="Complemento"/>

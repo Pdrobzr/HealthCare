@@ -3,9 +3,7 @@ import { prisma } from "../utils/prisma";
 import { compare, hash } from "bcryptjs";
 import * as dotenv from 'dotenv';
 import { sign } from "jsonwebtoken";
-import S3Storage from '../utils/S3Storage';
 import { UploadImagesServices } from "../services/UploadImagesServices";
-import multer from 'multer';
 import DeleteImagesService from "../services/DeleteImagesService";
 import obterDataEHoraBrasil from "../utils/getDateNow";
 
@@ -221,7 +219,7 @@ export class UsuarioController {
                 });
 
                 if (adicionarExame) {
-                    return res.status(200).json({ message: 'Exame criado com sucesso!', adicionarExame });
+                    return res.status(201).json({ message: 'Exame criado com sucesso!', adicionarExame });
                 }
 
             } catch (error) {
@@ -268,7 +266,7 @@ export class UsuarioController {
             });
 
             if (deletarExame) {
-                return res.status(201).json({ message: 'Exame deletado com sucesso!' });
+                return res.status(200).json({ message: 'Exame deletado com sucesso!' });
             }
         } catch (error) {
             return res.status(400).json({ error });

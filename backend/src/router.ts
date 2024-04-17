@@ -29,9 +29,6 @@ router.get('/listarProfissionais/:id', empresaController.listarProfissionaisDisp
 router.get('/listarComentarios/:id', empresaController.listarComentarios);
 router.put('/atualizarSenha/:id', empresaController.atualizarSenha);
 
-// ROTAS DE BAIRROS
-router.get('/listarBairros', empresaController.listarBairros);
-
 // ROTAS DE USUARIO
 router.get('/listarUsuarios', usuarioController.listarUsuarios);
 router.post('/adicionarUsuario', usuarioController.adicionarUsuario);
