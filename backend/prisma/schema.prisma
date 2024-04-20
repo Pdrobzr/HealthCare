@@ -16,19 +16,14 @@ model Empresa {
   emailEmpresa                 String                         @unique
   cpnjEmpresa                  String                         @unique
   senhaEmpresa                 String
-  telefoneEmpresa              Int
-  bairro                       Bairros                        @relation(fields: [bairrosId], references: [idBairro])
-  bairrosId                    Int
+  telefoneEmpresa              String
+  bairroEmpresa                String
   enderecoEmpresa              String
+  cepEmpresa                   String
+  complementoEmpresa           String
   DisponibilidadeEspecialidade DisponibilidadeEspecialidade[]
   Comentario                   Comentario[]
   statusEmpresa                Boolean                        @default(false)
-}
-
-model Bairros {
-  idBairro   Int       @id @default(autoincrement())
-  nomeBairro String
-  Empresa    Empresa[]
 }
 
 model Usuario {
@@ -38,6 +33,16 @@ model Usuario {
   roleUsuario  String
   senhaUsuario String
   Comentario   Comentario[]
+  Exame        Exame[]
+}
+
+model Exame {
+  idExame          Int     @id @default(autoincrement())
+  nomeExame        String?
+  nomeImagem       String
+  usuarioIdUsuario Usuario @relation(fields: [idUsuario], references: [idUsuario])
+  idUsuario        Int
+  dataCriacao      String
 }
 
 model Especialidade {
@@ -54,6 +59,7 @@ model DisponibilidadeEspecialidade {
   idEspecialidade         Int
   idEmpresa               Int
 }
+
 
 model Comentario {
   idComentario       Int     @id @default(autoincrement())

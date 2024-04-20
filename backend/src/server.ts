@@ -13,6 +13,7 @@ app.use(express.json());
 
 app.use(cors());
 
+app.use('/exames', express.static("src/uploads"));
 
 app.use(router);
 

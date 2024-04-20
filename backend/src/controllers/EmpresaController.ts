@@ -9,9 +9,9 @@ dotenv.config();
 export class EmpresaController {
 
     async adicionarEmpresa(req: Request, res: Response) {
-        const { nome, email, senha, cnpj, telefone, bairro, endereco } = req.body;
+        const { nome, email, senha, cnpj, telefone, bairro, endereco, cep, complemento } = req.body;
 
-        if (!nome || !email || !senha || !cnpj || !telefone || !bairro || !endereco) {
+        if (!nome || !email || !senha || !cnpj || !telefone || !bairro || !endereco || !cep) {
             return res.status(400).json({ error: 'Insira todas as informações' });
         } else {
 
@@ -41,8 +41,10 @@ export class EmpresaController {
                         senhaEmpresa: hashSenha,
                         cpnjEmpresa: cnpj,
                         telefoneEmpresa: telefone,
-                        bairrosId: bairro,
-                        enderecoEmpresa: endereco
+                        bairroEmpresa: bairro,
+                        enderecoEmpresa: endereco,
+                        cepEmpresa: cep,
+                        complementoEmpresa: complemento
                     }
                 });
 
@@ -97,11 +99,7 @@ export class EmpresaController {
                 enderecoEmpresa: true,
                 telefoneEmpresa: true,
                 statusEmpresa: true,
-                bairro: {
-                    select: {
-                        nomeBairro: true,
-                    }
-                },
+                bairroEmpresa: true,
                 DisponibilidadeEspecialidade: {
                     select: {
                         Especialidade: {
@@ -342,11 +340,6 @@ export class EmpresaController {
         }
     }
 
-    async listarBairros(req: Request, res: Response) {
-        const listarBairros = await prisma.bairros.findMany();
-
-        return res.json({ listarBairros });
-    }
 
     async listarComentarios(req: Request, res: Response) {
         const id = Number(req.params.id);

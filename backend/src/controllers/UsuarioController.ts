@@ -3,6 +3,9 @@ import { prisma } from "../utils/prisma";
 import { compare, hash } from "bcryptjs";
 import * as dotenv from 'dotenv';
 import { sign } from "jsonwebtoken";
+import { UploadImagesServices } from "../services/UploadImagesServices";
+import DeleteImagesService from "../services/DeleteImagesService";
+import obterDataEHoraBrasil from "../utils/getDateNow";
 
 dotenv.config();
 
@@ -172,32 +175,14 @@ export class UsuarioController {
         return res.json({ message: 'Usuário deletado com sucesso!', deletarUsuario });
     }
 
+
     async realizarComentario(req: Request, res: Response) {
         const { conteudo } = req.body;
 
         const idUsuario = Number(req.query.idUsuario);
         const idEmpresa = Number(req.query.idEmpresa);
 
-        function obterDataEHoraBrasil() {
-            // Obtém a data e hora atuais no fuso horário do sistema local
-            const dataEHoraAtual = new Date();
-
-            // Extrai os componentes da data e hora
-            const dia = String(dataEHoraAtual.getDate()).padStart(2, '0');
-            const mes = String(dataEHoraAtual.getMonth() + 1).padStart(2, '0');
-            const ano = dataEHoraAtual.getFullYear();
-            const hora = String(dataEHoraAtual.getHours()).padStart(2, '0');
-            const minuto = String(dataEHoraAtual.getMinutes()).padStart(2, '0');
-            const segundo = String(dataEHoraAtual.getSeconds()).padStart(2, '0');
-
-            // Cria a string no formato desejado (DD/MM/YYYY HH:mm:ss)
-            const dataEHoraFormatadas = `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
-
-            return dataEHoraFormatadas;
-        }
-
         const dataEHoraBrasil = obterDataEHoraBrasil().toString();
-
 
         const realizarComentario = await prisma.comentario.create({
             data: {
@@ -210,5 +195,86 @@ export class UsuarioController {
 
         return res.json({ message: 'Comentário realizado com sucesso!', realizarComentario });
     }
+
+    async adicionarExame(req: Request, res: Response) {
+
+        if (req.file) {
+            const { file } = req;
+
+            const id = Number(req.params.id);
+
+            const uploadImagesServices = new UploadImagesServices();
+
+            await uploadImagesServices.execute(file);
+
+            const dataEHoraBrasil = obterDataEHoraBrasil().toString();
+
+            try {
+                const adicionarExame = await prisma.exame.create({
+                    data: {
+                        nomeImagem: file.filename,
+                        idUsuario: id,
+                        dataCriacao: dataEHoraBrasil
+                    }
+                });
+
+                if (adicionarExame) {
+                    return res.status(201).json({ message: 'Exame criado com sucesso!', adicionarExame });
+                }
+
+            } catch (error) {
+                return res.status(400).json({ error });
+            }
+        }
+    }
+
+    async listarExames(req: Request, res: Response) {
+        const idUsuario = Number(req.params.id);
+
+        const listarExames = await prisma.exame.findMany({
+            select: {
+                idExame: true,
+                nomeExame: true,
+                nomeImagem: true
+            },
+            where: {
+                idUsuario
+            }
+        });
+
+        if (listarExames) {
+            return res.json({ listarExames });
+        } else {
+            return res.json({ message: 'Esse usuário ainda não possuí nenhum exame!' });
+        }
+    }
+
+    async deletarExame(req: Request, res: Response) {
+        const id = Number(req.params.id);
+
+        const { filename } = req.body;
+
+        const deleteImagesServices = new DeleteImagesService();
+
+        await deleteImagesServices.execute(filename);
+
+        try {
+            const deletarExame = await prisma.exame.delete({
+                where: {
+                    idExame: id
+                }
+            });
+
+            if (deletarExame) {
+                return res.status(200).json({ message: 'Exame deletado com sucesso!' });
+            }
+        } catch (error) {
+            return res.status(400).json({ error });
+        }
+
+
+    }
+
+
 
 }

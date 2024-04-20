@@ -47,7 +47,7 @@ export default HomeScreen = ({ navigation }) => {
                     const data = response.data;
                     setNomeEmpresa(data.selecionarEmpresa.nomeEmpresa);
                     setEndereco(data.selecionarEmpresa.enderecoEmpresa);
-                    setBairro(data.selecionarEmpresa.bairro.nomeBairro);
+                    setBairro(data.selecionarEmpresa.bairroEmpresa);
                 };
 
                 const listarProfissionais = async (id) => {

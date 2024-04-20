@@ -3,12 +3,17 @@ import { EmpresaController } from "./controllers/EmpresaController";
 import { AuthMiddleware } from "./middlewares/auth";
 import { UsuarioController } from "./controllers/UsuarioController";
 import { EspecialidadeController } from "./controllers/EspecialidadeController";
+import multer from 'multer';
+import multerConfig from "./utils/multerConfig";
 
 const empresaController = new EmpresaController();
 const usuarioController = new UsuarioController();
 const especialidadeController = new EspecialidadeController();
 
+const upload = multer(multerConfig);
+
 export const router = Router();
+
 
 // ROTAS DE EMPRESA
 router.post('/adicionarEmpresa', empresaController.adicionarEmpresa);
@@ -24,9 +29,6 @@ router.get('/listarProfissionais/:id', empresaController.listarProfissionaisDisp
 router.get('/listarComentarios/:id', empresaController.listarComentarios);
 router.put('/atualizarSenha/:id', empresaController.atualizarSenha);
 
-// ROTAS DE BAIRROS
-router.get('/listarBairros', empresaController.listarBairros);
-
 // ROTAS DE USUARIO
 router.get('/listarUsuarios', usuarioController.listarUsuarios);
 router.post('/adicionarUsuario', usuarioController.adicionarUsuario);
@@ -36,6 +38,9 @@ router.delete('/deletarUsuario/:id', usuarioController.deletarUsuario);
 router.get('/selecionarUsuario/:id', usuarioController.selecionarUsuario);
 router.post('/autenticarAdmin', usuarioController.autenticarAdmin);
 router.post('/realizarComentario', usuarioController.realizarComentario);
+router.post('/adicionarExame/:id', upload.single('image'), usuarioController.adicionarExame);
+router.get('/listarExames/:id', usuarioController.listarExames);
+router.delete('/deletarExame/:id', usuarioController.deletarExame);
 
 // ROTAS DE ESPECIALIDADES 
 router.get('/listarEspecialidades', especialidadeController.listarEspecialidades);
