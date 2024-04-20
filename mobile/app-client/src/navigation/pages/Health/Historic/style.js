@@ -63,10 +63,10 @@ const styles = StyleSheet.create({
         
     },
     card:{
-        width:170,
+        width: Platform.OS == 'ios' ? 150 : 170,
         height:100,
-        marginTop:20,
-        marginLeft:13,
+        marginTop:Platform.OS == 'ios' ? 25 : 20,
+        marginLeft:Platform.OS == 'ios' ? 20 : 13,
         borderRadius:10,
         backgroundColor:'#fff',
         padding:5,
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-between'
     },
     descriptionBottom:{
-        marginTop:5,
+        marginTop:Platform.OS == 'ios' ? 10 : 5,
         marginLeft:5,
         widht:'100%',
         height:35,
