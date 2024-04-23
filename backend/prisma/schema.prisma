@@ -21,6 +21,8 @@ model Empresa {
   enderecoEmpresa              String
   cepEmpresa                   String
   complementoEmpresa           String
+  longitude                    String
+  latitude                     String
   DisponibilidadeEspecialidade DisponibilidadeEspecialidade[]
   Comentario                   Comentario[]
   statusEmpresa                Boolean                        @default(false)
