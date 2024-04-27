@@ -18,13 +18,16 @@ export function RegistrarDados() {
     const [confimarSenha, setConfirmarSenha] = useState("");
     const [telefone, setTelefone] = useState('');
     const [cnpj, setCnpj] = useState('');
+    const [longitude, setLongitude] = useState('');
+    const [latitude, setLatitude] = useState('');
 
     const [mudarParteEndereco, setMudarParteEndereco] = useState(false)
 
     const [endereco, setEndereco] = useState("");
     const [bairro, setBairro] = useState("");
     const [cep, setCep] = useState(0);
-    const [complemento ,setComplemento] = useState("");
+    const [complemento, setComplemento] = useState("");
+    const [geodificacao, setGeodificacao] = useState(false);
 
 
     function validarCNPJ(cnpj) {
@@ -81,6 +84,8 @@ export function RegistrarDados() {
 
     }
 
+
+
     function validarNumeroTelefone(telefone) {
         const regex = /^[1-9]{2}9?[0-9]{8}$/;
 
@@ -90,6 +95,21 @@ export function RegistrarDados() {
             return false;
         }
     }
+
+    useEffect(() => {
+        const getGeodificacao = async () => {
+            const geodificacao = await blogFetch.get(`https://nominatim.openstreetmap.org/search?format=json&q=${endereco}, Praia Grande, Brazil`);
+
+            const dados = geodificacao;
+
+            const informacoes = dados.data[0];
+
+            setLatitude(informacoes.lat);
+            setLongitude(informacoes.lon);
+        }
+
+        getGeodificacao();
+    }, [geodificacao]);
 
     const registrarEmpresa = async (e) => {
         e.preventDefault();
@@ -101,19 +121,22 @@ export function RegistrarDados() {
                     text: 'CNPJ inválido!'
                 });
                 return;
-            } if(!validarNumeroTelefone(telefone)){
+            } if (!validarNumeroTelefone(telefone)) {
                 Swal.fire({
                     icon: 'error',
                     text: 'Numero de celular inválido!'
                 });
                 return;
-            } if(senha != confimarSenha){
+            } if (senha != confimarSenha) {
                 Swal.fire({
                     icon: 'error',
                     text: 'Digite a mesma senha nos dois campos!'
                 });
                 return;
             }
+            setGeodificacao(true);
+
+            if (latitude && longitude) {
 
                 const response = await blogFetch.post('/adicionarEmpresa', {
                     nome: nome,
@@ -124,7 +147,9 @@ export function RegistrarDados() {
                     bairro: bairro,
                     endereco: endereco,
                     cep: cep,
-                    complemento: complemento
+                    complemento: complemento,
+                    latitude: latitude,
+                    longitude: longitude
                 });
 
                 const data = response.data;
@@ -135,7 +160,8 @@ export function RegistrarDados() {
                 });
 
                 navigate('/entrar');
-            
+            }
+
         } catch (error) {
             Swal.fire({
                 icon: 'error',
@@ -149,51 +175,51 @@ export function RegistrarDados() {
     const checkCep = (e) => {
         const cep = e.target.value.replace(/\D/g, '');
         fetch(`https://viacep.com.br/ws/${cep}/json/`)
-        .then(res => res.json())
-        .then(data => {
-            setBairro(data.bairro)
-            setEndereco(data.logradouro)
-        })
+            .then(res => res.json())
+            .then(data => {
+                setBairro(data.bairro)
+                setEndereco(data.logradouro)
+            })
     }
 
     return (
         <div className='container-total'>
             <div className='parte-esquerda'>
-            <LogoDescricao title='Registre-se'/>
+                <LogoDescricao title='Registre-se' />
                 <form onSubmit={registrarEmpresa} className='formulario'>
-                    {!mudarParteEndereco ? 
-                    (<div className='formulario'>
-                        <label htmlFor="nome fantasia">Nome Fantasia</label>
-                        <input value={nome} type="text" onChange={(e) => setNome(e.target.value)} text="Nome Fantasia" name="nome fantasia" placeholder="Nome Fantasia" />
-                        <label htmlFor="e-mail">E-mail</label>
-                        <input value={email} type="email" onChange={(e) => setEmail(e.target.value)} text="E-mail" name="e-mail" placeholder="E-mail" />
-                        <label htmlFor="cnpj">CNPJ</label>
-                        <input value={cnpj} type="number" onChange={(e) => setCnpj(e.target.value)} text="Cnpj" name="cnpj" placeholder="CNPJ" />
-                        <label htmlFor="telefone">Telefone</label>
-                        <input value={telefone} type="number" onChange={(e) => setTelefone(e.target.value)} text="telefone" name="telefone" placeholder="Telefone" />
-                        <label htmlFor="senha">Senha</label>
-                        <input value={senha} type="password" onChange={(e) => setSenha(e.target.value)} text="Senha" name="senha" placeholder="Senha" />
-                        <label htmlFor="senha">Confirmar senha</label>
-                        <input value={confimarSenha} type="password" onChange={(e) => setConfirmarSenha(e.target.value)} text="Senha" name="senha" placeholder="Confirmar senha" />
-                        <button onClick={() => setMudarParteEndereco(true)} >Continuar</button>
-                    </div>) : 
-                    (<div className='formulario'>
-                        <button onClick={() => setMudarParteEndereco(false)} className='botao-voltar'>
-                            <img style={{width: 29}} src={imagemVoltar} alt="" />
-                        </button>
-                        <label htmlFor="cep">CEP</label>
-                        <input onBlur={checkCep} onChange={(e) => setCep(e.target.value)} type='number' text="cep" name="cep" placeholder="CEP"/>
-                        
-                        <label htmlFor="endereço">Endereço</label>
-                        <input value={endereco} onChange={(e) => setEndereco(e.target.value)} type="text" text="endereço" name="endereço" placeholder="Endereço"/>
-                        
-                        <label htmlFor="bairro">Bairro</label>
-                        <input value={bairro} type="text" className='input-bairro' name='bairro' onChange={(e) => setBairro(e.target.value)} placeholder='Bairro'/>                    
-                        
-                        <label htmlFor="complemento">Complemento</label>
-                        <input onChange={(e) => setComplemento(e.target.value)} type="text" text="complemento" name="complemento" placeholder="Complemento"/>
-                        <Button type="submit" content="Registrar" name="Registrar" />
-                    </div>)
+                    {!mudarParteEndereco ?
+                        (<div className='formulario'>
+                            <label htmlFor="nome fantasia">Nome Fantasia</label>
+                            <input value={nome} type="text" onChange={(e) => setNome(e.target.value)} text="Nome Fantasia" name="nome fantasia" placeholder="Nome Fantasia" />
+                            <label htmlFor="e-mail">E-mail</label>
+                            <input value={email} type="email" onChange={(e) => setEmail(e.target.value)} text="E-mail" name="e-mail" placeholder="E-mail" />
+                            <label htmlFor="cnpj">CNPJ</label>
+                            <input value={cnpj} type="number" onChange={(e) => setCnpj(e.target.value)} text="Cnpj" name="cnpj" placeholder="CNPJ" />
+                            <label htmlFor="telefone">Telefone</label>
+                            <input value={telefone} type="number" onChange={(e) => setTelefone(e.target.value)} text="telefone" name="telefone" placeholder="Telefone" />
+                            <label htmlFor="senha">Senha</label>
+                            <input value={senha} type="password" onChange={(e) => setSenha(e.target.value)} text="Senha" name="senha" placeholder="Senha" />
+                            <label htmlFor="senha">Confirmar senha</label>
+                            <input value={confimarSenha} type="password" onChange={(e) => setConfirmarSenha(e.target.value)} text="Senha" name="senha" placeholder="Confirmar senha" />
+                            <button onClick={() => setMudarParteEndereco(true)} >Continuar</button>
+                        </div>) :
+                        (<div className='formulario'>
+                            <button onClick={() => setMudarParteEndereco(false)} className='botao-voltar'>
+                                <img style={{ width: 29 }} src={imagemVoltar} alt="" />
+                            </button>
+                            <label htmlFor="cep">CEP</label>
+                            <input onBlur={checkCep} onChange={(e) => setCep(e.target.value)} type='number' text="cep" name="cep" placeholder="CEP" />
+
+                            <label htmlFor="endereço">Endereço</label>
+                            <input value={endereco} onChange={(e) => setEndereco(e.target.value)} type="text" text="endereço" name="endereço" placeholder="Endereço" />
+
+                            <label htmlFor="bairro">Bairro</label>
+                            <input value={bairro} type="text" className='input-bairro' name='bairro' onChange={(e) => setBairro(e.target.value)} placeholder='Bairro' />
+
+                            <label htmlFor="complemento">Complemento</label>
+                            <input onChange={(e) => setComplemento(e.target.value)} type="text" text="complemento" name="complemento" placeholder="Complemento" />
+                            <Button type="submit" content="Registrar" name="Registrar" />
+                        </div>)
                     }
                     <Links content="É registrado? " text=" Entrar" link="/entrar" />
                 </form>
