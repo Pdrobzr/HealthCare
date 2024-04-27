@@ -3,138 +3,125 @@
     margin: 0;
     padding: 0;
 }
-.body-disponivel{
-    background-color: rgba(242, 242, 242, 1);
-    display: flex;
-    flex-direction: column;
-    min-height: 99.8vh;
-    align-items: center;
-}
+
 .container-total-especialidade-disponivel {
     align-items: center;
     justify-content: center;
-    width: 800px;
-}
-.responsivo-disponivel{
-    max-width: 100%;
-}
-.imagem-empresa-escolhe-disponivel{
-    margin: 24px 0px;
-    width: 300px;
-    height: 66px;
-    border-radius: 8px;
-    background-size: cover;
-    background-repeat: contain;
-    background-image: url('../../img/imagemFundo/images.png');
-    box-shadow: 1px 5px 5px rgb(156, 156, 156);
+    background: rgba(242, 242, 242, 1);
     display: flex;
-    justify-content: right;
+    padding: 0px 40px  
 }
-.adicionar-especialidade-disponivel{
-    margin-bottom: 24px;
-    max-width: 100%;
+
+.responsivo-disponivell{
+    padding: 46px 64px;
+    background-color:white;
+    border-radius: 8px 8px 0px 0px;
+    width: 1050px;
+    margin-top: 40px;
+    height:83.4vh;
+    box-shadow: 1px 2px 5px 0px rgb(156, 156, 156);
 }
-.tabela-adicionar-especialidade-disponivel{
-    max-width: 100%;
-    height: 300px;
-    border-radius: 8px;
-    box-shadow: 1px 5px 5px rgb(156, 156, 156);
+
+.form-especialidades{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    gap: 10px;
+    margin-bottom: 60px;
 }
-.botao-alterar-imagem-disponivel{
-    height: 25px;
-    max-width: 25px;
-}
-.botao-imagem-disponivel{
-    max-width: 50px;
-    height: 50px;
-    margin: 8px;
-    background-color: transparent;
-}
-.botao-imagem-disponivel:hover{
-    background-color: transparent;
-}
+
 .titulo-adicionar-especialidade-disponivel{
-    font-size: 20px;
+    font-size: 30px;
+    color:rgba(19, 135, 241, 1);
+    font-family: "Arimo", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: italic;
+    margin-top:3px;
 }
-.botao-especialidade-disponivel{
-    height: 45px;
-    width: 120px;
-    background-color: rgba(22, 213, 41, 1);
-    border-radius: 8px;
-    transition: 1s;
-    box-shadow: 1px 5px 5px rgb(156, 156, 156);
-    margin-top: 18px;
+.inputs-form-especialidades{
+    display:flex;
+    gap:16px;
 }
-.botao-especialidade-disponivel:hover{
-    background-color: rgb(39, 234, 59)
-}
-.inputs-centralizados-disponivel{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 100%;
-    margin-right: 10px;
-}
+
 .escolha-especialidade-disponivel{
     border: none;
-    width: 280px;
-    height: 45px;
+    width: 185px;
+    height: 40px;
+    background-color:rgba(241, 243, 254, 1);
     color:rgba(112, 115, 119, 1);
     font-size: 13px;
     border-radius: 8px;
-    box-shadow: 1px 5px 5px rgb(156, 156, 156);
-    padding-left:24px ;
-    margin-bottom: 8px;
+    padding-left:18px ;
 }
-.input-quantidade-disponivel{
-    background-color: white;
-    border: none;
-    width: 73px;
-    height: 45px;
-    color:rgba(112, 115, 119, 1);
-    font-size: 13px;
-    border-radius: 8px;
-    box-shadow: 1px 5px 5px rgb(156, 156, 156);
-    padding-left: 24px ;
-    margin-left: 24px;
-    margin-right: 24px;
-}
-.centralizando-inputs-disponivel{
-    display: flex;
-    margin-top: 8px;
-}
-label{
-    margin-bottom: 9px;
 
+.input-quantidade-disponivel{
+    border: none;
+    width: 60px;
+    height: 40px;
+    background-color:rgba(241, 243, 254, 1);
+    color:rgba(112, 115, 119, 1);
+    font-size: 13px;
+    border-radius: 8px;
+    padding-left:18px ;
 }
-.input-quantidade-disponivel-label{
-    margin-left: 24px;
+
+.botao-especialidade-disponivel{
+    height: 40px;
+    width: 111px;
+    background-color: rgba(0, 202, 128, 1);
+    border-radius: 8px;
+    transition: 1s;
+}
+.botao-especialidade-disponivel:hover{
+    background-color:rgba(1, 244, 155, 1)
 }
 
 .styled-table-disponivel{
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 8px;
     font-size: 13px;
     min-width: 100%;
-    overflow: hidden;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
 }
 
-thead tr {
-    background-color: rgba(223, 223, 223, 1);
-    color: black;
-    text-align: center;   
+.thead-table th{
+    background-color: rgba(19, 135, 241, 1);
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 900;
+}
+
+th:first-child{
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px; 
+}
+th:last-child{
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px; 
+}
+/*************************************************/
+
+tr{
+    text-align:center;
+    padding: 5px;
 }
 td {
-    padding: 12px 15px;
+    margin-top: 5px;
+    background-color: rgba(234, 236, 244, 1);
+    padding: 10px;
+    font-size: 0.875rem;
 }
-tbody tr{
-    border-bottom: 1px solid #8b8c8c;
+
+td:first-child{
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px; 
 }
-.styled-table-disponivel tbody tr.active-row-disponivel {
-    color: rgba(112, 115, 119, 1);
-    text-align: center;
+
+td:last-child{
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px; 
 }
+/***********************************/
 .botao-editar-disponivel{
     border-radius: 5px;
     width: 27px;
@@ -160,70 +147,93 @@ tbody tr{
 }
 
 /*-----------------------------------------------------------------*/
-.switch-disponivel{
-    margin-top: 10px;
+.switch {
+    font-size: 15px;
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
-}
-.slider {
+    width: 55px;
+    height: 30px;
+    margin-top:6px ;
+   }
+   
+   .switch input {
+    opacity: 1;
+    width: 0;
+    height: 0;
+    
+   }
+   
+   .slider {
     position: absolute;
     cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    background-color: #e90303;
-    -webkit-transition: .4s;
+    bottom: 0px;
+    background: rgba(249, 112, 112, 1);
     transition: .4s;
-}
-.slider:before {
+    border-radius: 30px;
+    border: 1px solid #ccc;
+   }
+   
+   .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
+    height: 1.9em;
+    width: 1.9em;
+    border-radius: 16px;
+    left: 1.2px;
+    top: 0;
+    bottom: 0;
     background-color: white;
-    -webkit-transition: .4s;
+    box-shadow: 0 2px 5px #999999;
     transition: .4s;
-}
-input:checked + .slider {
-    background-color: #21f321;
-}
-input:focus + .slider {
-    box-shadow: 0 0 1px transparent;
-}
-input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-}
-.slider.round {
-    border-radius: 34px;
-}
-.slider.round:before {
-    border-radius: 50%;
-}
+   }
+   
+   input:checked + .slider {
+    background-color: #5fdd54;
+    border: 1px solid transparent;
+   }
+   
+   input:checked + .slider:before {
+    transform: translateX(1.5em);
+    
+   }
 /*------------------------------------------------------------------*/
-
-@media (max-width: 734px) {
-    .body-disponivel {
-        min-height: auto; /* Redefina a altura para o padrão */
-    }
-    .container-total-especialidade-disponivel {
-        max-width: 100%; /* Faça com que o contêiner ocupe a largura total */
-    }
-    .botao-especialidade-disponivel {
-        width: 60px;
-    }
+@media (max-width: 1149px) {
     .escolha-especialidade-disponivel{
-        width: 160px;
-        padding-left: 10px ;
+        width: 110px;
+        padding-left: 8px;
     }
     .input-quantidade-disponivel{
-        margin-left: 10px;
-        margin-right: 10px;
+        width: 40px;
+        padding-left: 8px;
+    }
+    .botao-especialidade-disponivel{
+        width: 70px;
+    }
+    .inputs-form-especialidades{
+        gap: 8px;
+    }
+    
+}
+@media (max-width: 800px) {
+    .titulo-adicionar-especialidade-disponivel{
+        font-size: 22px;
+    }
+}
+@media (max-width: 708px) {
+    .form-especialidades{
+        flex-direction: column;
+        align-items:left;
+    }
+    .responsivo-disponivell{
+        padding: 20px 10px;
+    }
+}
+
+@media(max-width: 450px){
+    .container-total-especialidade-disponivel{
+        padding:0;
     }
 }

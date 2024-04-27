@@ -1,32 +1,42 @@
-
-body{
-    background-color: rgba(242, 242, 242, 1);
-    min-height: 99.6vh;
-}
 header{
     display: flex;
-    height: 55px;
+    height: 80px;
     min-width: 100%;
     background-color: white;
+    padding: 0px 200px;
 }
-.parte-esquerda-logo{
-    
-    min-width: 50%;
-    
+
+.parte-esquerda-logo{    
+    width: 50%;
+    display: flex;
+    align-items: center;
 }
+
 .imagem-logo{
-    width: 105px;
-    padding-left: 30px;
+    width: 150px ;
+    height: 30px;
 }
+
 .parte-direita-logo{
-    min-width: 48%;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: right;
-    gap: 15px;
+    gap: 27px;
+    padding-right: 20px;
 }
 
 .logout {
     color: rgba(19, 135, 241, 1);
     cursor: pointer;
+}
+
+@media (max-width: 819px) {
+    header{
+        padding: 0px 10px;
+    }
+    .parte-direita-logo{
+        gap: 20px;
+    }
+
 }

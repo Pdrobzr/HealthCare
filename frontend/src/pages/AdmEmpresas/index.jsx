@@ -69,7 +69,6 @@ export function AdmEmpresa() {
                     <p>{usuario}</p>
                     <Link className='link' to={'/admEmpresa'}>Empresas</Link>
                     <Link className='link' to={'/admPaciente'}>Pacientes</Link>
-                    
                     <p className='logout' onClick={logout}>Sair</p>
                 </div>
             </header>

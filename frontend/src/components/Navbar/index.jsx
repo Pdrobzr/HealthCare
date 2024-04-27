@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import  Image from "../../img/imgLogo/logo.png";
+import  { useState } from 'react'
+import  Image from "../../img/imgLogo/logoHealthCare 2.png";
+import  iconImageConfig from "../../img/imagemFundo/iconConfig.png";
+import  iconImageExit from "../../img/imagemFundo/iconExit.png";
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import blogFetch from '../../axios/config';
@@ -13,7 +15,7 @@ const Navbar = () => {
     const token = localStorage.getItem("token");
     const idEmpresa = localStorage.getItem("Empresa");
 
-    const selecionarEmpresa = async (e) => {
+    const selecionarEmpresa = async () => {
         const response = await blogFetch.get(`/selecionarEmpresa/${idEmpresa}`, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -42,9 +44,9 @@ const Navbar = () => {
             </div>
             <div className="parte-direita-logo">
                 
-                <p>{nomeEmpresa}</p>
-                <Link className='link' to={'/alterarDados'}>Editar Dados</Link>
-                <p className='logout' onClick={logout}>Sair</p>
+                <strong>{nomeEmpresa}</strong>
+                <Link className='link' to={'/alterarDados'}><img src={iconImageConfig}/></Link>
+                <p className='logout' onClick={logout}><img src={iconImageExit} /></p>
             </div>
         </header>
         </>     

@@ -4,7 +4,6 @@ import Navbar from "../../components/Navbar";
 import blogFetch from "../../axios/config";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
-import ImagemBotao from "../../img/imagemFundo/botao-editar.png";
 import fotoDeletar from "../../img/imagemFundo/fotoDeletar.png";
 import fotoEditar from "../../img/imagemFundo/fotoEditar.png";
 
@@ -27,7 +26,6 @@ export function EspecialidadeDisponivel() {
         const data = response.data;
 
         setEspecialidades(data.listarEspecialidades);
-
     }
 
     const listarEspecialidadesDisponiveis = async () => {
@@ -57,7 +55,7 @@ export function EspecialidadeDisponivel() {
         listarEspecialidadesDisponiveis();
 
     }
-  
+
     const selecionarEmpresa = async () => {
 
         const response = await blogFetch.get(`/selecionarEmpresa/${empresa}`, {
@@ -78,7 +76,7 @@ export function EspecialidadeDisponivel() {
         });
 
         setStatus(!status);
-        
+
     }
 
     const deletarEspecialidade = async (id) => {
@@ -103,72 +101,57 @@ export function EspecialidadeDisponivel() {
     }, []);
 
     return (
-        <body className="body-disponivel">
+        <>
             <Navbar />
             <div className="container-total-especialidade-disponivel">
-                <div className="responsivo-disponivel">
-                    <div className="imagem-empresa-escolhe-disponivel">
-                        <button type="submit" className="botao-imagem-disponivel" >
-                            <img className="botao-alterar-imagem-disponivel" src={ImagemBotao} />
-                        </button>
-                    </div>
-                    <div className="adicionar-especialidade-disponivel">
-                        <form onSubmit={adicionarEspecialidade}>
-                            <h1 className="titulo-adicionar-especialidade-disponivel">Adicionar Especialidade</h1>
-                            <div className="centralizando-inputs-disponivel">
-                                <div className="inputs-centralizados-disponivel">
-                                    <label className="label-especialidade-disponivel" htmlFor="escolha-especialidade">Especialidade</label>
-                                    <select className='escolha-especialidade-disponivel' value={especialidade} onChange={(e) => setEspecialidade(Number(e.target.value))}>
-                                        <option>Selecionar especialidade</option>
-                                        {especialidades.map(especialidade => (
-                                            <option key={especialidade.idEspecialidade} value={especialidade.idEspecialidade}>
-                                                {especialidade.nomeEspecialidade}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className="inputs-centralizados-disponivel">
-                                    <label className="input-quantidade-disponivel-label" htmlFor="input-quantidade-disponivel">Quantidade</label>
-                                    <input className="input-quantidade-disponivel" type="number" value={quantidade} placeholder="Qtd" onChange={(e) => setQuantidade(Number(e.target.value))} />
-                                </div>
-                                <div className="inputs-centralizados-disponivel">
-                                    <button type="submit" className="botao-especialidade-disponivel">Adicionar</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div className="tabela-adicionar-especialidade-disponivel">
-                        <table className="styled-table-disponivel">
-                            <thead>
-                                <tr>
-                                    <th>Especialidade</th>
-                                    <th>Disponiveis</th>
-                                    <th>Ações</th>
-                                    <th>
-                                        <label class="switch-disponivel">
-                                            <input type="checkbox" checked={status} onChange={alterarStatus} />
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {especialidadesDisponiveis.map(especialidadeEmpresa => (
-                                    <tr className="active-row-disponivel" key={especialidadeEmpresa.idDisponibilidade}>
-                                        <td>{especialidadeEmpresa.Especialidade.nomeEspecialidade}</td>
-                                        <td>{especialidadeEmpresa.quantidadeEspecialidade}</td>
-                                        <td className="td-botoes">
-                                            <button className="botao-editar-disponivel" onClick={() => redirecionarEspecialidade(especialidadeEmpresa.idDisponibilidade)}><img className="img-foto" src={fotoEditar}></img></button>
-                                            <button className="botao-deletar-disponivel" onClick={() => deletarEspecialidade(especialidadeEmpresa.idDisponibilidade)}><img className="img-foto" src={fotoDeletar}></img></button>
-                                        </td>
-                                    </tr>
+                <div className="responsivo-disponivell">
+                    <form className="form-especialidades" onSubmit={adicionarEspecialidade}>
+                        <h1 className="titulo-adicionar-especialidade-disponivel">Adicionar Especialidade</h1>
+                        <div className="inputs-form-especialidades">
+                            <select className='escolha-especialidade-disponivel' value={especialidade} onChange={(e) => setEspecialidade(Number(e.target.value))}>
+                                <option>Especialidade</option>
+                                {especialidades.map(especialidade => (
+                                    <option key={especialidade.idEspecialidade} value={especialidade.idEspecialidade}>
+                                        {especialidade.nomeEspecialidade}
+                                    </option>
                                 ))}
-                            </tbody>
+                            </select>
+                            <input className="input-quantidade-disponivel" type="number" value={quantidade}  onChange={(e) => setQuantidade(Number(e.target.value))} />
+                            <button type="submit" className="botao-especialidade-disponivel">Adicionar</button>
+                        </div>
+                    </form>
+
+                    <div className="tabela-adicionar-especialidade-disponivel">
+                    <table className="styled-table-disponivel">
+                        <thead className="thead-table">
+                            <th>Especialidade</th>
+                            <th>Disponiveis</th>
+                            <th>Ações</th>
+                            <th>
+                            <label className="switch">
+                                <input type="checkbox" checked={status} onChange={alterarStatus}/>
+                                <span className="slider" ></span>
+                            </label>
+                            </th>
+                        </thead>
+                        <tbody>
+                            {especialidadesDisponiveis.map(especialidadeEmpresa => (
+                                <tr key={especialidadeEmpresa.idDisponibilidade}>
+                                    <td>{especialidadeEmpresa.Especialidade.nomeEspecialidade}</td>
+                                    <td>{especialidadeEmpresa.quantidadeEspecialidade}</td>
+                                    <td className="td-botoes">
+                                        <button className="botao-editar-disponivel" onClick={() => redirecionarEspecialidade(especialidadeEmpresa.idDisponibilidade)}><img className="img-foto" src={fotoEditar}></img></button>
+                                        <button className="botao-deletar-disponivel" onClick={() => deletarEspecialidade(especialidadeEmpresa.idDisponibilidade)}><img className="img-foto" src={fotoDeletar}></img></button>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            ))}
+                        </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-        </body>
+        </>
     )
 }
 
