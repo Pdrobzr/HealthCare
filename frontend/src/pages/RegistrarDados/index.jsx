@@ -18,16 +18,13 @@ export function RegistrarDados() {
     const [confimarSenha, setConfirmarSenha] = useState("");
     const [telefone, setTelefone] = useState('');
     const [cnpj, setCnpj] = useState('');
-    const [longitude, setLongitude] = useState('');
-    const [latitude, setLatitude] = useState('');
 
     const [mudarParteEndereco, setMudarParteEndereco] = useState(false)
 
     const [endereco, setEndereco] = useState("");
     const [bairro, setBairro] = useState("");
-    const [cep, setCep] = useState(0);
+    const [cep, setCep] = useState("");
     const [complemento, setComplemento] = useState("");
-    const [geodificacao, setGeodificacao] = useState(false);
 
 
     function validarCNPJ(cnpj) {
@@ -132,8 +129,8 @@ export function RegistrarDados() {
             const latitude = informacoes.lat.toString();
             const longitude = informacoes.lng.toString();
 
-            
-            if (latitude, longitude) {
+
+            if (latitude && longitude) {
                 await blogFetch.post('/adicionarEmpresa', {
                     nome: nome,
                     email: email,
@@ -204,7 +201,7 @@ export function RegistrarDados() {
                                 <img style={{ width: 29 }} src={imagemVoltar} alt="" />
                             </button>
                             <label htmlFor="cep">CEP</label>
-                            <input onBlur={checkCep} onChange={(e) => setCep(e.target.value)} type='number' text="cep" name="cep" placeholder="CEP" />
+                            <input onBlur={checkCep} value={cep} onChange={(e) => setCep(e.target.value)} type='number' text="cep" name="cep" placeholder="CEP" />
 
                             <label htmlFor="endereço">Endereço</label>
                             <input value={endereco} onChange={(e) => setEndereco(e.target.value)} type="text" text="endereço" name="endereço" placeholder="Endereço" />
@@ -213,7 +210,7 @@ export function RegistrarDados() {
                             <input value={bairro} type="text" className='input-bairro' name='bairro' onChange={(e) => setBairro(e.target.value)} placeholder='Bairro' />
 
                             <label htmlFor="complemento">Complemento</label>
-                            <input onChange={(e) => setComplemento(e.target.value)} type="text" text="complemento" name="complemento" placeholder="Complemento" />
+                            <input value={complemento} onChange={(e) => setComplemento(e.target.value)} type="text" text="complemento" name="complemento" placeholder="Complemento" />
                             <Button type="submit" content="Registrar" name="Registrar" />
                         </div>)
                     }
