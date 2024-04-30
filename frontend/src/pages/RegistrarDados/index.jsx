@@ -96,21 +96,6 @@ export function RegistrarDados() {
         }
     }
 
-    useEffect(() => {
-        const getGeodificacao = async () => {
-            const geodificacao = await blogFetch.get(`https://nominatim.openstreetmap.org/search?format=json&q=${endereco}, Praia Grande, Brazil`);
-
-            const dados = geodificacao;
-
-            const informacoes = dados.data[0];
-
-            setLatitude(informacoes.lat);
-            setLongitude(informacoes.lon);
-        }
-
-        getGeodificacao();
-    }, [geodificacao]);
-
     const registrarEmpresa = async (e) => {
         e.preventDefault();
 
@@ -134,11 +119,22 @@ export function RegistrarDados() {
                 });
                 return;
             }
-            setGeodificacao(true);
+            const key = import.meta.env.VITE_REACT_APP_KEY;
 
-            if (latitude && longitude) {
+            const response = await blogFetch.post(`https://maps.googleapis.com/maps/api/geocode/json?address=${cep}&key=${key}`);
 
-                const response = await blogFetch.post('/adicionarEmpresa', {
+            const data = response.data;
+
+            const { results } = data;
+
+            const informacoes = results[0].geometry.location;
+
+            const latitude = informacoes.lat.toString();
+            const longitude = informacoes.lng.toString();
+
+            
+            if (latitude, longitude) {
+                await blogFetch.post('/adicionarEmpresa', {
                     nome: nome,
                     email: email,
                     senha: senha,
@@ -152,15 +148,15 @@ export function RegistrarDados() {
                     longitude: longitude
                 });
 
-                const data = response.data;
-
                 Swal.fire({
                     icon: 'success',
-                    text: data.message
+                    text: 'Empresa adicionada com sucesso!'
                 });
 
                 navigate('/entrar');
+
             }
+
 
         } catch (error) {
             Swal.fire({
