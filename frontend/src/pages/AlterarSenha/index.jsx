@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import './styles.css';
-import { Input } from '../../components/Input';
 import { Button } from '../../components/Button'
 import { Links } from '../../components/linksBaixoBotao';
 import { LogoDescricao } from '../../components/LogoDescricao';
@@ -89,4 +88,4 @@ export function AlterarSenha() {
             </div>
         </>
     );
-};
+}

@@ -80,7 +80,7 @@ export function MenuConta(){
                             <span>Configurações</span>
                         </DropdownMenuItem>
                     </DialogTrigger>
-                    <DialogAlterarContaEmpresa/>{/*DialogContent Alterar dados da empresa*/} 
+                    <DialogAlterarContaEmpresa fechouDialog={fechouDialog}/>{/*DialogContent Alterar dados da empresa*/} 
                 </Dialog>
                 <DropdownMenuSeparator />
             <DropdownMenuItem  asChild >

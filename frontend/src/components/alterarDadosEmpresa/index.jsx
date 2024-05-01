@@ -149,7 +149,7 @@ export function DialogAlterarDadosEmpresa({fechouDialog}){
             <DialogFooter>
                 <DialogClose>
                 <Button
-                type='button'
+                  type='button'
                   onClick={() => {deletarEmpresa(); setTimeout(() => {fechouDialog(false)}, "300");}}
                   className="bg-red-600 max-w-[170px] hover:bg-[#ff3535]">
                   Deletar empresa

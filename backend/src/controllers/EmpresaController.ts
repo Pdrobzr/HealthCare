@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { prisma } from "../utils/prisma";
 import { compare, hash } from "bcryptjs";
 import * as dotenv from 'dotenv';
-import { sign } from "jsonwebtoken";
+import { sign, decode, verify } from "jsonwebtoken";
 
 dotenv.config();
 
@@ -249,7 +249,12 @@ export class EmpresaController {
     }
 
     async atualizarSenha(req: Request, res: Response) {
-        const id = Number(req.params.id);
+        if (!req?.headers?.authorization) {
+            return res.status(401).json({ error: 'Usuário não autenticado' });
+        }
+        const [, token] = req.headers.authorization.split(' ');
+
+        const { id }: any = verify(token, process.env.SECRET || '');
 
         const {senhaAntiga, senhaNova} = req.body;
 

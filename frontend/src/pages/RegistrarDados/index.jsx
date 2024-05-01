@@ -30,8 +30,6 @@ export function RegistrarDados() {
     const [latitude, setLatitude] = useState('');
     const [geodificacao, setGeodificacao] = useState(false);
 
-
-
     function validarCNPJ(cnpj) {
 
         cnpj = cnpj.replace(/[^\d]+/g, '');
