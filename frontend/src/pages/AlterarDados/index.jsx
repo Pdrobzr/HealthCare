@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import './styles.css';
-import { Input } from '../../components/Input';
 import { Button } from '../../components/Button'
 import { Links } from '../../components/linksBaixoBotao';
 import { LogoDescricao } from '../../components/LogoDescricao';
@@ -65,8 +64,9 @@ export function AlterarDados() {
             })
         }
     }
-
+ 
     const deletarEmpresa = async () => {
+        console.log('batata')
         try {
             Swal.fire({
                 title: 'Tem certeza que deseja apagar perfil da empresa?',
@@ -102,8 +102,7 @@ export function AlterarDados() {
             selecionarEmpresa();
         }
     }, []);
-
-
+    
 
     return (
         <>
@@ -115,9 +114,9 @@ export function AlterarDados() {
                         <label htmlFor="nome fantasia">Nome Fantasia</label>
                         <input type="text" onChange={(e) => setNomePlaceholder(e.target.value)} defaultValue={nomePlaceholder} name="nome fantasia" />
                         <label htmlFor="e-mail">E-mail</label>
-                        <input type="email" onChange={(e) => setEmailPlaceholder(e.target.value)} defaultValue={emailPlaceholder} text="E-mail" name="e-mail" />
+                        <input type="email" onChange={(e) => setEmailPlaceholder(e.target.value)} defaultValue={emailPlaceholder} name="e-mail" />
                         <label htmlFor="telefone">Telefone</label>
-                        <input type="number" onChange={(e) => setTelefonePlaceholder(Number(e.target.value))} defaultValue={telefonePlaceholder} text="telefone" name="telefone" />
+                        <input type="number" onChange={(e) => setTelefonePlaceholder(Number(e.target.value))} defaultValue={telefonePlaceholder} name="telefone" />
                         <Button type="submit" content="Editar" name="Editar" />
 
                     </form>
@@ -130,4 +129,4 @@ export function AlterarDados() {
             </div>
         </>
     );
-};
+}

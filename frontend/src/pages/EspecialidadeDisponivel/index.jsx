@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import fotoDeletar from "../../img/imagemFundo/fotoDeletar.png";
 import fotoEditar from "../../img/imagemFundo/fotoEditar.png";
 
+
+
 export function EspecialidadeDisponivel() {
 
     const navigate = useNavigate();
@@ -108,6 +110,8 @@ export function EspecialidadeDisponivel() {
                     <form className="form-especialidades" onSubmit={adicionarEspecialidade}>
                         <h1 className="titulo-adicionar-especialidade-disponivel">Adicionar Especialidade</h1>
                         <div className="inputs-form-especialidades">
+                        
+                        
                             <select className='escolha-especialidade-disponivel' value={especialidade} onChange={(e) => setEspecialidade(Number(e.target.value))}>
                                 <option>Especialidade</option>
                                 {especialidades.map(especialidade => (
@@ -116,7 +120,7 @@ export function EspecialidadeDisponivel() {
                                     </option>
                                 ))}
                             </select>
-                            <input className="input-quantidade-disponivel" type="number" value={quantidade}  onChange={(e) => setQuantidade(Number(e.target.value))} />
+                            <input className="input-quantidade-disponivel" type="number" placeholder="0" onChange={(e) => setQuantidade(Number(e.target.value))} />
                             <button type="submit" className="botao-especialidade-disponivel">Adicionar</button>
                         </div>
                     </form>

@@ -190,17 +190,17 @@ export function RegistrarDados() {
                     {!mudarParteEndereco ?
                         (<div className='formulario'>
                             <label htmlFor="nome fantasia">Nome Fantasia</label>
-                            <input value={nome} type="text" onChange={(e) => setNome(e.target.value)} text="Nome Fantasia" name="nome fantasia" placeholder="Nome Fantasia" />
+                            <input value={nome} type="text" onChange={(e) => setNome(e.target.value)}  name="nome fantasia" placeholder="Nome Fantasia" />
                             <label htmlFor="e-mail">E-mail</label>
-                            <input value={email} type="email" onChange={(e) => setEmail(e.target.value)} text="E-mail" name="e-mail" placeholder="E-mail" />
+                            <input value={email} type="email" onChange={(e) => setEmail(e.target.value)}  name="e-mail" placeholder="E-mail" />
                             <label htmlFor="cnpj">CNPJ</label>
-                            <input value={cnpj} type="number" onChange={(e) => setCnpj(e.target.value)} text="Cnpj" name="cnpj" placeholder="CNPJ" />
+                            <input value={cnpj} onChange={(e) => setCnpj(String(e.target.value))} name="cnpj" placeholder="CNPJ" />
                             <label htmlFor="telefone">Telefone</label>
-                            <input value={telefone} type="number" onChange={(e) => setTelefone(e.target.value)} text="telefone" name="telefone" placeholder="Telefone" />
+                            <input value={telefone} type="number" onChange={(e) => setTelefone(e.target.value)} name="telefone" placeholder="Telefone" />
                             <label htmlFor="senha">Senha</label>
-                            <input value={senha} type="password" onChange={(e) => setSenha(e.target.value)} text="Senha" name="senha" placeholder="Senha" />
+                            <input value={senha} type="password" onChange={(e) => setSenha(e.target.value)} name="senha" placeholder="Senha" />
                             <label htmlFor="senha">Confirmar senha</label>
-                            <input value={confimarSenha} type="password" onChange={(e) => setConfirmarSenha(e.target.value)} text="Senha" name="senha" placeholder="Confirmar senha" />
+                            <input value={confimarSenha} type="password" onChange={(e) => setConfirmarSenha(e.target.value)} name="senha" placeholder="Confirmar senha" />
                             <button onClick={() => setMudarParteEndereco(true)} >Continuar</button>
                         </div>) :
                         (<div className='formulario'>
@@ -208,16 +208,16 @@ export function RegistrarDados() {
                                 <img style={{ width: 29 }} src={imagemVoltar} alt="" />
                             </button>
                             <label htmlFor="cep">CEP</label>
-                            <input onBlur={checkCep} onChange={(e) => setCep(e.target.value)} type='number' text="cep" name="cep" placeholder="CEP" />
+                            <input onBlur={checkCep} onChange={(e) => setCep(e.target.value)} type='number'  name="cep" placeholder="CEP" />
 
                             <label htmlFor="endereço">Endereço</label>
-                            <input value={endereco} onChange={(e) => setEndereco(e.target.value)} type="text" text="endereço" name="endereço" placeholder="Endereço" />
+                            <input value={endereco} onChange={(e) => setEndereco(e.target.value)} type="text"  name="endereço" placeholder="Endereço" />
 
                             <label htmlFor="bairro">Bairro</label>
                             <input value={bairro} type="text" className='input-bairro' name='bairro' onChange={(e) => setBairro(e.target.value)} placeholder='Bairro' />
 
                             <label htmlFor="complemento">Complemento</label>
-                            <input onChange={(e) => setComplemento(e.target.value)} type="text" text="complemento" name="complemento" placeholder="Complemento" />
+                            <input onChange={(e) => setComplemento(e.target.value)} type="text"  name="complemento" placeholder="Complemento" />
                             <Button type="submit" content="Registrar" name="Registrar" />
                         </div>)
                     }
@@ -228,4 +228,4 @@ export function RegistrarDados() {
             </div>
         </div>
     );
-};
+}

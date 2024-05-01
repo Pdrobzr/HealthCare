@@ -9,7 +9,7 @@
     justify-content: center;
     background: rgba(242, 242, 242, 1);
     display: flex;
-    padding: 0px 40px  
+    padding: 0px 40px;  
 }
 
 .responsivo-disponivell{
@@ -18,7 +18,7 @@
     border-radius: 8px 8px 0px 0px;
     width: 1050px;
     margin-top: 40px;
-    height:83.4vh;
+    height:83.9vh;
     box-shadow: 1px 2px 5px 0px rgb(156, 156, 156);
 }
 
@@ -27,7 +27,7 @@
     justify-content: space-between;
     padding: 10px;
     gap: 10px;
-    margin-bottom: 60px;
+    margin-bottom: 45px;
 }
 
 .titulo-adicionar-especialidade-disponivel{
@@ -69,12 +69,14 @@
 .botao-especialidade-disponivel{
     height: 40px;
     width: 111px;
-    background-color: rgba(0, 202, 128, 1);
+    background-color: rgba(4, 243, 155, 1);
     border-radius: 8px;
     transition: 1s;
+    color: white;
+    font-size: 13px;
 }
 .botao-especialidade-disponivel:hover{
-    background-color:rgba(1, 244, 155, 1)
+    background-color:rgba(66, 255, 186, 1);
 }
 
 .styled-table-disponivel{
@@ -110,6 +112,7 @@ td {
     background-color: rgba(234, 236, 244, 1);
     padding: 10px;
     font-size: 0.875rem;
+    color: rgba(112, 115, 119, 1);
 }
 
 td:first-child{
@@ -122,17 +125,20 @@ td:last-child{
     border-bottom-right-radius: 8px; 
 }
 /***********************************/
+.td-botoes{
+ 
+}
 .botao-editar-disponivel{
     border-radius: 5px;
-    width: 27px;
-    height: 23px;
+    height: 25px;
+    padding: 0px 7px;
     background-color: rgb(244, 198, 35);
 }
 .botao-deletar-disponivel{
     border-radius: 5px;
     margin-left: 5px;
-    width: 27px;
-    height: 23px;
+    height: 25px;
+    padding: 0px 7px;
     background-color: rgb(212, 13, 13);
 }
 .img-foto{
