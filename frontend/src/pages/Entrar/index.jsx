@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './styles.css';
-import { Input } from '../../components/Input';
 import { Button } from '../../components/Button'
 import { Links } from '../../components/linksBaixoBotao';
 import { LogoDescricao } from '../../components/LogoDescricao';
@@ -58,8 +57,10 @@ export function Entrar(){
                 <div className='responsivo'>
                     <LogoDescricao title="Bem vindo novamente" description="Divulge o atendimento medico aos pacientes"/>
                     <form onSubmit={autenticarEmpresa} className='formulario-entrar'>
-                        <input onChange={handleChangeEmail} type="text" text="Email" name="Email" placeholder="Email"/>
-                        <input onChange={(e) => setSenha(e.target.value)} type="password" text="Senha" name="senha" placeholder="Senha"/>
+                        <label htmlFor="Email">E-mail</label>
+                        <input className="inputEmail" onChange={handleChangeEmail} type="text" name="Email" placeholder="Email"/>
+                        <label htmlFor="Senha">Senha</label>
+                        <input className="inputSenha" onChange={(e) => setSenha(e.target.value)} type="password" name="Senha" placeholder="Senha"/>
                         <Button type="submit" content="Entrar" name="entrar"/>
                         <Links content="Não tem uma conta? " text=" cadastre-se" link="/registrarDados"/>
                         <Links content="Deseja voltar para home?" text=" voltar" link="/"/>

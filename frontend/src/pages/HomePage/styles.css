@@ -33,6 +33,7 @@
     border-radius: 10px;
     font-size: 15px;
     margin-right: 30px;
+    font-weight: bold;
 }
 .botao-entrar-homepage:hover{
     background-color: transparent;
@@ -46,6 +47,8 @@
     border-radius: 10px;
     font-size: 15px;
     margin-right: 30px;
+    color: white;
+    font-weight: bold;
 }
 .botao-registrar-homepage:hover{
     background-color: rgb(52, 150, 230);    

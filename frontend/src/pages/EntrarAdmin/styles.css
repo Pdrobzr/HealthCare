@@ -41,12 +41,17 @@
     flex-direction: column;
     justify-content: right;
     margin-top: 25px;
-    width: 100%;
+    width: 270px;
     max-width: 303px;
 }
 
 .input-adm{
-    width: 400px;
+    background-color: rgba(208, 231, 253, 0.4);
+    height: 45px;
+    border-radius: 2px;
+    border: none;
+    padding-left: 23px;
+    margin-bottom: 8px;
 }
 
 .button-adm{

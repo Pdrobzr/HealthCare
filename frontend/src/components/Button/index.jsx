@@ -3,8 +3,8 @@ import "./styles.css"
 export function Button(props){
     return(
         <>
-        <button
-            type= {props.type}
+        <button className="buttonGlobal"
+            
         >
             {props.content}
         </button>

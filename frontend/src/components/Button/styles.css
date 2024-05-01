@@ -1,4 +1,4 @@
-button{
+.buttonGlobal{
     background-color: rgba(19, 135, 241, 1);
     max-width: 100%;
     height: 45px;
@@ -6,7 +6,7 @@ button{
     border: none;
     border-radius: 2px; 
     font-weight:bold;
-    font-size: 12px;
+    font-size: 14px;
     transition: 0.7s;
     cursor: pointer;
 }
