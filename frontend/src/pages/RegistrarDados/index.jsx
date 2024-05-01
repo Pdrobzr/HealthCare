@@ -26,6 +26,11 @@ export function RegistrarDados() {
     const [cep, setCep] = useState("");
     const [complemento, setComplemento] = useState("");
 
+    const [longitude, setLongitude] = useState('');
+    const [latitude, setLatitude] = useState('');
+    const [geodificacao, setGeodificacao] = useState(false);
+
+
 
     function validarCNPJ(cnpj) {
 
@@ -82,7 +87,6 @@ export function RegistrarDados() {
     }
 
 
-
     function validarNumeroTelefone(telefone) {
         const regex = /^[1-9]{2}9?[0-9]{8}$/;
 
@@ -92,6 +96,21 @@ export function RegistrarDados() {
             return false;
         }
     }
+    useEffect(() => {
+        const getGeodificacao = async () => {
+            const geodificacao = await blogFetch.get(`https://nominatim.openstreetmap.org/search?format=json&q=${endereco}, Praia Grande, Brazil`);
+
+            const dados = geodificacao;
+
+            const informacoes = dados.data[0];
+
+            setLatitude(informacoes.lat);
+            setLongitude(informacoes.lon);
+        }
+
+        getGeodificacao();
+    }, [geodificacao]);
+
 
     const registrarEmpresa = async (e) => {
         e.preventDefault();
@@ -116,6 +135,8 @@ export function RegistrarDados() {
                 });
                 return;
             }
+            setGeodificacao(true);
+
             const key = import.meta.env.VITE_REACT_APP_KEY;
 
             const response = await blogFetch.post(`https://maps.googleapis.com/maps/api/geocode/json?address=${cep}&key=${key}`);
@@ -131,7 +152,7 @@ export function RegistrarDados() {
 
 
             if (latitude && longitude) {
-                await blogFetch.post('/adicionarEmpresa', {
+              const response = await blogFetch.post('/adicionarEmpresa', {
                     nome: nome,
                     email: email,
                     senha: senha,
@@ -144,10 +165,11 @@ export function RegistrarDados() {
                     latitude: latitude,
                     longitude: longitude
                 });
+                const data = response.data;
 
                 Swal.fire({
                     icon: 'success',
-                    text: 'Empresa adicionada com sucesso!'
+                    text: data.message
                 });
 
                 navigate('/entrar');
