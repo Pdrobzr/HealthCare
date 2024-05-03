@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '../ui/button'
 import {
   DialogClose,
@@ -10,13 +10,11 @@ import {
 } from '../ui/dialog'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import blogFetch from '@/axios/config'
 
 export function DialogAlterarContaEmpresa({fechouDialog}) {
-
-  const navigate = useNavigate();
 
   const [senhaAntiga, setSenhaAntiga] = useState("");
   const [senhaNova, setSenhaNova] = useState("");
@@ -26,7 +24,7 @@ export function DialogAlterarContaEmpresa({fechouDialog}) {
 
   const atualizarSenha = async (e) => {
     e.preventDefault();
-
+    
     try {
       if (senhaNova != confimarSenhaNova) {
         Swal.fire({
@@ -54,7 +52,6 @@ export function DialogAlterarContaEmpresa({fechouDialog}) {
           text: data.message
         });
 
-        navigate('/especialidadeDisponivel');
       }
     } catch (error) {
       Swal.fire({
@@ -65,18 +62,12 @@ export function DialogAlterarContaEmpresa({fechouDialog}) {
     }
   }
 
-  useEffect(() => {
-    if (localStorage.length == 0) {
-      navigate('/entrar');
-    }
-  }, []);
-
   return (
     <DialogContent className="text-slate-600">
       <DialogHeader>
-        <DialogTitle>Perfil da Empresa</DialogTitle>
+        <DialogTitle>Conta da Empresa</DialogTitle>
         <DialogDescription>
-          Atualize as informações do seu estabelecimento visíveis aos seus clientes
+          Atualize a senha do seu estabelecimento 
         </DialogDescription>
       </DialogHeader>
       <form onSubmit={atualizarSenha}>
@@ -113,10 +104,14 @@ export function DialogAlterarContaEmpresa({fechouDialog}) {
                 Cancelar
               </Button>
             </DialogClose>
+            <DialogClose asChild>
             <Button
               onClick={() => fechouDialog(false)}
               type="submit"
-              className="bg-emerald-500 ml-2 hover:bg-[#06e84a]">Salvar</Button>
+              className="bg-emerald-500 ml-2 hover:bg-[#06e84a]">
+                Salvar
+            </Button>
+            </DialogClose>
           </DialogDescription>
         </DialogFooter>
       </form>

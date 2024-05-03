@@ -14,7 +14,7 @@ import { DialogAlterarContaEmpresa } from "../alterarContaEmpresa";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import blogFetch from "@/axios/config";
-
+import ContextNome from "../Context/index"
 
 export function MenuConta(){
 
@@ -29,6 +29,7 @@ export function MenuConta(){
         setOpen(data);
         // window.location.reload(data);
     }
+
     const selecionarEmpresa = async () => {
         const response = await blogFetch.get(`/selecionarEmpresa/${idEmpresa}`, {
             headers: {
@@ -40,58 +41,62 @@ export function MenuConta(){
 
         setNomeEmpresa(data.nomeEmpresa);
     }
-
+    
     const logout = () => {
         localStorage.clear();
         navigate('/entrar');
     }
-
+    
+    
     useEffect(() => {
         selecionarEmpresa();
     }, []);
     
     return(
-        <DropdownMenu open={open} onOpenChange={setOpen}>
-            <DropdownMenuTrigger asChild>
-                <Button  className="flex gap-[2] select-none hover:bg-transparent items-center bg-transparent text-[black] text-[15px] px-[5px] py-0 rounded-lg border-2 border-solid border-[rgba(232,232,232,1)] border-2 border-solid border-[rgba(184,185,190,1)]">
-                    <p>{nomeEmpresa}</p>
-                    <ChevronDown className="chevronDown"/>
-                </Button>
-            </DropdownMenuTrigger>
-                
-            <DropdownMenuContent 
-                 
-                align="end" className="dropdownMenuContent" >
-                <Dialog>  
-                    <DialogTrigger asChild>
-                        <DropdownMenuItem className="menuItem" onSelect={(e) => e.preventDefault()}>
-                            <Building size={20}/>
-                            <span>Perfil empresa</span>
-                        </DropdownMenuItem>
-                    </DialogTrigger>
-                    <DialogAlterarDadosEmpresa fechouDialog={fechouDialog} />{/*DialogContent Alterar dados da empresa*/}
-                </Dialog>
+        <ContextNome.Provider value={[nomeEmpresa, setNomeEmpresa]}>
+            <DropdownMenu open={open} onOpenChange={setOpen}>
 
-                <DropdownMenuSeparator />
-                <Dialog>
-                    <DialogTrigger asChild>
-                        <DropdownMenuItem className="menuItem" onSelect={(e) => e.preventDefault()}>
-                            <UserRoundCogIcon size={20}/>
-                            <span>Configurações</span>
-                        </DropdownMenuItem>
-                    </DialogTrigger>
-                    <DialogAlterarContaEmpresa fechouDialog={fechouDialog}/>{/*DialogContent Alterar dados da empresa*/} 
-                </Dialog>
-                <DropdownMenuSeparator />
-            <DropdownMenuItem  asChild >
-                <button className="menuItemSair" onClick={logout}>
-                    <LogOut color='red' size={20}/>
-                    <span>Sair</span>
-                </button>
-                
-            </DropdownMenuItem>
-    
-        </DropdownMenuContent>
-    </DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button  className="flex gap-[2] select-none hover:bg-transparent items-center bg-transparent text-[black] text-[15px] px-[5px] py-0 rounded-lg border-2 border-solid border-[rgba(232,232,232,1)] border-2 border-solid border-[rgba(184,185,190,1)]">
+                        <strong>{nomeEmpresa}</strong>
+                        <ChevronDown className="chevronDown"/>
+                    </Button>
+                </DropdownMenuTrigger>
+                    
+                <DropdownMenuContent 
+                    align="end" className="dropdownMenuContent" >
+                    <Dialog>  
+                        <DialogTrigger asChild>
+                            <DropdownMenuItem className="menuItem" onSelect={(e) => e.preventDefault()}>
+                                <Building size={20}/>
+                                <span>Perfil empresa</span>
+                            </DropdownMenuItem>
+                        </DialogTrigger>
+                        <DialogAlterarDadosEmpresa fechouDialog={() => {fechouDialog()}} />{/*DialogContent Alterar dados da empresa*/}
+                    </Dialog>
+
+                    <DropdownMenuSeparator />
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <DropdownMenuItem className="menuItem" onSelect={(e) => e.preventDefault()}>
+                                <UserRoundCogIcon size={20}/>
+                                <span>Configurações</span>
+                            </DropdownMenuItem>
+                        </DialogTrigger>
+                        <DialogAlterarContaEmpresa fechouDialog={() => {fechouDialog()}}/>{/*DialogContent Alterar dados da empresa*/} 
+                    </Dialog>
+
+                    <DropdownMenuSeparator />
+                <DropdownMenuItem  asChild >
+                    <button className="menuItemSair" onClick={logout}>
+                        <LogOut color='red' size={20}/>
+                        <span>Sair</span>
+                    </button>
+                    
+                </DropdownMenuItem>
+        
+            </DropdownMenuContent>
+        </DropdownMenu>
+    </ContextNome.Provider>
     )
 }

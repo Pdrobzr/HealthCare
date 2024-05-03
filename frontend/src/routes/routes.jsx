@@ -19,7 +19,6 @@ export const AppRoutes = () => {
             <Routes>
                 <Route element={<HomePage/>} path="/"/>
                 <Route element={<Entrar/>} path="/entrar"/>
-                <Route element={<AlterarDados/>} path="/alterarDados"/>
                 <Route element={<RegistrarDados/>} path="registrarDados"/>
                 <Route element={<RecuperarSenha/>} path="recuperarSenha"/>
                 <Route element={<EspecialidadeDisponivel/>} path="especialidadeDisponivel"/>

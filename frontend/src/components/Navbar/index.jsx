@@ -14,8 +14,10 @@ const Navbar = () => {
                 <img className="imagem-logo" src={Image} alt="" />
             </div>
             <div className="parte-direita-logo">
+
             <MenuConta/>
-                <Link className='link' to={'/alterarDados'}><img src={iconImageConfig}/></Link>
+            
+                <Link className='link' to={'/especialidadeDisponivel'}><img src={iconImageConfig}/></Link>
             </div>
         </header>
         </>     

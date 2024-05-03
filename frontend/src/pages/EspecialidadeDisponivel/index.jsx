@@ -6,7 +6,8 @@ import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 import fotoDeletar from "../../img/imagemFundo/fotoDeletar.png";
 import fotoEditar from "../../img/imagemFundo/fotoEditar.png";
-
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { EditarQuantidade } from "@/components/editarQuantidade/editarQuantidade";
 
 
 export function EspecialidadeDisponivel() {
@@ -82,15 +83,11 @@ export function EspecialidadeDisponivel() {
     }
 
     const deletarEspecialidade = async (id) => {
+        
         await blogFetch.delete(`/deletarEspecialidade/${id}`);
 
         setEspecialidadesDisponiveis(especialidadesDisponiveis.filter(especialidade => especialidade.idDisponibilidade !== id));
     }
-
-    const redirecionarEspecialidade = (id) => {
-        navigate(`/alterarEspecialidade/${id}`);
-    }
-
 
     useEffect(() => {
         if (localStorage.length == 0) {
@@ -144,7 +141,12 @@ export function EspecialidadeDisponivel() {
                                     <td>{especialidadeEmpresa.Especialidade.nomeEspecialidade}</td>
                                     <td>{especialidadeEmpresa.quantidadeEspecialidade}</td>
                                     <td className="td-botoes">
-                                        <button className="botao-editar-disponivel" onClick={() => redirecionarEspecialidade(especialidadeEmpresa.idDisponibilidade)}><img className="img-foto" src={fotoEditar}></img></button>
+                                        <Dialog>
+                                            <DialogTrigger asChild>
+                                                <button type="button" className="botao-editar-disponivel"><img className="img-foto" src={fotoEditar}></img></button>
+                                            </DialogTrigger>
+                                            <EditarQuantidade idDisponibilidade={especialidadeEmpresa.idDisponibilidade}/>
+                                        </Dialog>
                                         <button className="botao-deletar-disponivel" onClick={() => deletarEspecialidade(especialidadeEmpresa.idDisponibilidade)}><img className="img-foto" src={fotoDeletar}></img></button>
                                     </td>
                                     <td></td>

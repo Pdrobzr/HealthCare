@@ -8,30 +8,21 @@
   height: 150px;
   width: 200px;    
 }
+
 .div-lado-a-lado{
     display: flex;
     min-width: 100%;
 }
 
-.input-esquerdo{
-    display: flex;
-    flex-direction: column;
-  
-}
 
-.input-direito{
-    display: flex;
-    flex-direction: column;
-}
-
-.input-bairro{
+.inputGeral{
     background-color: rgba(208, 231, 253, 0.4);
     max-width: 100%;
-    height: 45px;
+    height: 40px;
     border-radius: 2px;
     border: none;
     padding-left: 23px;
-    margin-bottom: 8px;
+    margin-bottom: 7px;
 }
 
 

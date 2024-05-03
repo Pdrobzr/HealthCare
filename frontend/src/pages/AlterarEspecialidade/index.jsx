@@ -3,7 +3,7 @@ import './styles.css';
 import ImagemBotao from "../../img/imagemFundo/botao-editar.png";
 import Navbar from "../../components/Navbar";
 import blogFetch from "../../axios/config";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from 'sweetalert2'
 
 export function AlterarEspecialidade() {
@@ -12,16 +12,15 @@ export function AlterarEspecialidade() {
 
     const navigate = useNavigate();
 
-    const [especialidade, setEspecialidade] = useState();
+    const [especialidade, setEspecialidade] = useState(); 
     const [quantidade, setQuantidade] = useState();
 
-    const selecionarDisponibilidade = async (id) => {
+    const selecionarDisponibilidade = async (id) => { 
         const response = await blogFetch.get(`/selecionarDisponibilidade/${id}`);
         const data = response.data;
 
         setEspecialidade(data.selecionarDisponibilidade.Especialidade.nomeEspecialidade);
         setQuantidade(data.selecionarDisponibilidade.quantidadeEspecialidade);
-
     }
 
     const editarEspecialidade = async (e) => {
@@ -71,7 +70,7 @@ export function AlterarEspecialidade() {
                                     </div>
                                     <div className="inputs-centralizados">
                                         <label htmlFor="input-quantidade">Quantidade</label>
-                                        <input defaultValue={quantidade} className="input-quantidade" type="number" placeholder="Qtd" onChange={(e) => setQuantidade(Number(e.target.value))} />
+                                        <input onChange={(e) => setQuantidade(Number(e.target.value))} defaultValue={quantidade} className="input-quantidade" type="number" placeholder="Qtd"/>
                                     </div>
                                     <div className="inputs-centralizados">
                                         <button type="submit" className="botao-editarEspecialidade">Editar</button>

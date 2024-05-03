@@ -31,42 +31,42 @@ export function RegistrarDados() {
     const [geodificacao, setGeodificacao] = useState(false);
 
     function validarCNPJ(cnpj) {
-
         cnpj = cnpj.replace(/[^\d]+/g, '');
-
+        
         if (cnpj == '') return false;
-
+        
         if (cnpj.length != 14)
-            return false;
-
-        // Elimina CNPJs invalidos conhecidos
-        if (cnpj == "00000000000000" ||
-            cnpj == "11111111111111" ||
-            cnpj == "22222222222222" ||
-            cnpj == "33333333333333" ||
-            cnpj == "44444444444444" ||
-            cnpj == "55555555555555" ||
-            cnpj == "66666666666666" ||
-            cnpj == "77777777777777" ||
-            cnpj == "88888888888888" ||
-            cnpj == "99999999999999")
-            return false;
-
+        return false;
+    
+    // Elimina CNPJs invalidos conhecidos
+    if (cnpj == "00000000000000" ||
+    cnpj == "11111111111111" ||
+    cnpj == "22222222222222" ||
+    cnpj == "33333333333333" ||
+    cnpj == "44444444444444" ||
+    cnpj == "55555555555555" ||
+    cnpj == "66666666666666" ||
+    cnpj == "77777777777777" ||
+    cnpj == "88888888888888" ||
+    cnpj == "99999999999999")
+    return false;
+    
         // Valida DVs
-        let tamanho = cnpj.length - 2
+        let tamanho = cnpj.length - 2 
         let numeros = cnpj.substring(0, tamanho);
         let digitos = cnpj.substring(tamanho);
         let soma = 0;
-        let pos = tamanho - 7;
+        let pos = tamanho - 7;//5
         for (let i = tamanho; i >= 1; i--) {
             soma += numeros.charAt(tamanho - i) * pos--;
             if (pos < 2)
                 pos = 9;
         }
+        
         let resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
         if (resultado != digitos.charAt(0))
-            return false;
-
+        return false;
+        
         tamanho = tamanho + 1;
         numeros = cnpj.substring(0, tamanho);
         soma = 0;
@@ -94,6 +94,7 @@ export function RegistrarDados() {
             return false;
         }
     }
+
     useEffect(() => {
         const getGeodificacao = async () => {
             const geodificacao = await blogFetch.get(`https://nominatim.openstreetmap.org/search?format=json&q=${endereco}, Praia Grande, Brazil`);
@@ -121,6 +122,7 @@ export function RegistrarDados() {
                 });
                 return;
             } if (!validarNumeroTelefone(telefone)) {
+                
                 Swal.fire({
                     icon: 'error',
                     text: 'Numero de celular inválido!'
@@ -133,6 +135,7 @@ export function RegistrarDados() {
                 });
                 return;
             }
+
             setGeodificacao(true);
 
             const key = import.meta.env.VITE_REACT_APP_KEY;
@@ -173,17 +176,13 @@ export function RegistrarDados() {
                 navigate('/entrar');
 
             }
-
-
         } catch (error) {
             Swal.fire({
                 icon: 'error',
                 text: 'Erro ao cadastrar!'
             })
-
         }
     }
-
 
     const checkCep = (e) => {
         const cep = e.target.value.replace(/\D/g, '');
@@ -198,39 +197,39 @@ export function RegistrarDados() {
     return (
         <div className='container-total'>
             <div className='parte-esquerda'>
-                <LogoDescricao title='Registre-se' />
+                <LogoDescricao title='Registre-se'className="logoRegistrar" />
                 <form onSubmit={registrarEmpresa} className='formulario'>
                     {!mudarParteEndereco ?
                         (<div className='formulario'>
                             <label htmlFor="nome fantasia">Nome Fantasia</label>
-                            <input value={nome} type="text" onChange={(e) => setNome(e.target.value)}  name="nome fantasia" placeholder="Nome Fantasia" />
+                            <input value={nome} type="text" onChange={(e) => setNome(e.target.value)}  name="nome fantasia" placeholder="Nome Fantasia" className='inputGeral'/>
                             <label htmlFor="e-mail">E-mail</label>
-                            <input value={email} type="email" onChange={(e) => setEmail(e.target.value)}  name="e-mail" placeholder="E-mail" />
+                            <input value={email} type="email" onChange={(e) => setEmail(e.target.value)}  name="e-mail" placeholder="E-mail" className='inputGeral'/>
                             <label htmlFor="cnpj">CNPJ</label>
-                            <input value={cnpj} onChange={(e) => setCnpj(String(e.target.value))} name="cnpj" placeholder="CNPJ" />
+                            <input value={cnpj} onChange={(e) => setCnpj(String(e.target.value))} name="cnpj" placeholder="CNPJ" className='inputGeral'/>
                             <label htmlFor="telefone">Telefone</label>
-                            <input value={telefone} type="number" onChange={(e) => setTelefone(e.target.value)} name="telefone" placeholder="Telefone" />
+                            <input value={telefone} type="number" onChange={(e) => setTelefone(e.target.value)} name="telefone" placeholder="Telefone" className='inputGeral'/>
                             <label htmlFor="senha">Senha</label>
-                            <input value={senha} type="password" onChange={(e) => setSenha(e.target.value)} name="senha" placeholder="Senha" />
+                            <input value={senha} type="password" onChange={(e) => setSenha(e.target.value)} name="senha" placeholder="Senha" className='inputGeral'/>
                             <label htmlFor="senha">Confirmar senha</label>
-                            <input value={confimarSenha} type="password" onChange={(e) => setConfirmarSenha(e.target.value)} name="senha" placeholder="Confirmar senha" />
-                            <button onClick={() => setMudarParteEndereco(true)} >Continuar</button>
+                            <input value={confimarSenha} type="password" onChange={(e) => setConfirmarSenha(e.target.value)} name="senha" placeholder="Confirmar senha" className='inputGeral'/>
+                            <button className='buttonGlobal' onClick={() => setMudarParteEndereco(true)} >Continuar</button>
                         </div>) :
                         (<div className='formulario'>
                             <button onClick={() => setMudarParteEndereco(false)} className='botao-voltar'>
                                 <img style={{ width: 29 }} src={imagemVoltar} alt="" />
                             </button>
                             <label htmlFor="cep">CEP</label>
-                            <input onBlur={checkCep} onChange={(e) => setCep(e.target.value)} type='number' name="cep" placeholder="CEP" />
+                            <input onBlur={checkCep} onChange={(e) => setCep(e.target.value)} type='number' name="cep" placeholder="CEP" className='inputGeral'/>
 
                             <label htmlFor="endereço">Endereço</label>
-                            <input value={endereco} onChange={(e) => setEndereco(e.target.value)} type="text"  name="endereço" placeholder="Endereço" />
+                            <input value={endereco} onChange={(e) => setEndereco(e.target.value)} type="text"  name="endereço" placeholder="Endereço" className='inputGeral'/>
 
                             <label htmlFor="bairro">Bairro</label>
-                            <input value={bairro} type="text" className='input-bairro' name='bairro' onChange={(e) => setBairro(e.target.value)} placeholder='Bairro' />
+                            <input value={bairro} type="text" name='bairro' onChange={(e) => setBairro(e.target.value)} placeholder='Bairro' className='inputGeral'/>
 
                             <label htmlFor="complemento">Complemento</label>
-                            <input onChange={(e) => setComplemento(e.target.value)} type="text"  name="complemento" placeholder="Complemento" />
+                            <input onChange={(e) => setComplemento(e.target.value)} type="text"  name="complemento" placeholder="Complemento" className='inputGeral'/>
                             <Button type="submit" content="Registrar" name="Registrar" />
                         </div>)
                     }

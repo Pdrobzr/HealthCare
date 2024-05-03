@@ -10,14 +10,15 @@ import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-
+import { useContext, useEffect, useState } from 'react'
+import ContextNome from "../Context/index"
 
 
 export function DialogAlterarDadosEmpresa({fechouDialog}){
 
-  const navigate = useNavigate();
+  const [ setNomeEmpresa] = useContext(ContextNome);
 
+  const navigate = useNavigate();
 
     const token = localStorage.getItem("token");
 
@@ -58,10 +59,10 @@ export function DialogAlterarDadosEmpresa({fechouDialog}){
             const data = response.data;
 
             Swal.fire({
-                icon: 'success',
-                text: data.message
+              icon: 'success',
+              text: data.message
             });
-
+            
 
         } catch (error) {
             Swal.fire({
@@ -99,7 +100,7 @@ export function DialogAlterarDadosEmpresa({fechouDialog}){
             console.log(error);
         }
     }
-
+    
     useEffect(() => {
         if (localStorage.length == 0) {
             navigate('/entrar');
@@ -163,12 +164,12 @@ export function DialogAlterarDadosEmpresa({fechouDialog}){
                     </Button>
                   </DialogClose>
                   <DialogClose>
-                  <Button
-                    onClick={() => fechouDialog(false)}
-                    type='submit'
-                    className="bg-emerald-500 ml-2 hover:bg-[#06e84a]">
-                      Salvar
-                  </Button>
+                    <Button
+                      onClick={() => {fechouDialog(false); setNomeEmpresa(nomePlaceholder)}}
+                      type='submit'
+                      className="bg-emerald-500 ml-2 hover:bg-[#06e84a]">
+                        Salvar
+                    </Button>
                   </DialogClose>
                 </DialogDescription>
             </DialogFooter>
