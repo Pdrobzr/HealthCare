@@ -11,12 +11,12 @@ import { Label } from '../ui/label'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
-import ContextNome from "../Context/index"
+import ContextNome from "../Context/ContextName"
 
 
 export function DialogAlterarDadosEmpresa({fechouDialog}){
 
-  const [ setNomeEmpresa] = useContext(ContextNome);
+  const [nomeEmpresa, setNomeEmpresa] = useContext(ContextNome);
 
   const navigate = useNavigate();
 

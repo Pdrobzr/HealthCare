@@ -6,10 +6,10 @@ import { Label } from "../ui/label";
 import Swal from "sweetalert2";
 import blogFetch from "@/axios/config";
 
-export function EditarQuantidade({idDisponibilidade}) {
-
+export function EditarQuantidade({idDisponibilidade, idQuantidadeAlterar}) {
     const [quantidade, setQuantidade] = useState();
 
+    
     const editarEspecialidade = async (e) => {
         e.preventDefault();
         try {
@@ -20,10 +20,7 @@ export function EditarQuantidade({idDisponibilidade}) {
                 icon: 'success',
                 text: 'Quantidade alterada!'
               });
-              setTimeout(() => {
-                  window.location.reload();
-              }, "900");
-
+              idQuantidadeAlterar({idDisponibilidade, quantidade})
         } catch (e) {
             Swal.fire({
                 icon: 'error',

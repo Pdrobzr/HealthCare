@@ -14,7 +14,7 @@ import { DialogAlterarContaEmpresa } from "../alterarContaEmpresa";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import blogFetch from "@/axios/config";
-import ContextNome from "../Context/index"
+import ContextNome from "../Context/ContextName"
 
 export function MenuConta(){
 
@@ -27,7 +27,6 @@ export function MenuConta(){
     
     const fechouDialog = (data) => {
         setOpen(data);
-        // window.location.reload(data);
     }
 
     const selecionarEmpresa = async () => {

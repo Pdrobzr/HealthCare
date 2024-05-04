@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import './styles.css';
-import Navbar from "../../components/Navbar";
+import Navbar from "../Navbar";
 import blogFetch from "../../axios/config";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,6 @@ import fotoDeletar from "../../img/imagemFundo/fotoDeletar.png";
 import fotoEditar from "../../img/imagemFundo/fotoEditar.png";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { EditarQuantidade } from "@/components/editarQuantidade/editarQuantidade";
-
 
 export function EspecialidadeDisponivel() {
 
@@ -22,8 +21,6 @@ export function EspecialidadeDisponivel() {
 
     const empresa = localStorage.getItem("Empresa");
     const token = localStorage.getItem("token");
-
-    
 
     const listarEspecialidades = async () => {
         const response = await blogFetch.get('/listarEspecialidades');
@@ -60,6 +57,7 @@ export function EspecialidadeDisponivel() {
     }
 
     const selecionarEmpresa = async () => {
+
         const response = await blogFetch.get(`/selecionarEmpresa/${empresa}`, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -72,32 +70,19 @@ export function EspecialidadeDisponivel() {
     }
 
     const alterarStatus = async () => {
-
         await blogFetch.put(`/atualizarStatus/${empresa}`, {
             status: !status
         });
-
         setStatus(!status);
-
     }
 
     const deletarEspecialidade = async (id) => {
+        
         await blogFetch.delete(`/deletarEspecialidade/${id}`);
+
         setEspecialidadesDisponiveis(especialidadesDisponiveis.filter(especialidade => especialidade.idDisponibilidade !== id));
     }
 
-    const idQuantidadeAlterar = (data) => {
-        const NovasQuantidadesEspecialidadeTabela = especialidadesDisponiveis.map( arrayCompleta => {
-                if(arrayCompleta.idDisponibilidade === data.idDisponibilidade){
-                    arrayCompleta.quantidadeEspecialidade = data.quantidade
-                }
-                return arrayCompleta
-            }
-        )
-        setEspecialidadesDisponiveis(NovasQuantidadesEspecialidadeTabela)
-    }
-
-    
     useEffect(() => {
         if (localStorage.length == 0) {
             navigate('/entrar');
@@ -110,15 +95,12 @@ export function EspecialidadeDisponivel() {
 
     return (
         <>
-        
             <Navbar />
             <div className="container-total-especialidade-disponivel">
                 <div className="responsivo-disponivell">
                     <form className="form-especialidades" onSubmit={adicionarEspecialidade}>
                         <h1 className="titulo-adicionar-especialidade-disponivel">Adicionar Especialidade</h1>
                         <div className="inputs-form-especialidades">
-                        
-                        
                             <select className='escolha-especialidade-disponivel' value={especialidade} onChange={(e) => setEspecialidade(Number(e.target.value))}>
                                 <option>Especialidade</option>
                                 {especialidades.map(especialidade => (
@@ -145,30 +127,41 @@ export function EspecialidadeDisponivel() {
                             </label>
                             </th>
                         </thead>
-                        <tbody>
+                        <tbody>	
                             {especialidadesDisponiveis.map(especialidadeEmpresa => (
-                                <tr key={especialidadeEmpresa.idDisponibilidade}>
-                                    <td>{especialidadeEmpresa.Especialidade.nomeEspecialidade}</td>
-                                    <td>{especialidadeEmpresa.quantidadeEspecialidade}</td>
-                                    <td className="td-botoes">
-                                        <Dialog>
-                                            <DialogTrigger asChild>
-                                                <button type="button" className="botao-editar-disponivel"><img className="img-foto" src={fotoEditar}></img></button>
-                                            </DialogTrigger>
-                                            <EditarQuantidade idQuantidadeAlterar={idQuantidadeAlterar} idDisponibilidade={especialidadeEmpresa.idDisponibilidade}/>
-                                        </Dialog>
-                                        <button className="botao-deletar-disponivel" onClick={() => deletarEspecialidade(especialidadeEmpresa.idDisponibilidade)}><img className="img-foto" src={fotoDeletar}></img></button>
-                                    </td>
-                                    <td></td>
-                                </tr>
+                                <LinhaEspecialidade especialidadeEmpresa={especialidadeEmpresa} />
                             ))}
                         </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
         </>
+    )
+}
+
+function LinhaEspecialidade({ especialidadeEmpresa }) {
+    const [especialidade, setEspecialidade] = useState(especialidadeEmpresa);
+
+    function handleOnUpdateEspecialidade(novosDadosDaEspecialidade) {
+        setEspecialidade(novosDadosDaEspecialidade)
+    }
+
+    return (
+        <tr key={especialidade.idDisponibilidade}>
+        <td>{especialidade.Especialidade.nomeEspecialidade}</td>
+        <td>{especialidade.quantidadeEspecialidade}</td>
+        <td className="td-botoes">
+            <Dialog>
+                <DialogTrigger asChild>
+                    <button type="button" className="botao-editar-disponivel"><img className="img-foto" src={fotoEditar}></img></button>
+                </DialogTrigger>
+                <EditarQuantidade handleOnUpdateEspecialidade={handleOnUpdateEspecialidade} idDisponibilidade={especialidade.idDisponibilidade}/>
+            </Dialog>
+            <button className="botao-deletar-disponivel" onClick={() => deletarEspecialidade(especialidade.idDisponibilidade)}><img className="img-foto" src={fotoDeletar}></img></button>
+        </td>
+        <td></td>
+    </tr>
     )
 }
 
