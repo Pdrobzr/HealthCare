@@ -87,17 +87,17 @@ export function EspecialidadeDisponivel() {
     }
 
     const idQuantidadeAlterar = (data) => {
-        const NovasQuantidadesEspecialidadeTabela = especialidadesDisponiveis.map( arrayCompleta => {
-                if(arrayCompleta.idDisponibilidade === data.idDisponibilidade){
-                    arrayCompleta.quantidadeEspecialidade = data.quantidade
-                }
-                return arrayCompleta
-            }
-        )
-        setEspecialidadesDisponiveis(NovasQuantidadesEspecialidadeTabela)
+        const idAlterado = especialidadesDisponiveis.findIndex((arrayCompleta) => {
+            return arrayCompleta.idDisponibilidade === data.idDisponibilidade
+        })
+
+        const especialidadesAtualizadas = [...especialidadesDisponiveis]
+
+        especialidadesAtualizadas[idAlterado].quantidadeEspecialidade = data.quantidade
+
+        setEspecialidadesDisponiveis(especialidadesAtualizadas)
     }
 
-    
     useEffect(() => {
         if (localStorage.length == 0) {
             navigate('/entrar');
