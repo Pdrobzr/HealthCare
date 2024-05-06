@@ -1,16 +1,15 @@
 import './styles.css';
-import Imagem from "../../img/imgLogo/logo.png";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import fotoDeletar from "../../img/imagemFundo/fotoDeletar.png"
 import { useEffect, useState } from 'react';
 import blogFetch from '../../axios/config';
+import { NavbarAdm } from '@/components/NavbarAdm';
 
 export function AdmEmpresa() {
 
     const navigate = useNavigate();
 
     const [empresas, setEmpresas] = useState([]);
-    const [usuario, setUsuario] = useState([]);
 
     const listarEmpresas = async () => {
         try {
@@ -23,15 +22,6 @@ export function AdmEmpresa() {
         }
     }
 
-    const selecionarUsuario = async(id) => {
-        try {
-            const response = await blogFetch.get(`/selecionarUsuario/${id}`);
-            const data = response.data;
-            setUsuario(data.selecionarUsuario.nomeUsuario);
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     const deletarEmpresa = async (id) => {
         try {
@@ -42,10 +32,6 @@ export function AdmEmpresa() {
         }
     }
 
-    const logout = () => {
-        localStorage.clear();
-        navigate('/entrarAdmin');
-    }
 
     useEffect(() => {
         const admin = localStorage.getItem('admin');
@@ -55,28 +41,19 @@ export function AdmEmpresa() {
             navigate('/especialidadeDisponivel');
         } else {
             listarEmpresas();
-            selecionarUsuario(admin);
         }
     }, []);
 
     return (
         <body className="body-adm">
-            <header>
-                <div className="parte-esquerda-logo">
-                    <img className="imagem-logo" src={Imagem} alt="" />
-                </div>
-                <div className="parte-direita-logo">
-                    <p>{usuario}</p>
-                    <Link className='link' to={'/admEmpresa'}>Empresas</Link>
-                    <Link className='link' to={'/admPaciente'}>Pacientes</Link>
-                    <p className='logout' onClick={logout}>Sair</p>
-                </div>
-            </header>
+            <NavbarAdm/>
             <main className="container-total-adm">
-                <div className="responsivo-adm">
-                    <h1 className="titulo-tabela-adm">Lista de Empresas</h1>
-                    <div className="tabela-adm">
-                        <table className="tabela-adm-style">
+                <div className="responsivo-disponivell">
+                    <h1 className="titulo-adicionar-especialidade-disponivel-adm">
+                        Empresas Cadastradas
+                    </h1>
+                    <div className="tabela-adicionar-especialidade-disponivel-adm">
+                        <table className="styled-table-adm">
                             <thead className="thead-adm">
                                 <tr>
                                     <th>ID</th>
@@ -103,5 +80,5 @@ export function AdmEmpresa() {
             </main>
         </body>
     );
-};
+}
 

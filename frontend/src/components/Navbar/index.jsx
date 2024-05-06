@@ -1,4 +1,3 @@
-
 import  Image from "../../img/imgLogo/logoHealthCareGrande.png";
 import  Image2 from "../../img/imgLogo/logoHealthCarePequeno.png";
 import { Link} from 'react-router-dom';
@@ -23,10 +22,9 @@ const Navbar = () => {
             window.removeEventListener('resize', checkScreenSize);
         };
     }, []);
-
     return (
         <>
-            <header>
+         <header>
                 <div className="parte-esquerda-logo">
                     <img className="imagem-logo" src={isSmallScreen ? Image2 : Image} alt="" />
                 </div>

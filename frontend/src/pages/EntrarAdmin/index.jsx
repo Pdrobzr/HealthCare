@@ -66,8 +66,8 @@ export function EntrarAdmin() {
                 <div className='responsivo-admin'>
                     <LogoDescricao title="Bem vindo novamente" />
                     <form className='formulario-entrar-admin' onSubmit={autenticarAdmin}>
-                        <input onChange={(e) => setEmail(e.target.value)} className="input-adm" type="text" text="Email" name="Email" placeholder="Email" />
-                        <input onChange={(e) => setSenha(e.target.value)} className="input-adm" type="password" text="Senha" name="senha" placeholder="Senha" />
+                        <input onChange={(e) => setEmail(e.target.value)} className="input-adm" type="text" name="Email" placeholder="Email" />
+                        <input onChange={(e) => setSenha(e.target.value)} className="input-adm" type="password" name="senha" placeholder="Senha" />
                         <Button className="button-adm" type="submit" content="Entrar" name="entrar" />
                     </form>
                 </div>
@@ -75,4 +75,4 @@ export function EntrarAdmin() {
         </div>
 
     );
-};
+}

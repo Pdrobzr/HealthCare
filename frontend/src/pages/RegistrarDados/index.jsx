@@ -135,7 +135,6 @@ export function RegistrarDados() {
                 });
                 return;
             }
-
             setGeodificacao(true);
 
             const key = import.meta.env.VITE_REACT_APP_KEY;
@@ -151,7 +150,7 @@ export function RegistrarDados() {
             const latitude = informacoes.lat.toString();
             const longitude = informacoes.lng.toString();
 
-
+            
             if (latitude && longitude) {
               const response = await blogFetch.post('/adicionarEmpresa', {
                     nome: nome,

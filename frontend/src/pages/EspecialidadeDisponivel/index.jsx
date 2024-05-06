@@ -117,7 +117,6 @@ export function EspecialidadeDisponivel() {
                         <h1 className="titulo-adicionar-especialidade-disponivel">Adicionar Especialidade</h1>
                         <div className="inputs-form-especialidades">
                         
-                        
                             <select className='escolha-especialidade-disponivel' value={especialidade} onChange={(e) => setEspecialidade(Number(e.target.value))}>
                                 <option>Especialidade</option>
                                 {especialidades.map(especialidade => (

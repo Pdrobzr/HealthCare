@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import fotoDeletar from "../../img/imagemFundo/fotoDeletar.png"
 import { useEffect, useState } from 'react';
 import blogFetch from '../../axios/config';
-
+import { NavbarAdm } from '@/components/NavbarAdm';
 
 export function AdmPaciente() {
 
@@ -65,22 +65,14 @@ export function AdmPaciente() {
 
     return (
         <body className="body-adm">
-            <header>
-                <div className="parte-esquerda-logo">
-                    <img className="imagem-logo" src={Imagem} alt="" />
-                </div>
-                <div className="parte-direita-logo">
-                    <p>{usuario}</p>
-                    <Link className='link' to={'/admEmpresa'}>Empresas</Link>
-                    <Link className='link' to={'/admPaciente'}>Pacientes</Link>
-                    <p className='logout' onClick={logout}>Sair</p>
-                </div>
-            </header>
+            <NavbarAdm/>
             <main className="container-total-adm">
-                <div className="responsivo-adm">
-                    <h1 className="titulo-tabela-adm">Lista de Pacientes</h1>
-                    <div className="tabela-adm">
-                        <table className="tabela-adm-style">
+                <div className="responsivo-disponivell">
+                    <h1 className="titulo-adicionar-especialidade-disponivel-adm">
+                        Pacientes cadastrados
+                    </h1>
+                    <div className="tabela-adicionar-especialidade-disponivel-adm">
+                        <table className="styled-table-adm">
                             <thead className="thead-adm">
                                 <tr>
                                     <th>ID</th>
@@ -107,4 +99,4 @@ export function AdmPaciente() {
             </main>
         </body>
     );
-};
+}
