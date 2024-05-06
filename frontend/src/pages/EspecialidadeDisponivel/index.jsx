@@ -110,7 +110,6 @@ export function EspecialidadeDisponivel() {
 
     return (
         <>
-        
             <Navbar />
             <div className="container-total-especialidade-disponivel">
                 <div className="responsivo-disponivell">
@@ -131,7 +130,6 @@ export function EspecialidadeDisponivel() {
                             <button type="submit" className="botao-especialidade-disponivel">Adicionar</button>
                         </div>
                     </form>
-
                     <div className="tabela-adicionar-especialidade-disponivel">
                     <table className="styled-table-disponivel">
                         <thead className="thead-table">

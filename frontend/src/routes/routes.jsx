@@ -4,14 +4,13 @@ import { Entrar } from "../pages/Entrar";
 import { RegistrarDados } from "../pages/RegistrarDados"
 import { RecuperarSenha } from "../pages/RecuperarSenha"
 import { EspecialidadeDisponivel } from "../pages/EspecialidadeDisponivel"
-import { AlterarDados } from "../pages/AlterarDados";
-import { AlterarEspecialidade } from "../pages/AlterarEspecialidade";
 import { HomePage } from "../pages/HomePage";
 import { EntrarAdmin } from "../pages/EntrarAdmin";
 import { AdmEmpresa } from "../pages/AdmEmpresas";
 import { AdmPaciente } from "../pages/AdmPacientes";
 import { AlterarSenha } from "../pages/AlterarSenha";
 import NotFoundPage from "../pages/NotFoundPage";
+import { Metricas } from "@/pages/Metricas";
 
 export const AppRoutes = () => {
     return(
@@ -22,12 +21,11 @@ export const AppRoutes = () => {
                 <Route element={<RegistrarDados/>} path="registrarDados"/>
                 <Route element={<RecuperarSenha/>} path="recuperarSenha"/>
                 <Route element={<EspecialidadeDisponivel/>} path="especialidadeDisponivel"/>
-                <Route element={<AlterarEspecialidade/>} path="alterarEspecialidade/:id"/>
                 <Route element={<EntrarAdmin/>} path="entrarAdmin"/>
                 <Route element={<AdmEmpresa/>} path="admEmpresa"/>
                 <Route element={<AdmPaciente/>} path="admPaciente"/>
-                <Route element={<AlterarSenha/>} path="alterarSenha/:id" />
-
+                <Route element={<Metricas/>} path="/metricas"/>
+                <Route element={<AlterarSenha/>} path="alterarSenha/:id"/>
                 <Route path="*" element={<NotFoundPage/>} />
             </Routes>
         </BrowserRouter>
