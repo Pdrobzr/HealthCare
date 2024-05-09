@@ -17,7 +17,7 @@ import ContextNome from "../Context/ContextName"
 export function DialogAlterarDadosEmpresa({fechouDialog}){
 
   const [nomeEmpresa, setNomeEmpresa] = useContext(ContextNome);
-
+  console.log(nomeEmpresa)
   const navigate = useNavigate();
 
     const token = localStorage.getItem("token");

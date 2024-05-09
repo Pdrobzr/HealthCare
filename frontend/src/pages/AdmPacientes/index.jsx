@@ -69,7 +69,7 @@ export function AdmPaciente() {
             <main className="container-total-adm">
                 <div className="responsivo-disponivell">
                     <h1 className="titulo-adicionar-especialidade-disponivel-adm">
-                        Pacientes cadastrados
+                        Pacientes cadastrados 
                     </h1>
                     <div className="tabela-adicionar-especialidade-disponivel-adm">
                         <table className="styled-table-adm">

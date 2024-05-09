@@ -65,7 +65,7 @@ export function EspecialidadeDisponivel() {
                 Authorization: `Bearer ${token}`
             }
         });
-
+        
         const data = response.data;
         setStatus(data.selecionarEmpresa.statusEmpresa);
 
