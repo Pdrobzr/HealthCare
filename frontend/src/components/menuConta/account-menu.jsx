@@ -12,15 +12,15 @@ import { Dialog, DialogTrigger } from '../ui/dialog'
 import { DialogAlterarDadosEmpresa } from "../alterarDadosEmpresa";
 import { DialogAlterarContaEmpresa } from "../alterarContaEmpresa";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import blogFetch from "@/axios/config";
-import ContextNome from "../Context/ContextName"
+import { ContextNome } from "../Context/ContextName";
 
 export function MenuConta(){
 
     const navigate = useNavigate();
 
-    const [nomeEmpresa, setNomeEmpresa] = useState("");
+    const {nomeEmpresa, setNomeEmpresa} = useContext(ContextNome);
     const token = localStorage.getItem("token");
     const idEmpresa = localStorage.getItem("Empresa");
     const [open, setOpen] = useState(false)
@@ -52,11 +52,11 @@ export function MenuConta(){
     }, []);
     
     return(
-        <ContextNome.Provider value={[nomeEmpresa, setNomeEmpresa]}>
+        
             <DropdownMenu open={open} onOpenChange={setOpen}>
 
                 <DropdownMenuTrigger asChild>
-                    <Button  className="flex gap-[2] select-none hover:bg-transparent items-center bg-transparent text-[black] text-[15px] px-[5px] py-0 rounded-lg border-2 border-solid border-[rgba(232,232,232,1)] border-2 border-solid border-[rgba(184,185,190,1)]">
+                    <Button  className="flex gap-[2] select-none hover:bg-transparent items-center bg-transparent text-[black] text-[15px] px-[5px] py-0 rounded-lg border-2 border-solid border-[rgba(232,232,232,1)] ">
                         <strong>{nomeEmpresa}</strong>
                         <ChevronDown className="chevronDown"/>
                     </Button>
@@ -71,7 +71,7 @@ export function MenuConta(){
                                 <span>Perfil empresa</span>
                             </DropdownMenuItem>
                         </DialogTrigger>
-                        <DialogAlterarDadosEmpresa fechouDialog={() => {fechouDialog()}} />{/*DialogContent Alterar dados da empresa*/}
+                        <DialogAlterarDadosEmpresa fechouDialog={() => {fechouDialog()}} />
                     </Dialog>
 
                     <DropdownMenuSeparator />
@@ -82,7 +82,7 @@ export function MenuConta(){
                                 <span>Configurações</span>
                             </DropdownMenuItem>
                         </DialogTrigger>
-                        <DialogAlterarContaEmpresa fechouDialog={() => {fechouDialog()}}/>{/*DialogContent Alterar dados da empresa*/} 
+                        <DialogAlterarContaEmpresa fechouDialog={() => {fechouDialog()}}/>
                     </Dialog>
 
                     <DropdownMenuSeparator />
@@ -96,6 +96,5 @@ export function MenuConta(){
         
             </DropdownMenuContent>
         </DropdownMenu>
-    </ContextNome.Provider>
     )
 }

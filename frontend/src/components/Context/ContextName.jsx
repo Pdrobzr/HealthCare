@@ -1,5 +1,13 @@
-import { createContext } from "react"
+import { createContext, useState } from "react"
 
-const ContextNome = createContext({})
+export const ContextNome = createContext()
 
-export default ContextNome
+export const ContextProvider = ({children}) => {
+    const [nomeEmpresa, setNomeEmpresa] = useState();
+
+    return(
+        <ContextNome.Provider value={{nomeEmpresa, setNomeEmpresa}}>
+            {children}
+        </ContextNome.Provider>
+    )
+}

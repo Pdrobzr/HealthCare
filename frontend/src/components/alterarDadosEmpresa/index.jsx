@@ -11,13 +11,12 @@ import { Label } from '../ui/label'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
-import ContextNome from "../Context/ContextName"
-
+import { ContextNome } from '../Context/ContextName'
 
 export function DialogAlterarDadosEmpresa({fechouDialog}){
 
-  const [nomeEmpresa, setNomeEmpresa] = useContext(ContextNome);
-  console.log(nomeEmpresa)
+  const {nomeEmpresa, setNomeEmpresa} = useContext(ContextNome);
+
   const navigate = useNavigate();
 
     const token = localStorage.getItem("token");
@@ -27,6 +26,7 @@ export function DialogAlterarDadosEmpresa({fechouDialog}){
     const [nomePlaceholder, setNomePlaceholder] = useState("");
     const [emailPlaceholder, setEmailPlaceholder] = useState("");
     const [telefonePlaceholder, setTelefonePlaceholder] = useState();
+
     const selecionarEmpresa = async () => {
         const response = await blogFetch.get(`/selecionarEmpresa/${idEmpresa}`, {
             headers: {
