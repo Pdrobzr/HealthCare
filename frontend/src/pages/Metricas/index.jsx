@@ -33,7 +33,7 @@ export function Metricas() {
                 
                 <div className="responsivo-disponivell">
                     <h1 className="titulo-adicionar-especialidade-disponivel-adm">
-                        Comentarios
+                        Comentários
                     </h1>
                     <div className="totalComentarios">
                         <hr />
@@ -42,7 +42,7 @@ export function Metricas() {
                             <div className="imagemComentario" style={{backgroundColor: 'blue'}}>{nomeEmpresa?.charAt(0).toUpperCase()}</div>
                             <div>   
                                 <p className="nomeEmpresa">{nomeEmpresa}</p>
-                                <p className="quantidadeComentarios">comentarios ({comentarios.length})</p>
+                                <p className="quantidadeComentarios">comentários ({comentarios.length})</p>
                             </div>
                         </div>
                         <hr />
