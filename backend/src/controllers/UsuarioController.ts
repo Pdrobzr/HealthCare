@@ -201,7 +201,9 @@ export class UsuarioController {
         if (req.file) {
             const { file } = req;
 
-            const id = Number(req.params.id);
+            const id = Number(req.query.id);
+
+            const titulo = String(req.query.titulo);
 
             const uploadImagesServices = new UploadImagesServices();
 
@@ -213,6 +215,7 @@ export class UsuarioController {
                 const adicionarExame = await prisma.exame.create({
                     data: {
                         nomeImagem: file.filename,
+                        nomeExame: titulo,
                         idUsuario: id,
                         dataCriacao: dataEHoraBrasil
                     }
