@@ -49,7 +49,7 @@ export class UsuarioController {
         });
 
         if (emailRegistrado) {
-            return res.json({ error: 'Erro! Email já cadastrado!' });
+            return res.status(400).json({ error: 'Erro! Email já cadastrado!' });
         } else {
 
             const adicionarUsuario = await prisma.usuario.create({
@@ -61,7 +61,7 @@ export class UsuarioController {
                 }
             });
 
-            return res.json({ message: 'Usuáro registrado com sucesso!', adicionarUsuario });
+            return res.status(201).json({ message: 'Usuáro registrado com sucesso!', adicionarUsuario });
         }
 
     }
