@@ -238,7 +238,8 @@ export class UsuarioController {
             select: {
                 idExame: true,
                 nomeExame: true,
-                nomeImagem: true
+                nomeImagem: true,
+                dataCriacao: true,
             },
             where: {
                 idUsuario

@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 function App(){
   return(
     <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="HealthScreen" screenOptions={{headerShown: false,}}>
+      <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false,}}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />

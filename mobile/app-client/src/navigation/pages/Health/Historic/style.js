@@ -58,12 +58,12 @@ const styles = StyleSheet.create({
     cardsContent:{
         flex:1,
         marginTop:5,
-        flexDirection:'row',
+        flexDirection:'column',
         flexWrap: 'wrap',
         
     },
     card:{
-        width: Platform.OS == 'ios' ? 150 : 170,
+        width: Platform.OS == 'ios' ? "90%" : "90%",
         height:100,
         marginTop:Platform.OS == 'ios' ? 25 : 20,
         marginLeft:Platform.OS == 'ios' ? 20 : 13,
@@ -92,7 +92,30 @@ const styles = StyleSheet.create({
         height:35,
         padding:1,
         flexDirection:'column',
-    }
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    modalContent: {
+        width: 300,
+        backgroundColor: '#FFF',
+        borderRadius: 10,
+        padding: 20,
+        alignItems: 'center',
+    },
+    closeButton: {
+        marginTop: 20,
+        padding: 10,
+        backgroundColor: '#4A4444',
+        borderRadius: 5,
+    },
+    closeButtonText: {
+        color: '#FFF',
+        fontFamily: 'Montserrat-Bold',
+    },
 })
 
 export default styles;
