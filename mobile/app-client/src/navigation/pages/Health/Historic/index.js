@@ -1,4 +1,5 @@
-import { View, TextInput, ScrollView, Text, TouchableOpacity, Modal,Platform } from 'react-native';
+import * as React from 'react';
+import { View, TextInput, ScrollView, Text, TouchableOpacity, Modal,Platform, RefreshControl } from 'react-native';
 import styles from './style';
 import { useFonts } from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
@@ -100,6 +101,18 @@ const HistoricScreen = ({ navigation }) => {
         }
     }
 
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        listarExames();
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 1000);
+    }, []);
+
+
+
     return (
         <View style={{ flex: 1, flexDirection: 'column', padding: 15, backgroundColor: '#F1F5F8' }}>
             <View style={styles.descriptionContent}>
@@ -140,7 +153,9 @@ const HistoricScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <ScrollView style={{ flex: 1 }}>
+            <ScrollView style={{ flex: 1 }} refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                }>
                 <View style={styles.cardsContent}>
                     {exames.map((exame) => (
                         <TouchableOpacity key={exame.id} style={{ width: '100%' }} onPress={() => abrirDetalhesExame(exame)}>
