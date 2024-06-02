@@ -256,6 +256,60 @@
                 }
             }
         },
+        "/realizarComentario": {
+            "post": {
+                "description": "Rota para o paciente realizar o comentário sobre uma empresa",
+                "summary": "Rota para o paciente realizar o comentário sobre uma empresa",
+                "tags": [
+                    "Pacientes"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/adicionarExame": {
+            "post": {
+                "description": "Rota para o paciente armazenar um determinado exame em sua conta",
+                "summary": "Rota para o paciente armazenar um determinado exame em sua conta",
+                "tags": [
+                    "Pacientes"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/listarExames/{idUsuario}": {
+            "get": {
+                "description": "Rota para o paciente visualizar todos os exames armazenados em sua conta",
+                "summary": "Rota para o paciente visualizar todos os exames armazenados em sua conta",
+                "tags": [
+                    "Pacientes"
+                ],"security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/deletarExame/{idExame}": {
+            "delete": {
+                "description": "Rota para o paciente deletar um determinado exame de sua conta",
+                "summary": "Rota para o paciente deletar um determinado exame de sua conta",
+                "tags": [
+                    "Pacientes"
+                ], "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/adicionarEmpresa": {
             "post": {
                 "description": "Rota para adicionar empresas!",
@@ -480,6 +534,146 @@
                     }
                 }
                 
+            }
+        },
+        "/listarEmpresasAbertas": {
+            "get": {
+                "description": "Rota para listar empresas abertas",
+                "summary": "Rota para listar empresas abertas",
+                "tags": [
+                    "Empresas"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/listarComentarios/{idEmpresa}": {
+            "get": {
+                "description": "Rota para listar os comentários de um empresa",
+                "summary": "Rota para listar os comentários de um empresa",
+                "tags": [
+                    "Empresas"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/atualizarSenha/{id}": {
+            "put": {
+                "description": "Rota para atualizar senha da empresa",
+                "summary": "Rota para atualizar senha da empresa",
+                "tags": [
+                    "Empresas"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/listarProfissionais/{idEmpresa}": {
+            "get": {
+                "description": "Rota para listar profissionais disponiveis por empresa",
+                "summary": "Rota para listar profissionais disponiveis por empresa",
+                "tags": [
+                    "Empresas"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/listarEspecialidades": {
+            "get": {
+                "description": "Rota para listar todos os tipos de especialidades",
+                "summary": "Rota para listar todos os tipos de especialidades",
+                "tags": [
+                    "Especialidades"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }, 
+        "/adicionarEspecialidade/{idEmpresa}/{idEspecialidade}": {
+            "post": {
+                "description": "Rota para a empresa adicionar profissionais disponiveis por especialidade",
+                "summary": "Rota para a empresa adicionar profissionais disponiveis por especialidade",
+                "tags": [
+                    "Especialidades"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/informarDisponibilidade/{idDisponibilidade}": {
+            "put": {
+                "description": "Rota para a empresa atualizar o numero de profissionais disponiveis por especialidade",
+                "summary": "Rota para a empresa atualizar o numero de profissionais disponiveis por especialidade",
+                "tags": [
+                    "Especialidades"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/deletarEspecialidade/{idDisponibilidade}": {
+            "delete": {
+                "description": "Rota para a empresa deletar todos os profissionais disponiveis por especialidade",
+                "summary": "Rota para a empresa deletar todos os profissionais disponiveis por especialidade",
+                "tags": [
+                    "Especialidades"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/selecionarDisponibilidade/{idDisponibilidade}": {
+            "get": {
+                "description": "Rota para listar os profissionais disponiveis por especialidade de uma empresa (utilizada pela empresa)",
+                "summary": "Rota para listar os profissionais disponiveis por especialidade de uma empresa (utilizada pela empresa)",
+                "tags": [
+                    "Especialidades"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/selecionarEspecialidades/{idEspecialidade}": {
+            "get": {
+                "description": "Rota para listar os profissionais disponiveis por especialidade de uma empresa (utilizada pelo paciente)",
+                "summary": "Rota para listar os profissionais disponiveis por especialidade de uma empresa (utilizada pelo paciente)",
+                "tags": [
+                    "Especialidades"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
