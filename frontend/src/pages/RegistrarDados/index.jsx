@@ -95,22 +95,6 @@ export function RegistrarDados() {
         }
     }
 
-    useEffect(() => {
-        const getGeodificacao = async () => {
-            const geodificacao = await blogFetch.get(`https://nominatim.openstreetmap.org/search?format=json&q=${endereco}, Praia Grande, Brazil`);
-
-            const dados = geodificacao;
-
-            const informacoes = dados.data[0];
-
-            setLatitude(informacoes.lat);
-            setLongitude(informacoes.lon);
-        }
-
-        getGeodificacao();
-    }, [geodificacao]);
-
-
     const registrarEmpresa = async (e) => {
         e.preventDefault();
 
