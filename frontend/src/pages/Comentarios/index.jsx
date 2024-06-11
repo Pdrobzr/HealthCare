@@ -6,10 +6,10 @@ import './style.css'
 import { ContextNome } from "@/components/Context/ContextName";
 import randomColor from "randomcolor";
 
-export function Metricas() {
+export function Comentarios() {
 
     const empresa = localStorage.getItem("Empresa");
-    const {nomeEmpresa, setNomeEmpresa} = useContext(ContextNome);
+    const {nomeEmpresa} = useContext(ContextNome);
 
     const [comentarios, setComentarios] = useState([]);
 
@@ -18,8 +18,6 @@ export function Metricas() {
         const response = await blogFetch.get(`/listarComentarios/${empresa}`);
         const data = response.data;
         setComentarios(data);
-         
-         
     }
 
     useEffect(() => {

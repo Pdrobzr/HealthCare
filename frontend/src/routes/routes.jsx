@@ -10,7 +10,7 @@ import { AdmEmpresa } from "../pages/AdmEmpresas";
 import { AdmPaciente } from "../pages/AdmPacientes";
 import { AlterarSenha } from "../pages/AlterarSenha";
 import NotFoundPage from "../pages/NotFoundPage";
-import { Metricas } from "@/pages/Metricas";
+import { Comentarios } from "@/pages/Comentarios";
 
 export const AppRoutes = () => {
     return(
@@ -24,7 +24,7 @@ export const AppRoutes = () => {
                 <Route element={<EntrarAdmin/>} path="entrarAdmin"/>
                 <Route element={<AdmEmpresa/>} path="admEmpresa"/>
                 <Route element={<AdmPaciente/>} path="admPaciente"/>
-                <Route element={<Metricas/>} path="/metricas"/>
+                <Route element={<Comentarios/>} path="/comentarios"/>
                 <Route element={<AlterarSenha/>} path="alterarSenha/:id"/>
                 <Route path="*" element={<NotFoundPage/>} />
             </Routes>

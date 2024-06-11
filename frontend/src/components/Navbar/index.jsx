@@ -30,11 +30,11 @@ const Navbar = () => {
                 </div>
                 <div className="parte-direita-logo">
                 <Link className='link' to={'/especialidadeDisponivel'}><HeartPulse className="hover:border-solid hover:text-[red]"/></Link>
-                <Link className='link' to={'/metricas'}><BarChartBig className="hover:border-solid hover:text-[red]"/></Link>
+                <Link className='link' to={'/comentarios'}><BarChartBig className="hover:border-solid hover:text-[red]"/></Link>
                 <MenuConta/>
                 </div>
             </header>
-        </>     
+        </>
     )
 }
 

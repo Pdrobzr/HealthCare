@@ -25,6 +25,7 @@ export function RegistrarDados() {
     const [bairro, setBairro] = useState("");
     const [cep, setCep] = useState("");
     const [complemento, setComplemento] = useState("");
+    const [numero, setNumero] = useState();
 
     const [longitude, setLongitude] = useState('');
     const [latitude, setLatitude] = useState('');
@@ -146,6 +147,7 @@ export function RegistrarDados() {
                     endereco: endereco,
                     cep: cep,
                     complemento: complemento,
+                    numero: numero,
                     latitude: latitude,
                     longitude: longitude
                 });
@@ -211,8 +213,11 @@ export function RegistrarDados() {
                             <label htmlFor="bairro">Bairro</label>
                             <input value={bairro} type="text" name='bairro' onChange={(e) => setBairro(e.target.value)} placeholder='Bairro' className='inputGeral'/>
 
+                            <label htmlFor="numero">Numero</label>
+                            <input onChange={(e) => setNumero(e.target.value)} type="number" name="numero" placeholder="Numero" className='inputGeral'/>
+                            
                             <label htmlFor="complemento">Complemento</label>
-                            <input onChange={(e) => setComplemento(e.target.value)} type="text"  name="complemento" placeholder="Complemento" className='inputGeral'/>
+                            <input onChange={(e) => setComplemento(e.target.value)} type="text" name="complemento" placeholder="Complemento" className='inputGeral'/>
                             <Button type="submit" content="Registrar" name="Registrar" />
                         </div>)
                     }

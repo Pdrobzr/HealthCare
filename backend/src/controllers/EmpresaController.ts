@@ -9,9 +9,9 @@ dotenv.config();
 export class EmpresaController {
 
     async adicionarEmpresa(req: Request, res: Response) {
-        const { nome, email, senha, cnpj, telefone, bairro, endereco, cep, complemento, latitude, longitude } = req.body;
+        const { nome, email, senha, cnpj, telefone, bairro, endereco, cep, numero, complemento, latitude, longitude } = req.body;
 
-        if (!nome || !email || !senha || !cnpj || !telefone || !bairro || !endereco || !cep || !latitude || !longitude) {
+        if (!nome || !email || !senha || !cnpj || !telefone || !bairro || !endereco || !cep || !numero ||!latitude || !longitude) {
             return res.status(400).json({ error: 'Insira todas as informações' });
         } else {
 
@@ -44,12 +44,12 @@ export class EmpresaController {
                         bairroEmpresa: bairro,
                         enderecoEmpresa: endereco,
                         cepEmpresa: cep,
+                        numeroEmpresa: numero,
                         complementoEmpresa: complemento,
                         latitude: latitude,
                         longitude: longitude
                     }
                 });
-
                 return res.json({ message: 'Empresa adicionada com sucesso!', adicionarEmpresa });
             }
         }
