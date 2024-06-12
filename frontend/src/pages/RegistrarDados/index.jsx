@@ -124,7 +124,7 @@ export function RegistrarDados() {
 
             const key = import.meta.env.VITE_REACT_APP_KEY;
 
-            const response = await blogFetch.post(`https://maps.googleapis.com/maps/api/geocode/json?address=${cep}&key=${key}`);
+            const response = await blogFetch.post(`https://maps.googleapis.com/maps/api/geocode/json?address=${endereco} ${numero}, ${bairro}, Praia Grande&key=${key}`);
 
             const data = response.data;
 
@@ -206,10 +206,10 @@ export function RegistrarDados() {
                             <input onBlur={checkCep} onChange={(e) => setCep(e.target.value)} type='number' name="cep" placeholder="CEP" className='inputGeral'/>
 
                             <label htmlFor="endereço">Endereço</label>
-                            <input value={endereco} onChange={(e) => setEndereco(e.target.value)} type="text"  name="endereço" placeholder="Endereço" className='inputGeral'/>
+                            <input value={endereco} onChange={(e) => setEndereco(e.target.value)} type="text"  name="endereço" placeholder="Endereço" className='inputGeral' readOnly/>
 
                             <label htmlFor="bairro">Bairro</label>
-                            <input value={bairro} type="text" name='bairro' onChange={(e) => setBairro(e.target.value)} placeholder='Bairro' className='inputGeral'/>
+                            <input value={bairro} type="text" name='bairro' onChange={(e) => setBairro(e.target.value)} placeholder='Bairro' className='inputGeral' readOnly/>
 
                             <label htmlFor="numero">Numero</label>
                             <input onChange={(e) => setNumero(e.target.value)} type="number" name="numero" placeholder="Numero" className='inputGeral'/>
