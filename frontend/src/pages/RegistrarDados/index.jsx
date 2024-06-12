@@ -135,7 +135,6 @@ export function RegistrarDados() {
             const latitude = informacoes.lat.toString();
             const longitude = informacoes.lng.toString();
 
-            
             if (latitude && longitude) {
               const response = await blogFetch.post('/adicionarEmpresa', {
                     nome: nome,
@@ -144,10 +143,9 @@ export function RegistrarDados() {
                     cnpj: cnpj,
                     telefone: telefone,
                     bairro: bairro,
-                    endereco: endereco,
+                    endereco: endereco +' '+ numero,
                     cep: cep,
                     complemento: complemento,
-                    numero: numero,
                     latitude: latitude,
                     longitude: longitude
                 });
