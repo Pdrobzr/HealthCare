@@ -21,7 +21,7 @@ router.get('/listarEmpresas', empresaController.listarEmpresas);
 router.get('/selecionarEmpresa/:id', empresaController.selecionarEmpresa);
 router.post('/autenticarEmpresa', empresaController.autenticarEmpresa);
 router.put('/atualizarEmpresa/:id',AuthMiddleware, empresaController.atualizarEmpresa);
-router.delete('/deletarEmpresa/:id', AuthMiddleware, empresaController.deletarEmpresa);
+router.delete('/deletarEmpresa/:id', empresaController.deletarEmpresa);
 router.put('/atualizarStatus/:id', empresaController.atualizarStatus);
 router.post('/pesquisarEmpresa', AuthMiddleware, empresaController.pesquisarEmpresa);
 router.get('/listarEmpresasAbertas', empresaController.listarEmpresasAbertas);
