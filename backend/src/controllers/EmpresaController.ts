@@ -109,7 +109,7 @@ export class EmpresaController {
         
         const total = somaValores._sum.situacaoFila;
 
-        let mediaSituacaoFila = 1;
+        let mediaSituacaoFila = 0;
 
         if(total){
             mediaSituacaoFila = total / contarRegistros
