@@ -92,6 +92,29 @@ export class EmpresaController {
     async selecionarEmpresa(req: Request, res: Response) {
         const id = Number(req.params.id);
 
+        const contarRegistros = await prisma.comentario.count({
+            where: {
+                Empresa: {
+                    idEmpresa: id
+                }
+            }
+        });
+
+        const somaValores = await prisma.comentario.aggregate({
+            _sum: {
+                situacaoFila: true,  
+            },
+        });
+
+        
+        const total = somaValores._sum.situacaoFila;
+
+        let mediaSituacaoFila = 1;
+
+        if(total){
+            mediaSituacaoFila = total / contarRegistros
+        }
+        
         const selecionarEmpresa = await prisma.empresa.findFirst({
             select: {
                 idEmpresa: true,
@@ -112,7 +135,6 @@ export class EmpresaController {
                         quantidadeEspecialidade: true
                     }
                 }
-
             },
             where: {
                 idEmpresa: id,
@@ -127,7 +149,7 @@ export class EmpresaController {
             }
         });
 
-        return res.json({ selecionarEmpresa, listarComentarios });
+        return res.json({ selecionarEmpresa, listarComentarios, mediaSituacaoFila });
     }
 
     async listarProfissionaisDisponiveis(req: Request, res: Response) {

@@ -178,7 +178,7 @@ export class UsuarioController {
 
     async realizarComentario(req: Request, res: Response) {
         const { conteudo } = req.body;
-        const { situacaoFila } = req.body;
+        const situacaoFila  = Number(req.body.situacaoFila);
 
         const idUsuario = Number(req.query.idUsuario);
         const idEmpresa = Number(req.query.idEmpresa);
