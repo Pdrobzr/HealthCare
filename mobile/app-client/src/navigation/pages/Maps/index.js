@@ -6,12 +6,24 @@ import { View, StyleSheet, TextInput, Platform, Animated, ScrollView, Text } fro
 import * as Location from 'expo-location';
 import { blips } from './Markers/blips';
 import { FontAwesome } from '@expo/vector-icons';
+import blogFetch from '../../../axios/config';
 
 export default function MapsScreen({ navigation }) {
 
   const [location, setLocation] = useState(null);
   const [initialRegion, setInitialRegion] = useState(null);
 
+  const [empresas, setEmpresas] = useState([]);
+
+  const listarEmpresas = async () => {
+      const response = await blogFetch.get('/listarEmpresasAbertas');
+      const data = response.data;
+      setEmpresas(data.listarEmpresasAbertas);
+  }
+
+  useEffect(() => {
+    listarEmpresas()
+  },[])
 
   useEffect(() => {
     (async () => {
@@ -30,7 +42,6 @@ export default function MapsScreen({ navigation }) {
 
       });
     })();
-
 
   }, []);
 
@@ -87,25 +98,24 @@ export default function MapsScreen({ navigation }) {
 
         customMapStyle={mapStyle}
       >
-        {blips.map((blips, index) => (
+        {empresas.map((empresa, index) => (
           <Marker
             key={index}
             coordinate={{
-              latitude: blips.latitude,
-              longitude: blips.longitude
+              latitude: parseFloat(empresa.latitude),
+              longitude: parseFloat(empresa.longitude)
             }}
-            title={blips.title}
+            title={empresa.nomeEmpresa}
 
 
             resizeMode="contain"
           >
             <Callout tooltip  style={styles.callout}>
-              <View style={styles.contentCallout}>
+      
                 <View style={styles.bubble}>
-                  <Text style={styles.title}>{blips.title}</Text>
-                </View>
-               
-              </View>
+                  <Text style={styles.title}>{empresa.nomeEmpresa}</Text>
+                  <Text style={styles.title}>Endereço:{empresa.enderecoEmpresa} </Text>
+                </View> 
             </Callout>
           </Marker>
         ))}
@@ -151,12 +161,13 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   callout:{
-    width:'600px'
+    width:'600px',
+    height:'600px'
   },
-  contentCallout:{
-    width:500,
-    height:500,
-  },  
+ // contentCallout:{
+ //   width:500,
+ //   height:500,
+ // },  
   //Bubble
   bubble: {
     flexDirection: 'column',
@@ -165,8 +176,9 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderColor: '#ccc',
     
-    padding: 15,
-    width: 150
+    padding: 5,
+    width: 150,
+    height:100
   },
   title:{
     fontSize:10,
