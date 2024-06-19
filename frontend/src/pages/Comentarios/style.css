@@ -10,6 +10,14 @@
     font-size: 24px;
 }
 
+.horarioEnviado{
+    color:rgba(140, 137, 137, 1);
+    display: flex;
+    justify-content: right;
+    font-size: 13px;
+    font-weight: bold;
+}
+
 .dadosEmpresa{
     display: flex;
     gap: 10px;

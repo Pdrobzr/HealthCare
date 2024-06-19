@@ -6,6 +6,9 @@ import './style.css'
 import { ContextNome } from "@/components/Context/ContextName";
 import randomColor from "randomcolor";
 import Rating from '@mui/material/Rating';
+import { styled } from '@mui/material/styles';
+import { UserRound } from 'lucide-react';
+import { format } from "date-fns";
 
 export function Comentarios() {
     
@@ -13,7 +16,18 @@ export function Comentarios() {
     const {nomeEmpresa} = useContext(ContextNome);
     
     const [comentarios, setComentarios] = useState([]);
-    
+
+    //
+    const StyledRating = styled(Rating)({
+        '& .MuiRating-iconFilled': {
+          color: '#ff6d75',
+        },
+        '& .MuiRating-iconHover': {
+          color: '#ff3d47',
+        },
+      });
+
+    //
     const listarComentarios = async () => {
         const response = await blogFetch.get(`/listarComentarios/${empresa}`);
         const data = response.data;
@@ -51,12 +65,22 @@ export function Comentarios() {
                                         <div className="imagemComentario" style={{backgroundColor: randomColor()}}>{todosComentarios.Usuario.nomeUsuario.charAt(0).toUpperCase()}</div>
                                         <div className="nomeData">
                                             <p>{todosComentarios.Usuario.nomeUsuario}</p>
-                                            <p className="dataComentario">{todosComentarios.dataPublicacao.slice(0,10)}</p>
+                                            <p className="dataComentario">{format(todosComentarios.dataPublicacao.slice(0,10), 'dd/MM/yyyy')}</p>
                                         </div>
                                     </div>
                                     <div className="comentariosWeb">
-                                        <p><strong>Situação da fila :</strong><Rating name="read-only" value={todosComentarios.situacaoFila} size="small" readOnly /></p>
+                                        <p>
+                                            <strong>Situação da fila :</strong>
+                                            <StyledRating 
+                                                defaultValue={todosComentarios.situacaoFila}
+                                                readOnly
+                                                size="small"
+                                                icon={<UserRound fontSize="small" />}
+                                                emptyIcon={<UserRound fontSize="small" />}/>
+                                        </p>
                                         <p>{todosComentarios.conteudoComentario}</p>
+                                        <p className="horarioEnviado">Enviado: {todosComentarios.dataPublicacao.slice(11,20)}</p>
+                                        
                                     </div>
                                 </div>
                             )
