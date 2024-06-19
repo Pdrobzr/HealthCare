@@ -8,7 +8,6 @@ import randomColor from "randomcolor";
 import Rating from '@mui/material/Rating';
 import { styled } from '@mui/material/styles';
 import { UserRound } from 'lucide-react';
-import { format } from "date-fns";
 
 export function Comentarios() {
     
@@ -65,7 +64,7 @@ export function Comentarios() {
                                         <div className="imagemComentario" style={{backgroundColor: randomColor()}}>{todosComentarios.Usuario.nomeUsuario.charAt(0).toUpperCase()}</div>
                                         <div className="nomeData">
                                             <p>{todosComentarios.Usuario.nomeUsuario}</p>
-                                            <p className="dataComentario">{format(todosComentarios.dataPublicacao.slice(0,10), 'dd/MM/yyyy')}</p>
+                                            <p className="dataComentario">{todosComentarios.dataPublicacao.slice(0,10)}</p>
                                         </div>
                                     </div>
                                     <div className="comentariosWeb">
