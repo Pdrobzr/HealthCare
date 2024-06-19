@@ -5,15 +5,15 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import './style.css'
 import { ContextNome } from "@/components/Context/ContextName";
 import randomColor from "randomcolor";
+import Rating from '@mui/material/Rating';
 
 export function Comentarios() {
-
+    
     const empresa = localStorage.getItem("Empresa");
     const {nomeEmpresa} = useContext(ContextNome);
-
+    
     const [comentarios, setComentarios] = useState([]);
-
-
+    
     const listarComentarios = async () => {
         const response = await blogFetch.get(`/listarComentarios/${empresa}`);
         const data = response.data;
@@ -28,7 +28,7 @@ export function Comentarios() {
         <body className="body-adm">
             <Navbar />
             <main className="container-total-adm">
-                
+
                 <div className="responsivo-disponivell">
                     <h1 className="titulo-adicionar-especialidade-disponivel-adm">
                         Comentários
@@ -55,6 +55,7 @@ export function Comentarios() {
                                         </div>
                                     </div>
                                     <div className="comentariosWeb">
+                                        <p><strong>Situação da fila :</strong><Rating name="read-only" value={todosComentarios.situacaoFila} size="small" readOnly /></p>
                                         <p>{todosComentarios.conteudoComentario}</p>
                                     </div>
                                 </div>

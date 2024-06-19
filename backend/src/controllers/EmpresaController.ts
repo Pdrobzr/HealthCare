@@ -376,6 +376,7 @@ export class EmpresaController {
             select: {
                 conteudoComentario:true,
                 dataPublicacao: true,
+                situacaoFila: true, 
                 Usuario: {
                     select: {
                         nomeUsuario: true,
