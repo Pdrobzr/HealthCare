@@ -6,7 +6,7 @@ import InputSearch from '../../../components/CustomInputs/inputSearch';
 import { FontAwesome } from '@expo/vector-icons';
 import blogFetch from '../../../axios/config';
 import Login from '../../../authentication/Login/index'
-
+import { Rating } from '@kolking/react-native-rating';
 const transparent = 'rgba(0,0,0,0.5)'
 export default HomeScreen = ({ navigation }) => {
 
@@ -37,6 +37,7 @@ export default HomeScreen = ({ navigation }) => {
 
         const [nomeEmpresa, setNomeEmpresa] = useState('');
         const [endereco, setEndereco] = useState('');
+        const [rating,setRating] = useState()
         const [bairro, setBairro] = useState('');
         const [especialidades, setEspecialidades] = useState([])
 
@@ -48,6 +49,7 @@ export default HomeScreen = ({ navigation }) => {
                     setNomeEmpresa(data.selecionarEmpresa.nomeEmpresa);
                     setEndereco(data.selecionarEmpresa.enderecoEmpresa);
                     setBairro(data.selecionarEmpresa.bairroEmpresa);
+                    setRating(data.mediaSituacaoFila)
                 };
 
                 const listarProfissionais = async (id) => {
@@ -208,13 +210,14 @@ export default HomeScreen = ({ navigation }) => {
                                         style={{
                                             position: 'absolute',
                                             right: 5,
-                                            width: 120,
+                                            width: 160,
                                             height: 50,
 
                                             alignContent: 'center',
                                             justifyContent: 'center',
                                             alignItems: 'center',
-                                            flexDirection: 'row'
+                                            flexDirection: 'row',
+                                           
                                         }}>
                                         <View>
                                             <Text
@@ -231,28 +234,7 @@ export default HomeScreen = ({ navigation }) => {
                                                 flexDirection: 'row',
                                                 justifyContent: 'space-around',
                                             }}>
-                                            <View style={{}}>
-                                                <FontAwesome
-                                                    name="user"
-                                                    size={15}
-                                                    color={'#6CA8DA'}
-                                                />
-                                            </View>
-                                            <View>
-                                                <FontAwesome
-                                                    name="user"
-                                                    size={15}
-                                                    color={'#6CA8DA'}
-                                                />
-                                            </View>
-                                            <View>
-                                                <FontAwesome
-                                                    name="user"
-                                                    size={15}
-                                                    color={'#C5E4FF'}
-                                                />
-                                            </View>
-
+                                            <Rating size={15} rating={rating}   fillColor={'#27a1f5'} touchColor={'#27a1f5'} />
                                         </View>
 
                                     </View>
@@ -488,9 +470,9 @@ const styles = StyleSheet.create({
     },
     contentText: {
         width: 200,
-        height: 30,
+        height: 40,
         left: 20,
-        top: 15,
+        top: 7,
         fontFamily: "Montserrat-Bold",
         color: '#4A4444',
         fontSize: 40,

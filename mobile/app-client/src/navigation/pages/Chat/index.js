@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState,useCallback} from 'react';
 import {
     KeyboardAvoidingView,
     Platform,
@@ -9,12 +9,15 @@ import {
     TextInput,
     TouchableOpacity,
     View,
-    FlatList
+    FlatList,
+    Modal
 } from 'react-native';
 import Balloon from './Balloon';
 import { FontAwesome } from '@expo/vector-icons';
 import blogFetch from '../../../axios/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Rating } from '@kolking/react-native-rating';
+
 
 const KEYBOARD_AVOIDING_BEHAVIOR = Platform.select({
     ios: 'padding',
@@ -23,7 +26,7 @@ const KEYBOARD_AVOIDING_BEHAVIOR = Platform.select({
 export default Chat = ({ navigation, route }) => {
 
     const { nomeEmpresa, idEmpresa } = route.params;
-
+    const [openModal, setOpenModal] = useState(false);
     const [comentarios, setComentarios] = useState([]);
     const [conteudo, setConteudo] = useState("");
     const backHome = async () => {
@@ -41,16 +44,27 @@ export default Chat = ({ navigation, route }) => {
         setComentarios(data);
     }
 
+    const [rating, setRating] = useState(0);
+
+    const handleChange = useCallback(
+      (value) => setRating(Math.round((rating + value) * 5) / 10),
+      [rating],
+    );
+
+
     useEffect(() => {    
         listarComentarios(idEmpresa);
     }, []);
+
+    
 
     const adicionarComentario = async () => {
 
         const idUsuario = await AsyncStorage.getItem('@usuario');
         try {
             const response = await blogFetch.post(`realizarComentario?idUsuario=${idUsuario}&idEmpresa=${idEmpresa}`, {
-                conteudo: conteudo
+                conteudo: conteudo,
+                situacaoFila: rating
             });
             const data = response.data;
             alert(data.message);
@@ -62,6 +76,15 @@ export default Chat = ({ navigation, route }) => {
         }
        
     }
+
+    const abrirDetalhesExame = () => {  
+        setOpenModal(true);
+    };
+
+    const fecharDetalhesExame = () => {
+        setOpenModal(false);
+    };
+
 
     return (
         <Fragment>
@@ -106,16 +129,38 @@ export default Chat = ({ navigation, route }) => {
                         <TouchableOpacity
                             style={styles.sendButton}
                             disabled={!conteudo}
-                            onPress={adicionarComentario}>
+                            onPress={abrirDetalhesExame}>
                             <Text style={styles.sendButtonText}>Enviar</Text>
                         </TouchableOpacity>
                     </View>
                 </SafeAreaView>
             </KeyboardAvoidingView>
+            {openModal && (
+                <Modal
+                    transparent={true}
+                    animationType="slide"
+                    visible={openModal}
+                    onRequestClose={fecharDetalhesExame}
+                >
+                    <View style={styles.modalContainer}>
+                        <View style={styles.modalContent}>
+                            <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20 }}>Avaliação</Text>
+                            <Rating size={30} rating={rating} onChange={handleChange}  fillColor={'#27a1f5'} touchColor={'#27a1f5'} />
+                            <Text style={{marginTop:10  }}>Avaliou {rating} de  5</Text>
+                            <TouchableOpacity onPress={adicionarComentario}>
+                                <Text style={{ color: 'blue', marginTop: 20 }}>Enviar</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={fecharDetalhesExame}>
+                                <Text style={{ color: 'blue', marginTop: 20 }}>Fechar</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </Modal>
+            )}
         </Fragment>
     );
 }
-
+ 
 const styles = StyleSheet.create({
     container: {
         marginTop: 16,
@@ -162,7 +207,29 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 20,
     },
-
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    modalContent: {
+        width: 300,
+        backgroundColor: '#FFF',
+        borderRadius: 10,
+        padding: 20,
+        alignItems: 'center',
+    },
+    closeButton: {
+        marginTop: 20,
+        padding: 10,
+        backgroundColor: '#4A4444',
+        borderRadius: 5,
+    },
+    closeButtonText: {
+        color: '#FFF',
+        fontFamily: 'Montserrat-Bold',
+    },
 });
 
 
