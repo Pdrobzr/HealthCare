@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState,useCallback} from 'react';
+import React, { Fragment, useEffect, useState, useCallback } from 'react';
 import {
     KeyboardAvoidingView,
     Platform,
@@ -16,8 +16,8 @@ import Balloon from './Balloon';
 import { FontAwesome } from '@expo/vector-icons';
 import blogFetch from '../../../axios/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Rating } from '@kolking/react-native-rating';
-
+//import { Rating } from '@kolking/react-native-rating';
+import { Rating, AirbnbRating } from 'react-native-ratings';
 
 const KEYBOARD_AVOIDING_BEHAVIOR = Platform.select({
     ios: 'padding',
@@ -32,11 +32,11 @@ export default Chat = ({ navigation, route }) => {
     const backHome = async () => {
         navigation.navigate('MainContainer');
     };
-
+    const USER_IMAGE = require('../../../../assets/user.png')
     // const renderChat = ({ item }) => (
     //     <Balloon message={item.conteudoComentario} name={item.Usuario.nomeUsuario} date={item.dataPublicacao} />
     // );
-   
+
 
     const listarComentarios = async (id) => {
         const response = await blogFetch.get(`/listarComentarios/${id}`);
@@ -46,17 +46,16 @@ export default Chat = ({ navigation, route }) => {
 
     const [rating, setRating] = useState(0);
 
-    const handleChange = useCallback(
-      (value) => setRating(Math.round((rating + value) * 5) / 10),
-      [rating],
-    );
 
+    const ratingCompleted = (rating) => {
+        console.log("Rating is: " + rating)
+    }
 
-    useEffect(() => {    
+    useEffect(() => {
         listarComentarios(idEmpresa);
     }, []);
 
-    
+
 
     const adicionarComentario = async () => {
 
@@ -74,10 +73,10 @@ export default Chat = ({ navigation, route }) => {
         } catch (error) {
             console.log(error);
         }
-       
+
     }
 
-    const abrirDetalhesExame = () => {  
+    const abrirDetalhesExame = () => {
         setOpenModal(true);
     };
 
@@ -144,9 +143,30 @@ export default Chat = ({ navigation, route }) => {
                 >
                     <View style={styles.modalContainer}>
                         <View style={styles.modalContent}>
-                            <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20 }}>Avaliação</Text>
-                            <Rating size={30} rating={rating} onChange={handleChange}  fillColor={'#27a1f5'} touchColor={'#27a1f5'} />
-                            <Text style={{marginTop:10  }}>Avaliou {rating} de  5</Text>
+                            <Text style={{ fontFamily: 'Montserrat-Bold', fontSize: 20 }}>Avaliação da Fila</Text>
+                            <AirbnbRating
+                         
+                                reviews={[
+                                    'Vazio',
+                                    'Moderado',
+                                    'Moderado',
+                                    'Cheio',
+                                    'Muito Cheio',
+                                ]}
+                                count={5}
+                                defaultRating={3}
+                                selectedColor="#27a1f5"
+                                unSelectedColor="lightgray"
+                                reviewColor='#27a1f5'
+                                size={25}
+                                reviewSize={25}
+                                showRating={true}
+                                // isDisabled
+                                // starContainerStyle={{ backgroundColor:"red" }}
+                                ratingContainerStyle={{ marginVertical: 20 }}
+                                starImage={require('../../../../assets/user.png')}
+                                onFinishRating={(rating) => setRating(rating)}
+                            />
                             <TouchableOpacity onPress={adicionarComentario}>
                                 <Text style={{ color: 'blue', marginTop: 20 }}>Enviar</Text>
                             </TouchableOpacity>
@@ -160,7 +180,7 @@ export default Chat = ({ navigation, route }) => {
         </Fragment>
     );
 }
- 
+
 const styles = StyleSheet.create({
     container: {
         marginTop: 16,

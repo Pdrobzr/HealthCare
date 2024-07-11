@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   callout:{
     width:'600px',
-    height:'600px'
+    height:'400px'
   },
  // contentCallout:{
  //   width:500,

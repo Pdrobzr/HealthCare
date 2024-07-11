@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
         top: 50,
     },
     imgLogo: {
-        width: 360,
-        height: 300,
+        width: 260,
+        height: 200,
         alignSelf: 'center',
 
     },

@@ -6,7 +6,7 @@ import InputSearch from '../../../components/CustomInputs/inputSearch';
 import { FontAwesome } from '@expo/vector-icons';
 import blogFetch from '../../../axios/config';
 import Login from '../../../authentication/Login/index'
-import { Rating } from '@kolking/react-native-rating';
+import { Rating, AirbnbRating } from 'react-native-ratings';
 const transparent = 'rgba(0,0,0,0.5)'
 export default HomeScreen = ({ navigation }) => {
 
@@ -234,7 +234,22 @@ export default HomeScreen = ({ navigation }) => {
                                                 flexDirection: 'row',
                                                 justifyContent: 'space-around',
                                             }}>
-                                            <Rating size={15} rating={rating}   fillColor={'#27a1f5'} touchColor={'#27a1f5'} />
+                                              <AirbnbRating
+                         
+                        
+                         count={5}
+                         defaultRating={rating}
+                         selectedColor="#27a1f5"
+                         unSelectedColor="lightgray"
+                         reviewColor='#27a1f5'
+                         size={15}
+                         reviewSize={0}
+                         showRating={true}
+                         // isDisabled
+                         // starContainerStyle={{ backgroundColor:"red" }}
+                         ratingContainerStyle={{ marginBottom:20 }}
+                         starImage={require('../../../../assets/user.png')}
+                     />
                                         </View>
 
                                     </View>

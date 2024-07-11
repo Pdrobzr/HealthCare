@@ -1,5 +1,5 @@
 
-import { View, Text, StyleSheet, TouchableOpacity, Platform, Pressable, TextInput, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform, Pressable, TextInput, Image,KeyboardAvoidingView } from 'react-native';
 import * as React from 'react';
 import { useFonts } from 'expo-font';
 import {useState} from 'react';
@@ -7,7 +7,10 @@ import Input from '../../components/CustomInputs/index';
 import blogFetch from '../../axios/config';
 import { FontAwesome } from '@expo/vector-icons';
 
-
+const KEYBOARD_AVOIDING_BEHAVIOR = Platform.select({
+    ios: 'padding',
+    android: 'height',
+});
 
 export default Register = ({ navigation }) =>{
     const [nome, setNome] = useState('');
@@ -61,6 +64,8 @@ export default Register = ({ navigation }) =>{
                     <Text style={styles.subTitle}>Prossiga com o seu</Text>
                     <Text style={styles.titleText}>Registro</Text>
                 </View>
+                <KeyboardAvoidingView   behavior={KEYBOARD_AVOIDING_BEHAVIOR}
+                keyboardVerticalOffset={76}>
                 <Input placeholder="Nome" iconName="user" iconSize={24} onChangeText={(text) => setNome(text)}/>
                 <Input placeholder="Email" iconName="envelope" iconSize={23} onChangeText={(text) => setEmail(text)} />
                 <Input secureTextEntry={true} placeholder="Senha" iconName="lock" iconSize={24} onChangeText={(text) => setSenha(text)} />
@@ -68,6 +73,8 @@ export default Register = ({ navigation }) =>{
                 <Pressable style={styles.buttonLogin} onPress={handleRegister}>
                     <Text style={styles.formsButtonText}>CADASTRAR</Text>
                 </Pressable>
+                </KeyboardAvoidingView>
+                
             
 
             </View>
@@ -105,7 +112,7 @@ const styles = StyleSheet.create({
     },  
     contentTitle: {
         right: 0,
-        bottom: 60,
+        bottom: 150,
     },
     subTitle: {
         fontFamily: "Montserrat-Medium",

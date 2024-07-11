@@ -159,12 +159,12 @@ const styles = StyleSheet.create({
         borderRadius:50
     },  
     modalTitle:{
-        position:'absolute',
+    
         fontFamily: "Montserrat-Bold",
         color: '#4A4444',
-        fontSize:30,
+        fontSize:20,
         top:20,
-        right:60
+        right:100
     },
     modalInputs:{
         position:'absolute',
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     titleText: {
         fontFamily: "Montserrat-Bold",
         color: '#4A4444',
-        fontSize: 40,
+        fontSize: 30,
     },
     formsInput:{
         position:'absolute',
