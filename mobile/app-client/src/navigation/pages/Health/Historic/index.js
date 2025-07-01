@@ -9,13 +9,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import blogFetch from '../../../../axios/config';
 import * as FileSystem from "expo-file-system"
 import * as Sharing from "expo-sharing"
-
+import QRCode from 'react-native-qrcode-svg';
 
 const AWS_URL = "https://exames-usuarios.s3.sa-east-1.amazonaws.com/"
 
 const HistoricScreen = ({ navigation }) => {
     const [exames, setExames] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [openModalQR, setOpenModalQR] = useState(false);
+    const [uRLQr, setuRLQr] = useState('');
     const [selectedExame, setSelectedExame] = useState(null);
     const [isDownloading, setIsDownloading] = useState(false);
     const [fontsLoaded] = useFonts({
@@ -50,7 +52,24 @@ const HistoricScreen = ({ navigation }) => {
         setSelectedExame(null);
     };
 
-    
+    const abrirQrCode = () => {
+        setSelectedExame(exame);
+        setOpenModal(true);
+    };
+
+    const fecharQrCode = () => {
+        setOpenModalQR(false);
+    };
+    const QrGenerate = async(nomeImagem, nomeExame)=>{
+       try{
+        setOpenModal(false)
+        setOpenModalQR(true)
+        const FILE_URL = AWS_URL + nomeImagem;
+        setuRLQr(FILE_URL)
+       }catch{
+
+       }
+    }
     const downloadArquivo = async (nomeImagem, nomeExame) => {
        
         try {
@@ -187,16 +206,40 @@ const HistoricScreen = ({ navigation }) => {
                                 <>
                                     <Text>Nome: {selectedExame.nomeExame}</Text>
                                     <Text>Data: {selectedExame.dataCriacao}</Text>
-                                    <TouchableOpacity onPress={() => downloadArquivo(selectedExame.nomeImagem, selectedExame.nomeExame)}>
-                                        <Text style={{ color: 'blue', marginTop: 20 }}>Baixar</Text>
+                                    <View style={{width:'100%',flexDirection:'row',display:'flex',flexWrap:'wrap', padding: 5}}>
+                                    <TouchableOpacity onPress={() => downloadArquivo(selectedExame.nomeImagem, selectedExame.nomeExame)}
+                                        style={{marginRight:15,marginLeft:60}}>
+                                        <Text style={{ color: 'blue', marginTop: 20}}>Baixar</Text>
                                     </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => QrGenerate(selectedExame.nomeImagem, selectedExame.nomeExame)}>
+                                        <Text style={{ color: 'blue', marginTop: 20 }}>Compartilhar</Text>
+                                    </TouchableOpacity>
+                                    </View>
                                 </>
                             )}
-                            <TouchableOpacity onPress={fecharDetalhesExame}>
-                                <Text style={{ color: 'blue', marginTop: 20 }}>Fechar</Text>
+                            <TouchableOpacity onPress={fecharDetalhesExame} >
+                                <Text style={{ color: 'blue', marginTop: 20}}>Fechar</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
+                </Modal>
+            )}
+            {openModalQR &&(
+                <Modal
+                transparent={true}
+                animationType="slide"
+                visible={openModalQR}
+                onRequestClose={fecharQrCode}>
+                <View style={styles.modalContainer}>
+                   <View style={styles.modalContent}>
+                   <QRCode
+                    value={uRLQr}
+                    />
+                    <TouchableOpacity onPress={fecharQrCode} >
+                        <Text style={{ color: 'blue', marginTop: 20}}>Fechar</Text>
+                    </TouchableOpacity>
+                   </View>
+                </View>
                 </Modal>
             )}
         </View>
