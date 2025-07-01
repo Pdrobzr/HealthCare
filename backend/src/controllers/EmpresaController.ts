@@ -104,6 +104,11 @@ export class EmpresaController {
             _sum: {
                 situacaoFila: true,  
             },
+            where: {
+                Empresa: {
+                    idEmpresa: id
+                }
+            }
         });
 
         
